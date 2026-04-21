@@ -1,3 +1,64 @@
+/*COLORES PARA EL SISTEMA*/
+:roo{
+    /* ── COLORES PRIMARIOS DE IDENTIDAD ─────────── */
+    --color-coral: #FA897B;
+        /* Resaltar elementos clave, calidez */
+    --color-lavanda-Salmon: #ccabd8; 
+    --color-verde:#86e3ce;
+
+    /* ---Superficies y fondos*/
+    --color-blanco:#ffffff;
+    --color-gris-azulado:#f8fafc;
+    --color-fondo-sidebar:#f2f0ff; /*sidebar*/
+
+    /*Estados y alertas del sistema*/
+    --color-error:#ff2121;
+    --color-alerta:#ffdbd7;
+    /*Texto*/
+    --color-texto-principal:#000000;
+    --color-secundario:#4a4a4a;
+    /* ── TIPOGRAFÍA ──────────────────────────────── */
+    --font-principal: 'Inter', sans-serif;
+    /* Fuente única del sistema */
+    
+    --font-weight-bold: 700;
+    /* Títulos y cifras clave */
+        --font-weight-semibold: 600;
+    /* Nombres de módulos */
+    --font-weight-medium: 500;
+    /* Datos en tablas, nombres clientes */
+        --font-weight-regular: 400;
+    /* Descripciones, fechas, metadatos */
+    
+    
+    /* ── BORDES Y RADIO ──────────────────────────── */
+    --radius-boton: 8px;
+    /* Botones normales */
+    --radius-boton-lg: 12px;
+    /* Botones grandes */
+    --radius-card: 12px;
+    /* Cards de KPI */
+    --radius-pill: 100px;
+    /* Pills de filtro */
+    
+    
+    /* ── ESPACIADO (base 4px) ────────────────────── */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-12: 48px;
+    
+    
+    /* ── SOMBRAS ─────────────────────────────────── */
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+    /* Sombra suave para cards */
+    --shadow-sidebar: 2px 0 8px rgba(0, 0, 0, 0.05);
+    /* Sombra del sidebar */
+}
+
 *{
     box-sizing: border-box;
     margin: 0;
