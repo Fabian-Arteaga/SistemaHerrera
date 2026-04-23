@@ -16,7 +16,7 @@ class Sidebar {
             }
             const html = await respuesta.text();
             this.contenedor.innerHTML = html;
-          lucide.createIcons();
+          lucide.createIcons();  
             this.#marcarActivo();
         }
         catch (error) {
