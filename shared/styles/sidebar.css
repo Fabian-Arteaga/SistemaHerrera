@@ -25,15 +25,17 @@
     flex-direction: column;
 }
 
-.sidebar-user-name {
-    font-size: 0.92rem;
+.sidebar-company-name {
+    font-size: 1rem;
     font-weight: var(--font-weight-semibold);
     color: var(--color-texto-principal);
 }
 
-.sidebar-user-role {
-    font-size: 0.75rem;
+.sidebar-company-brand{
+
+    font-size: 0.80rem;
     color: var(--color-texto-secundario);
+    font-style: italic;
 }
 
 .sidebar {
