@@ -5,7 +5,7 @@
 }
 
 body{
-    font-family: 'Inter';
+    font-family:'Inter',sans-serif;
     min-height: 100vh;
     background-color: #EFFFFB;
     display: flex;
