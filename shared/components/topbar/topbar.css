@@ -1,0 +1,71 @@
+#topbar-placeholder {
+  position: fixed;
+  top: 0;
+  left: 240px;
+  right: 0;
+  height: 60px;
+  background-color: #F2F2F6;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.action-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 40px;
+}
+
+.btn-new {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  height: 32px;
+  min-width: 130px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.btn-new:hover {
+  opacity: 0.85;
+}
+
+.btn-new svg {
+  width: 18px;
+  height: 18px;
+  color: #000000;
+  flex-shrink: 0;
+}
+
+.btn-new span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #000000;
+  line-height: 1;
+}
+
+.btn-ventas {
+  background-color: #FA897B;
+}
+
+.btn-pedidos {
+  background-color: #CCABD8;
+}
+
+.btn-produccion {
+  background-color: #86E3CE;
+}
+
+
+

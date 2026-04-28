@@ -9,7 +9,7 @@ class Sidebar {
         if (!this.contenedor) return;
 
         try {
-            const respuesta = await fetch('/shared/components/sidebar.html');
+            const respuesta = await fetch('/shared/components/sidebar/sidebar.html');
 
             if (!respuesta.ok) {
                 throw new Error(`rror al cargar el sidebar: ${respuesta.status}`);
