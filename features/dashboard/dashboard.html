@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/shared/styles/global.css" />
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="/features/dashboard/dashboard.css" />
+  </head>
+  <body>
+    <div id="layout-placeholder"></div>
+    <script src="/shared/components/sidebar/sidebar.js"></script>
+    <div id="topbar-placeholder"></div>
+    <script src="/shared/components/topbar/topbar.js"></script>
+    <main class="main-content">
+      <h1 class="page-title">Vista General</h1>
+
+      <div class="stats-row">
+        <div class="stat-card stat-card-ventas">
+          <span class="stat-label">Ventas Totales de hoy</span>
+          <span class="stat-value">2,656.00 C$</span>
+          <span class="stat-change positive">+12% vs Ayer</span>
+          <div class="stat-decoration"></div>
+        </div>
+
+        <div class="stat-card stat-card-pedidos">
+          <span class="stat-label">Pedidos pendientes</span>
+          <span class="stat-value">11</span>
+          <span class="stat-change urgent">2 Urgente</span>
+          <div class="stat-decoration"></div>
+        </div>
+        <div class="stat-card stat-card-produccion">
+          <span class="stat-label">Pedidos pendientes</span>
+          <span class="stat-value">11</span>
+          <span class="stat-change urgent">2 Urgente</span>
+          <div class="stat-decoration decoration-produccion"></div>
+        </div>
+      </div>
+      <div class="tables-row">
+        <div class="table-card">
+          <h2 class="table-title">Ventas Recientes</h2>
+          <table class="sales-table">
+            <thead>
+              <tr>
+                <th>Fecha/Hora</th>
+                <th>Usuario</th>
+                <th>Cliente</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hoy, 4:12 PM</td>
+                <td>Marcelo Mena</td>
+                <td>Cliente genérico</td>
+                <td>70.00 C$</td>
+              </tr>
+              <tr>
+                <td>Hoy, 4:08 PM</td>
+                <td>Marcelo Mena</td>
+                <td>Cliente genérico</td>
+                <td>45.00 C$</td>
+              </tr>
+              <tr>
+                <td>Hoy, 4:03 PM</td>
+                <td>Marcelo Mena</td>
+                <td>Cliente genérico</td>
+                <td>210.00 C$</td>
+              </tr>
+              <tr>
+                <td>Hoy, 3:52 PM</td>
+                <td>Marcelo Mena</td>
+                <td>Cliente genérico</td>
+                <td>310.00 C$</td>
+              </tr>
+              <tr>
+                <td>Hoy, 3:43 PM</td>
+                <td>Marcelo Mena</td>
+                <td>Cliente genérico</td>
+                <td>45.00 C$</td>
+              </tr>
+              <tr>
+                <td>Hoy, 3:33 PM</td>
+                <td>Ronald Narvaez</td>
+                <td>Cliente genérico</td>
+                <td>45.00 C$</td>
+              </tr>
+              <tr>
+                <td>Hoy, 3:28 PM</td>
+                <td>Ronald Narvaez</td>
+                <td>Cliente genérico</td>
+                <td>40.00 C$</td>
+              </tr>
+              <tr>
+                <td>Hoy, 3:12 PM</td>
+                <td>Ronald Narvaez</td>
+                <td>Cliente genérico</td>
+                <td>70.00 C$</td>
+              </tr>
+              <tr>
+                <td>Hoy, 3:09 PM</td>
+                <td>Ronald Narvaez</td>
+                <td>Cliente genérico</td>
+                <td>70.00 C$</td>
+              </tr>
+              <tr>
+                <td>Hoy, 3:01 PM</td>
+                <td>Ronald Narvaez</td>
+                <td>Cliente genérico</td>
+                <td>140.00 C$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="stock-card">
+          <h2 class="table-title">Stock Crítico</h2>
+          <div class="stock-items">
+            <div class="stock-item">
+              <span class="stock-name">Sorbete Tradicional Fresa 8 Onzas</span>
+              <span class="stock-badge">8 Rest.</span>
+            </div>
+            <div class="stock-item">
+              <span class="stock-name">Sorbete Tradicional Fresa 8 Onzas</span>
+              <span class="stock-badge">8 Rest.</span>
+            </div>
+            <div class="stock-item">
+              <span class="stock-name">Sorbete Tradicional Fresa 8 Onzas</span>
+              <span class="stock-badge">8 Rest.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
