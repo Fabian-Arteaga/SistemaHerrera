@@ -1,25 +1,44 @@
 :root {
-    --color-coral: #FA897B;
-    --color-lavanda: #CCABD8;
-    --color-teal: #00C296;
-    --color-blanco: #FFFFFF;
-    --color-fondo-main: #F8FAFC;
-    --color-fondo-sidebar: #F2F0FF;
-    --color-error: #FF2121;
-    --color-alerta-bg: #FFDBD7;
-    --color-texto-principal: #000000;
-    --color-texto-secundario: #4A4A4A;
+    /* ── Brand ── */
+    --color-brand: #00C296;
+    --color-brand-hover: #04a598;
+    --color-brand-dark: #1a6b3a;
 
-    --font-principal: 'Inter', sans-serif;
+    /* ── Backgrounds ── */
+    --color-bg-page: #F8FAFC;
+    --color-bg-sidebar: #F2F0FF;
+    --color-bg-login: #EFFFFB;
+
+    /* ── Text ── */
+    --color-text-heading: #000000;
+    --color-text-body: #4A4A4A;
+    --color-text-hint: #6b8078;
+
+    /* ── Feedback ── */
+    --color-error: #FF2121;
+    --color-error-bg: #FFDBD7;
+
+    /* ── Decorative ── */
+    --color-blob: #48FFAA;
+    --color-coral: #FA897B;
+    --color-lavender: #CCABD8;
+
+    /* ── Base ── */
+    --color-white: #FFFFFF;
+
+    /* ── Typography ── */
+    --font-primary: 'Inter', sans-serif;
     --font-weight-bold: 700;
     --font-weight-semibold: 600;
     --font-weight-medium: 500;
     --font-weight-regular: 400;
 
-    --radius-boton: 8px;
+    /* ── Border Radius ── */
+    --radius-button: 8px;
     --radius-card: 12px;
     --radius-pill: 100px;
 
+    /* ── Spacing ── */
     --space-1: 4px;
     --space-2: 8px;
     --space-3: 12px;
@@ -28,6 +47,7 @@
     --space-8: 32px;
     --space-12: 48px;
 
+    /* ── Shadows ── */
     --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
     --shadow-sidebar: 2px 0 8px rgba(0, 0, 0, 0.05);
 }

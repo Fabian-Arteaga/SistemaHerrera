@@ -1,14 +1,27 @@
-lucide.createIcons();
+class LoginForm {
+    constructor() {
+        this.passwordInput = document.getElementById('password');
+        this.toggleBtn = document.querySelector('.toggle-password');
+    }
 
-function togglePassword() {
-  const input = document.getElementById('password');
-  const btn = document.querySelector('.toggle-password');
-  if (input.type === 'password') {
-    input.type = 'text';
-    btn.innerHTML = '<i data-lucide="eye-off"></i>';
-  } else {
-    input.type = 'password';
-    btn.innerHTML = '<i data-lucide="eye"></i>';
-  }
-  lucide.createIcons();
+    init() {
+        lucide.createIcons();
+        this.toggleBtn.addEventListener('click', () => this.#togglePassword());
+    }
+
+    #togglePassword() {
+        const isHidden = this.passwordInput.type === 'password';
+
+        this.passwordInput.type = isHidden ? 'text' : 'password';
+        this.toggleBtn.innerHTML = isHidden
+            ? '<i data-lucide="eye-off"></i>'
+            : '<i data-lucide="eye"></i>';
+
+        lucide.createIcons();
+    }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = new LoginForm();
+    loginForm.init();
+});

@@ -1,23 +1,26 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inicio de Sesion</title>
-    <link rel="stylesheet" href="/features/login/login.css" />
+    <title>Inicio de Sesión — Sorbetería Herrera</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700&display=swap"
     />
+    <link rel="stylesheet" href="/shared/styles/global.css" />
+    <link rel="stylesheet" href="/features/login/login.css" />
   </head>
   <body>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
+
     <div class="form-container">
       <div class="brand">
         <div class="brand-icon">
-          <img src="/assets/img/logo.jpg" alt="Logo Sorbeteria Herrera" />
+          <img src="/assets/img/logo.jpg" alt="Logo Sorbetería Herrera" />
         </div>
         <h2 class="brand-name">Sorbetería Herrera</h2>
         <p class="brand-slogan">EL SABOR DE LO NATURAL</p>
@@ -26,29 +29,44 @@
       <h1>Bienvenido</h1>
       <p>Por favor ingresa tus credenciales</p>
 
-      <form method="post">
+      <form id="login-form" method="post">
         <div class="field">
-          <label class="user-name" for="user-name">Usuario</label>
-          <input id="user-name" type="text" required />
+          <label for="username">Usuario</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            autocomplete="nickname"
+            required
+          />
         </div>
+
         <div class="field">
           <div class="field-header">
             <label for="password">Contraseña</label>
             <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
           </div>
           <div class="input-wrapper">
-            <input id="password" type="password" required />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
             <button
               type="button"
               class="toggle-password"
-              onclick="togglePassword()"
+              aria-label="Mostrar contraseña"
             >
               <i data-lucide="eye"></i>
             </button>
           </div>
         </div>
-        <input type="submit" value="Continuar al sistema" />
+
+        <button type="submit" class="btn-submit">Continuar al sistema</button>
       </form>
+
       <footer>
         <p>&copy; 2026 Sorbetería Herrera. Todos los derechos reservados.</p>
       </footer>

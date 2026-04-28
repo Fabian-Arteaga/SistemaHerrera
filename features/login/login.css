@@ -1,63 +1,68 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
-    font-family:'Inter',sans-serif;
+body {
+    font-family: var(--font-primary);
     min-height: 100vh;
-    background-color: #EFFFFB;
+    background-color: var(--color-bg-login);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
 }
+
 .brand {
     text-align: center;
     margin-bottom: 16px;
 }
+
 .brand-icon img {
     width: 70px;
     height: 70px;
     object-fit: contain;
     border-radius: 50px;
 }
+
 .brand-name {
-    font-family:'Nunito', cursive;
+    font-family: 'Nunito', sans-serif;
     font-size: 30px;
-    color: #1a6b3a;
+    color: var(--color-brand-dark);
 }
 
 .brand-slogan {
     font-size: 11px;
     letter-spacing: 2px;
-    color: #6b8078;
+    color: var(--color-text-hint);
     margin-top: 2px;
 }
 
-.form-container{
-    background-color: rgba(242,242,246,0.63);
+.form-container {
+    background-color: rgba(242, 242, 246, 0.63);
     border-radius: 30px;
     padding: 40px 40px;
     width: 500px;
-    height: 540px;
+    min-height: 540px;
+    position: relative;
+    z-index: 1;
 }
 
-.form-container h1{
+.form-container h1 {
     margin-top: 20px;
     font-size: 30px;
     font-weight: 700;
     text-align: center;
-    color: #000000;
+    color: var(--color-text-heading);
 }
 
 .form-container p {
     font-size: 14px;
     text-align: center;
-    color: #4a4a4a;
-    margin-top:4px;
+    color: var(--color-text-body);
+    margin-top: 4px;
 }
 
 .field {
@@ -68,47 +73,44 @@ body{
 
 .field label {
     font-size: 13px;
-    font-weight: 500;
-    font-weight:bolder;
-    color:#000000;
+    font-weight: bolder;
+    color: var(--color-text-heading);
     margin-top: 6px;
 }
 
-.field input{
+.field input {
     padding: 10px 14px;
     background-color: #d9d9d9;
     border: 1px solid rgba(0, 0, 0, 0.09);
     border-radius: 8px;
     font-size: 15px;
-    color: #1a2e26;
+    color: var(--color-text-heading);
     outline: none;
 }
 
-.field input:focus{
-    border-color: #00b8a9;
-    box-shadow: 0 0 0 3px rgba(0,184,169,0.15);
+.field input:focus {
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 3px rgba(0, 194, 150, 0.15);
 }
 
-.forgot-password{
-    display:block;
+.forgot-password {
+    display: block;
     text-align: right;
     font-size: 12px;
-    color: #4a4a4a;
+    color: var(--color-text-body);
     text-decoration: none;
 }
-.forgot-password:hover{
+
+.forgot-password:hover {
     text-decoration: underline;
 }
-.user-name{
-    margin-bottom: 8px;
-}
 
-input[type="submit"]{
+.btn-submit {
     width: 100%;
     padding: 12px;
     margin-top: 24px;
-    background-color: #00c296;
-    color: #ffffff;
+    background-color: var(--color-brand);
+    color: var(--color-white);
     border: none;
     border-radius: 999px;
     font-size: 14px;
@@ -116,14 +118,14 @@ input[type="submit"]{
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
-    background-color: #04a598;
+.btn-submit:hover {
+    background-color: var(--color-brand-hover);
 }
 
 .blob {
     position: absolute;
     border-radius: 999px;
-    background-color: #48FFAA;
+    background-color: var(--color-blob);
     opacity: 0.6;
     z-index: 0;
 }
@@ -148,12 +150,14 @@ input[type="submit"]:hover {
     bottom: 140px;
     left: -70px;
 }
+
 .field-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 5px;
 }
+
 .input-wrapper {
     position: relative;
     display: flex;
@@ -170,21 +174,23 @@ input[type="submit"]:hover {
     background: none;
     border: none;
     cursor: pointer;
-    color: #6b8078;
+    color: var(--color-text-hint);
     display: flex;
     align-items: center;
 }
+
 .toggle-password svg {
-    width:20px;
+    width: 20px;
     height: 20px;
 }
 
 .toggle-password:hover {
-    color: #00b8a9;
+    color: var(--color-brand);
 }
+
 footer {
     text-align: center;
     font-size: 11px;
-    color: #6b8078;
+    color: var(--color-text-hint);
     margin-top: 20px;
 }
