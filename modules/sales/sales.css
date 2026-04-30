@@ -1,0 +1,213 @@
+.main-content {
+    margin-left: 250px; 
+    padding: var(--space-6);
+    background-color: var(--color-bg-page);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-bottom: var(--space-6);
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-heading);
+    margin-bottom: 4px;
+}
+
+.page-subtitle {
+    color: var(--color-text-hint);
+    font-size: 0.9rem;
+}
+
+.card {
+    background: var(--color-white);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+    margin-bottom: var(--space-4);
+    box-shadow: var(--shadow-card);
+    border-left: 5px solid var(--color-brand);
+}
+
+.card h3 {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-hint);
+    margin-bottom: var(--space-4);
+}
+
+.grid-3 { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: var(--space-4); 
+}
+
+.grid-2 { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: var(--space-4); 
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-body);
+}
+
+/* Estilo de los inputs */
+input[type="text"], 
+input[type="number"], 
+input[type="date"],
+select {
+    padding: 10px 12px;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-button);
+    background-color: #F8FAFC;
+    font-family: var(--font-primary);
+    color: var(--color-text-body);
+    outline: none;
+    width: 100%; 
+}
+
+input[readonly] {
+    background-color: #EDF2F7;
+    cursor: not-allowed;
+}
+
+.input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon i {
+    position: absolute;
+    right: 12px;
+    top: 50% !important;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+.selector-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    border: none;
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.btn-limpiar { background-color: #FFE5D0; color: #D48344; }
+.btn-aceptar { background-color: #D1FAE5; color: #065F46; }
+
+/* Tabla */
+.table-section { padding: 0; overflow: hidden; }
+
+.sales-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sales-table th {
+    background-color: #FEE2E2; 
+    padding: 14px;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--color-text-heading);
+}
+
+.sales-table td {
+    padding: 14px;
+    border-bottom: 1px solid #EDF2F7;
+    font-size: 0.9rem;
+    color: var(--color-text-body);
+}
+
+.totales {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--space-4);
+}
+
+.resumen-card {
+    width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    background: var(--color-white);
+    padding: var(--space-6);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+}
+
+.total-row {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.total-row label {
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+}
+
+.total-row input {
+    width: 160px; 
+}
+
+.input-with-btn {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-small-aceptar {
+    background-color: #FEE2E2;
+    border: none;
+    padding: 5px 15px;
+    border-radius: var(--radius-button);
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-registrar-venta {
+    background-color: #D1FAE5;
+    color: #065F46;
+    padding: 14px;
+    border: none;
+    border-radius: var(--radius-button);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    margin-top: 15px; 
+    font-size: 0.95rem;
+    width: 100%;
+}
