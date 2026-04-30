@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/modules/customers/customer.css" />
+     <link rel="stylesheet" href="/shared/css/global.css" />
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="layout-placeholder"></div>
+    <script src="/shared/components/sidebar/sidebar.js"></script>
+    <div id="topbar-placeholder"></div>
+   <header class="topbar">
+           
+            <div class="topbar-right">
+                <button class="topbar-icon-btn">
+                    <i data-lucide="search" style="width:18px;height:18px;color:#4A4A4A;"></i>
+                </button>
+                <button class="topbar-icon-btn">
+                    <i data-lucide="bell" style="width:18px;height:18px;color:#4A4A4A;"></i>
+                    <span class="badge">3</span>
+                </button>
+                <div class="topbar-user">
+                    <div class="topbar-user-avatar">MM</div>
+                    <div class="topbar-user-info">
+                        <span>Indiana Herrera</span>
+                        <span>Administrador</span>
+                    </div>
+                    <i data-lucide="chevron-down" style="width:16px;height:16px;color:#94A3B8;"></i>
+                </div>
+            </div>
+        </header>
+
+         <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header animate-in">
+                <div class="page-header-left">
+                    <h1>Clientes</h1>
+                    <div class="page-tabs">
+                        <button class="page-tab active" onclick="switchTab(this, 'activos')">
+                            Activos
+                        </button>
+                        <button class="page-tab" onclick="switchTab(this, 'inactivos')">
+                            Inactivos
+                        </button>
+                    </div>
+                </div>
+                <div class="page-header-right">
+                    <button class="btn btn-outline">
+                        <i data-lucide="download" style="width:16px;height:16px;"></i>
+                        Exportar
+                    </button>
+                    <button class="btn btn-primary">
+                        <i data-lucide="plus" style="width:18px;height:18px;"></i>
+                        Nuevo cliente
+                    </button>
+                </div>
+            </div>
+ <!-- Stats Cards -->
+            <div class="stats-row animate-in delay-1">
+                <div class="stat-card stat-card-brand">
+                    <div class="stat-card-decoration"></div>
+                    <div class="stat-card-icon">
+                        <i data-lucide="users" style="width:20px;height:20px;"></i>
+                    </div>
+                    <div class="stat-card-label">Cientes Activos</div>
+                    <div class="stat-card-value">150</div>
+                    
+                </div>
+                <div class="stat-card stat-card-warm">
+                    <div class="stat-card-decoration"></div>
+                    <div class="stat-card-icon">
+                        <i data-lucide="user-check" style="width:20px;height:20px;"></i>
+                    </div>
+                    <div class="stat-card-label">Clientes Inactivos</div>
+                    <div class="stat-card-value">25</div>
+                    
+                </div>
+                <div class="stat-card stat-card-coral">
+                    <div class="stat-card-decoration"></div>
+                    <div class="stat-card-icon">
+                        <i data-lucide="user-x" style="width:20px;height:20px;"></i>
+                    </div>
+                    <div class="stat-card-label">Municipios</div>
+                    <div class="stat-card-value">23</div>
+                    
+                </div>
+                <div class="stat-card stat-card-purple">
+                    <div class="stat-card-decoration"></div>
+                    <div class="stat-card-icon">
+                        <i data-lucide="map-pin" style="width:20px;height:20px;"></i>
+                    </div>
+                    <div class="stat-card-label">Puntos de Venta</div>
+                    <div class="stat-card-value">34</div>
+                   
+                </div>
+            </div>
+
+            <!-- Filters Bar -->
+         <div class="filters-bar">
+    <div class="search-box">
+        
+        <input type="text" placeholder="Buscar clientes..." id="searchInput" onkeyup="filterClients()">
+    </div>
+
+    <div class="filter-group">
+        <div class="select-wrapper">
+            <select class="filter-select select-pink">
+                <option value="">Departamento</option>
+                <option value="managua">Managua</option>
+                <option value="carazo">Carazo</option>
+            </select>
+            <i data-lucide="chevron-down" class="select-icon"></i>
+        </div>
+
+        <div class="select-wrapper">
+            <select class="filter-select select-yellow">
+                <option value="">Municipio</option>
+                <option value="jinotepe">Jinotepe</option>
+                <option value="san-marcos">San Marcos</option>
+            </select>
+            <i data-lucide="chevron-down" class="select-icon"></i>
+        </div>
+    </div>
+</div>
+                <div class="view-toggle">
+                    <button class="view-toggle-btn active" title="Vista lista">
+                        <i data-lucide="list" style="width:18px;height:18px;"></i>
+                    </button>
+                    <button class="view-toggle-btn" title="Vista cuadrícula">
+                        <i data-lucide="grid-3x3" style="width:18px;height:18px;"></i>
+                    </button>
+                </div>
+            </div>
+<!-- Table Card -->
+            <div class="table-card animate-in delay-3">
+                <div class="table-card-header">
+                    <h2>
+                        <span>Clientes Activos</span>
+                        <span class="count-badge">150</span>
+                    </h2>
+                    <div class="table-actions">
+                        <button class="btn btn-outline">
+                            <i data-lucide="filter" style="width:14px;height:14px;"></i>
+                            Filtros
+                        </button>
+                        <button class="btn btn-outline">
+                            <i data-lucide="arrow-down-up" style="width:14px;height:14px;"></i>
+                            Ordenar
+                        </button>
+                    </div>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width:28%;">Cliente</th>
+                            <th style="width:16%;">Teléfono</th>
+                            <th style="width:14%;">Departamento</th>
+                            <th style="width:14%;">Municipio</th>
+                            <th style="width:16%;">Punto de Venta</th>
+                            <th style="width:12%;">Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientsTableBody">
+                        <tr>
+                            <td>
+                                <div class="client-cell">
+                                    <div class="client-avatar avatar-1">CM</div>
+                                    <div class="client-info">
+                                        <span class="client-name">Carlos Mendoza</span>
+                                        
+                                    </div>
+                                </div>
+                            </td>
+                            <td>8845-2301</td>
+                            <td>
+                                <div class="location-cell">
+                                    <i data-lucide="map-pin"></i>
+                                    <span>Managua</span>
+                                </div>
+                            </td>
+                            <td>Ticuantepe</td>
+                            <td>PV-001</td>
+                            <td>
+                                <button class="btn-detail" title="Ver detalles">
+                                <i data-lucide="eye" style="width:18px;height:18px;"></i>
+                               </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="client-cell">
+                                    <div class="client-avatar avatar-2">LR</div>
+                                    <div class="client-info">
+                                        <span class="client-name">Laura Rodríguez</span>
+                                        
+                                    </div>
+                                </div>
+                            </td>
+                            <td>8920-4455</td>
+                            <td>
+                                <div class="location-cell">
+                                    <i data-lucide="map-pin"></i>
+                                    <span>Carazo</span>
+                                </div>
+                            </td>
+                            <td>Jinotepe</td>
+                            <td>PV-003</td>
+                            <td>
+                                 <button class="btn-detail" title="Ver detalles">
+                                <i data-lucide="eye" style="width:18px;height:18px;"></i>
+                               </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="client-cell">
+                                    <div class="client-avatar avatar-3">JP</div>
+                                    <div class="client-info">
+                                        <span class="client-name">José Pérez</span>
+                                        
+                                    </div>
+                                </div>
+                            </td>
+                            <td>8733-1190</td>
+                            <td>
+                                <div class="location-cell">
+                                    <i data-lucide="map-pin"></i>
+                                    <span>Estelí</span>
+                                </div>
+                            </td>
+                            <td>Estelí</td>
+                            <td>PV-007</td>
+                            <td>
+                                <button class="btn-detail" title="Ver detalles">
+                                <i data-lucide="eye" style="width:18px;height:18px;"></i>
+                               </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="client-cell">
+                                    <div class="client-avatar avatar-4">MG</div>
+                                    <div class="client-info">
+                                        <span class="client-name">María García</span>
+                                        
+                                    </div>
+                                </div>
+                            </td>
+                            <td>8556-7788</td>
+                            <td>
+                                <div class="location-cell">
+                                    <i data-lucide="map-pin"></i>
+                                    <span>Matagalpa</span>
+                                </div>
+                            </td>
+                            <td>Matagalpa</td>
+                            <td>PV-012</td>
+                            <td>
+                                 <button class="btn-detail" title="Ver detalles">
+                                <i data-lucide="eye" style="width:18px;height:18px;"></i>
+                               </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="client-cell">
+                                    <div class="client-avatar avatar-5">RL</div>
+                                    <div class="client-info">
+                                        <span class="client-name">Roberto López</span>
+                                        
+                                    </div>
+                                </div>
+                            </td>
+                            <td>8612-3344</td>
+                            <td>
+                                <div class="location-cell">
+                                    <i data-lucide="map-pin"></i>
+                                    <span>Managua</span>
+                                </div>
+                            </td>
+                            <td>Tipitapa</td>
+                            <td>PV-002</td>
+                            <td> <button class="btn-detail" title="Ver detalles">
+                                <i data-lucide="eye" style="width:18px;height:18px;"></i>
+                               </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="client-cell">
+                                    <div class="client-avatar avatar-6">AS</div>
+                                    <div class="client-info">
+                                        <span class="client-name">Ana Sánchez</span>
+                                      
+                                    </div>
+                                </div>
+                            </td>
+                            <td>8799-5566</td>
+                            <td>
+                                <div class="location-cell">
+                                    <i data-lucide="map-pin"></i>
+                                    <span>Chinandega</span>
+                                </div>
+                            </td>
+                            <td>Chinandega</td>
+                            <td>PV-015</td>
+                            <td>
+                                 <button class="btn-detail" title="Ver detalles">
+                                <i data-lucide="eye" style="width:18px;height:18px;"></i>
+                               </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="client-cell">
+                                    <div class="client-avatar avatar-7">FH</div>
+                                    <div class="client-info">
+                                        <span class="client-name">Fernando Herrera</span>
+                                     
+                                    </div>
+                                </div>
+                            </td>
+                            <td>8841-9922</td>
+                            <td>
+                                <div class="location-cell">
+                                    <i data-lucide="map-pin"></i>
+                                    <span>Granada</span>
+                                </div>
+                            </td>
+                            <td>Granada</td>
+                            <td>PV-020</td>
+                            <td>
+                                 <button class="btn-detail" title="Ver detalles">
+                                <i data-lucide="eye" style="width:18px;height:18px;"></i>
+                               </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="client-cell">
+                                    <div class="client-avatar avatar-8">PT</div>
+                                    <div class="client-info">
+                                        <span class="client-name">Patricia Torres</span>
+                                       
+                                    </div>
+                                </div>
+                            </td>
+                            <td>8523-1188</td>
+                            <td>
+                                <div class="location-cell">
+                                    <i data-lucide="map-pin"></i>
+                                    <span>León</span>
+                                </div>
+                            </td>
+                            <td>León</td>
+                            <td>PV-025</td>
+                            <td>
+                                 <button class="btn-detail" title="Ver detalles">
+                                <i data-lucide="eye" style="width:18px;height:18px;"></i>
+                               </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Table Footer / Pagination -->
+                <div class="table-footer">
+                    <div class="table-footer-info">
+                        Mostrando <strong>1-8</strong> de <strong>248</strong> clientes
+                    </div>
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled>
+                            <i data-lucide="chevron-left"></i>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">...</button>
+                        <button class="pagination-btn">31</button>
+                        <button class="pagination-btn">
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Tab switching
+        function switchTab(el, tab) {
+            document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        // Filter toggle
+        function toggleFilter(btn) {
+            const arrow = btn.querySelector('i');
+            if (btn.classList.contains('expanded')) {
+                btn.classList.remove('expanded');
+                arrow.setAttribute('data-lucide', 'chevron-down');
+            } else {
+                btn.classList.add('expanded');
+                arrow.setAttribute('data-lucide', 'chevron-up');
+            }
+            lucide.createIcons();
+        }
+
+        // Search filter
+        function filterClients() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#clientsTableBody tr');
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        // View toggle
+        document.querySelectorAll('.view-toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Pagination
+        document.querySelectorAll('.pagination-btn:not(:disabled)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.textContent === '...') return;
+                document.querySelectorAll('.pagination-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Row click for details
+        document.querySelectorAll('#clientsTableBody tr').forEach(row => {
+            row.addEventListener('click', function() {
+                this.style.background = 'rgba(0, 194, 150, 0.05)';
+                setTimeout(() => {
+                    this.style.background = '';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
