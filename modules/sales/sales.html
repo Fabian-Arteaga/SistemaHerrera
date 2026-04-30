@@ -1,19 +1,145 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ventas</title>
-    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
-    <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
-    <link rel="stylesheet" href="/shared/css/global.css" />
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  </head>
-  <body>
-    <div id="layout-placeholder"></div>
+    <title>Ventas - Sorbetería Herrera</title>
+      <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700&display=swap"
+    />
+    <link rel="stylesheet" href="/shared/css/global.css">
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/shared/components/topbar/topbar.css">
+    <link rel="stylesheet" href="/modules/sales/sales.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+      <div id="layout-placeholder"></div>
     <script src="/shared/components/sidebar/sidebar.js"></script>
     <div id="topbar-placeholder"></div>
     <script src="/shared/components/topbar/topbar.js"></script>
-    <h1>Ventas</h1>
-  </body>
+  
+
+    <div class="layout-wrapper">
+        <script src="/shared/components/sidebar/sidebar.js"></script>
+
+        <div class="main-content">
+            <script src="/shared/components/topbar/topbar.js"></script>
+
+            <main class="container">
+                
+                <div class="page-header">
+                    <h1 class="page-title">Nueva venta</h1>
+                    <p class="page-subtitle">Gestión de facturación</p>
+                </div>
+
+                <section class="card">
+                    <h3>Datos de encabezado</h3>
+                    <div class="grid-3">
+                        <div class="form-group"><label>Número de venta:</label><input type="text" readonly></div>
+                        <div class="form-group"><label>Fecha:</label><input type="text"></div>
+                        <div class="form-group"><label>Tipo de venta:</label><input type="text"></div>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <h3>Información cliente</h3>
+                    <div class="grid-2">
+                        <div class="form-group"><label>Cliente:</label><input type="text"></div>
+                        <div class="form-group"><label>Punto de venta:</label><input type="text"></div>
+                    </div>
+                </section>
+
+                <section class="card card-highlight">
+                    <h3>Seleccionar productos</h3>
+                    
+                    <div class="grid-form-top">
+                        <div class="form-group">
+                            <label>Buscar:</label>
+                            <div class="input-icon">
+                                <input type="text" placeholder="Buscar producto..."><i data-lucide="search"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Línea:</label>
+                            <div class="input-icon">
+                                <input type="text"><i data-lucide="chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="form-group"><label>Sabor:</label><input type="text"></div>
+                        <div class="form-group"><label>Presentación:</label><input type="text"></div>
+                    </div>
+
+                    <div class="selector-action-row">
+                        <div class="form-group">
+                            <label>Cantidad:</label>
+                            <input type="number" value="1">
+                        </div>
+                        <div class="selector-buttons">
+                            <button class="btn btn-limpiar">Limpiar</button>
+                            <button class="btn btn-aceptar">Aceptar</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card table-section">
+                    <table class="sales-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sorbete tradicional fresa</td>
+                                <td>4</td>
+                                <td>152.00C$</td>
+                                <td>608.00C$</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <div class="totales">
+                    <div class="resumen-card">
+                        <div class="total-row"><label>Total:</label><input type="text" readonly></div>
+
+                        <div class="total-row">
+                            <label>Pago:</label>
+                            <div class="input-with-btn">
+                                <input type="text">
+                                <button class="btn-small-aceptar">Aceptar</button>
+                            </div>
+                        </div>
+
+                        <div class="total-row">
+                            <label>Cambio:</label>
+                            <input type="text" readonly>
+                        </div>
+                        <button class="btn-registrar-venta">Registrar venta</button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Inicializar iconos de Lucide
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }, 500);
+        });
+    </script>
+</body>
 </html>
