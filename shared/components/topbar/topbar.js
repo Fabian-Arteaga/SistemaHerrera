@@ -34,24 +34,38 @@ class TopBar {
     const btnProduccion = this.contenedor.querySelector('.btn-produccion');
 
     if (btnVenta) {
-      btnVenta.addEventListener('click', () => {
-        console.log('Nueva venta');
-      });
+      btnVenta.addEventListener('click', () => console.log('Nueva venta'));
     }
 
     if (btnPedido) {
-      btnPedido.addEventListener('click', () => {
-        console.log('Nuevo pedido');
-      });
+      btnPedido.addEventListener('click', () => console.log('Nuevo pedido'));
     }
 
     if (btnProduccion) {
-      btnProduccion.addEventListener('click', () => {
-        console.log('Nueva producción');
+      btnProduccion.addEventListener('click', () => console.log('Nueva producción'));
+    }
+
+    const searchWrapper = this.contenedor.querySelector('.topbar-search');
+    const searchInput   = this.contenedor.querySelector('.search-input');
+    const searchTrigger = this.contenedor.querySelector('.search-trigger');
+
+    if (searchTrigger && searchInput && searchWrapper) {
+      searchTrigger.addEventListener('click', () => {
+        searchWrapper.classList.toggle('active');
+        if (searchWrapper.classList.contains('active')) {
+          searchInput.focus();
+        }
+      });
+
+      searchInput.addEventListener('blur', () => {
+        if (searchInput.value.trim() === '') {
+          searchWrapper.classList.remove('active');
+        }
       });
     }
   }
 }
+
 document.addEventListener('DOMContentLoaded', async () => {
   const topbar = new TopBar();
   await topbar.cargar();
