@@ -1,0 +1,238 @@
+/* restock.css - Versión Unificada HerreraSystem */
+
+/* 1. Estructura General y Contenedor */
+.pedido-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-container {
+    background: #FFFFFF;
+    border-radius: var(--radius-card);
+    padding: 32px;
+    box-shadow: var(--shadow-card);
+}
+
+/* 2. Tarjetas con Estilo Figma (Resaltadas) */
+.card-pedido {
+    background-color: var(--color-white);
+    padding: var(--space-6);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card-highlight {
+    border-left: 5px solid #f3e5ab !important; /* Turquesa de marca */
+}
+
+.card-title {
+    font-size: 13px;
+    color: #8E9E99; /* Gris sutil de la imagen */
+    margin-bottom: var(--space-4);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 3. Grillas y Formularios */
+.grid-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+}
+
+/* Nueva configuración para que los selectores quepan en una sola fila */
+.selector-grid {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(4, 1fr); /* El buscador es más ancho que el resto[cite: 3] */
+    gap: var(--space-4);
+    align-items: flex-end;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 992px) {
+    .selector-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-body);
+}
+
+/* 4. Estilos de Inputs y Selects[cite: 2] */
+.form-group input, 
+.form-group select,
+.input-styled,
+.form-input {
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    height: 40px;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    color: var(--color-text-body);
+    transition: border-color 0.2s;
+}
+
+.input-styled:focus, .form-group input:focus, .form-input:focus {
+    outline: none;
+    border-color: var(--color-brand);
+}
+
+.input-readonly {
+    background-color: #F1F5F9 !important;
+    color: #64748B;
+}
+
+/* Input con Icono (Buscador) */
+.input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 12px;
+    width: 16px;
+    color: #94A3B8;
+}
+
+.input-icon input {
+    padding-left: 40px;
+    width: 100%;
+}
+
+/* 5. Botones de Acción[cite: 2] */
+.button-group {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start; /* Alineado a la izquierda según imagen[cite: 3] */
+}
+
+.mt-3 {
+    margin-top: 20px;
+}
+
+.btn-action {
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 0.1s;
+}
+
+.btn-action:active {
+    transform: scale(0.98);
+}
+
+.btn-accept {
+    background-color: #86E3CE; /* Verde turquesa de selección[cite: 3] */
+    color: white;
+}
+
+.btn-clear {
+    background-color: #D6B4DC; /* Lavanda de selección[cite: 3] */
+    color: #4A4A4A;
+}
+
+/* 6. Tabla Estilizada (Estilo Rosa Suave)[cite: 2] */
+.table-section {
+    padding: 0;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.pedido-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pedido-table th {
+    background-color: #FFE4E1; /* Rosa suave[cite: 2] */
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+    color: var(--color-text-body);
+}
+
+.pedido-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #F1F5F9;
+    font-size: 14px;
+}
+
+/* 7. Totales y Footer[cite: 2] */
+.resumen-final-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.resumen-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-row span {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-text-heading);
+}
+
+.total-row input {
+    width: 160px;
+    padding: 8px;
+    text-align: right;
+    font-weight: 700;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    color: var(--color-brand);
+}
+
+.btn-registrar-venta {
+    background-color: #86E3CE; /* Turquesa HerreraSystem[cite: 2] */
+    color: #000;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+.btn-registrar-venta:hover {
+    opacity: 0.9;
+}
