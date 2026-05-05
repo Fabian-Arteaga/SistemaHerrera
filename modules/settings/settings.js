@@ -31,7 +31,10 @@
         document.getElementById("tab-title").textContent = tabMeta[id].title;
         document.getElementById("tab-desc").textContent = tabMeta[id].desc;
         lucide.createIcons();
-      }
+}
+      document.getElementById('btn-logout').addEventListener('click', function() {
+    window.location.href = '/modules/login/login.html';
+});
 
       function setTheme(el) {
         document
