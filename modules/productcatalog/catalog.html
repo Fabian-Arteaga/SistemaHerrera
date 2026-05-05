@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productos - Sorbetería Herrera</title>
+    
+   <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700&display=swap"
+    />
+    <link rel="stylesheet" href="/shared/css/global.css">
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/shared/components/topbar/topbar.css">
+    <link rel="stylesheet" href="/modules/productcatalog/catalog.css">   
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Contenedores de componentes -->
+    <div id="layout-placeholder"></div>
+    <div id="topbar-placeholder"></div>
+
+    <main class="main-content">
+        <!-- Encabezado Principal -->
+        <div class="products-header">
+            <h1>Productos</h1>
+        </div>
+
+        <div class="products-grid">
+            <!-- Columna Izquierda: Filtros y Resultados -->
+            <div class="products-main-col">
+                
+                <!-- Sección de Filtros -->
+                <section class="filter-card">
+                    <p class="filter-label">Filtrar</p>
+                    <div class="filter-form">
+                        
+                        <!-- Buscador Horizontal -->
+                        <div class="filter-group search-row"> 
+                            <label>Buscar :</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="input-field" placeholder="Buscar producto...">
+                                <i data-lucide="search"></i> 
+                            </div>
+                        </div>
+
+                        <!-- Fila 1: Linea y Sabor -->
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label>Linea :</label>
+                                <div class="input-wrapper">
+                                    <input type="text" class="input-field" placeholder="Seleccionar...">
+                                    <i data-lucide="chevron-down"></i>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label>Sabor :</label>
+                                <div class="input-wrapper">
+                                    <input type="text" class="input-field" placeholder="Seleccionar...">
+                                    <i data-lucide="chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 2: Presentación y Botones de acción -->
+                        <div class="filter-row align-end">
+                            <div class="filter-group">
+                                <label>Presentación:</label>
+                                <div class="input-wrapper">
+                                    <input type="text" class="input-field" placeholder="Seleccionar...">
+                                    <i data-lucide="chevron-down"></i>
+                                </div>
+                            </div>
+                            <div class="filter-buttons" style="display: flex; gap: 10px;">
+                                <button class="btn-secondary">Limpiar</button>
+                                <button class="btn-primary">Filtrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tabla de Resultados -->
+                <section class="results-card">
+                    <h2>Resultados</h2>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Sabor</th>
+                                    <th>Presentación</th>
+                                    <th>Estado</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Sorbete tradicional fresa</td>
+                                    <td>Fresa</td>
+                                    <td>4 onzas</td>
+                                    <td><span class="status-badge status-true">Activo</span></td>
+                                    <td class="actions-cell">
+                                        <i data-lucide="pencil"></i>
+                                        <i data-lucide="trash-2"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sorbete tradicional mango</td>
+                                    <td>Mango</td>
+                                    <td>4 onzas</td>
+                                    <td><span class="status-badge status-true">Activo</span></td>
+                                    <td class="actions-cell">
+                                        <i data-lucide="pencil"></i>
+                                        <i data-lucide="trash-2"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sorbete tradicional fresa</td>
+                                    <td>Fresa</td>
+                                    <td>4 onzas</td>
+                                    <td><span class="status-badge status-false">Inactivo</span></td>
+                                    <td class="actions-cell">
+                                        <i data-lucide="pencil"></i>
+                                        <i data-lucide="trash-2"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Columna Derecha: Administración Lateral -->
+            <aside class="products-side-col">
+                <div class="admin-card">
+                    <h2>Administración de líneas</h2>
+                    <table class="mini-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre de línea</th>
+                                <th>Sabores</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>Tradicionales</td><td>24</td></tr>
+                            <tr><td>2</td><td>Light</td><td>15</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="admin-actions">
+                        <button class="btn-action btn-coral">Nuevo</button>
+                        <button class="btn-action btn-brand-light">Gestionar sabores</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <!-- Scripts -->
+    <script src="/shared/components/sidebar/sidebar.js"></script>
+    <script src="/shared/components/topbar/topbar.js"></script>
+    <script>
+        // Inicializar iconos de Lucide
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
