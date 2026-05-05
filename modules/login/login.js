@@ -9,7 +9,6 @@ class LoginForm {
         lucide.createIcons();
         this.toggleBtn.addEventListener('click', () => this.#togglePassword());
         
-        // Agregar validación del formulario
         this.form.addEventListener('submit', (e) => this.#handleLogin(e));
     }
 
@@ -35,11 +34,9 @@ class LoginForm {
             { user: 'vendedor', pass: 'vendedor123', rol: 'vendedor' }
         ];
 
-        // Buscar usuario válido
         const validUser = users.find(u => u.user === username && u.pass === password);
 
         if (validUser) {
-            // Guardar sesión en localStorage
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('username', username);
             localStorage.setItem('rol', validUser.rol);

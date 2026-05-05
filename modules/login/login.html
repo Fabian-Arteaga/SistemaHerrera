@@ -7,71 +7,96 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700;800&display=swap"
     />
     <link rel="stylesheet" href="/shared/css/global.css" />
     <link rel="stylesheet" href="/modules/login/login.css" />
   </head>
   <body>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+    <!-- Panel Izquierdo: Marca -->
+    <div class="brand-panel">
+      <div class="glass-circle circle-1"></div>
+      <div class="glass-circle circle-2"></div>
+      <div class="glass-circle circle-3"></div>
 
-    <div class="form-container">
-      <div class="brand">
-        <div class="brand-icon">
-          <img src="/assets/img/logo.jpg" alt="Logo Sorbetería Herrera" />
-        </div>
-        <h2 class="brand-name">Sorbetería Herrera</h2>
-        <p class="brand-slogan">EL SABOR DE LO NATURAL</p>
-      </div>
-
-      <h1>Bienvenido</h1>
-      <p>Por favor ingresa tus credenciales</p>
-
-      <form id="login-form" method="post">
-        <div class="field">
-          <label for="username">Usuario</label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            autocomplete="nickname"
-            placeholder="Usuario"
-            required
+      <div class="brand-content">
+        <span class="brand-badge">Sistema de Gestión</span>
+        <div class="brand-logo-container">
+          <img
+            src="/assets/img/logo.jpg"
+            onerror="
+              this.src =
+                'https://ui-avatars.com/api/?name=SH&background=fff&color=00C296&size=150'
+            "
+            alt="Logo Sorbetería Herrera"
           />
         </div>
+        <h1>Sorbetería Herrera</h1>
+        <p>
+          Accede al panel de control para administrar ventas, inventario,
+          pedidos y más. Hecho en familia, gestionado de forma inteligente.
+        </p>
+      </div>
+    </div>
 
-        <div class="field">
-          <div class="field-header">
-            <label for="password">Contraseña</label>
-            <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-          </div>
-          <div class="input-wrapper">
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              placeholder="*********"
-              required
-            />
-            <button
-              type="button"
-              class="toggle-password"
-              aria-label="Mostrar contraseña"
-            >
-              <i data-lucide="eye"></i>
-            </button>
-          </div>
+    <div class="form-panel">
+      <div class="form-wrapper">
+        <div class="form-header">
+          <h2>Iniciar Sesión</h2>
+          <p>Ingresa tus credenciales para continuar.</p>
         </div>
 
-        <button type="submit" class="btn-submit">Continuar al sistema</button>
-      </form>
+        <form id="login-form" method="post">
+          <div class="field">
+            <label for="username">Usuario</label>
+            <div class="input-wrapper">
+              <i data-lucide="user" class="input-icon"></i>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                autocomplete="nickname"
+                placeholder="Ej: admin"
+                required
+              />
+            </div>
+          </div>
 
-      <footer>
-        <p>&copy; 2026 Sorbetería Herrera. Todos los derechos reservados.</p>
-      </footer>
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <div class="input-wrapper">
+              <i data-lucide="lock" class="input-icon"></i>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="••••••••"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                aria-label="Mostrar contraseña"
+              >
+                <i data-lucide="eye"></i>
+              </button>
+            </div>
+            <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <span>Ingresar al sistema</span>
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </form>
+
+        <footer>
+          <p>
+            &copy; 2026 Sorbetería Herrera.<br />Todos los derechos reservados.
+          </p>
+        </footer>
+      </div>
     </div>
 
     <script src="https://unpkg.com/lucide@latest"></script>

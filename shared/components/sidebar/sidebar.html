@@ -5,83 +5,99 @@
       <img src="/assets/img/logo.jpg" alt="Logo Sorbetería Herrera" />
     </div>
     <div class="sidebar-user-info">
-      <span class="sidebar-user-name">Sorbetería Herrera</span>
-      <span class="sidebar-user-role">Hecho en familia</span>
+      <span class="sidebar-user-name-company">Sorbetería Herrera</span>
+      <span class="sidebar-slogan">Hecho en familia</span>
     </div>
   </div>
 
-  <!-- Navigation -->
   <nav class="sidebar-nav">
-    <ul class="nav-list">
-      <li class="nav-item">
-        <a href="/modules/dashboard/dashboard.html" class="nav-link">
-          <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
-          <span class="nav-text">Dashboard</span>
-        </a>
-      </li>
+    <div class="nav-section">
+      <p class="nav-section-label">Principal</p>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="/modules/dashboard/dashboard.html" class="nav-link">
+            <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
+            <span class="nav-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/modules/sales/sales.html" class="nav-link">
+            <span class="nav-icon"><i data-lucide="receipt"></i></span>
+            <span class="nav-text">Ventas</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/modules/order/order.html" class="nav-link">
+            <span class="nav-icon"><i data-lucide="calendar-days"></i></span>
+            <span class="nav-text">Pedidos</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/modules/purchase/purchase.html" class="nav-link">
+            <span class="nav-icon"><i data-lucide="boxes"></i></span>
+            <span class="nav-text">Compras</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/modules/customers/customer.html" class="nav-link">
+            <span class="nav-icon"><i data-lucide="users-round"></i></span>
+            <span class="nav-text">Clientes</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-      <li class="nav-item">
-        <a href="/modules/sales/sales.html" class="nav-link">
-          <span class="nav-icon"><i data-lucide="receipt"></i></span>
-          <span class="nav-text">Ventas</span>
-        </a>
-      </li>
+    <div class="nav-section">
+      <p class="nav-section-label">Gestión</p>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="/modules/inventory/inventory.html" class="nav-link">
+            <span class="nav-icon"><i data-lucide="clipboard-list"></i></span>
+            <span class="nav-text">Inventario</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/modules/productcatalog/catalog.html" class="nav-link">
+            <span class="nav-icon"><i data-lucide="package"></i></span>
+            <span class="nav-text">Productos</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/modules/reports/reports.html" class="nav-link">
+            <span class="nav-icon"
+              ><i data-lucide="file-chart-column"></i
+            ></span>
+            <span class="nav-text">Reportes</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-      <li class="nav-item">
-        <a href="/modules/order/order.html" class="nav-link">
-          <span class="nav-icon"><i data-lucide="calendar-days"></i></span>
-          <span class="nav-text">Pedidos</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a href="" class="nav-link">
-          <span class="nav-icon"><i data-lucide="boxes"></i></span>
-          <span class="nav-text">Compras</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a href="" class="nav-link">
-          <span class="nav-icon"><i data-lucide="users-round"></i></span>
-          <span class="nav-text">Clientes</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a href="" class="nav-link">
-          <span class="nav-icon"><i data-lucide="clipboard-list"></i></span>
-          <span class="nav-text">Inventario</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a href="" class="nav-link">
-          <span class="nav-icon"><i data-lucide="package"></i></span>
-          <span class="nav-text">Productos</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a href="" class="nav-link">
-          <span class="nav-icon"><i data-lucide="file-chart-column"></i></span>
-          <span class="nav-text">Reportes</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a href="" class="nav-link">
-          <span class="nav-icon"><i data-lucide="circle-user-round"></i></span>
-          <span class="nav-text">Usuarios</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a href="" class="nav-link">
-          <span class="nav-icon"><i data-lucide="settings"></i></span>
-          <span class="nav-text">Configuración</span>
-        </a>
-      </li>
-    </ul>
+    <div class="nav-section">
+      <p class="nav-section-label">Sistema</p>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="/modules/users/users.html" class="nav-link">
+            <span class="nav-icon"
+              ><i data-lucide="circle-user-round"></i
+            ></span>
+            <span class="nav-text">Usuarios</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/modules/settings/settings.html" class="nav-link">
+            <span class="nav-icon"><i data-lucide="settings"></i></span>
+            <span class="nav-text">Configuración</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </nav>
+
+  <div class="sidebar-footer">
+    <button class="btn-logout" id="btn-logout">
+      <span class="nav-icon"><i data-lucide="log-out"></i></span>
+      <span>Cerrar sesión</span>
+    </button>
+  </div>
 </aside>
