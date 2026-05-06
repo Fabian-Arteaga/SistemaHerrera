@@ -25,6 +25,9 @@ body {
     overflow-y: auto;
     scrollbar-width: none;
 }
+.settings-sidebar-title {
+    margin-bottom: 1px;
+}
 
 .settings-sidebar::-webkit-scrollbar {
     display: none;
@@ -35,6 +38,7 @@ body {
     flex-direction: column;
     padding: 16px;
     border-bottom: 1px solid #f0f1f3;
+    
 }
 
 .btn-back {
@@ -70,7 +74,7 @@ body {
     padding: 8px 12px;
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 8px;
     overflow-y: auto;
     scrollbar-width: none;
 }

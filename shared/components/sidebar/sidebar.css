@@ -5,6 +5,7 @@ body {
 }
 .sidebar {
     background-color: var(--color-bg-sidebar);
+    
     width: 240px;
     height: 100vh;
     position: fixed;
@@ -53,12 +54,13 @@ body {
 }
 
 .sidebar-user-name-company {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 0.98rem;
+    font-weight: 800;
     color: var(--color-text-heading);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 160px;
 }
 
 .sidebar-slogan {
