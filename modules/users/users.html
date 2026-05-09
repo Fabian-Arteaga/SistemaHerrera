@@ -31,8 +31,12 @@
           <h1>Usuarios</h1>
         </div>
         <div class="page-header-right">
+          <button class="btn btn-outline">
+            <i data-lucide="download"></i>
+            Exportar
+          </button>
           <button class="btn btn-primary" id="btn-open-modal">
-            <i data-lucide="user-plus" style="width: 18px; height: 18px"></i>
+            <i data-lucide="user-plus"></i>
             Agregar Usuario
           </button>
         </div>
@@ -42,7 +46,7 @@
         <div class="stat-card stat-card-brand">
           <div class="stat-card-decoration"></div>
           <div class="stat-card-icon">
-            <i data-lucide="users" style="width: 20px; height: 20px"></i>
+            <i data-lucide="users"></i>
           </div>
           <div class="stat-card-label">Usuarios Activos</div>
           <div class="stat-card-value">5</div>
@@ -50,7 +54,7 @@
         <div class="stat-card stat-card-coral">
           <div class="stat-card-decoration"></div>
           <div class="stat-card-icon">
-            <i data-lucide="user-x" style="width: 20px; height: 20px"></i>
+            <i data-lucide="user-x"></i>
           </div>
           <div class="stat-card-label">Usuarios Inactivos</div>
           <div class="stat-card-value">1</div>
@@ -58,7 +62,7 @@
         <div class="stat-card stat-card-warm">
           <div class="stat-card-decoration"></div>
           <div class="stat-card-icon">
-            <i data-lucide="shield-check" style="width: 20px; height: 20px"></i>
+            <i data-lucide="shield-check"></i>
           </div>
           <div class="stat-card-label">Administradores</div>
           <div class="stat-card-value">2</div>
@@ -66,7 +70,7 @@
         <div class="stat-card stat-card-purple">
           <div class="stat-card-decoration"></div>
           <div class="stat-card-icon">
-            <i data-lucide="user-round" style="width: 20px; height: 20px"></i>
+            <i data-lucide="user-round"></i>
           </div>
           <div class="stat-card-label">Vendedores</div>
           <div class="stat-card-value">4</div>
@@ -91,24 +95,110 @@
             <span class="count-badge">6</span>
           </h2>
           <div class="table-actions">
-            <button class="btn btn-outline">
-              <i
-                data-lucide="arrow-down-up"
-                style="width: 14px; height: 14px"
-              ></i>
-              Ordenar
-            </button>
+            <div class="filter-wrapper">
+              <button class="btn btn-outline" id="btn-filters">
+                <i data-lucide="sliders-horizontal"></i>
+                Filtros
+              </button>
+              <div class="filter-dropdown" id="filter-dropdown">
+                <div class="filter-section">
+                  <span class="filter-label">Rol</span>
+                  <label class="filter-option">
+                    <input
+                      type="radio"
+                      name="filter-role"
+                      value="all"
+                      checked
+                    />
+                    <div class="custom-radio"></div>
+                    Todos
+                  </label>
+                  <label class="filter-option">
+                    <input type="radio" name="filter-role" value="admin" />
+                    <div class="custom-radio"></div>
+                    Administrador
+                  </label>
+                  <label class="filter-option">
+                    <input type="radio" name="filter-role" value="seller" />
+                    <div class="custom-radio"></div>
+                    Vendedor
+                  </label>
+                </div>
+                <div class="filter-section">
+                  <span class="filter-label">Estado</span>
+                  <label class="filter-option">
+                    <input
+                      type="radio"
+                      name="filter-status"
+                      value="all"
+                      checked
+                    />
+                    <div class="custom-radio"></div>
+                    Todos
+                  </label>
+                  <label class="filter-option">
+                    <input type="radio" name="filter-status" value="active" />
+                    <div class="custom-radio"></div>
+                    Activo
+                  </label>
+                  <label class="filter-option">
+                    <input type="radio" name="filter-status" value="inactive" />
+                    <div class="custom-radio"></div>
+                    Inactivo
+                  </label>
+                </div>
+                <div class="filter-footer">
+                  <button class="btn-filter-clear" id="btn-filter-clear">
+                    Limpiar
+                  </button>
+                  <button class="btn-filter-apply" id="btn-filter-apply">
+                    Aplicar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="sort-wrapper">
+              <button class="btn btn-outline" id="btn-sort">
+                <i data-lucide="arrow-down-up"></i>
+                Ordenar
+              </button>
+              <div class="sort-dropdown" id="sort-dropdown">
+                <div class="filter-section">
+                  <label class="filter-option">
+                    <input type="radio" name="sort" value="name-asc" checked />
+                    <div class="custom-radio"></div>
+                    Nombre A → Z
+                  </label>
+                  <label class="filter-option">
+                    <input type="radio" name="sort" value="name-desc" />
+                    <div class="custom-radio"></div>
+                    Nombre Z → A
+                  </label>
+                  <label class="filter-option">
+                    <input type="radio" name="sort" value="role" />
+                    <div class="custom-radio"></div>
+                    Por Rol
+                  </label>
+                  <label class="filter-option">
+                    <input type="radio" name="sort" value="status" />
+                    <div class="custom-radio"></div>
+                    Por Estado
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <table class="data-table">
           <thead>
             <tr>
-              <th style="width: 28%">Usuario</th>
-              <th style="width: 20%">Cédula</th>
-              <th style="width: 15%">Rol</th>
-              <th style="width: 15%">Estado</th>
-              <th style="width: 22%">Acciones</th>
+              <th class="col-user">Usuario</th>
+              <th class="col-id">Cédula</th>
+              <th class="col-role">Rol</th>
+              <th class="col-status">Estado</th>
+              <th class="col-actions">Acciones</th>
             </tr>
           </thead>
           <tbody id="users-table-body">
@@ -132,22 +222,16 @@
               <td>
                 <div class="row-actions">
                   <button class="btn-detail" title="Editar">
-                    <i
-                      data-lucide="edit-2"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="edit-2"></i>
                   </button>
                   <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key" style="width: 16px; height: 16px"></i>
+                    <i data-lucide="key"></i>
                   </button>
                   <button
                     class="btn-detail btn-toggle-status"
                     title="Desactivar"
                   >
-                    <i
-                      data-lucide="power-off"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="power-off"></i>
                   </button>
                 </div>
               </td>
@@ -173,22 +257,16 @@
               <td>
                 <div class="row-actions">
                   <button class="btn-detail" title="Editar">
-                    <i
-                      data-lucide="edit-2"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="edit-2"></i>
                   </button>
                   <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key" style="width: 16px; height: 16px"></i>
+                    <i data-lucide="key"></i>
                   </button>
                   <button
                     class="btn-detail btn-toggle-status"
                     title="Desactivar"
                   >
-                    <i
-                      data-lucide="power-off"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="power-off"></i>
                   </button>
                 </div>
               </td>
@@ -214,22 +292,16 @@
               <td>
                 <div class="row-actions">
                   <button class="btn-detail" title="Editar">
-                    <i
-                      data-lucide="edit-2"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="edit-2"></i>
                   </button>
                   <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key" style="width: 16px; height: 16px"></i>
+                    <i data-lucide="key"></i>
                   </button>
                   <button
                     class="btn-detail btn-toggle-status"
                     title="Desactivar"
                   >
-                    <i
-                      data-lucide="power-off"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="power-off"></i>
                   </button>
                 </div>
               </td>
@@ -255,22 +327,16 @@
               <td>
                 <div class="row-actions">
                   <button class="btn-detail" title="Editar">
-                    <i
-                      data-lucide="edit-2"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="edit-2"></i>
                   </button>
                   <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key" style="width: 16px; height: 16px"></i>
+                    <i data-lucide="key"></i>
                   </button>
                   <button
                     class="btn-detail btn-toggle-status"
                     title="Desactivar"
                   >
-                    <i
-                      data-lucide="power-off"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="power-off"></i>
                   </button>
                 </div>
               </td>
@@ -296,22 +362,16 @@
               <td>
                 <div class="row-actions">
                   <button class="btn-detail" title="Editar">
-                    <i
-                      data-lucide="edit-2"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="edit-2"></i>
                   </button>
                   <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key" style="width: 16px; height: 16px"></i>
+                    <i data-lucide="key"></i>
                   </button>
                   <button
                     class="btn-detail btn-toggle-status"
                     title="Desactivar"
                   >
-                    <i
-                      data-lucide="power-off"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="power-off"></i>
                   </button>
                 </div>
               </td>
@@ -340,19 +400,13 @@
               <td>
                 <div class="row-actions">
                   <button class="btn-detail" title="Editar">
-                    <i
-                      data-lucide="edit-2"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="edit-2"></i>
                   </button>
                   <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key" style="width: 16px; height: 16px"></i>
+                    <i data-lucide="key"></i>
                   </button>
                   <button class="btn-detail btn-toggle-status" title="Activar">
-                    <i
-                      data-lucide="power"
-                      style="width: 16px; height: 16px"
-                    ></i>
+                    <i data-lucide="power"></i>
                   </button>
                 </div>
               </td>
