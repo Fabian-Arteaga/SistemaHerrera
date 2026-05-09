@@ -30,63 +30,88 @@
 .stat-card {
     flex: 1;
     border-radius: 16px;
-    padding: 16px 18px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    padding: 20px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+
 .stat-ventas {
-    background-color: #FFF9F9;
+    background: linear-gradient(135deg, rgba(250, 137, 123, 0.1), rgba(250, 137, 123, 0.05));
+    border: 1px solid rgba(250, 137, 123, 0.15);
 }
 
 .stat-pedidos {
-    background-color: #FFF8EA;
+    background: linear-gradient(135deg, rgba(244, 197, 66, 0.12), rgba(244, 197, 66, 0.05));
+    border: 1px solid rgba(244, 197, 66, 0.2);
 }
 
 .stat-stock {
-    background-color: #FFF0F0;
+    background: linear-gradient(135deg, rgba(0, 194, 150, 0.1), rgba(0, 194, 150, 0.05));
+    border: 1px solid rgba(0, 194, 150, 0.15);
 }
 
+.stat-card-decoration {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    opacity: 0.2;
+}
+
+.stat-ventas .stat-card-decoration {
+    background: #FA897B;
+}
+
+.stat-pedidos .stat-card-decoration {
+    background: #F4C542;
+}
+
+.stat-stock .stat-card-decoration {
+    background: #00C296;
+}
+
+/* Ícono */
 .stat-icon-wrap {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin-bottom: 12px;
 }
 
 .stat-ventas .stat-icon-wrap {
     background: rgba(250, 137, 123, 0.15);
-}
-
-.stat-ventas .stat-icon-wrap svg {
-    width: 20px;
-    height: 20px;
-    color: #e05c4a;
+    color: #FA897B;
 }
 
 .stat-pedidos .stat-icon-wrap {
     background: rgba(244, 197, 66, 0.2);
-}
-
-.stat-pedidos .stat-icon-wrap svg {
-    width: 20px;
-    height: 20px;
-    color: #c99a00;
+    color: #b8930a;
 }
 
 .stat-stock .stat-icon-wrap {
-    background: rgba(220, 38, 38, 0.1);
+    background: rgba(0, 194, 150, 0.15);
+    color: #00C296;
 }
 
-.stat-stock .stat-icon-wrap svg {
+.stat-icon-wrap svg {
     width: 20px;
     height: 20px;
-    color: #dc2626;
 }
+
 
 .stat-body {
     display: flex;
@@ -95,13 +120,14 @@
 }
 
 .stat-label {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     color: #6b7280;
+    margin-bottom: 4px;
 }
 
 .stat-value {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 700;
     color: #111827;
     line-height: 1.1;

@@ -207,14 +207,6 @@ body {
     box-shadow: 0 0 0 4px rgba(0, 194, 150, 0.1);
 }
 
-.forgot-password {
-    margin-top: 12px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--color-brand);
-    text-decoration: none;
-    text-align: right;
-}
 
 .forgot-password:hover {
     color: var(--color-brand-hover);
