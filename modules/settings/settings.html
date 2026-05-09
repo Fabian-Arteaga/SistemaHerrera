@@ -52,13 +52,6 @@
             Preferencias
           </button>
         </nav>
-
-        <div class="settings-sidebar-footer">
-          <button class="btn-logout" id="btn-logout">
-            <span class="nav-icon"><i data-lucide="log-out"></i></span>
-            Cerrar sesión
-          </button>
-        </div>
       </aside>
 
       <main class="settings-main">
@@ -83,29 +76,6 @@
                 <p>
                   Esta información identifica tu actividad dentro del sistema.
                 </p>
-              </div>
-
-              <div class="avatar-row">
-                <div class="avatar-preview">
-                  <img
-                    src="/assets/img/logo.jpg"
-                    alt="Avatar"
-                    id="avatar-img"
-                  />
-                </div>
-                <div class="avatar-actions">
-                  <p class="avatar-hint">JPG o PNG. Máximo 2MB.</p>
-                  <label class="btn-upload" for="avatar-input">
-                    <i data-lucide="upload"></i>
-                    Cambiar foto
-                  </label>
-                  <input
-                    type="file"
-                    id="avatar-input"
-                    accept="image/*"
-                    hidden
-                  />
-                </div>
               </div>
 
               <div class="form-grid">
@@ -155,10 +125,6 @@
                       <i data-lucide="eye"></i>
                     </button>
                   </div>
-                  <div class="strength-bar">
-                    <div class="strength-fill" id="strength-fill"></div>
-                  </div>
-                  <span class="strength-label" id="strength-label"></span>
                 </div>
                 <div class="form-group">
                   <label>Confirmar Nueva Contraseña</label>
@@ -182,6 +148,28 @@
                   Información legal que aparece en reportes y documentos del
                   sistema.
                 </p>
+              </div>
+              <div class="avatar-row">
+                <div class="avatar-preview">
+                  <img
+                    src="/assets/img/logo.jpg"
+                    alt="Avatar"
+                    id="avatar-img"
+                  />
+                </div>
+                <div class="avatar-actions">
+                  <p class="avatar-hint">JPG o PNG. Máximo 2MB.</p>
+                  <label class="btn-upload" for="avatar-input">
+                    <i data-lucide="upload"></i>
+                    Cambiar Logo
+                  </label>
+                  <input
+                    type="file"
+                    id="avatar-input"
+                    accept="image/*"
+                    hidden
+                  />
+                </div>
               </div>
               <div class="form-grid">
                 <div class="form-group full">
