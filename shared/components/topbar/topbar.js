@@ -1,104 +1,104 @@
 class TopBar {
   constructor() {
-    this.contenedor = document.getElementById('topbar-placeholder');
+    this.container = document.getElementById('topbar-placeholder');
   }
 
-  async cargar() {
-    if (!this.contenedor) return;
+  async load() {
+    if (!this.container) return;
 
     try {
-      const respuesta = await fetch('/shared/components/topbar/topbar.html');
+      const response = await fetch('/shared/components/topbar/topbar.html');
 
-      if (!respuesta.ok) {
-        throw new Error(`Error al cargar el topbar: ${respuesta.status}`);
+      if (!response.ok) {
+        throw new Error(`Error loading topbar: ${response.status}`);
       }
 
-      const html = await respuesta.text();
-      this.contenedor.innerHTML = html;
+      const html = await response.text();
+      this.container.innerHTML = html;
 
       if (window.lucide) lucide.createIcons();
 
-      this.#configurarEventos();
+      this.#setupEvents();
 
     } catch (error) {
-      console.error('Error en topbar:', error);
-      this.contenedor.innerHTML = `<p style="color:red; padding:1rem;">Error al cargar el topbar</p>`;
+      console.error('Topbar error:', error);
+      this.container.innerHTML = `<p style="color:red; padding:1rem;">Error al cargar el menú</p>`;
     }
   }
 
-  #configurarEventos() {
-    this.#configurarBuscador();
-    this.#configurarOffcanvas();
-    this.#configurarToggleTema();
-    this.#configurarLogout();
-    this.#configurarNotificaciones();
+  #setupEvents() {
+    this.#setupSearch();
+    this.#setupOffcanvas();
+    this.#setupThemeToggle();
+    this.#setupLogout();
+    this.#setupNotifications();
   }
 
-  #configurarBuscador() {
-    const searchWrapper = this.contenedor.querySelector('.topbar-search');
-    const searchInput   = this.contenedor.querySelector('.search-input');
-    const searchTrigger = this.contenedor.querySelector('.search-trigger');
+  #setupSearch() {
+    const wrapper  = this.container.querySelector('.topbar-search');
+    const input    = this.container.querySelector('.search-input');
+    const trigger  = this.container.querySelector('.search-trigger');
 
-    if (!searchTrigger || !searchInput || !searchWrapper) return;
+    if (!trigger || !input || !wrapper) return;
 
-    searchTrigger.addEventListener('click', () => {
-      searchWrapper.classList.toggle('active');
-      if (searchWrapper.classList.contains('active')) searchInput.focus();
+    trigger.addEventListener('click', () => {
+      wrapper.classList.toggle('active');
+      if (wrapper.classList.contains('active')) input.focus();
     });
 
-    searchInput.addEventListener('blur', () => {
-      if (searchInput.value.trim() === '') searchWrapper.classList.remove('active');
+    input.addEventListener('blur', () => {
+      if (input.value.trim() === '') wrapper.classList.remove('active');
     });
   }
 
-  #configurarOffcanvas() {
-    const btnOpenProfile  = this.contenedor.querySelector('#btn-open-profile');
-    const btnCloseProfile = this.contenedor.querySelector('#btn-close-profile');
-    const offcanvasPanel  = this.contenedor.querySelector('#profile-offcanvas');
-    const overlay         = this.contenedor.querySelector('#profile-overlay');
+  #setupOffcanvas() {
+    const btnOpen  = this.container.querySelector('#btn-open-profile');
+    const btnClose = this.container.querySelector('#btn-close-profile');
+    const panel    = this.container.querySelector('#profile-offcanvas');
+    const overlay  = this.container.querySelector('#profile-overlay');
 
-    if (!btnOpenProfile || !offcanvasPanel || !overlay) return;
+    if (!btnOpen || !panel || !overlay) return;
 
-    const closePanel = () => {
-      offcanvasPanel.classList.remove('active');
+    const close = () => {
+      panel.classList.remove('active');
       overlay.classList.remove('active');
     };
 
-    btnOpenProfile.addEventListener('click', () => {
-      offcanvasPanel.classList.add('active');
+    btnOpen.addEventListener('click', () => {
+      panel.classList.add('active');
       overlay.classList.add('active');
     });
 
-    if (btnCloseProfile) btnCloseProfile.addEventListener('click', closePanel);
-    overlay.addEventListener('click', closePanel);
+    if (btnClose) btnClose.addEventListener('click', close);
+    overlay.addEventListener('click', close);
   }
 
-  #configurarToggleTema() {
-    const btnToggle   = this.contenedor.querySelector('#btn-toggle-theme');
-    const themeSwitch = this.contenedor.querySelector('#theme-switch');
+  #setupThemeToggle() {
+    const btn    = this.container.querySelector('#btn-toggle-theme');
+    const toggle = this.container.querySelector('#theme-switch');
 
-    if (!btnToggle || !themeSwitch) return;
+    if (!btn || !toggle) return;
 
-    btnToggle.addEventListener('click', () => {
-      themeSwitch.classList.toggle('active');
+    btn.addEventListener('click', () => {
+      toggle.classList.toggle('active');
     });
   }
 
-  #configurarLogout() {
-    const btnLogout = this.contenedor.querySelector('.btn-logout-panel');
-    if (!btnLogout) return;
+  #setupLogout() {
+    const btn = this.container.querySelector('.btn-logout-panel');
+    if (!btn) return;
 
-    btnLogout.addEventListener('click', () => {
+    btn.addEventListener('click', () => {
       localStorage.removeItem('token');
       window.location.href = '/modules/login/login.html';
     });
   }
 
-  #configurarNotificaciones() {
-    const btnBell    = this.contenedor.querySelector('#btn-notifications');
-    const dropdown   = this.contenedor.querySelector('#notif-dropdown');
-    const btnMarkAll = this.contenedor.querySelector('#btn-mark-all');
-    const badge      = this.contenedor.querySelector('#notif-badge');
+  #setupNotifications() {
+    const btnBell   = this.container.querySelector('#btn-notifications');
+    const dropdown  = this.container.querySelector('#notif-dropdown');
+    const btnMarkAll = this.container.querySelector('#btn-mark-all');
+    const badge     = this.container.querySelector('#notif-badge');
 
     if (!btnBell || !dropdown) return;
 
@@ -110,15 +110,17 @@ class TopBar {
     document.addEventListener('click', (e) => {
       if (!dropdown.contains(e.target) && e.target !== btnBell) {
         dropdown.classList.remove('active');
+        dropdown.classList.remove('expanded');
+        if (btnViewAll) btnViewAll.textContent = 'Ver todas las notificaciones';
       }
     });
 
     if (btnMarkAll) {
       btnMarkAll.addEventListener('click', () => {
-        this.contenedor.querySelectorAll('.notif-item.unread')
+        this.container.querySelectorAll('.notif-item.unread')
           .forEach(item => item.classList.remove('unread'));
 
-        this.contenedor.querySelectorAll('.notif-dot')
+        this.container.querySelectorAll('.notif-dot')
           .forEach(dot => dot.remove());
 
         if (badge) {
@@ -127,10 +129,11 @@ class TopBar {
         }
       });
     }
+
   }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   const topbar = new TopBar();
-  await topbar.cargar();
+  await topbar.load();
 });
