@@ -18,23 +18,14 @@ class Sidebar {
             this.contenedor.innerHTML = html;
           lucide.createIcons();  
           this.#marcarActivo();
-          this.#configurarLogout(); 
+         
         }
         catch (error) {
             console.error('error en sidebar:', error);
             this.contenedor.innerHTML = `<p style="color:red; padding:1rem;">Error al cargar el menu</p>`;
         }
   }
-  #configurarLogout() {
-    const btn = this.contenedor.querySelector('#btn-logout');
-    if (!btn) return;
-
-    btn.addEventListener('click', () => {
-        localStorage.removeItem('token');       
-        sessionStorage.clear();                 
-        window.location.href = '/modules/login/login.html';  
-    });
-}
+ 
       #marcarActivo() {
     const links = this.contenedor.querySelectorAll('.nav-link');
 
