@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precios</title>
+
+    <link rel="stylesheet" href="/shared/css/global.css" />
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
+    <link rel="stylesheet" href="/modules/prices/prices.css" />
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <div id="layout-placeholder"></div>
+    <script src="/shared/components/sidebar/sidebar.js"></script>
+
+    <div id="topbar-placeholder"></div>
+    <script src="/shared/components/topbar/topbar.js"></script>
+
+<main class="main-content">
+    <div class="page-header animate-in">
+        <h1>Precios</h1>
+        <div style="display:flex;gap:10px;">
+            <button class="btn btn-outline">
+                <i data-lucide="download" style="width:16px;height:16px;"></i> Exportar
+            </button>
+            <button class="btn btn-primary" onclick="openBulkEditModal()">
+                <i data-lucide="edit-3" style="width:18px;height:18px;"></i> Editar masivo
+            </button>
+        </div>
+    </div>
+
+    <div class="stats-row animate-in delay-1">
+        <div class="stat-card stat-card-ventas">
+            <span class="stat-label">Productos con Precio</span>
+            <span class="stat-value">156</span>
+            <span class="stat-change positive">+5 esta semana</span>
+            <div class="stat-decoration"></div>
+        </div>
+        <div class="stat-card stat-card-pedidos">
+            <span class="stat-label">Precios Especiales Activos</span>
+            <span class="stat-value">8</span>
+            <span class="stat-change neutral">3 finalizan pronto</span>
+            <div class="stat-decoration"></div>
+        </div>
+        <div class="stat-card stat-card-produccion">
+            <span class="stat-label">Margen Promedio</span>
+            <span class="stat-value">35%</span>
+            <span class="stat-change positive">+2% vs mes anterior</span>
+            <div class="stat-decoration"></div>
+        </div>
+        <div class="stat-card stat-card-inventory">
+            <span class="stat-label">Última Actualización</span>
+            <span class="stat-value" style="font-size:28px;">Hoy</span>
+            <span class="stat-change neutral">Hace 2 horas</span>
+            <div class="stat-decoration"></div>
+        </div>
+    </div>
+
+    <div class="content-grid animate-in delay-2">
+        <div class="general-prices-card">
+            <div class="section-header">
+                <h2><i data-lucide="tag"></i> Gestionar precios generales</h2>
+            </div>
+
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="switchCategory(this)">Tradicionales</button>
+                <button class="category-tab" onclick="switchCategory(this)">Lights</button>
+                <button class="category-tab" onclick="switchCategory(this)">Nieves</button>
+                <button class="category-tab" onclick="switchCategory(this)">Fantasía</button>
+                <button class="category-tab" onclick="switchCategory(this)">Paletas</button>
+            </div>
+
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Presentación</th>
+                        <th style="width:25%;text-align:center;">Precio Detalle</th>
+                        <th style="width:25%;text-align:center;">Precio Mayoreo</th>
+                        <th style="width:15%;text-align:center;">Productos</th>
+                        <th style="width:10%;text-align:center;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="presentation-cell">
+                                <div class="presentation-icon oz4">🍦</div>
+                                <div class="presentation-info">
+                                    <span class="presentation-name">4 Onzas</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align:center;"><span class="price-value detail">C$45</span></td>
+                        <td style="text-align:center;"><span class="price-value wholesale">C$38</span></td>
+                        <td style="text-align:center;"><span class="products-badge">42</span></td>
+                        <td style="text-align:center;">
+                            <button class="edit-btn" onclick="openEditModal('4 Onzas', '45', '38')">
+                                <i data-lucide="pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="presentation-cell">
+                                <div class="presentation-icon oz8">🍨</div>
+                                <div class="presentation-info">
+                                    <span class="presentation-name">8 Onzas</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align:center;"><span class="price-value detail">C$75</span></td>
+                        <td style="text-align:center;"><span class="price-value wholesale">C$65</span></td>
+                        <td style="text-align:center;"><span class="products-badge">42</span></td>
+                        <td style="text-align:center;">
+                            <button class="edit-btn" onclick="openEditModal('8 Onzas', '75', '65')">
+                                <i data-lucide="pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="presentation-cell">
+                                <div class="presentation-icon galon4"></div>
+                                <div class="presentation-info">
+                                    <span class="presentation-name">1/4 Galón</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align:center;"><span class="price-value detail">C$100</span></td>
+                        <td style="text-align:center;"><span class="price-value wholesale">C$90</span></td>
+                        <td style="text-align:center;"><span class="products-badge">42</span></td>
+                        <td style="text-align:center;">
+                            <button class="edit-btn" onclick="openEditModal('1/4 Galón', '100', '90')">
+                                <i data-lucide="pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="presentation-cell">
+                                <div class="presentation-icon galon2">🫙</div>
+                                <div class="presentation-info">
+                                    <span class="presentation-name">1/2 Galón</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align:center;"><span class="price-value detail">C$150</span></td>
+                        <td style="text-align:center;"><span class="price-value wholesale">C$135</span></td>
+                        <td style="text-align:center;"><span class="products-badge">42</span></td>
+                        <td style="text-align:center;">
+                            <button class="edit-btn" onclick="openEditModal('1/2 Galón', '150', '135')">
+                                <i data-lucide="pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="special-prices-card">
+            <div class="special-prices-header">
+                <h2><i data-lucide="sparkles"></i> Precios especiales</h2>
+                <button class="add-special-btn" onclick="openSpecialPriceModal()">
+                    <i data-lucide="plus"></i>
+                </button>
+            </div>
+
+            <div class="special-prices-list">
+                <div class="special-price-card card-purple">
+                    <div class="special-product-img">🍓</div>
+                    <div class="special-product-info">
+                        <span class="special-product-name">Sorbete tradicional Ron con pasas 4 Oz</span>
+                        <span class="special-product-price">C$20</span>
+                        <span class="special-product-discount">
+                            <i data-lucide="trending-down" style="width:12px;height:12px;"></i> 40% Descuento
+                        </span>
+                        <span class="special-product-date">Inicio: 03/03/25</span>
+                    </div>
+                </div>
+
+                <div class="special-price-card card-yellow">
+                    <div class="special-product-img">🍋</div>
+                    <div class="special-product-info">
+                        <span class="special-product-name">Sorbete tradicional Vainilla 8 Oz</span>
+                        <span class="special-product-price">C$50</span>
+                        <span class="special-product-discount">
+                            <i data-lucide="heart" style="width:12px;height:12px;"></i> Especial Día de Madres
+                        </span>
+                        <span class="special-product-date">Inicio: 02/03/25</span>
+                    </div>
+                </div>
+
+                <div class="special-price-card card-mint">
+                    <div class="special-product-img">🍫</div>
+                    <div class="special-product-info">
+                        <span class="special-product-name">Sorbete Premium Chocolate 1/4 Gal</span>
+                        <span class="special-product-price">C$85</span>
+                        <span class="special-product-discount">
+                            <i data-lucide="tag" style="width:12px;height:12px;"></i> 15% Descuento
+                        </span>
+                        <span class="special-product-date">Inicio: 15/03/25</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div id="editModal" class="modal-overlay" onclick="if(event.target===this)closeEditModal()">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i data-lucide="pencil" style="width:22px;height:22px;color:var(--color-brand);"></i> Editar Precios</h2>
+            <button class="modal-close" onclick="closeEditModal()"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-form-group">
+            <label>Presentación</label>
+            <input type="text" id="editPresentation" readonly style="background:#F8FAFC;">
+        </div>
+        <div class="modal-form-row">
+            <div class="modal-form-group">
+                <label>Precio Detalle</label>
+                <input type="number" id="editPriceDetail" placeholder="C$0.00">
+            </div>
+            <div class="modal-form-group">
+                <label>Precio Mayoreo</label>
+                <input type="number" id="editPriceWholesale" placeholder="C$0.00">
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closeEditModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="savePriceEdit()">
+                <i data-lucide="check" style="width:16px;height:16px;"></i> Guardar cambios
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    lucide.createIcons();
+
+    function switchCategory(el) {
+        document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    function openEditModal(presentation, detail, wholesale) {
+        document.getElementById('editPresentation').value = presentation;
+        document.getElementById('editPriceDetail').value = detail;
+        document.getElementById('editPriceWholesale').value = wholesale;
+        document.getElementById('editModal').classList.add('active');
+        lucide.createIcons();
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').classList.remove('active');
+    }
+
+    function savePriceEdit() {
+        closeEditModal();
+        const card = document.querySelector('.general-prices-card');
+        card.style.transition = 'box-shadow 0.3s';
+        card.style.boxShadow = '0 0 0 3px rgba(0, 194, 150, 0.2)';
+        setTimeout(() => { card.style.boxShadow = ''; }, 800);
+    }
+
+    function openSpecialPriceModal() {
+        document.getElementById('specialModal').classList.add('active');
+        lucide.createIcons();
+    }
+
+    function openBulkEditModal() {
+        document.getElementById('bulkModal').classList.add('active');
+        lucide.createIcons();
+    }
+</script>
+
+</body>
+</html>

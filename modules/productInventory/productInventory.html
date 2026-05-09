@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario | Sistema de Gestión</title>
+
+    <link rel="stylesheet" href="/shared/css/global.css" />
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
+    <link rel="stylesheet" href="/modules/productInventory/productInventory.css" />
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+
+<body>
+    <div id="layout-placeholder"></div>
+    <script src="/shared/components/sidebar/sidebar.js"></script>
+
+    <div id="topbar-placeholder"></div>
+    <script src="/shared/components/topbar/topbar.js"></script>
+
+    <main class="main-content">
+
+        <div class="page-header animate-in">
+            <h1>Inventario</h1>
+            <div style="display:flex; gap:10px;">
+                <button class="btn btn-outline">
+                    <i data-lucide="download" style="width:16px; height:16px;"></i>
+                    Exportar
+                </button>
+                <button class="btn btn-primary">
+                    <i data-lucide="plus" style="width:18px; height:18px;"></i>
+                    Reabastecer
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-row animate-in delay-1">
+            <div class="stat-card stat-card-brand">
+                <div class="stat-card-decoration"></div>
+                <div class="stat-card-icon"><i data-lucide="package"></i></div>
+                <div class="stat-card-label">Total Productos</div>
+                <div class="stat-card-value">156</div>
+                <div class="stat-card-change positive">
+                    <i data-lucide="trending-up" style="width:14px; height:14px;"></i>
+                    +8 este mes
+                </div>
+            </div>
+
+            <div class="stat-card stat-card-yellow">
+                <div class="stat-card-decoration"></div>
+                <div class="stat-card-icon"><i data-lucide="alert-triangle"></i></div>
+                <div class="stat-card-label">Stock Bajo</div>
+                <div class="stat-card-value">12</div>
+                <div class="stat-card-change warning">
+                    <i data-lucide="alert-circle" style="width:14px; height:14px;"></i>
+                    Requieren atención
+                </div>
+            </div>
+
+            <div class="stat-card stat-card-coral">
+                <div class="stat-card-decoration"></div>
+                <div class="stat-card-icon"><i data-lucide="trending-up"></i></div>
+                <div class="stat-card-label">Más Vendido</div>
+                <div class="stat-card-value">Fresa</div>
+                <div class="stat-card-change info">
+                    <i data-lucide="star" style="width:14px; height:14px;"></i>
+                    34% del total
+                </div>
+            </div>
+
+            <div class="stat-card stat-card-lavender">
+                <div class="stat-card-decoration"></div>
+                <div class="stat-card-icon"><i data-lucide="dollar-sign"></i></div>
+                <div class="stat-card-label">Valor Inventario</div>
+                <div class="stat-card-value">48,250</div>
+                <div class="stat-card-change positive">
+                    <i data-lucide="trending-up" style="width:14px; height:14px;"></i>
+                    +5.2% vs anterior
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-card animate-in delay-2">
+            <div class="filter-card-header">
+                <i data-lucide="sliders-horizontal" style="width:18px; height:18px;"></i>
+                <h3>Filtrar</h3>
+            </div>
+
+            <div class="filter-grid">
+                <div class="filter-field full-width">
+                    <label>Buscar</label>
+                    <div style="position:relative;">
+                        <input type="text" placeholder="Buscar por nombre de producto, SKU..." id="searchInput"
+                            onkeyup="filterProducts()" style="width:100%; padding-left:40px;">
+                        <i data-lucide="search"
+                            style="position:absolute; left:12px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:#CBD5E1;"></i>
+                    </div>
+                </div>
+
+                <div class="filter-field">
+                    <label>Línea</label>
+                    <select id="lineaFilter" onchange="filterProducts()">
+                        <option value="">Todas las líneas</option>
+                        <option value="tradicional">Tradicional</option>
+                        <option value="premium">Premium</option>
+                        <option value="especial">Especial</option>
+                        <option value="artesanal">Artesanal</option>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label>Sabor</label>
+                    <select id="saborFilter" onchange="filterProducts()">
+                        <option value="">Todos los sabores</option>
+                        <option value="fresa">Fresa</option>
+                        <option value="chocolate">Chocolate</option>
+                        <option value="vainilla">Vainilla</option>
+                        <option value="limon">Limón</option>
+                        <option value="mora">Mora</option>
+                        <option value="coco">Coco</option>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label>Presentación</label>
+                    <select id="presentacionFilter" onchange="filterProducts()">
+                        <option value="">Todas</option>
+                        <option value="4oz">4 Onzas</option>
+                        <option value="8oz">8 Onzas</option>
+                        <option value="16oz">16 Onzas</option>
+                        <option value="32oz">32 Onzas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button class="btn btn-clear" onclick="clearFilters()">
+                    <i data-lucide="rotate-ccw" style="width:16px; height:16px;"></i>
+                    Limpiar
+                </button>
+                <button class="btn btn-filter" onclick="applyFilters()">
+                    <i data-lucide="filter" style="width:16px; height:16px;"></i>
+                    Filtrar
+                </button>
+            </div>
+        </div>
+
+        <div class="content-grid animate-in delay-3">
+            <div class="results-card">
+                <div class="results-header">
+                    <h2>
+                        <span>Resultados</span>
+                        <span class="count-badge" id="resultCount">156</span>
+                    </h2>
+                    <div class="results-actions">
+                        <button class="btn btn-outline" style="padding:8px 12px;">
+                            <i data-lucide="arrow-down-up" style="width:14px; height:14px;"></i>
+                            Ordenar
+                        </button>
+                    </div>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th style="text-align:center;">Stock Mostrador</th>
+                            <th style="text-align:center;">Stock Bodega</th>
+                            <th style="text-align:center;">Stock Reservado</th>
+                            <th style="text-align:center;">Stock Total</th>
+                            <th style="text-align:right;">Precio Detalle</th>
+                            <th style="text-align:right;">Precio Mayoritario</th>
+                            <th style="text-align:center;"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="inventoryTableBody">
+                        <tr data-linea="tradicional" data-sabor="fresa" data-presentacion="8oz">
+                            <td>
+                                <div class="product-cell">
+                                    <div class="product-icon fresa">🍓</div>
+                                    <div class="product-info">
+                                        <span class="product-name">S. Tradicional Fresa 8 Onz</span>
+                                        <span class="product-sku">SKU-001-FRE</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align:center;">15</td>
+                            <td style="text-align:center;">45</td>
+                            <td style="text-align:center;">12</td>
+                            <td style="text-align:center; font-weight:600;">72</td>
+                            <td style="text-align:right;">70.00 C$</td>
+                            <td style="text-align:right;">65.00 C$</td>
+                            <td style="text-align:center;">
+                                <button class="action-btn" title="Ver detalles">
+                                    <i data-lucide="eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr data-linea="premium" data-sabor="chocolate" data-presentacion="16oz">
+                            <td>
+                                <div class="product-cell">
+                                    <div class="product-icon chocolate">🍫</div>
+                                    <div class="product-info">
+                                        <span class="product-name">S. Premium Chocolate 16 Onz</span>
+                                        <span class="product-sku">SKU-009-CHO</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align:center;">12</td>
+                            <td style="text-align:center;">28</td>
+                            <td style="text-align:center;">6</td>
+                            <td style="text-align:center; font-weight:600;">46</td>
+                            <td style="text-align:right;">130.00 C$</td>
+                            <td style="text-align:right;">120.00 C$</td>
+                            <td style="text-align:center;">
+                                <button class="action-btn"><i data-lucide="eye"></i></button>
+                            </td>
+                        </tr>
+
+                        <tr data-linea="tradicional" data-sabor="vainilla" data-presentacion="8oz">
+                            <td>
+                                <div class="product-cell">
+                                    <div class="product-icon vainilla"></div>
+                                    <div class="product-info">
+                                        <span class="product-name">S. Tradicional Vainilla 8 Onz</span>
+                                        <span class="product-sku">SKU-010-VAN</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align:center;">18</td>
+                            <td style="text-align:center;">36</td>
+                            <td style="text-align:center;">10</td>
+                            <td style="text-align:center; font-weight:600;">64</td>
+                            <td style="text-align:right;">70.00 C$</td>
+                            <td style="text-align:right;">65.00 C$</td>
+                            <td style="text-align:center;">
+                                <button class="action-btn"><i data-lucide="eye"></i></button>
+                            </td>
+                        </tr>
+
+                        <tr data-linea="especial" data-sabor="coco" data-presentacion="8oz">
+                            <td>
+                                <div class="product-cell">
+                                    <div class="product-icon coco">🥥</div>
+                                    <div class="product-info">
+                                        <span class="product-name">S. Especial Coco 8 Onz</span>
+                                        <span class="product-sku">SKU-011-COC</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align:center;">6</td>
+                            <td style="text-align:center;">22</td>
+                            <td style="text-align:center;">4</td>
+                            <td style="text-align:center; font-weight:600;">32</td>
+                            <td style="text-align:right;">90.00 C$</td>
+                            <td style="text-align:right;">82.00 C$</td>
+                            <td style="text-align:center;">
+                                <button class="action-btn"><i data-lucide="eye"></i></button>
+                            </td>
+                        </tr>
+
+                        <tr data-linea="artesanal" data-sabor="mora" data-presentacion="16oz">
+                            <td>
+                                <div class="product-cell">
+                                    <div class="product-icon mora">🫐</div>
+                                    <div class="product-info">
+                                        <span class="product-name">S. Artesanal Mora 16 Onz</span>
+                                        <span class="product-sku">SKU-012-MOR</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align:center;">9</td>
+                            <td style="text-align:center;">27</td>
+                            <td style="text-align:center;">5</td>
+                            <td style="text-align:center; font-weight:600;">41</td>
+                            <td style="text-align:right;">135.00 C$</td>
+                            <td style="text-align:right;">125.00 C$</td>
+                            <td style="text-align:center;">
+                                <button class="action-btn"><i data-lucide="eye"></i></button>
+                            </td>
+                        </tr>
+
+                        <tr data-linea="premium" data-sabor="limon" data-presentacion="32oz">
+                            <td>
+                                <div class="product-cell">
+                                    <div class="product-icon limon">🍋</div>
+                                    <div class="product-info">
+                                        <span class="product-name">S. Premium Limón 32 Onz</span>
+                                        <span class="product-sku">SKU-013-LIM</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align:center;">14</td>
+                            <td style="text-align:center;">34</td>
+                            <td style="text-align:center;">8</td>
+                            <td style="text-align:center; font-weight:600;">56</td>
+                            <td style="text-align:right;">195.00 C$</td>
+                            <td style="text-align:right;">180.00 C$</td>
+                            <td style="text-align:center;">
+                                <button class="action-btn"><i data-lucide="eye"></i></button>
+                            </td>
+                        </tr>
+
+                        <tr data-linea="tradicional" data-sabor="coco" data-presentacion="4oz">
+                            <td>
+                                <div class="product-cell">
+                                    <div class="product-icon coco">🥥</div>
+                                    <div class="product-info">
+                                        <span class="product-name">S. Tradicional Coco 4 Onz</span>
+                                        <span class="product-sku">SKU-014-COC</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align:center;">20</td>
+                            <td style="text-align:center;">40</td>
+                            <td style="text-align:center;">6</td>
+                            <td style="text-align:center; font-weight:600;">66</td>
+                            <td style="text-align:right;">45.00 C$</td>
+                            <td style="text-align:right;">40.00 C$</td>
+                            <td style="text-align:center;">
+                                <button class="action-btn"><i data-lucide="eye"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="table-footer">
+                    <div class="table-footer-info">
+                        Mostrando <strong id="showingFrom">1-7</strong> de <strong id="showingTotal">156</strong> productos
+                    </div>
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i data-lucide="chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">...</button>
+                        <button class="pagination-btn">20</button>
+                        <button class="pagination-btn"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        /**
+         * Filtra dinámicamente las filas de la tabla según los criterios seleccionados
+         */
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const linea = document.getElementById('lineaFilter').value;
+            const sabor = document.getElementById('saborFilter').value;
+            const presentacion = document.getElementById('presentacionFilter').value;
+
+            const rows = document.querySelectorAll('#inventoryTableBody tr');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                const rowLinea = row.getAttribute('data-linea') || '';
+                const rowSabor = row.getAttribute('data-sabor') || '';
+                const rowPres = row.getAttribute('data-presentacion') || '';
+
+                const matchSearch = !query || text.includes(query);
+                const matchLinea = !linea || rowLinea === linea;
+                const matchSabor = !sabor || rowSabor === sabor;
+                const matchPres = !presentacion || rowPres === presentacion;
+
+                if (matchSearch && matchLinea && matchSabor && matchPres) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // Actualizar contadores de la interfaz
+            document.getElementById('resultCount').textContent = visibleCount;
+            document.getElementById('showingFrom').textContent = visibleCount > 0 ? `1-${visibleCount}` : `0-0`;
+        }
+
+        /**
+         * Resetea todos los inputs de filtro
+         */
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('lineaFilter').value = '';
+            document.getElementById('saborFilter').value = '';
+            document.getElementById('presentacionFilter').value = '';
+            filterProducts();
+            lucide.createIcons();
+        }
+
+        /**
+         * Aplica una animación visual al filtrar
+         */
+        function applyFilters() {
+            filterProducts();
+            const table = document.querySelector('.results-card');
+            table.style.transition = 'box-shadow 0.3s';
+            table.style.boxShadow = '0 0 0 3px rgba(0, 194, 150, 0.2)';
+            setTimeout(() => { table.style.boxShadow = ''; }, 600);
+        }
+
+        // Manejo de eventos para botones de paginación
+        document.querySelectorAll('.pagination-btn:not(:disabled)').forEach(btn => {
+            btn.addEventListener('click', function () {
+                if (this.textContent === '...') return;
+                document.querySelectorAll('.pagination-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Efecto visual al hacer clic en las filas de la tabla
+        document.querySelectorAll('#inventoryTableBody tr').forEach(row => {
+            row.style.cursor = 'pointer';
+            row.addEventListener('click', function (e) {
+                // Evitar el efecto si se hace clic específicamente en el botón de acción
+                if (e.target.closest('.action-btn')) return;
+                
+                this.style.background = 'rgba(0, 194, 150, 0.05)';
+                setTimeout(() => { this.style.background = ''; }, 300);
+            });
+        });
+    </script>
+</body>
+
+</html>
