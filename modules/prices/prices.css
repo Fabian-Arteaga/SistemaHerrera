@@ -244,18 +244,18 @@
     background: rgba(202, 138, 4, 0.15);
 }
 
-.special-price-card.card-mint {
-    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+.special-price-card.card-pink {
+    background: linear-gradient(135deg, #fad1f0, #f3a7d5);
 }
-.special-price-card.card-mint::after {
+.special-price-card.card-pink::after {
     content: ''; position: absolute; top: -10px; right: -10px;
     width: 60px; height: 60px; border-radius: 50%;
-    background: rgba(0, 194, 150, 0.2);
+    background: rgba(194, 0, 97, 0.2);
 }
 
 .special-product-img {
     width: 64px; height: 64px; border-radius: 12px;
-    background: var(--color-white); display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     font-size: 32px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
@@ -267,7 +267,7 @@
 }
 
 .special-product-price {
-    font-size: 20px; font-weight: 800; color: var(--color-brand);
+    font-size: 20px; font-weight: 800; color: var(--color-text-body) ;
 }
 
 .special-product-discount {

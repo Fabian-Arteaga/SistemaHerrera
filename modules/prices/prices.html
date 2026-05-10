@@ -97,7 +97,7 @@
                         <td style="text-align:center;"><span class="price-value wholesale">C$38</span></td>
                         <td style="text-align:center;"><span class="products-badge">42</span></td>
                         <td style="text-align:center;">
-                            <button class="edit-btn" onclick="openEditModal('4 Onzas', '45', '38')">
+                            <button class="edit-btn" onclick="openEditModal('Tradicionales', '4 Onzas', '45', '38')">
                                 <i data-lucide="pencil"></i>
                             </button>
                         </td>
@@ -170,7 +170,9 @@
 
             <div class="special-prices-list">
                 <div class="special-price-card card-purple">
-                    <div class="special-product-img">🍓</div>
+                    <div class="special-product-img">
+                        <img src="/assets/ProductsImages/Trad.RonConPasas_4Onzas.png" alt="Sorbete Ron con Pasas" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
+                    </div>
                     <div class="special-product-info">
                         <span class="special-product-name">Sorbete tradicional Ron con pasas 4 Oz</span>
                         <span class="special-product-price">C$20</span>
@@ -182,7 +184,9 @@
                 </div>
 
                 <div class="special-price-card card-yellow">
-                    <div class="special-product-img">🍋</div>
+                    <div class="special-product-img">
+                        <img src="/assets/ProductsImages/Trad.Vainilla_4Onzas.png" alt="Sorbete Vainilla" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
+                    </div>
                     <div class="special-product-info">
                         <span class="special-product-name">Sorbete tradicional Vainilla 8 Oz</span>
                         <span class="special-product-price">C$50</span>
@@ -193,10 +197,12 @@
                     </div>
                 </div>
 
-                <div class="special-price-card card-mint">
-                    <div class="special-product-img">🍫</div>
+                <div class="special-price-card card-pink">
+                    <div class="special-product-img">
+                        <img src="/assets/ProductsImages/Trad.Fresas_1.4Galon.png" alt="Sorbete Fresas" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
+                    </div>
                     <div class="special-product-info">
-                        <span class="special-product-name">Sorbete Premium Chocolate 1/4 Gal</span>
+                        <span class="special-product-name">Sorbete Tradicional Fresa 1/4 Gal</span>
                         <span class="special-product-price">C$85</span>
                         <span class="special-product-discount">
                             <i data-lucide="tag" style="width:12px;height:12px;"></i> 15% Descuento
@@ -216,6 +222,10 @@
             <button class="modal-close" onclick="closeEditModal()"><i data-lucide="x"></i></button>
         </div>
         <div class="modal-form-group">
+            <label>Linea</label>
+            <input type="text" id="editLine" readonly style="background:#F8FAFC;">
+        </div>
+         <div class="modal-form-group">
             <label>Presentación</label>
             <input type="text" id="editPresentation" readonly style="background:#F8FAFC;">
         </div>
@@ -246,7 +256,8 @@
         el.classList.add('active');
     }
 
-    function openEditModal(presentation, detail, wholesale) {
+    function openEditModal(line, presentation, detail, wholesale) {
+        document.getElementById('editLine').value = line;
         document.getElementById('editPresentation').value = presentation;
         document.getElementById('editPriceDetail').value = detail;
         document.getElementById('editPriceWholesale').value = wholesale;
