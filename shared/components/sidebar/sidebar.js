@@ -12,23 +12,24 @@ class Sidebar {
             const respuesta = await fetch('/shared/components/sidebar/sidebar.html');
 
             if (!respuesta.ok) {
-                throw new Error(`rror al cargar el sidebar: ${respuesta.status}`);
+                throw new Error(`Error al cargar el sidebar: ${respuesta.status}`);
             }
             const html = await respuesta.text();
             this.contenedor.innerHTML = html;
           lucide.createIcons();  
-            this.#marcarActivo();
+          this.#marcarActivo();
+         
         }
         catch (error) {
             console.error('error en sidebar:', error);
             this.contenedor.innerHTML = `<p style="color:red; padding:1rem;">Error al cargar el menu</p>`;
         }
-    }
+  }
+ 
       #marcarActivo() {
     const links = this.contenedor.querySelectorAll('.nav-link');
 
     links.forEach(link => {
-      // Compara el href del link con la página actual
       if (link.getAttribute('href') === this.paginaActual) {
         link.classList.add('active');
       }
@@ -37,11 +38,10 @@ class Sidebar {
 }
 document.addEventListener('DOMContentLoaded', async () => {
 
-  // Crea una instancia de la clase pasando la página actual
-  // Ejemplo: new Sidebar('/productos.html')
+
   const sidebar = new Sidebar(window.location.pathname);
 
-  // Llama al método cargar()
+
   await sidebar.cargar();
 
 });
