@@ -8,7 +8,6 @@
     padding: 24px 32px;
     background-color: var(--color-bg-page);
     min-height: calc(100vh - 60px);
-    overflow-y: auto;
 }
 
 /* ==========================================================
@@ -207,12 +206,11 @@
     background: rgba(244,197,66,0.18);
     color: #b8930a;
 }
-        /* ── Content Grid ── */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 24px;
-        }
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
 
         /* ── Filter Card ── */
 .filter-card {
@@ -332,13 +330,36 @@
     box-shadow: 0 5px 16px rgba(0, 194, 150, 0.35);
     transform: translateY(-1px);
 }
+.table-wrapper {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+}
 
+/* Ancho mínimo para que las 8 columnas no se compriman */
+.data-table {
+  width: 100%;
+  min-width: 820px;
+  /* ← AÑADIR esta línea */
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+/* Mantener esquinas redondeadas sin overflow: hidden */
+.results-header {
+  border-radius: 20px 20px 0 0;
+}
+
+.table-footer {
+  border-radius: 0 0 20px 20px;
+}
 /* ── Results Card ── */
 .results-card {
   background: var(--color-white);
   border-radius: 20px;
   box-shadow: var(--shadow-card);
-  overflow: hidden;
+  height: auto;
+  overflow: visible;
 }
 
 .results-header {
@@ -379,6 +400,7 @@
 
 .data-table {
   width: 100%;
+  min-width: 820px;
   border-collapse: collapse;
   font-size: 13px;
 }
