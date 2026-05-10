@@ -274,3 +274,48 @@
     flex-direction: column;
     gap: 15px;
 }
+/*boton historial*/
+/* Contenedor principal del encabezado */
+.page-header {
+    display: flex;
+    justify-content: space-between; /* Empuja el título a la izquierda y el botón a la derecha */
+    align-items: center; /* Centra verticalmente el botón con el título */
+    margin-bottom: var(--space-6);
+    padding: 0 10px; /* Un pequeño respiro en los bordes */
+}
+
+.header-title-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Botón de Historial (Estilo Sorbetería Herrera) */
+.btn-history {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: white;
+    color: #0077b6; /* Azul de marca */
+    border: 2px solid #0077b6;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-history:hover {
+    background-color: #0077b6;
+    color: white;
+    transform: translateY(-2px); /* Efecto sutil de elevación */
+    box-shadow: 0 4px 12px rgba(0, 119, 182, 0.2);
+}
+
+/* Tamaño del icono de Lucide */
+.btn-history i {
+    width: 18px;
+    height: 18px;
+}
