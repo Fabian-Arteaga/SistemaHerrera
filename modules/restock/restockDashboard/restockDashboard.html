@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/shared/css/global.css" />
+    <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="restockDashboard.css"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+ <div id="layout-placeholder"></div>
+ <script src="/shared/components/sidebar/sidebar.js"></script>
+
+ <div id="topbar-placeholder"></div>
+ <script src="/shared/components/topbar/topbar.js"></script>
+
+<!-- Main Content -->
+<main class="main-content">
+    <!-- Page Header -->
+    <div class="page-header animate-in">
+        <h1>Reabastecimientos</h1>
+        <div style="display:flex;gap:10px;">
+            <button class="btn btn-outline">
+                <i data-lucide="download" style="width:16px;height:16px;"></i>
+                Exportar
+            </button>
+            <button class="btn btn-primary">
+                <i data-lucide="plus" style="width:18px;height:18px;"></i>
+                Reabastecimiento
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats Row -->
+<div class="stats-row animate-in delay-1">
+
+    <!-- Card 1 -->
+    <div class="stat-card stat-card-brand">
+        <div class="stat-card-decoration"></div>
+        <div class="stat-card-icon">
+            <i data-lucide="package-plus" style="width: 20px; height: 20px"></i>
+        </div>
+        <div class="stat-card-label">Reabastecimientos este mes</div>
+        <div class="stat-card-value">27</div>
+        <div class="stat-card-change positive">
+            +5 vs mes anterior
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="stat-card stat-card-coral">
+        <div class="stat-card-decoration"></div>
+        <div class="stat-card-icon">
+            <i data-lucide="wallet" style="width: 20px; height: 20px"></i>
+        </div>
+        <div class="stat-card-label">Inversión total</div>
+        <div class="stat-card-value">C$28,000</div>
+        <div class="stat-card-change neutral">
+            +8% vs mes anterior
+        </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="stat-card stat-card-purple">
+        <div class="stat-card-decoration"></div>
+        <div class="stat-card-icon">
+            <i data-lucide="boxes" style="width: 20px; height: 20px"></i>
+        </div>
+        <div class="stat-card-label">Lotes creados</div>
+        <div class="stat-card-value">48</div>
+        <div class="stat-card-change info">
+            Prom. 1.8 por reabastecimiento
+        </div>
+    </div>
+</div>
+    <!-- Filter Bar -->
+    <div class="filter-bar animate-in delay-2">
+        <div class="filter-bar-search">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Buscar por código, usuario..." id="searchInput" onkeyup="filterResults()">
+        </div>
+        <div class="filter-bar-divider"></div>
+        <div class="filter-bar-date">
+            <label>Desde</label>
+            <input type="date" id="dateFrom" value="2025-03-01">
+        </div>
+        <div class="filter-bar-date">
+            <label>Hasta</label>
+            <input type="date" id="dateTo" value="2025-03-31">
+        </div>
+        <div class="filter-bar-divider"></div>
+        <div class="filter-bar-actions">
+            <button class="btn btn-clear" onclick="clearFilters()">
+                <i data-lucide="x" style="width:14px;height:14px;"></i>
+                Limpiar
+            </button>
+        </div>
+    </div>
+
+    <!-- Results Table -->
+    <div class="results-card animate-in delay-3">
+        <div class="results-header">
+            <h2>
+                <span>Resultados</span>
+                <span class="count-badge" id="resultCount">27</span>
+            </h2>
+            <div class="results-actions">
+                <button class="btn btn-outline">
+                    <i data-lucide="arrow-down-up" style="width:14px;height:14px;"></i>
+                    Ordenar
+                </button>
+                <button class="btn btn-outline">
+                    <i data-lucide="filter" style="width:14px;height:14px;"></i>
+                    Filtros
+                </button>
+            </div>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width:12%;">Código</th>
+                    <th style="width:16%;">Fecha</th>
+                    <th style="width:18%;">Usuario</th>
+                    <th style="width:10%;text-align:center;">Lotes</th>
+                    <th style="width:12%;text-align:center;">Unidades totales</th>
+                    <th style="width:16%;text-align:right;">Total Invertido</th>
+                    <th style="width:16%;text-align:center;">Detalles</th>
+                </tr>
+            </thead>
+            <tbody id="reabastecimientoTableBody">
+                <tr>
+                    <td><span class="code-cell">#RBT-027</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">02/03/2025</span>
+                            <span class="date-time">3:45 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-1">NC</div>
+                            <span class="user-name">Nohelia Cortes</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;"><span class="lots-cell high">8</span></td>
+                    <td style="text-align:center;"><span class="total-units-cell">100</span></td>
+                    <td style="text-align:right;"><span class="total-cell">C$10,000</span></td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#RBT-026</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">02/03/2025</span>
+                            <span class="date-time">2:15 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-1">NC</div>
+                            <span class="user-name">Nohelia Cortes</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;"><span class="lots-cell high">10</span></td>
+                    <td style="text-align:center;"><span class="total-units-cell">135</span></td>
+                    <td style="text-align:right;"><span class="total-cell">C$13,520</span></td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#RBT-025</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">01/03/2025</span>
+                            <span class="date-time">10:30 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-2">RN</div>
+                            <span class="user-name">Ronald Narvaez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;"><span class="lots-cell medium">5</span></td>
+                    <td style="text-align:center;"><span class="total-units-cell">100</span></td>
+                    <td style="text-align:right;"><span class="total-cell">C$4,200</span></td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#RBT-024</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">01/03/2025</span>
+                            <span class="date-time">9:00 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-3">LM</div>
+                            <span class="user-name">Luis Martinez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;"><span class="lots-cell medium">5</span></td>
+                    <td style="text-align:center;"><span class="total-units-cell">100</span></td>
+                    <td style="text-align:right;"><span class="total-cell">C$4,800</span></td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#RBT-023</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">28/02/2025</span>
+                            <span class="date-time">4:20 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-1">NC</div>
+                            <span class="user-name">Nohelia Cortes</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;"><span class="lots-cell high">12</span></td>
+                    <td style="text-align:center;"><span class="total-units-cell">150</span></td>
+                    <td style="text-align:right;"><span class="total-cell">C$15,600</span></td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#RBT-022</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">28/02/2025</span>
+                            <span class="date-time">11:00 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-4">AG</div>
+                            <span class="user-name">Ana Garcia</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;"><span class="lots-cell low">3</span></td>
+                    <td style="text-align:center;"><span class="total-units-cell">100</span></td>
+                    <td style="text-align:right;"><span class="total-cell">C$3,150</span></td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#RBT-021</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">27/02/2025</span>
+                            <span class="date-time">3:00 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-2">RN</div>
+                            <span class="user-name">Ronald Narvaez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;"><span class="lots-cell medium">7</span></td>
+                    <td style="text-align:center;"><span class="total-units-cell">100</span></td>
+                    <td style="text-align:right;"><span class="total-cell">C$8,750</span></td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#RBT-020</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">27/02/2025</span>
+                            <span class="date-time">10:15 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-3">LM</div>
+                            <span class="user-name">Luis Martinez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;"><span class="lots-cell medium">6</span></td>
+                    <td style="text-align:center;"><span class="total-units-cell">100</span></td>
+                    <td style="text-align:right;"><span class="total-cell">C$6,300</span></td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="table-footer">
+            <div class="rows-per-page">
+                <span>Filas por página:</span>
+                <select onchange="changeRowsPerPage(this.value)">
+                    <option value="8" selected>8</option>
+                    <option value="15">15</option>
+                    <option value="25">25</option>
+                </select>
+            </div>
+            <div class="table-footer-info">
+                Mostrando <strong id="showingFrom">1-8</strong> de <strong id="showingTotal">27</strong> registros
+            </div>
+            <div class="pagination">
+                <button class="pagination-btn" disabled id="prevBtn" onclick="prevPage()">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <button class="pagination-btn active" onclick="goToPage(1)">1</button>
+                <button class="pagination-btn" onclick="goToPage(2)">2</button>
+                <button class="pagination-btn" onclick="goToPage(3)">3</button>
+                <button class="pagination-btn" onclick="goToPage(4)">4</button>
+                <button class="pagination-btn" id="nextBtn" onclick="nextPage()">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+
+<script>
+lucide.createIcons();
+
+let currentPage = 1;
+let rowsPerPage = 8;
+let totalPages = 4;
+
+function filterResults() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const rows = document.querySelectorAll('#reabastecimientoTableBody tr');
+    let visibleCount = 0;
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        if (text.includes(query)) {
+            row.style.display = '';
+            visibleCount++;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    document.getElementById('resultCount').textContent = visibleCount;
+    lucide.createIcons();
+}
+
+function clearFilters() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('dateFrom').value = '2025-03-01';
+    document.getElementById('dateTo').value = '2025-03-31';
+    filterResults();
+}
+
+
+function goToPage(page) {
+    currentPage = page;
+    document.querySelectorAll('.pagination-btn').forEach(btn => {
+        if (!btn.querySelector('i')) btn.classList.remove('active');
+    });
+    document.querySelectorAll('.pagination-btn').forEach(btn => {
+        if (btn.textContent == page) btn.classList.add('active');
+    });
+    updatePaginationInfo();
+    updatePaginationButtons();
+}
+
+function nextPage() {
+    if (currentPage < totalPages) goToPage(currentPage + 1);
+}
+
+function prevPage() {
+    if (currentPage > 1) goToPage(currentPage - 1);
+}
+
+function changeRowsPerPage(value) {
+    rowsPerPage = parseInt(value);
+    totalPages = Math.ceil(27 / rowsPerPage);
+    currentPage = 1;
+    updatePaginationButtons();
+    updatePaginationInfo();
+}
+
+function updatePaginationInfo() {
+    const from = (currentPage - 1) * rowsPerPage + 1;
+    const to = Math.min(currentPage * rowsPerPage, 27);
+    document.getElementById('showingFrom').textContent = `${from}-${to}`;
+    document.getElementById('showingTotal').textContent = '27';
+}
+
+function updatePaginationButtons() {
+    document.getElementById('prevBtn').disabled = currentPage <= 1;
+    document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+}
+
+</script>
+</body>
+</html>
