@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/modules/reports/reports.css" />
+    <link rel="stylesheet" href="/shared/css/cards.css" />
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -79,56 +80,52 @@
         </div>
       </div>
 
-      <!-- KPIs -->
-      <div class="kpi-grid">
-        <div class="kpi-card kpi-green">
-          <div class="kpi-header">
-            <span class="kpi-title">Ingresos Totales</span>
-            <div class="kpi-icon"><i data-lucide="circle-dollar-sign"></i></div>
-          </div>
-          <div class="kpi-value">C$ 45,230.00</div>
-          <div class="kpi-trend trend-up">
-            <i data-lucide="trending-up" style="width: 14px"></i>
-            <span>12.5% vs mes anterior</span>
-          </div>
-        </div>
+     <!-- Stats Row -->
+<div class="stats-row animate-in delay-1">
 
-        <div class="kpi-card kpi-blue">
-          <div class="kpi-header">
-            <span class="kpi-title">Pedidos Completados</span>
-            <div class="kpi-icon"><i data-lucide="shopping-bag"></i></div>
-          </div>
-          <div class="kpi-value">128</div>
-          <div class="kpi-trend trend-up">
-            <i data-lucide="trending-up" style="width: 14px"></i>
-            <span>5.2% vs mes anterior</span>
-          </div>
-        </div>
+  <!-- Card 1 -->
+  <div class="stat-card stat-card-mint">
+    <div class="stat-card-decoration"></div>
+    <div class="stat-card-icon">
+      <i data-lucide="circle-dollar-sign" style="width: 20px; height: 20px"></i>
+    </div>
+    <div class="stat-card-label">Ingresos Totales</div>
+    <div class="stat-card-value">C$ 45,230</div>
+  </div>
 
-        <div class="kpi-card kpi-yellow">
-          <div class="kpi-header">
-            <span class="kpi-title">Promedio por Pedido</span>
-            <div class="kpi-icon"><i data-lucide="receipt"></i></div>
-          </div>
-          <div class="kpi-value">C$ 353.35</div>
-          <div class="kpi-trend trend-down">
-            <i data-lucide="trending-down" style="width: 14px"></i>
-            <span>-1.1% vs mes anterior</span>
-          </div>
-        </div>
+  <!-- Card 2 -->
+  <div class="stat-card stat-card-yellow">
+    <div class="stat-card-decoration"></div>
+    <div class="stat-card-icon">
+      <i data-lucide="shopping-bag" style="width: 20px; height: 20px"></i>
+    </div>
+    <div class="stat-card-label">Pedidos Completados</div>
+    <div class="stat-card-value">128</div>
+  </div>
 
-        <div class="kpi-card kpi-purple">
-          <div class="kpi-header">
-            <span class="kpi-title">Producto Estrella</span>
-            <div class="kpi-icon"><i data-lucide="award"></i></div>
-          </div>
-          <div class="kpi-value kpi-value-sm">Trad. Fresa (¼ Galón)</div>
-          <div class="kpi-trend trend-neutral">
-            <i data-lucide="minus" style="width: 14px"></i>
-            <span>24 unidades vendidas</span>
-          </div>
-        </div>
-      </div>
+  <!-- Card 3 -->
+  <div class="stat-card stat-card-coral">
+    <div class="stat-card-decoration"></div>
+    <div class="stat-card-icon">
+      <i data-lucide="receipt" style="width: 20px; height: 20px"></i>
+    </div>
+    <div class="stat-card-label">Promedio por Pedido</div>
+    <div class="stat-card-value">C$ 353</div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="stat-card stat-card-purple">
+    <div class="stat-card-decoration"></div>
+    <div class="stat-card-icon">
+      <i data-lucide="award" style="width: 20px; height: 20px"></i>
+    </div>
+    <div class="stat-card-label">Producto Estrella</div>
+    <div class="stat-card-value" style="font-size: 20px;">
+      Trad. Fresa
+    </div>
+  </div>
+
+</div>
 
       <div class="charts-grid">
         <div class="chart-card">
