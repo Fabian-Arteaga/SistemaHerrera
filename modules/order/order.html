@@ -184,7 +184,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="openDrawer('PED-10528')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -205,7 +205,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-pending">Pendiente</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100527')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -226,7 +226,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-delivered">Entregado</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100526')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -247,7 +247,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100525')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -268,7 +268,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-pending">Pendiente</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100524')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -289,7 +289,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-delivered">Entregado</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100523')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -310,7 +310,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-cancelled">Cancelado</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100522')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -331,7 +331,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100521')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -462,22 +462,103 @@
   <div class="order-drawer-header">
     <div class="order-drawer-header-top">
       <div class="order-drawer-title">
-        <i data-lucide="file-text"></i>
-        Detalle del pedido
+        <i data-lucide="file-text"></i> Detalle del pedido
       </div>
       <button class="order-drawer-close" id="drawerCloseBtn">
         <i data-lucide="x"></i>
       </button>
     </div>
     <div class="order-drawer-identity">
-      <span class="order-drawer-code" id="drawerCode">PED-10526</span>
-      <span class="order-drawer-status status-pending" id="drawerStatus">
+      <span class="order-drawer-code">PED-10526</span>
+      <span class="order-drawer-status status-pending">
         <span class="status-dot"></span> Pendiente
       </span>
     </div>
   </div>
 
-  <div class="order-drawer-body" id="drawerBody"></div>
+  <!-- Contenido visual estático (sin JS) -->
+  <div class="order-drawer-body">
+    
+    <!-- Info General -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="info"></i> Información general</div>
+      <div class="info-grid">
+        <div class="info-item"><span class="info-label">Código</span><span class="info-value mono">PED-10526</span></div>
+        <div class="info-item"><span class="info-label">Fecha registro</span><span class="info-value">02/03/2026 09:15 AM</span></div>
+        <div class="info-item"><span class="info-label">Entrega estimada</span><span class="info-value">02/03/2026 03:00 PM</span></div>
+        <div class="info-item"><span class="info-label">Entrega real</span><span class="info-value">-</span></div>
+        <div class="info-item"><span class="info-label">Registrado por</span><span class="info-value">Nohelia Cortes</span></div>
+      </div>
+    </div>
+    
+    <!-- Cliente -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="user"></i> Cliente</div>
+      <div class="client-card">
+        <div class="client-avatar"><span>ML</span></div>
+        <div class="client-info">
+          <span class="client-name">Nombre Cliente</span>
+          <span class="client-point"><i data-lucide="store"></i> Punto de venta</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ubicación -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="map-pin"></i> Ubicación</div>
+      <div class="location-card">
+        <div class="location-icon"><i data-lucide="map"></i></div>
+        <div class="location-info">
+          <span class="location-label">Departamento</span>
+          <span class="location-value">Managua</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Resumen -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="bar-chart-3"></i> Resumen</div>
+      <div class="summary-metrics">
+        <div class="summary-metric"><div class="summary-metric-value">6</div><div class="summary-metric-label">Productos</div></div>
+        <div class="summary-metric"><div class="summary-metric-value">24</div><div class="summary-metric-label">Unidades</div></div>
+        <div class="summary-metric"><div class="summary-metric-value total-price">C$1,250.00</div><div class="summary-metric-label">Total</div></div>
+      </div>
+    </div>
+    
+    <!-- Productos (tabla visual) -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="package"></i> Productos</div>
+      <div class="products-table-wrapper">
+        <table class="products-table">
+          <thead><tr><th>Producto</th><th style="width:14%;text-align:center;">Cant.</th><th style="width:18%;">P. Unit.</th><th style="width:18%;">P. Total</th><th style="width:15%;">Lote</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="product-cell"><div><div class="product-name">Helado de Vainilla 1L</div><div style="font-size:10.5px;color:var(--color-text-hint)">PROD-001</div></div></div></td>
+              <td class="quantity-cell">6</td>
+              <td class="price-cell">C$120.00</td>
+              <td class="price-total-cell">C$720.00</td>
+              <td><span style="font-family:monospace;font-size:11px;background:var(--color-bg-page);padding:3px 8px;border-radius:6px">L-VA123</span></td>
+            </tr>
+            <tr>
+              <td><div class="product-cell"><div><div class="product-name">Helado de Chocolate 1L</div><div style="font-size:10.5px;color:var(--color-text-hint)">PROD-002</div></div></div></td>
+              <td class="quantity-cell">6</td>
+              <td class="price-cell">C$120.00</td>
+              <td class="price-total-cell">C$720.00</td>
+              <td><span style="font-family:monospace;font-size:11px;background:var(--color-bg-page);padding:3px 8px;border-radius:6px">L-CH456</span></td>
+            </tr>
+            <tr>
+              <td><div class="product-cell"><div><div class="product-name">Cono Clásico</div><div style="font-size:10.5px;color:var(--color-text-hint)">PROD-015</div></div></div></td>
+              <td class="quantity-cell">12</td>
+              <td class="price-cell">C$6.00</td>
+              <td class="price-total-cell">C$72.00</td>
+              <td><span style="font-family:monospace;font-size:11px;background:var(--color-bg-page);padding:3px 8px;border-radius:6px">L-CO789</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </div>
 
   <div class="order-drawer-footer">
     <button class="drawer-btn drawer-btn-secondary" onclick="closeDrawer()">Cerrar</button>
@@ -489,199 +570,24 @@
 
 </div>
 
-<!-- ═════ ORDER DRAWER JS ═════ -->
 <script>
-  // ── Variables ──
-  const drawerOverlay = document.getElementById('orderDrawerOverlay');
-  const drawerPanel = document.getElementById('orderDrawer');
-  const drawerCloseBtn = document.getElementById('drawerCloseBtn');
-  const drawerCode = document.getElementById('drawerCode');
-  const drawerStatus = document.getElementById('drawerStatus');
-  const drawerBody = document.getElementById('drawerBody');
-
-  // ── Datos de ejemplo ──
-  const ordersData = {
-    'PED-10526': {
-      code: 'PED-10526',
-      status: 'pending',
-      statusLabel: 'Pendiente',
-      registrationDate: '02/03/2026 09:15 AM',
-      estimatedDelivery: '02/03/2026 03:00 PM',
-      realDelivery: '-',
-      registeredBy: 'Nohelia Cortes',
-      customer: { name: 'María López', initials: 'ML', pointOfSale: 'Managua Centro', customerId: 15 },
-      location: { department: 'Managua', municipality: 'Managua' },
-      summary: { totalProducts: 6, totalUnits: 24, totalPrice: 'C$1,250.00' },
-      products: [
-        { name: 'Helado de Vainilla 1L', sku: 'PROD-001', quantity: 6, unitPrice: 'C$120.00', totalPrice: 'C$720.00', lot: 'L-VA123' },
-        { name: 'Helado de Chocolate 1L', sku: 'PROD-002', quantity: 6, unitPrice: 'C$120.00', totalPrice: 'C$720.00', lot: 'L-CH456' },
-        { name: 'Cono Clásico', sku: 'PROD-015', quantity: 12, unitPrice: 'C$6.00', totalPrice: 'C$72.00', lot: 'L-CO789' }
-      ],
-      technical: { orderId: 10526, customerId: 15, orderStatusId: 1, isActive: true, posAddressId: 3 }
-    },
-    'PED-10528': {
-      code: 'PED-10528',
-      status: 'processing',
-      statusLabel: 'En Proceso',
-      registrationDate: '01/03/2026 10:30 AM',
-      estimatedDelivery: '02/03/2026 04:00 PM',
-      realDelivery: '-',
-      registeredBy: 'Ronald Narváez',
-      customer: { name: 'Yahir Guevara', initials: 'YG', pointOfSale: 'Managua Norte', customerId: 22 },
-      location: { department: 'Managua', municipality: 'Tipitapa' },
-      summary: { totalProducts: 4, totalUnits: 18, totalPrice: 'C$890.00' },
-      products: [
-        { name: 'Helado de Fresa 1L', sku: 'PROD-003', quantity: 8, unitPrice: 'C$120.00', totalPrice: 'C$960.00', lot: 'L-FR234' },
-        { name: 'Paleta de Coco', sku: 'PROD-030', quantity: 4, unitPrice: 'C$15.00', totalPrice: 'C$60.00', lot: 'L-PA890' }
-      ],
-      technical: { orderId: 10528, customerId: 22, orderStatusId: 2, isActive: true, posAddressId: 5 }
-    }
-  };
-
-  // ── Función principal: abrir drawer ──
-  function openDrawer(orderCode) {
-    const order = ordersData[orderCode] || buildGenericOrder(orderCode);
-    
-    drawerCode.textContent = order.code;
-    updateStatus(order.status, order.statusLabel);
-    renderBody(order);
-    
-    drawerOverlay.classList.add('active');
-    drawerPanel.classList.add('active');
+  function openDrawer() {
+    document.getElementById('orderDrawerOverlay').classList.add('active');
+    document.getElementById('orderDrawer').classList.add('active');
     document.body.style.overflow = 'hidden';
-    
-     Re-renderizar íconos después de insertar HTML dinámico
     if (typeof lucide !== 'undefined') lucide.createIcons();
   }
-
   function closeDrawer() {
-    drawerOverlay.classList.remove('active');
-    drawerPanel.classList.remove('active');
+    document.getElementById('orderDrawerOverlay').classList.remove('active');
+    document.getElementById('orderDrawer').classList.remove('active');
     document.body.style.overflow = '';
   }
-
-  function updateStatus(status, label) {
-    const map = {
-      pending: 'status-pending',
-      processing: 'status-processing',
-      transit: 'status-transit',
-      delivered: 'status-delivered',
-      cancelled: 'status-cancelled'
-    };
-    drawerStatus.className = 'order-drawer-status ' + (map[status] || 'status-pending');
-    drawerStatus.innerHTML = '<span class="status-dot"></span> ' + label;
-  }
-
-  function renderBody(o) {
-    drawerBody.innerHTML = `
-      <div class="drawer-section">
-        <div class="drawer-section-title"><i data-lucide="info"></i> Información general</div>
-        <div class="info-grid">
-          <div class="info-item"><span class="info-label">Código</span><span class="info-value mono">${o.code}</span></div>
-          <div class="info-item"><span class="info-label">Fecha registro</span><span class="info-value">${o.registrationDate}</span></div>
-          <div class="info-item"><span class="info-label">Entrega estimada</span><span class="info-value">${o.estimatedDelivery}</span></div>
-          <div class="info-item"><span class="info-label">Entrega real</span><span class="info-value">${o.realDelivery}</span></div>
-          <div class="info-item"><span class="info-label">Registrado por</span><span class="info-value">${o.registeredBy}</span></div>
-        </div>
-      </div>
-      
-      <div class="drawer-section">
-        <div class="drawer-section-title"><i data-lucide="user"></i> Cliente</div>
-        <div class="client-card">
-          <div class="client-avatar"><span>${o.customer.initials}</span></div>
-          <div class="client-info">
-            <span class="client-name">${o.customer.name}</span>
-            <span class="client-point"><i data-lucide="store"></i> ${o.customer.pointOfSale}</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="drawer-section">
-        <div class="drawer-section-title"><i data-lucide="map-pin"></i> Ubicación</div>
-        <div class="location-card">
-          <div class="location-icon"><i data-lucide="map"></i></div>
-          <div class="location-info">
-            <span class="location-label">Departamento</span>
-            <span class="location-value">${o.location.department}</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="drawer-section">
-        <div class="drawer-section-title"><i data-lucide="bar-chart-3"></i> Resumen</div>
-        <div class="summary-metrics">
-          <div class="summary-metric"><div class="summary-metric-value">${o.summary.totalProducts}</div><div class="summary-metric-label">Productos</div></div>
-          <div class="summary-metric"><div class="summary-metric-value">${o.summary.totalUnits}</div><div class="summary-metric-label">Unidades</div></div>
-          <div class="summary-metric"><div class="summary-metric-value total-price">${o.summary.totalPrice}</div><div class="summary-metric-label">Total</div></div>
-        </div>
-      </div>
-      
-      <div class="drawer-section">
-        <div class="drawer-section-title"><i data-lucide="package"></i> Productos</div>
-        <div class="products-table-wrapper">
-          <table class="products-table">
-            <thead><tr><th>Producto</th><th style="width:14%;text-align:center;">Cant.</th><th style="width:18%;">P. Unit.</th><th style="width:18%;">P. Total</th><th style="width:15%;">Lote</th></tr></thead>
-            <tbody>
-              ${o.products.map(p => `
-                <tr>
-                  <td><div class="product-cell"><div><div class="product-name">${p.name}</div><div style="font-size:10.5px;color:var(--color-text-hint)">${p.sku}</div></div></div></td>
-                  <td class="quantity-cell">${p.quantity}</td>
-                  <td class="price-cell">${p.unitPrice}</td>
-                  <td class="price-total-cell">${p.totalPrice}</td>
-                  <td><span style="font-family:monospace;font-size:11px;background:var(--color-bg-page);padding:3px 8px;border-radius:6px">${p.lot}</span></td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      
-      <div class="drawer-section">
-        <div class="drawer-section-title"><i data-lucide="code-2"></i> Técnico</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--color-bg-page);border-radius:8px">
-            <span style="font-size:11.5px;font-weight:600;color:var(--color-text-hint)">Order ID</span>
-            <span style="font-size:12px;font-weight:700">${o.technical.orderId}</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--color-bg-page);border-radius:8px">
-            <span style="font-size:11.5px;font-weight:600;color:var(--color-text-hint)">Customer ID</span>
-            <span style="font-size:12px;font-weight:700">${o.technical.customerId}</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--color-bg-page);border-radius:8px">
-            <span style="font-size:11.5px;font-weight:600;color:var(--color-text-hint)">Is Active</span>
-            <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:${o.technical.isActive ? 'rgba(0,194,150,0.15)' : 'rgba(250,137,123,0.12)'};color:${o.technical.isActive ? 'var(--color-brand)' : 'var(--color-coral)'}">
-              <span style="width:6px;height:6px;border-radius:50%;background:${o.technical.isActive ? 'var(--color-brand)' : 'var(--color-coral)'}"></span>
-              ${o.technical.isActive ? 'Activo' : 'Inactivo'}
-            </span>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  function buildGenericOrder(code) {
-    return {
-      code: code, status: 'pending', statusLabel: 'Pendiente',
-      registrationDate: '-', estimatedDelivery: '-', realDelivery: '-', registeredBy: '-',
-      customer: { name: 'Cliente', initials: 'CL', pointOfSale: '-' },
-      location: { department: '-', municipality: '-' },
-      summary: { totalProducts: 0, totalUnits: 0, totalPrice: 'C$0.00' },
-      products: [],
-      technical: { orderId: 0, customerId: 0, orderStatusId: 0, isActive: true, posAddressId: 0 }
-    };
-  }
-
-  // ── Event Listeners ──
-  if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
-  if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+  document.getElementById('orderDrawerOverlay')?.addEventListener('click', closeDrawer);
+  document.getElementById('drawerCloseBtn')?.addEventListener('click', closeDrawer);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-
-  // ⚠️ IMPORTANTE: Exponer funciones al scope global para los onclick del HTML
   window.openDrawer = openDrawer;
   window.closeDrawer = closeDrawer;
-  window.viewDetails = function(code) { openDrawer(code); };
-
-  // Inicializar íconos de Lucide (para los que ya están en el DOM al cargar)
+  // Inicializar íconos
   if (typeof lucide !== 'undefined') lucide.createIcons();
 </script>
 </body>
