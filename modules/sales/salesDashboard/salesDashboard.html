@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/shared/css/global.css" />
+    <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="salesDashboard.css"/>
+    <link rel="stylesheet" href="/shared/css/cards.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div id="layout-placeholder"></div>
+ <script src="/shared/components/sidebar/sidebar.js"></script>
+ 
+
+ <div id="topbar-placeholder"></div>
+ <script src="/shared/components/topbar/topbar.js"></script> 
+
+ <!-- Main Content -->
+<main class="main-content">
+    <!-- Page Header -->
+    <div class="page-header animate-in">
+        <h1>Reporte de Ventas</h1>
+        <div style="display:flex;gap:10px;">
+            <button class="btn btn-outline">
+                <i data-lucide="download" style="width:16px;height:16px;"></i>
+                Exportar
+            </button>
+            <button class="btn btn-primary" onclick="window.location.href='/modules/sales/sales.html'">
+                <i data-lucide="plus" style="width:18px;height:18px;"></i>
+                Nueva venta
+            </button>
+        </div>
+    </div>
+ 
+    <!-- Stats Row -->
+    <div class="stats-row animate-in delay-1">
+        <!-- Card 1: Ventas del Mes -->
+        <div class="stat-card stat-card-mint">
+            <div class="stat-card-decoration"></div>
+            <div class="stat-card-icon">
+                <i data-lucide="shopping-cart" style="width: 20px; height: 20px"></i>
+            </div>
+            <div class="stat-card-label">Ventas este mes</div>
+            <div class="stat-card-value">143</div>
+        </div>
+
+        <!-- Card 2: Ingresos Totales -->
+        <div class="stat-card stat-card-coral">
+            <div class="stat-card-decoration"></div>
+            <div class="stat-card-icon">
+                <i data-lucide="dollar-sign" style="width: 20px; height: 20px"></i>
+            </div>
+            <div class="stat-card-label">Ingresos totales</div>
+            <div class="stat-card-value">C$86,450</div>
+        </div>
+
+        <!-- Card 3: Productos Vendidos -->
+        <div class="stat-card stat-card-purple">
+            <div class="stat-card-decoration"></div>
+            <div class="stat-card-icon">
+                <i data-lucide="package" style="width: 20px; height: 20px"></i>
+            </div>
+            <div class="stat-card-label">Productos vendidos</div>
+            <div class="stat-card-value">512</div>
+        </div>
+    </div>
+
+     <div class="filter-bar animate-in delay-2">
+    <div class="filter-bar-search">
+        <i data-lucide="search"></i>
+        <input type="text" placeholder="Buscar por código, cliente..." id="searchInput" onkeyup="filterResults()">
+    </div>
+
+    <div class="filter-bar-divider"></div>
+
+    <div class="filter-bar-date">
+        <label>Desde</label>
+        <input type="date" id="dateFrom" value="2024-01-01">
+    </div>
+
+    <div class="filter-bar-date">
+        <label>Hasta</label>
+        <input type="date" id="dateTo" value="2024-12-31">
+    </div>
+
+    <div class="filter-bar-divider"></div>
+
+    <div class="filter-bar-actions">
+        <button class="btn btn-clear" onclick="clearFilters()">
+            <i data-lucide="x" style="width:14px;height:14px;"></i>
+            Limpiar
+        </button>
+    </div>
+</div>
+
+    <!-- Results Table -->
+    <div class="results-card animate-in delay-3">
+        <div class="results-header">
+            <h2>
+                <span>Resultados</span>
+                <span class="count-badge" id="resultCount">8</span>
+            </h2>
+            <div class="results-actions">
+                <button class="btn btn-outline">
+                    <i data-lucide="arrow-down-up" style="width:14px;height:14px;"></i>
+                    Ordenar
+                </button>
+                <button class="btn btn-outline">
+                    <i data-lucide="filter" style="width:14px;height:14px;"></i>
+                    Filtros
+                </button>
+            </div>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width:12%;">Código</th>
+                    <th style="width:16%;">Fecha</th>
+                    <th style="width:18%;">Cliente</th>
+                    <th style="width:10%;text-align:center;">Productos</th>
+                    <th style="width:12%;text-align:right;">Total</th>
+                    <th style="width:16%;text-align:center;">Método de Pago</th>
+                    <th style="width:16%;text-align:center;">Detalles</th>
+                </tr>
+            </thead>
+            <tbody id="ventasTableBody">
+                <tr>
+                    <td><span class="code-cell">#VTA-027</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">02/03/2024</span>
+                            <span class="date-time">5:45 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-1">CS</div>
+                            <span class="user-name">Carlos Sánchez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">8</td>
+                    <td style="text-align:right;"><span class="total-cell">C$152.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-026</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">02/03/2024</span>
+                            <span class="date-time">2:15 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-2">RM</div>
+                            <span class="user-name">Rosa Mendoza</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">10</td>
+                    <td style="text-align:right;"><span class="total-cell">C$285.50</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-025</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">01/03/2025</span>
+                            <span class="date-time">10:30 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-3">JP</div>
+                            <span class="user-name">Jorge Pérez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">5</td>
+                    <td style="text-align:right;"><span class="total-cell">C$420.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-024</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">01/03/2025</span>
+                            <span class="date-time">9:00 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-4">ML</div>
+                            <span class="user-name">María López</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">5</td>
+                    <td style="text-align:right;"><span class="total-cell">C$195.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-023</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">28/02/2025</span>
+                            <span class="date-time">4:20 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-5">DG</div>
+                            <span class="user-name">Diego García</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">12</td>
+                    <td style="text-align:right;"><span class="total-cell">C$485.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-022</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">28/02/2025</span>
+                            <span class="date-time">11:00 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-6">LT</div>
+                            <span class="user-name">Laura Torres</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">3</td>
+                    <td style="text-align:right;"><span class="total-cell">C$125.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-021</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">27/02/2025</span>
+                            <span class="date-time">3:00 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-7">PV</div>
+                            <span class="user-name">Pedro Vargas</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">7</td>
+                    <td style="text-align:right;"><span class="total-cell">C$315.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-020</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">27/02/2025</span>
+                            <span class="date-time">10:15 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-8">SA</div>
+                            <span class="user-name">Sofía Álvarez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">6</td>
+                    <td style="text-align:right;"><span class="total-cell">C$240.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="table-footer">
+            <div class="rows-per-page">
+                <span>Filas por página:</span>
+                <select onchange="changeRowsPerPage(this.value)">
+                    <option value="8" selected>8</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="table-footer-info">
+                Mostrando <strong id="showingFrom">1-8</strong> de <strong id="showingTotal">8</strong> registros
+            </div>
+            <div class="pagination">
+                <button class="pagination-btn" disabled id="prevBtn" onclick="prevPage()">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <button class="pagination-btn active" onclick="goToPage(1)">1</button>
+                <button class="pagination-btn" id="nextBtn" onclick="nextPage()">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+lucide.createIcons();
+
+let currentPage = 1;
+let rowsPerPage = 8;
+let totalPages = 1;
+
+function filterResults() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const rows = document.querySelectorAll('#ventasTableBody tr');
+    let visibleCount = 0;
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        if (text.includes(query)) {
+            row.style.display = '';
+            visibleCount++;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    document.getElementById('resultCount').textContent = visibleCount;
+    lucide.createIcons();
+}
+
+function clearFilters() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('dateFrom').value = '2024-01-01';
+    document.getElementById('dateTo').value = '2024-12-31';
+    filterResults();
+}
+
+function goToPage(page) {
+    currentPage = page;
+    document.querySelectorAll('.pagination-btn').forEach(btn => {
+        if (!btn.querySelector('i')) btn.classList.remove('active');
+    });
+    document.querySelectorAll('.pagination-btn').forEach(btn => {
+        if (btn.textContent == page) btn.classList.add('active');
+    });
+    updatePaginationInfo();
+    updatePaginationButtons();
+}
+
+function nextPage() {
+    if (currentPage < totalPages) goToPage(currentPage + 1);
+}
+
+function prevPage() {
+    if (currentPage > 1) goToPage(currentPage - 1);
+}
+
+function changeRowsPerPage(value) {
+    rowsPerPage = parseInt(value);
+    totalPages = Math.ceil(8 / rowsPerPage);
+    currentPage = 1;
+    updatePaginationButtons();
+    updatePaginationInfo();
+}
+
+function updatePaginationInfo() {
+    const from = (currentPage - 1) * rowsPerPage + 1;
+    const to = Math.min(currentPage * rowsPerPage, 8);
+    document.getElementById('showingFrom').textContent = `${from}-${to}`;
+    document.getElementById('showingTotal').textContent = '8';
+}
+
+function updatePaginationButtons() {
+    document.getElementById('prevBtn').disabled = currentPage <= 1;
+    document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+}
+</script>
