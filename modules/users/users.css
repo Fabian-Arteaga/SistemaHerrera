@@ -917,6 +917,7 @@ td:last-child {
         margin-left: 0;
         padding: 16px;
     }
+<<<<<<< HEAD
 
     .page-header {
         flex-direction: column;
@@ -927,12 +928,22 @@ td:last-child {
         width: 100%;
         justify-content: flex-end;
     }
+=======
+}
+
+/* ========================================
+   RESPONSIVE CUSTOMER DASHBOARD
+======================================== */
+
+/* TABLET */
+>>>>>>> a3cac52bf3c5c6c151efff9cc52e1aba7312ef96
 
     .table-card {
         overflow-x: auto;
     }
 
     .data-table {
+<<<<<<< HEAD
         min-width: 600px;
         /* fuerza scroll horizontal en vez de romperse */
     }
@@ -942,3 +953,20 @@ td:last-child {
     }
 }
 
+=======
+        min-width: 850px;
+    }
+
+/* MOBILE */
+
+    .data-table {
+        min-width: 780px;
+    }
+
+    /* FOOTER */
+    .table-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+>>>>>>> a3cac52bf3c5c6c151efff9cc52e1aba7312ef96
