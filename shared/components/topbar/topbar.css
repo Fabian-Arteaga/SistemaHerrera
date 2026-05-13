@@ -533,30 +533,49 @@
   border-radius: 99px;
 }
 
+
+
+/* ── Botón Hamburguesa ── */
 .topbar-menu-btn {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--color-text-body);
-  padding: 6px;
+  padding: 8px;
   border-radius: 8px;
   transition: background 0.2s;
+  align-items: center;
+  justify-content: center;
 }
 
 .topbar-menu-btn:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 
+/* ── Responsive Topbar ── */
 @media (max-width: 768px) {
-  .topbar-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .topbar {
     left: 0 !important;
     width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  .topbar-menu-btn {
+    display: flex;
+    /* visible solo en móvil */
+  }
+
+  /* Ocultar búsqueda en móvil para no saturar */
+  .topbar-search {
+    display: none;
+  }
+
+  /* Ocultar texto del usuario, solo mostrar avatar */
+  .topbar-user-info {
+    display: none;
   }
 }

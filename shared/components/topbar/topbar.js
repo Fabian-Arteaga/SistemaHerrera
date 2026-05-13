@@ -107,8 +107,6 @@ class TopBar {
       dropdown.classList.toggle('active');
     });
 
-  
-
     if (btnMarkAll) {
       btnMarkAll.addEventListener('click', () => {
         this.container.querySelectorAll('.notif-item.unread')

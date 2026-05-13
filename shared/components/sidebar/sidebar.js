@@ -3,7 +3,7 @@ class Sidebar {
         this.paginaActual = paginaActual;
         this.contenedor = document.getElementById('layout-placeholder');
     }
-
+ 
     async cargar() {
         if (!this.contenedor) return;
 
