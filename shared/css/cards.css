@@ -194,3 +194,22 @@
 .btn-ghost:hover {
     background: rgba(0, 194, 150, 0.08);
 }
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .btn {
+        padding: 10px; /* Padding uniforme para que sea cuadrado */
+        justify-content: center;
+        gap: 0;
+    }
+
+    /* Ocultamos el texto */
+    .btn-label {
+        display: none;
+    }
+
+    /* Ajuste opcional: centrar el icono si es necesario */
+    .btn i {
+        margin: 0;
+    }
+}

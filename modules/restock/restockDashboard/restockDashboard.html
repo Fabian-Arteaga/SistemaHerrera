@@ -26,11 +26,11 @@
         <div style="display:flex;gap:10px;">
             <button class="btn btn-outline">
                 <i data-lucide="download" style="width:16px;height:16px;"></i>
-                Exportar
+                <span class="btn-label">Exportar</span>
             </button>
             <button class="btn btn-primary">
                 <i data-lucide="plus" style="width:18px;height:18px;"></i>
-                Reabastecimiento
+                <span class="btn-label">Rebastecimiento</span>
             </button>
         </div>
     </div>
@@ -87,7 +87,7 @@
         </div>
         <div class="filter-bar-divider"></div>
         <div class="filter-bar-actions">
-            <button class="btn btn-clear" onclick="clearFilters()">
+            <button class="btn btn-clear">
                 <i data-lucide="x" style="width:14px;height:14px;"></i>
                 Limpiar
             </button>
@@ -317,7 +317,7 @@
         <div class="table-footer">
             <div class="rows-per-page">
                 <span>Filas por página:</span>
-                <select onchange="changeRowsPerPage(this.value)">
+                <select onchange=>
                     <option value="8" selected>8</option>
                     <option value="15">15</option>
                     <option value="25">25</option>
@@ -327,14 +327,14 @@
                 Mostrando <strong id="showingFrom">1-8</strong> de <strong id="showingTotal">27</strong> registros
             </div>
             <div class="pagination">
-                <button class="pagination-btn" disabled id="prevBtn" onclick="prevPage()">
+                <button class="pagination-btn">
                     <i data-lucide="chevron-left"></i>
                 </button>
-                <button class="pagination-btn active" onclick="goToPage(1)">1</button>
-                <button class="pagination-btn" onclick="goToPage(2)">2</button>
-                <button class="pagination-btn" onclick="goToPage(3)">3</button>
-                <button class="pagination-btn" onclick="goToPage(4)">4</button>
-                <button class="pagination-btn" id="nextBtn" onclick="nextPage()">
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">4</button>
+                <button class="pagination-btn">
                     <i data-lucide="chevron-right"></i>
                 </button>
             </div>
@@ -346,74 +346,8 @@
 <script>
 lucide.createIcons();
 
-let currentPage = 1;
-let rowsPerPage = 8;
-let totalPages = 4;
-
-function filterResults() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const rows = document.querySelectorAll('#reabastecimientoTableBody tr');
-    let visibleCount = 0;
-    rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        if (text.includes(query)) {
-            row.style.display = '';
-            visibleCount++;
-        } else {
-            row.style.display = 'none';
-        }
-    });
-    document.getElementById('resultCount').textContent = visibleCount;
-    lucide.createIcons();
-}
-
-function clearFilters() {
-    document.getElementById('searchInput').value = '';
-    document.getElementById('dateFrom').value = '2025-03-01';
-    document.getElementById('dateTo').value = '2025-03-31';
-    filterResults();
-}
 
 
-function goToPage(page) {
-    currentPage = page;
-    document.querySelectorAll('.pagination-btn').forEach(btn => {
-        if (!btn.querySelector('i')) btn.classList.remove('active');
-    });
-    document.querySelectorAll('.pagination-btn').forEach(btn => {
-        if (btn.textContent == page) btn.classList.add('active');
-    });
-    updatePaginationInfo();
-    updatePaginationButtons();
-}
-
-function nextPage() {
-    if (currentPage < totalPages) goToPage(currentPage + 1);
-}
-
-function prevPage() {
-    if (currentPage > 1) goToPage(currentPage - 1);
-}
-
-function changeRowsPerPage(value) {
-    rowsPerPage = parseInt(value);
-    totalPages = Math.ceil(27 / rowsPerPage);
-    currentPage = 1;
-    updatePaginationButtons();
-    updatePaginationInfo();
-}
-
-function updatePaginationInfo() {
-    const from = (currentPage - 1) * rowsPerPage + 1;
-    const to = Math.min(currentPage * rowsPerPage, 27);
-    document.getElementById('showingFrom').textContent = `${from}-${to}`;
-    document.getElementById('showingTotal').textContent = '27';
-}
-
-function updatePaginationButtons() {
-    document.getElementById('prevBtn').disabled = currentPage <= 1;
-    document.getElementById('nextBtn').disabled = currentPage >= totalPages;
-}
 
 </script>
 </body>
