@@ -1,181 +1,542 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nuevo Pedido</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/modules/order/order.css" />
     <link rel="stylesheet" href="/shared/css/global.css" />
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
-    <link rel="stylesheet" href="/modules/order/order.css" />
-  </head>
-  <body>
-    <div id="layout-placeholder"></div>
-    <div id="topbar-placeholder"></div>
+    <link rel="stylesheet" href="/shared/css/cards.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+  <div id="layout-placeholder"></div>
+  <script src="/shared/components/sidebar/sidebar.js"></script>
+  <div id="topbar-placeholder"></div>
+  <script src="/shared/components/topbar/topbar.js"></script>
 
-    <main class="main-content">
-      <div class="page-header">
-        <h1 class="page-title">Nuevo pedido</h1>
-        <p class="page-subtitle">Gestión de pedido</p>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Page Header -->
+    <div class="page-header animate-in">
+      <h1>Pedidos</h1>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-outline">
+          <i data-lucide="download" style="width:16px;height:16px;"></i>
+          Exportar
+        </button>
+        <button class="btn btn-primary">
+          <i data-lucide="plus" style="width:18px;height:18px;"></i>
+          Nuevo Pedido
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row animate-in delay-1">
+      <!-- Card 1 -->
+      <div class="stat-card stat-card-mint">
+        <div class="stat-card-decoration"></div>
+        <div class="stat-card-icon">
+          <i data-lucide="shopping-cart" style="width: 20px; height: 20px"></i>
+        </div>
+        <div class="stat-card-label">Pedidos Hoy</div>
+        <div class="stat-card-value">24</div>
       </div>
 
-      <section class="pedido-container">
-        <div class="card card-pedido card-highlight">
-          <h3 class="card-title">DATOS DE ENCABEZADO</h3>
-          <div class="grid-form">
-            <div class="form-group">
-              <label>Número de pedido:</label>
-              <input
-                type="text"
-                value="PE-0001"
-                readonly
-                class="input-readonly"
-              />
+      <!-- Card 2 -->
+      <div class="stat-card stat-card-yellow">
+        <div class="stat-card-decoration"></div>
+        <div class="stat-card-icon">
+          <i data-lucide="clock-3" style="width: 20px; height: 20px"></i>
+        </div>
+        <div class="stat-card-label">Pedidos Pendientes</div>
+        <div class="stat-card-value">11</div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="stat-card stat-card-coral">
+        <div class="stat-card-decoration"></div>
+        <div class="stat-card-icon">
+          <i data-lucide="alert-triangle" style="width: 20px; height: 20px"></i>
+        </div>
+        <div class="stat-card-label">Pedidos Retrasados</div>
+        <div class="stat-card-value">3</div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="stat-card stat-card-purple">
+        <div class="stat-card-decoration"></div>
+        <div class="stat-card-icon">
+          <i data-lucide="package-check" style="width: 20px; height: 20px"></i>
+        </div>
+        <div class="stat-card-label">Pedidos Entregados</div>
+        <div class="stat-card-value">126</div>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar animate-in delay-2">
+      <div class="filter-row">
+        <div class="filter-group">
+          <label>Desde</label>
+          <input type="date" id="dateFrom" value="2025-03-01">
+        </div>
+        <div class="filter-group">
+          <label>Hasta</label>
+          <input type="date" id="dateTo" value="2025-03-31">
+        </div>
+        <div class="filter-group">
+          <label>Estado</label>
+          <select id="statusFilter" onchange="filterResults()">
+            <option value="">Todos</option>
+            <option value="pending">Pendiente</option>
+            <option value="processing">En Proceso</option>
+            <option value="delivered">Entregado</option>
+            <option value="cancelled">Cancelado</option>
+          </select>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="filter-group">
+          <label>Departamento</label>
+          <select id="deptFilter" onchange="filterResults()">
+            <option value="">Todos</option>
+            <option value="managua">Managua</option>
+            <option value="carazo">Carazo</option>
+            <option value="esteli">Estelí</option>
+            <option value="matagalpa">Matagalpa</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Municipio</label>
+          <select id="municipalityFilter" onchange="filterResults()">
+            <option value="">Todos</option>
+            <option value="managua">Managua</option>
+            <option value="tipitapa">Tipitapa</option>
+            <option value="ticuantepe">Ticuantepe</option>
+            <option value="jinotepe">Jinotepe</option>
+          </select>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="filter-search">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Buscar por código o cliente..." id="searchInput" onkeyup="filterResults()">
+        </div>
+        <div class="filter-actions">
+          <button class="btn-search" onclick="filterResults()">
+            <i data-lucide="search"></i>
+            Buscar
+          </button>
+          <button class="btn-clear" onclick="clearFilters()">
+            <i data-lucide="x" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i>
+            Limpiar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="content-grid animate-in delay-3">
+      <!-- Results Table -->
+      <div class="results-card">
+        <div class="results-header">
+          <h2>
+            <span>Resultados</span>
+            <span class="count-badge" id="resultCount">48</span>
+          </h2>
+          <div class="results-actions">
+            <button class="btn btn-outline">
+              <i data-lucide="arrow-down-up" style="width:14px;height:14px;"></i>
+              Ordenar
+            </button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:12%;">Código</th>
+              <th style="width:16%;">Fecha de Entrega</th>
+              <th style="width:14%;text-align:right;">Total</th>
+              <th style="width:22%;">Cliente</th>
+              <th style="width:14%;text-align:center;">Estado</th>
+              <th style="width:22%;text-align:center;">Detalles</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <tr data-status="processing" data-dept="managua">
+              <td><span class="code-cell">#PED-100528</span></td>
+              <td>
+                <div class="date-cell">
+                  <span class="date-main">02/03/2025</span>
+                </div>
+              </td>
+              <td style="text-align:right;"><span class="total-cell">C$152.00</span></td>
+              <td>
+                <div class="client-cell">
+                  <div class="client-avatar bg-1">YG</div>
+                  <span class="client-name">Yahir Guevara</span>
+                </div>
+              </td>
+              <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
+              <td style="text-align:center;">
+                <button class="detail-btn" onclick="viewDetails('PED-100528')">
+                  <i data-lucide="eye"></i> Ver
+                </button>
+              </td>
+            </tr>
+            <tr data-status="pending" data-dept="managua">
+              <td><span class="code-cell">#PED-100527</span></td>
+              <td>
+                <div class="date-cell">
+                  <span class="date-main">02/03/2025</span>
+                </div>
+              </td>
+              <td style="text-align:right;"><span class="total-cell">C$152.00</span></td>
+              <td>
+                <div class="client-cell">
+                  <div class="client-avatar bg-2">CM</div>
+                  <span class="client-name">Carlos Mena</span>
+                </div>
+              </td>
+              <td style="text-align:center;"><span class="status-badge status-pending">Pendiente</span></td>
+              <td style="text-align:center;">
+                <button class="detail-btn" onclick="viewDetails('PED-100527')">
+                  <i data-lucide="eye"></i> Ver
+                </button>
+              </td>
+            </tr>
+            <tr data-status="delivered" data-dept="carazo">
+              <td><span class="code-cell">#PED-100526</span></td>
+              <td>
+                <div class="date-cell">
+                  <span class="date-main">02/03/2025</span>
+                </div>
+              </td>
+              <td style="text-align:right;"><span class="total-cell">C$152.00</span></td>
+              <td>
+                <div class="client-cell">
+                  <div class="client-avatar bg-3">NC</div>
+                  <span class="client-name">Nohelia Cortes</span>
+                </div>
+              </td>
+              <td style="text-align:center;"><span class="status-badge status-delivered">Entregado</span></td>
+              <td style="text-align:center;">
+                <button class="detail-btn" onclick="viewDetails('PED-100526')">
+                  <i data-lucide="eye"></i> Ver
+                </button>
+              </td>
+            </tr>
+            <tr data-status="processing" data-dept="esteli">
+              <td><span class="code-cell">#PED-100525</span></td>
+              <td>
+                <div class="date-cell">
+                  <span class="date-main">02/03/2025</span>
+                </div>
+              </td>
+              <td style="text-align:right;"><span class="total-cell">C$152.00</span></td>
+              <td>
+                <div class="client-cell">
+                  <div class="client-avatar bg-4">MP</div>
+                  <span class="client-name">Michelle Peña</span>
+                </div>
+              </td>
+              <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
+              <td style="text-align:center;">
+                <button class="detail-btn" onclick="viewDetails('PED-100525')">
+                  <i data-lucide="eye"></i> Ver
+                </button>
+              </td>
+            </tr>
+            <tr data-status="pending" data-dept="managua">
+              <td><span class="code-cell">#PED-100524</span></td>
+              <td>
+                <div class="date-cell">
+                  <span class="date-main">02/03/2025</span>
+                </div>
+              </td>
+              <td style="text-align:right;"><span class="total-cell">C$152.00</span></td>
+              <td>
+                <div class="client-cell">
+                  <div class="client-avatar bg-1">AC</div>
+                  <span class="client-name">Antonio Campos</span>
+                </div>
+              </td>
+              <td style="text-align:center;"><span class="status-badge status-pending">Pendiente</span></td>
+              <td style="text-align:center;">
+                <button class="detail-btn" onclick="viewDetails('PED-100524')">
+                  <i data-lucide="eye"></i> Ver
+                </button>
+              </td>
+            </tr>
+            <tr data-status="delivered" data-dept="matagalpa">
+              <td><span class="code-cell">#PED-100523</span></td>
+              <td>
+                <div class="date-cell">
+                  <span class="date-main">01/03/2025</span>
+                </div>
+              </td>
+              <td style="text-align:right;"><span class="total-cell">C$280.00</span></td>
+              <td>
+                <div class="client-cell">
+                  <div class="client-avatar bg-2">AL</div>
+                  <span class="client-name">Andres Lopez</span>
+                </div>
+              </td>
+              <td style="text-align:center;"><span class="status-badge status-delivered">Entregado</span></td>
+              <td style="text-align:center;">
+                <button class="detail-btn" onclick="viewDetails('PED-100523')">
+                  <i data-lucide="eye"></i> Ver
+                </button>
+              </td>
+            </tr>
+            <tr data-status="cancelled" data-dept="managua">
+              <td><span class="code-cell">#PED-100522</span></td>
+              <td>
+                <div class="date-cell">
+                  <span class="date-main">01/03/2025</span>
+                </div>
+              </td>
+              <td style="text-align:right;"><span class="total-cell">C$95.00</span></td>
+              <td>
+                <div class="client-cell">
+                  <div class="client-avatar bg-3">RG</div>
+                  <span class="client-name">Rosa Garcia</span>
+                </div>
+              </td>
+              <td style="text-align:center;"><span class="status-badge status-cancelled">Cancelado</span></td>
+              <td style="text-align:center;">
+                <button class="detail-btn" onclick="viewDetails('PED-100522')">
+                  <i data-lucide="eye"></i> Ver
+                </button>
+              </td>
+            </tr>
+            <tr data-status="processing" data-dept="carazo">
+              <td><span class="code-cell">#PED-100521</span></td>
+              <td>
+                <div class="date-cell">
+                  <span class="date-main">01/03/2025</span>
+                </div>
+              </td>
+              <td style="text-align:right;"><span class="total-cell">C$210.00</span></td>
+              <td>
+                <div class="client-cell">
+                  <div class="client-avatar bg-4">JT</div>
+                  <span class="client-name">Jose Torres</span>
+                </div>
+              </td>
+              <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
+              <td style="text-align:center;">
+                <button class="detail-btn" onclick="viewDetails('PED-100521')">
+                  <i data-lucide="eye"></i> Ver
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="table-footer">
+          <div class="rows-per-page">
+            <span>Filas:</span>
+            <select onchange="changeRowsPerPage(this.value)">
+              <option value="8" selected>8</option>
+              <option value="15">15</option>
+              <option value="25">25</option>
+            </select>
+          </div>
+          <div class="table-footer-info">
+            Mostrando <strong id="showingFrom">1-8</strong> de <strong id="showingTotal">48</strong> registros
+          </div>
+          <div class="pagination">
+            <button class="pagination-btn" disabled id="prevBtn" onclick="prevPage()"><i data-lucide="chevron-left"></i></button>
+            <button class="pagination-btn active" onclick="goToPage(1)">1</button>
+            <button class="pagination-btn" onclick="goToPage(2)">2</button>
+            <button class="pagination-btn" onclick="goToPage(3)">3</button>
+            <button class="pagination-btn" onclick="goToPage(4)">4</button>
+            <button class="pagination-btn" onclick="goToPage(5)">5</button>
+            <button class="pagination-btn" onclick="goToPage(6)">6</button>
+            <button class="pagination-btn" id="nextBtn" onclick="nextPage()"><i data-lucide="chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side Panel -->
+      <div class="side-panel">
+        <!-- Orders for Today -->
+        <div class="side-card">
+          <div class="side-card-header">
+            <h3><i data-lucide="calendar-check" style="color:var(--color-brand);"></i> Pedidos para hoy</h3>
+            <span class="view-all">Ver todo</span>
+          </div>
+          <div class="order-card order-card-today">
+            <div class="order-card-icon"><i data-lucide="package"></i></div>
+            <div class="order-card-info">
+              <div class="order-card-code">#PED-100528</div>
+              <div class="order-card-location">Managua, Managua</div>
+              <div class="order-card-user">Marcelo Mena</div>
             </div>
-            <div class="form-group">
-              <label>Fecha de registro:</label>
-              <input type="date" />
+            <div class="order-card-actions">
+              <button class="order-action-btn" title="Llamar"><i data-lucide="phone"></i></button>
             </div>
-            <div class="form-group">
-              <label>Fecha de entrega:</label>
-              <input type="date" />
+          </div>
+          <div class="order-card order-card-today">
+            <div class="order-card-icon"><i data-lucide="package"></i></div>
+            <div class="order-card-info">
+              <div class="order-card-code">#PED-100527</div>
+              <div class="order-card-location">Managua, Managua</div>
+              <div class="order-card-user">Marcelo Mena</div>
             </div>
-            <div class="form-group">
-              <label>Estado de pedido:</label>
-              <select class="select-field">
-                <option value="pendiente">Pendiente</option>
-              </select>
+            <div class="order-card-actions">
+              <button class="order-action-btn" title="Llamar"><i data-lucide="phone"></i></button>
+            </div>
+          </div>
+          <div class="order-card order-card-today">
+            <div class="order-card-icon"><i data-lucide="package"></i></div>
+            <div class="order-card-info">
+              <div class="order-card-code">#PED-100526</div>
+              <div class="order-card-location">Carazo, Jinotepe</div>
+              <div class="order-card-user">Nohelia Cortes</div>
+            </div>
+            <div class="order-card-actions">
+              <button class="order-action-btn" title="Llamar"><i data-lucide="phone"></i></button>
             </div>
           </div>
         </div>
 
-        <div class="card card-pedido card-highlight">
-          <h3 class="card-title">INFORMACIÓN CLIENTE</h3>
-          <div class="grid-form">
-            <div class="form-group">
-              <label>Cliente:</label>
-              <input type="text" placeholder="Nombre completo" />
+        <!-- Delayed Orders -->
+        <div class="side-card">
+          <div class="side-card-header">
+            <h3><i data-lucide="alert-triangle" style="color:var(--color-coral);"></i> Pedidos retrasados</h3>
+            <span class="view-all">Ver todo</span>
+          </div>
+          <div class="order-card order-card-delayed">
+            <div class="order-card-icon"><i data-lucide="alert-circle"></i></div>
+            <div class="order-card-info">
+              <div class="order-card-code">#PED-100529</div>
+              <div class="order-card-location">Managua, Managua</div>
+              <div class="order-card-user">Marcelo Mena</div>
             </div>
-            <div class="form-group">
-              <label>Departamento:</label>
-              <input type="text" placeholder="Ej: Carazo" />
+            <div class="order-card-actions">
+              <button class="order-action-btn" title="Editar"><i data-lucide="pencil"></i></button>
+              <button class="order-action-btn" title="Llamar"><i data-lucide="phone"></i></button>
             </div>
-            <div class="form-group">
-              <label>Municipio:</label>
-              <input type="text" placeholder="Ej: Jinotepe" />
+          </div>
+          <div class="order-card order-card-delayed">
+            <div class="order-card-icon"><i data-lucide="alert-circle"></i></div>
+            <div class="order-card-info">
+              <div class="order-card-code">#PED-100526</div>
+              <div class="order-card-location">Managua, Managua</div>
+              <div class="order-card-user">Marcelo Mena</div>
             </div>
-            <div class="form-group">
-              <label>Punto de venta:</label>
-              <input type="text" placeholder="Local central" />
+            <div class="order-card-actions">
+              <button class="order-action-btn" title="Editar"><i data-lucide="pencil"></i></button>
+              <button class="order-action-btn" title="Llamar"><i data-lucide="phone"></i></button>
             </div>
-            <div class="form-group full-width">
-              <label>Dirección:</label>
-              <textarea
-                rows="2"
-                placeholder="Dirección exacta del cliente"
-              ></textarea>
+          </div>
+          <div class="order-card order-card-delayed">
+            <div class="order-card-icon"><i data-lucide="alert-circle"></i></div>
+            <div class="order-card-info">
+              <div class="order-card-code">#PED-100528</div>
+              <div class="order-card-location">Managua, Tipitapa</div>
+              <div class="order-card-user">Marcelo Mena</div>
+            </div>
+            <div class="order-card-actions">
+              <button class="order-action-btn" title="Editar"><i data-lucide="pencil"></i></button>
+              <button class="order-action-btn" title="Llamar"><i data-lucide="phone"></i></button>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </main>
+</div>
 
-        <div
-          id="selector-producto-container"
-          class="card card-pedido card-highlight"
-        >
-          <h3 class="card-title">SELECCIONAR PRODUCTOS</h3>
-          <div class="selector-grid">
-            <div class="form-group search-box">
-              <label>Buscar:</label>
-              <div class="input-icon">
-                <i data-lucide="search"></i>
-                <input type="text" placeholder="Buscar..." />
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Línea:</label>
-              <select class="select-field">
-                <option value="Tradicional">Tradicional</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Sabor:</label>
-              <select class="select-field">
-                <option value="Mango">Mango</option>
-                <option value="Pistacho">Pistacho</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Presentación:</label>
-              <select class="select-field">
-                <option value="4 onza">4 onza</option>
-                <option value="8 onza">8 onza</option>
-                <option value="1/4 Galon">1/4 Galon</option>
-                <option value="1/2 Galon">1/2 Galon</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Cantidad:</label>
-              <input type="number" value="1" min="1" />
-            </div>
-            <div class="selector-buttons">
-              <button type="button" class="btn-sec btn-limpiar">Limpiar</button>
-              <button type="button" class="btn-pri btn-aceptar">Aceptar</button>
-            </div>
-          </div>
-        </div>
+<script>
+  lucide.createIcons();
+  let currentPage = 1;
+  let rowsPerPage = 8;
+  let totalPages = 6;
 
-        <div class="card card-pedido table-section">
-          <div class="table-wrapper">
-            <table class="pedido-table">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Subtotal</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Sorbete tradicional fresa</td>
-                  <td>3</td>
-                  <td>70.00 C$</td>
-                  <td>210.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Sorbete tradicional mango</td>
-                  <td>2</td>
-                  <td>70.00 C$</td>
-                  <td>140.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Sorbete fresa light</td>
-                  <td>4</td>
-                  <td>75.00 C$</td>
-                  <td>300.00 C$</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+  function filterResults() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const status = document.getElementById('statusFilter').value;
+    const dept = document.getElementById('deptFilter').value;
+    const rows = document.querySelectorAll('#ordersTableBody tr');
+    let visibleCount = 0;
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      const rowStatus = row.getAttribute('data-status') || '';
+      const rowDept = row.getAttribute('data-dept') || '';
+      const matchSearch = !query || text.includes(query);
+      const matchStatus = !status || rowStatus === status;
+      const matchDept = !dept || rowDept === dept;
+      if (matchSearch && matchStatus && matchDept) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+    document.getElementById('resultCount').textContent = visibleCount;
+    lucide.createIcons();
+  }
 
-        <div class="resumen-final-container">
-          <div class="resumen-card">
-            <div class="resumen-row total-row">
-              <span>Total :</span>
-              <input type="text" readonly value="0.00 C$" />
-            </div>
+  function clearFilters() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('statusFilter').value = '';
+    document.getElementById('deptFilter').value = '';
+    document.getElementById('municipalityFilter').value = '';
+    document.getElementById('dateFrom').value = '2025-03-01';
+    document.getElementById('dateTo').value = '2025-03-31';
+    filterResults();
+  }
 
-            <button class="btn-registrar-venta">Registrar Pedido</button>
-          </div>
-        </div>
-      </section>
-    </main>
+  function viewDetails(code) {
+    alert('Ver detalles del pedido: ' + code);
+  }
 
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="/shared/components/sidebar/sidebar.js"></script>
-    <script src="/shared/components/topbar/topbar.js"></script>
-    <script src="/modules/order/order.js"></script>
-  </body>
+  function goToPage(page) {
+    currentPage = page;
+    document.querySelectorAll('.pagination-btn').forEach(btn => {
+      if (!btn.querySelector('i')) btn.classList.remove('active');
+    });
+    document.querySelectorAll('.pagination-btn').forEach(btn => {
+      if (btn.textContent == page) btn.classList.add('active');
+    });
+    updatePaginationInfo();
+    updatePaginationButtons();
+  }
+
+  function nextPage() {
+    if (currentPage < totalPages) goToPage(currentPage + 1);
+  }
+  function prevPage() {
+    if (currentPage > 1) goToPage(currentPage - 1);
+  }
+
+  function changeRowsPerPage(value) {
+    rowsPerPage = parseInt(value);
+    totalPages = Math.ceil(48 / rowsPerPage);
+    currentPage = 1;
+    updatePaginationButtons();
+    updatePaginationInfo();
+  }
+
+  function updatePaginationInfo() {
+    const from = (currentPage - 1) * rowsPerPage + 1;
+    const to = Math.min(currentPage * rowsPerPage, 48);
+    document.getElementById('showingFrom').textContent = `${from}-${to}`;
+    document.getElementById('showingTotal').textContent = '48';
+  }
+
+  function updatePaginationButtons() {
+    document.getElementById('prevBtn').disabled = currentPage <= 1;
+    document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+  }
+
+
+</script>
+</body>
 </html>
