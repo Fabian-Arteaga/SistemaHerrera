@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/modules/order/ordersDrawer.css" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
+ 
   <div id="layout-placeholder"></div>
   <script src="/shared/components/sidebar/sidebar.js"></script>
   <div id="topbar-placeholder"></div>
@@ -90,7 +92,7 @@
         </div>
         <div class="filter-group">
           <label>Estado</label>
-          <select id="statusFilter" onchange="filterResults()">
+          <select id="statusFilter">
             <option value="">Todos</option>
             <option value="pending">Pendiente</option>
             <option value="processing">En Proceso</option>
@@ -101,7 +103,7 @@
         <div class="filter-divider"></div>
         <div class="filter-group">
           <label>Departamento</label>
-          <select id="deptFilter" onchange="filterResults()">
+          <select id="deptFilter" >
             <option value="">Todos</option>
             <option value="managua">Managua</option>
             <option value="carazo">Carazo</option>
@@ -111,7 +113,7 @@
         </div>
         <div class="filter-group">
           <label>Municipio</label>
-          <select id="municipalityFilter" onchange="filterResults()">
+          <select id="municipalityFilter">
             <option value="">Todos</option>
             <option value="managua">Managua</option>
             <option value="tipitapa">Tipitapa</option>
@@ -125,11 +127,11 @@
           <input type="text" placeholder="Buscar por código o cliente..." id="searchInput" onkeyup="filterResults()">
         </div>
         <div class="filter-actions">
-          <button class="btn-search" onclick="filterResults()">
+          <button class="btn-search">
             <i data-lucide="search"></i>
             Buscar
           </button>
-          <button class="btn-clear" onclick="clearFilters()">
+          <button class="btn-clear">
             <i data-lucide="x" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i>
             Limpiar
           </button>
@@ -182,7 +184,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100528')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -203,7 +205,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-pending">Pendiente</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100527')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -224,7 +226,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-delivered">Entregado</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100526')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -245,7 +247,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100525')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -266,7 +268,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-pending">Pendiente</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100524')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -287,7 +289,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-delivered">Entregado</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100523')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -308,7 +310,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-cancelled">Cancelado</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100522')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -329,7 +331,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100521')">
+                <button class="detail-btn" onclick="openDrawer()">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -340,7 +342,7 @@
         <div class="table-footer">
           <div class="rows-per-page">
             <span>Filas:</span>
-            <select onchange="changeRowsPerPage(this.value)">
+            <select>
               <option value="8" selected>8</option>
               <option value="15">15</option>
               <option value="25">25</option>
@@ -350,14 +352,14 @@
             Mostrando <strong id="showingFrom">1-8</strong> de <strong id="showingTotal">48</strong> registros
           </div>
           <div class="pagination">
-            <button class="pagination-btn" disabled id="prevBtn" onclick="prevPage()"><i data-lucide="chevron-left"></i></button>
-            <button class="pagination-btn active" onclick="goToPage(1)">1</button>
-            <button class="pagination-btn" onclick="goToPage(2)">2</button>
-            <button class="pagination-btn" onclick="goToPage(3)">3</button>
-            <button class="pagination-btn" onclick="goToPage(4)">4</button>
-            <button class="pagination-btn" onclick="goToPage(5)">5</button>
-            <button class="pagination-btn" onclick="goToPage(6)">6</button>
-            <button class="pagination-btn" id="nextBtn" onclick="nextPage()"><i data-lucide="chevron-right"></i></button>
+            <button class="pagination-btn" disabled id="prevBtn" "><i data-lucide="chevron-left"></i></button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">4</button>
+            <button class="pagination-btn">5</button>
+            <button class="pagination-btn">6</button>
+            <button class="pagination-btn"><i data-lucide="chevron-right"></i></button>
           </div>
         </div>
       </div>
@@ -453,90 +455,140 @@
   </main>
 </div>
 
+<!-- ═════ ORDER DRAWER ═════ -->
+<div class="order-drawer-overlay" id="orderDrawerOverlay"></div>
+<div class="order-drawer" id="orderDrawer">
+  
+  <div class="order-drawer-header">
+    <div class="order-drawer-header-top">
+      <div class="order-drawer-title">
+        <i data-lucide="file-text"></i> Detalle del pedido
+      </div>
+      <button class="order-drawer-close" id="drawerCloseBtn">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="order-drawer-identity">
+      <span class="order-drawer-code">PED-10526</span>
+      <span class="order-drawer-status status-pending">
+        <span class="status-dot"></span> Pendiente
+      </span>
+    </div>
+  </div>
+
+  <!-- Contenido visual estático (sin JS) -->
+  <div class="order-drawer-body">
+    
+    <!-- Info General -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="info"></i> Información general</div>
+      <div class="info-grid">
+        <div class="info-item"><span class="info-label">Código</span><span class="info-value mono">PED-10526</span></div>
+        <div class="info-item"><span class="info-label">Fecha registro</span><span class="info-value">02/03/2026 09:15 AM</span></div>
+        <div class="info-item"><span class="info-label">Entrega estimada</span><span class="info-value">02/03/2026 03:00 PM</span></div>
+        <div class="info-item"><span class="info-label">Entrega real</span><span class="info-value">-</span></div>
+        <div class="info-item"><span class="info-label">Registrado por</span><span class="info-value">Nohelia Cortes</span></div>
+      </div>
+    </div>
+    
+    <!-- Cliente -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="user"></i> Cliente</div>
+      <div class="client-card">
+        <div class="client-avatar"><span>ML</span></div>
+        <div class="client-info">
+          <span class="client-name">Nombre Cliente</span>
+          <span class="client-point"><i data-lucide="store"></i> Punto de venta</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ubicación -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="map-pin"></i> Ubicación</div>
+      <div class="location-card">
+        <div class="location-icon"><i data-lucide="map"></i></div>
+        <div class="location-info">
+          <span class="location-label">Departamento</span>
+          <span class="location-value">Managua</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Resumen -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="bar-chart-3"></i> Resumen</div>
+      <div class="summary-metrics">
+        <div class="summary-metric"><div class="summary-metric-value">6</div><div class="summary-metric-label">Productos</div></div>
+        <div class="summary-metric"><div class="summary-metric-value">24</div><div class="summary-metric-label">Unidades</div></div>
+        <div class="summary-metric"><div class="summary-metric-value total-price">C$1,250.00</div><div class="summary-metric-label">Total</div></div>
+      </div>
+    </div>
+    
+    <!-- Productos (tabla visual) -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="package"></i> Productos</div>
+      <div class="products-table-wrapper">
+        <table class="products-table">
+          <thead><tr><th>Producto</th><th style="width:14%;text-align:center;">Cant.</th><th style="width:18%;">P. Unit.</th><th style="width:18%;">P. Total</th><th style="width:15%;">Lote</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="product-cell"><div><div class="product-name">Helado de Vainilla 1L</div><div style="font-size:10.5px;color:var(--color-text-hint)">PROD-001</div></div></div></td>
+              <td class="quantity-cell">6</td>
+              <td class="price-cell">C$120.00</td>
+              <td class="price-total-cell">C$720.00</td>
+              <td><span style="font-family:monospace;font-size:11px;background:var(--color-bg-page);padding:3px 8px;border-radius:6px">L-VA123</span></td>
+            </tr>
+            <tr>
+              <td><div class="product-cell"><div><div class="product-name">Helado de Chocolate 1L</div><div style="font-size:10.5px;color:var(--color-text-hint)">PROD-002</div></div></div></td>
+              <td class="quantity-cell">6</td>
+              <td class="price-cell">C$120.00</td>
+              <td class="price-total-cell">C$720.00</td>
+              <td><span style="font-family:monospace;font-size:11px;background:var(--color-bg-page);padding:3px 8px;border-radius:6px">L-CH456</span></td>
+            </tr>
+            <tr>
+              <td><div class="product-cell"><div><div class="product-name">Cono Clásico</div><div style="font-size:10.5px;color:var(--color-text-hint)">PROD-015</div></div></div></td>
+              <td class="quantity-cell">12</td>
+              <td class="price-cell">C$6.00</td>
+              <td class="price-total-cell">C$72.00</td>
+              <td><span style="font-family:monospace;font-size:11px;background:var(--color-bg-page);padding:3px 8px;border-radius:6px">L-CO789</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="order-drawer-footer">
+    <button class="drawer-btn drawer-btn-secondary" onclick="closeDrawer()">Cerrar</button>
+    <div class="drawer-btn-spacer"></div>
+    <button class="drawer-btn drawer-btn-primary" onclick="window.print()">
+      <i data-lucide="printer"></i> Imprimir
+    </button>
+  </div>
+
+</div>
+
 <script>
-  lucide.createIcons();
-  let currentPage = 1;
-  let rowsPerPage = 8;
-  let totalPages = 6;
-
-  function filterResults() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const status = document.getElementById('statusFilter').value;
-    const dept = document.getElementById('deptFilter').value;
-    const rows = document.querySelectorAll('#ordersTableBody tr');
-    let visibleCount = 0;
-    rows.forEach(row => {
-      const text = row.textContent.toLowerCase();
-      const rowStatus = row.getAttribute('data-status') || '';
-      const rowDept = row.getAttribute('data-dept') || '';
-      const matchSearch = !query || text.includes(query);
-      const matchStatus = !status || rowStatus === status;
-      const matchDept = !dept || rowDept === dept;
-      if (matchSearch && matchStatus && matchDept) {
-        row.style.display = '';
-        visibleCount++;
-      } else {
-        row.style.display = 'none';
-      }
-    });
-    document.getElementById('resultCount').textContent = visibleCount;
-    lucide.createIcons();
+  function openDrawer() {
+    document.getElementById('orderDrawerOverlay').classList.add('active');
+    document.getElementById('orderDrawer').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lucide !== 'undefined') lucide.createIcons();
   }
-
-  function clearFilters() {
-    document.getElementById('searchInput').value = '';
-    document.getElementById('statusFilter').value = '';
-    document.getElementById('deptFilter').value = '';
-    document.getElementById('municipalityFilter').value = '';
-    document.getElementById('dateFrom').value = '2025-03-01';
-    document.getElementById('dateTo').value = '2025-03-31';
-    filterResults();
+  function closeDrawer() {
+    document.getElementById('orderDrawerOverlay').classList.remove('active');
+    document.getElementById('orderDrawer').classList.remove('active');
+    document.body.style.overflow = '';
   }
-
-  function viewDetails(code) {
-    alert('Ver detalles del pedido: ' + code);
-  }
-
-  function goToPage(page) {
-    currentPage = page;
-    document.querySelectorAll('.pagination-btn').forEach(btn => {
-      if (!btn.querySelector('i')) btn.classList.remove('active');
-    });
-    document.querySelectorAll('.pagination-btn').forEach(btn => {
-      if (btn.textContent == page) btn.classList.add('active');
-    });
-    updatePaginationInfo();
-    updatePaginationButtons();
-  }
-
-  function nextPage() {
-    if (currentPage < totalPages) goToPage(currentPage + 1);
-  }
-  function prevPage() {
-    if (currentPage > 1) goToPage(currentPage - 1);
-  }
-
-  function changeRowsPerPage(value) {
-    rowsPerPage = parseInt(value);
-    totalPages = Math.ceil(48 / rowsPerPage);
-    currentPage = 1;
-    updatePaginationButtons();
-    updatePaginationInfo();
-  }
-
-  function updatePaginationInfo() {
-    const from = (currentPage - 1) * rowsPerPage + 1;
-    const to = Math.min(currentPage * rowsPerPage, 48);
-    document.getElementById('showingFrom').textContent = `${from}-${to}`;
-    document.getElementById('showingTotal').textContent = '48';
-  }
-
-  function updatePaginationButtons() {
-    document.getElementById('prevBtn').disabled = currentPage <= 1;
-    document.getElementById('nextBtn').disabled = currentPage >= totalPages;
-  }
-
-
+  document.getElementById('orderDrawerOverlay')?.addEventListener('click', closeDrawer);
+  document.getElementById('drawerCloseBtn')?.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+  window.openDrawer = openDrawer;
+  window.closeDrawer = closeDrawer;
+  // Inicializar íconos
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 </script>
 </body>
 </html>
