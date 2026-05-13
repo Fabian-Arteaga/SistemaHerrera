@@ -912,11 +912,33 @@ td:last-child {
     padding-top: 20px;
     border-top: 1px solid #F3F4F6;
 }
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        padding: 16px;
+    }
 
-/* Responsivo para info-section en mobile */
-@media (max-width: 640px) {
-    .info-section {
-        grid-template-columns: 1fr;
-        gap: 16px;
+    .page-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .page-header-right {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .table-card {
+        overflow-x: auto;
+    }
+
+    .data-table {
+        min-width: 600px;
+        /* fuerza scroll horizontal en vez de romperse */
+    }
+
+    .filters-bar {
+        flex-wrap: wrap;
     }
 }
+

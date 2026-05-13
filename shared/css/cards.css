@@ -213,3 +213,21 @@
         margin: 0;
     }
 }
+@media (max-width: 768px) {
+    .stats-row {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .stat-card {
+        flex: 1 1 calc(50% - 6px);
+        /* 2 columnas en tablet */
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-card {
+        flex: 1 1 100%;
+        /* 1 columna en móvil */
+    }
+}
