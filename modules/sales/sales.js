@@ -1,6 +1,4 @@
-// Función para generar los detalles fijos automáticamente
 function generarDetallesFijos() {
-    // 1. Fecha actual automática
     const fechaActual = new Date();
     const fechaFormateada = fechaActual.toLocaleDateString('es-ES', {
         year: 'numeric',
@@ -10,23 +8,14 @@ function generarDetallesFijos() {
         minute: '2-digit'
     });
     
-    // 2. Número de venta automático
     const numeroVenta = 'VTA-' + fechaActual.getTime().toString().slice(-8) + '-' + 
                         Math.floor(Math.random() * 1000).toString().padStart(3, '0');
     
-    // 3. Tipo de venta (Detalle)
     const tipoVenta = 'Detalle';
-    
-    // 4. Método de pago (Contado)
     const metodoPago = 'Contado';
-    
-    // Actualizar el DOM
     actualizarDetallesFijos(fechaFormateada, numeroVenta, tipoVenta, metodoPago);
 }
-
-// Función para actualizar los elementos en el HTML
 function actualizarDetallesFijos(fecha, numeroVenta, tipoVenta, metodoPago) {
-    // Buscamos los elementos por su texto o estructura
     const infoList = document.querySelector('.info-list');
     
     if (infoList) {
@@ -53,16 +42,12 @@ function actualizarDetallesFijos(fecha, numeroVenta, tipoVenta, metodoPago) {
         });
     }
 }
-
-// Ejecutar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    // Pequeño delay para asegurar que el layout se cargue
     setTimeout(() => {
         generarDetallesFijos();
     }, 600);
 });
 
-// Función para regenerar los datos
 window.regenerarDetallesVenta = function() {
     generarDetallesFijos();
     console.log('Detalles de venta actualizados');

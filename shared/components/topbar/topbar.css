@@ -382,7 +382,6 @@
   color: var(--color-error, #ef4444);
 }
 
-/* Notifications */
 .notif-wrapper {
   position: relative;
 }
@@ -533,9 +532,6 @@
   border-radius: 99px;
 }
 
-
-
-/* ── Botón Hamburguesa ── */
 .topbar-menu-btn {
   display: none;
   background: none;

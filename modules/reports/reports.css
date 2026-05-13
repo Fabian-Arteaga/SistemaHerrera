@@ -6,7 +6,6 @@
     min-height: calc(100vh - 60px);
 }
 
-
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -30,7 +29,6 @@
     display: flex;
     gap: 12px;
 }
-
 
 .btn {
     display: inline-flex;
@@ -64,7 +62,6 @@
     padding: 8px 14px;
     font-size: 13px;
 }
-
 
 .filters-bar {
     background: white;
@@ -119,7 +116,6 @@
     padding: 4px 8px;
     font-size: 12px;
 }
-
 
 .charts-grid {
     display: grid;

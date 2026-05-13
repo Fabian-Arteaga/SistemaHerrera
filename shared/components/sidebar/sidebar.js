@@ -39,7 +39,6 @@ class Sidebar {
         overlay.addEventListener('click', () => this.#cerrar());
         document.body.appendChild(overlay);
 
-        // Cerrar al hacer clic en un enlace (móvil)
         const links = this.contenedor.querySelectorAll('.nav-link');
         links.forEach(link => {
             link.addEventListener('click', () => {
@@ -47,7 +46,7 @@ class Sidebar {
             });
         });
 
-        // Exponer función global para el botón del topbar
+
         window.toggleSidebar = () => {
             const sidebar = document.querySelector('.sidebar');
             sidebar.classList.contains('open') ? this.#cerrar() : this.#abrir();

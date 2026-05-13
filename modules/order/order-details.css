@@ -1,16 +1,10 @@
-/* ==========================================================================
-   HISTORIAL DE PEDIDOS - SORBETERÍA HERRERA
-   ========================================================================== */
-
 :root {
-  
     --pending-color: #f59e0b;
     --completed-color: #10b981;
     --border-card: #e2e8f0;
     --bg-main: #f8fafc;
 }
 
-/* --- ESTRUCTURA DE LA PÁGINA --- */
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -24,9 +18,8 @@
     font-weight: var(--font-weight-bold);
 }
 
-/* 1. BOTÓN NUEVO PEDIDO (Verde Pastel) */
 .btn-primary-modern {
-    background-color: var(--color-brand); /* #00C296 del global.css */
+    background-color: var(--color-brand);
     color: var(--color-white);
     padding: 12px 24px;
     border-radius: 12px;
@@ -47,7 +40,6 @@
     box-shadow: 0 6px 15px rgba(0, 194, 150, 0.3);
 }
 
-/* --- BARRA DE BÚSQUEDA --- */
 .toolbar-container {
     display: flex;
     gap: 15px;
@@ -82,7 +74,6 @@
     border-color: var(--color-brand);
 }
 
-/* --- CUADRÍCULA DE TARJETAS --- */
 .orders-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -104,9 +95,13 @@
     transform: translateY(-5px);
 }
 
-/* Bordes de estado (mantienen el color lógico) */
-.order-card.border-pending { border-top-color: var(--pending-color); }
-.order-card.border-completed { border-top-color: var(--completed-color); }
+.order-card.border-pending {
+    border-top-color: var(--pending-color);
+}
+
+.order-card.border-completed {
+    border-top-color: var(--completed-color);
+}
 
 .order-header {
     display: flex;
@@ -139,7 +134,6 @@
     color: var(--color-text-body);
 }
 
-/* 2. BOTÓN VER DETALLES (Verde Pastel suave) */
 .btn-view-detail {
     margin-top: auto;
     padding: 10px;
@@ -150,11 +144,8 @@
     text-decoration: none;
     border-radius: 8px;
     font-weight: var(--font-weight-semibold);
-    
-    /* Colores solicitados */
-    color: var(--color-brand); 
-    background-color: var(--color-bg-login); /* #EFFFFB (Verde pastel muy suave) */
-    
+    color: var(--color-brand);
+    background-color: var(--color-bg-login);
     transition: all 0.2s ease;
 }
 
@@ -163,7 +154,6 @@
     color: var(--color-white);
 }
 
-/* Badges de Estado */
 .badge {
     padding: 4px 10px;
     border-radius: 20px;
@@ -180,4 +170,32 @@
 .badge-completed {
     background: #ecfdf5;
     color: var(--completed-color);
+}
+
+.sidebar {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 194, 150, 0.45) transparent;
+    min-height: 0;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 194, 150, 0.45);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 194, 150, 0.7);
 }

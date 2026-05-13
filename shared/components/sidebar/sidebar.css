@@ -23,7 +23,6 @@ body {
     display: none;
 }
 
-
 .sidebar-profile {
     display: flex;
     align-items: center;
@@ -154,8 +153,6 @@ body {
     padding: 24px;
 }
 
-
-
 .sidebar-overlay {
     display: none;
     position: fixed;
@@ -170,7 +167,6 @@ body {
     display: block;
 }
 
-/* ── Responsive ── */
 @media (max-width: 768px) {
     .sidebar {
         transform: translateX(-100%);

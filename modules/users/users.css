@@ -917,18 +917,6 @@ td:last-child {
         margin-left: 0;
         padding: 16px;
     }
-<<<<<<< HEAD
-
-    .page-header {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .page-header-right {
-        width: 100%;
-        justify-content: flex-end;
-    }
-=======
 }
 
 /* ========================================
@@ -936,24 +924,12 @@ td:last-child {
 ======================================== */
 
 /* TABLET */
->>>>>>> a3cac52bf3c5c6c151efff9cc52e1aba7312ef96
 
     .table-card {
         overflow-x: auto;
     }
 
     .data-table {
-<<<<<<< HEAD
-        min-width: 600px;
-        /* fuerza scroll horizontal en vez de romperse */
-    }
-
-    .filters-bar {
-        flex-wrap: wrap;
-    }
-}
-
-=======
         min-width: 850px;
     }
 
@@ -969,4 +945,3 @@ td:last-child {
         align-items: flex-start;
         gap: 14px;
     }
->>>>>>> a3cac52bf3c5c6c151efff9cc52e1aba7312ef96
