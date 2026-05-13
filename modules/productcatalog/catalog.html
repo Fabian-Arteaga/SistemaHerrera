@@ -1,197 +1,374 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Productos - Sorbetería Herrera</title>
-    <link rel="stylesheet" href="/shared/css/global.css" />
-    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/shared/css/global.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
-    <link rel="stylesheet" href="/modules/productcatalog/catalog.css" />
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="catalog.css"/>
+    <link rel="stylesheet" href="/shared/css/cards.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
-  </head>
-  <body>
-    <!-- Contenedores de componentes -->
-    <div id="layout-placeholder"></div>
-    <div id="topbar-placeholder"></div>
+</head>
+<body>
+  
+<div id="layout-placeholder"></div>
+ <script src="/shared/components/sidebar/sidebar.js"></script>
 
-    <main class="main-content">
-      <!-- Encabezado Principal -->
-      <div class="products-header">
-        <h1>Productos</h1>
-      </div>
+ <div id="topbar-placeholder"></div>
+ <script src="/shared/components/topbar/topbar.js"></script>
 
-      <div class="products-grid">
-        <!-- Columna Izquierda: Filtros y Resultados -->
-        <div class="products-main-col">
-          <!-- Sección de Filtros -->
-          <section class="filter-card">
-            <p class="filter-label">Filtrar</p>
-            <div class="filter-form">
-              <!-- Buscador Horizontal -->
-              <div class="filter-group search-row">
-                <label>Buscar :</label>
-                <div class="input-wrapper">
-                  <input
-                    type="text"
-                    class="input-field"
-                    placeholder="Buscar producto..."
-                  />
-                  <i data-lucide="search"></i>
-                </div>
-              </div>
+  <!-- MAIN CONTENT -->
+<main class="main-content">
+<!-- Page Header -->
+<div class="page-header">
+<h1>Productos</h1>
+<div class="page-header-actions">
+<button class="btn btn-outline" onclick="alert('Exportar catálogo')">
+<i data-lucide="download"></i>Exportar
+</button>
+<button class="btn btn-primary" onclick="alert('Nuevo producto')">
+<i data-lucide="plus"></i>Nuevo Producto
+</button>
+</div>
+</div>
+<div class="stats-row">
 
-              <!-- Fila 1: Linea y Sabor -->
-              <div class="filter-row">
-                <div class="filter-group">
-                  <label>Linea :</label>
-                  <div class="input-wrapper">
-                    <input
-                      type="text"
-                      class="input-field"
-                      placeholder="Seleccionar..."
-                    />
-                    <i data-lucide="chevron-down"></i>
-                  </div>
-                </div>
-                <div class="filter-group">
-                  <label>Sabor :</label>
-                  <div class="input-wrapper">
-                    <input
-                      type="text"
-                      class="input-field"
-                      placeholder="Seleccionar..."
-                    />
-                    <i data-lucide="chevron-down"></i>
-                  </div>
-                </div>
-              </div>
+    <div class="stat-card stat-card-mint">
 
-              <!-- Fila 2: Presentación y Botones de acción -->
-              <div class="filter-row align-end">
-                <div class="filter-group">
-                  <label>Presentación:</label>
-                  <div class="input-wrapper">
-                    <input
-                      type="text"
-                      class="input-field"
-                      placeholder="Seleccionar..."
-                    />
-                    <i data-lucide="chevron-down"></i>
-                  </div>
-                </div>
-                <div class="filter-buttons" style="display: flex; gap: 10px">
-                  <button class="btn-secondary">Limpiar</button>
-                  <button class="btn-primary">Filtrar</button>
-                </div>
-              </div>
-            </div>
-          </section>
+        <div class="stat-card-decoration"></div>
 
-          <!-- Tabla de Resultados -->
-          <section class="results-card">
-            <h2>Resultados</h2>
-            <div class="table-container">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Producto</th>
-                    <th>Sabor</th>
-                    <th>Presentación</th>
-                    <th>Estado</th>
-                    <th class="text-center">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Sorbete tradicional fresa</td>
-                    <td>Fresa</td>
-                    <td>4 onzas</td>
-                    <td>
-                      <span class="status-badge status-true">Activo</span>
-                    </td>
-                    <td class="actions-cell">
-                      <i data-lucide="pencil"></i>
-                      <i data-lucide="trash-2"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Sorbete tradicional mango</td>
-                    <td>Mango</td>
-                    <td>4 onzas</td>
-                    <td>
-                      <span class="status-badge status-true">Activo</span>
-                    </td>
-                    <td class="actions-cell">
-                      <i data-lucide="pencil"></i>
-                      <i data-lucide="trash-2"></i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Sorbete tradicional fresa</td>
-                    <td>Fresa</td>
-                    <td>4 onzas</td>
-                    <td>
-                      <span class="status-badge status-false">Inactivo</span>
-                    </td>
-                    <td class="actions-cell">
-                      <i data-lucide="pencil"></i>
-                      <i data-lucide="trash-2"></i>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
+        <div class="stat-card-icon">
+            <i data-lucide="package"></i>
         </div>
 
-        <!-- Columna Derecha: Administración Lateral -->
-        <aside class="products-side-col">
-          <div class="admin-card">
-            <h2>Administración de líneas</h2>
-            <table class="mini-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre de línea</th>
-                  <th>Sabores</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Tradicionales</td>
-                  <td>24</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Light</td>
-                  <td>15</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="admin-actions">
-              <button class="btn-action btn-coral">Nuevo</button>
-              <button class="btn-action btn-brand-light">
-                Gestionar sabores
-              </button>
+        <div class="stat-card-label">
+            Productos Registrados
+        </div>
+
+        <div class="stat-card-value">
+            110
+        </div>
+
+    </div>
+
+    <div class="stat-card stat-card-purple">
+
+        <div class="stat-card-decoration"></div>
+
+        <div class="stat-card-icon">
+            <i data-lucide="check-circle"></i>
+        </div>
+
+        <div class="stat-card-label">
+            Productos Activos
+        </div>
+
+        <div class="stat-card-value">
+            104
+        </div>
+
+    </div>
+
+    <div class="stat-card stat-card-coral">
+
+        <div class="stat-card-decoration"></div>
+
+        <div class="stat-card-icon">
+            <i data-lucide="x-circle"></i>
+        </div>
+
+        <div class="stat-card-label">
+            Productos Inactivos
+        </div>
+
+        <div class="stat-card-value">
+            6
+        </div>
+
+    </div>
+
+</div>
+<!-- IMPROVED QUICK ACTIONS -->
+<div class="quick-actions-bar">
+<span class="quick-actions-bar-title">Catálogos</span>
+<button class="quick-action-card lines" onclick="alert('Catálogo de Líneas')">
+<div class="quick-action-icon"><i data-lucide="ice-cream"></i></div>
+<div class="quick-action-info">
+<span class="qa-name">Líneas</span>
+<span class="qa-desc">Tradicionales, Premium...</span>
+</div>
+<div class="quick-action-arrow"><i data-lucide="chevron-right"></i></div>
+</button>
+<button class="quick-action-card presentations" onclick="alert('Catálogo de Presentaciones')">
+<div class="quick-action-icon"><i data-lucide="container"></i></div>
+<div class="quick-action-info">
+<span class="qa-name">Presentaciones</span>
+<span class="qa-desc">4oz, 8oz, 1 Libra...</span>
+</div>
+<div class="quick-action-arrow"><i data-lucide="chevron-right"></i></div>
+</button>
+<button class="quick-action-card flavors" onclick="alert('Catálogo de Sabores')">
+<div class="quick-action-icon"><i data-lucide="cherry"></i></div>
+<div class="quick-action-info">
+<span class="qa-name">Sabores</span>
+<span class="qa-desc">Nueces, Fresa, Mango...</span>
+</div>
+<div class="quick-action-arrow"><i data-lucide="chevron-right"></i></div>
+</button>
+</div>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar">
+<div class="filter-bar-search">
+<i data-lucide="search"></i>
+<input type="text" placeholder="Buscar por nombre, código..." id="searchInput" onkeyup="filterProducts()">
+</div>
+<div class="filter-bar-divider"></div>
+<div class="filter-bar-select">
+<select id="filterLine" onchange="filterProducts()">
+<option value="">Todas las líneas</option>
+<option value="Tradicionales">Tradicionales</option>
+<option value="Especiales">Especiales</option>
+<option value="Premium">Premium</option>
+<option value="Light">Light</option>
+</select>
+</div>
+<div class="filter-bar-select">
+<select id="filterPresentation" onchange="filterProducts()">
+<option value="">Todas</option>
+<option value="4 Onzas">4 Onzas</option>
+<option value="8 Onzas">8 Onzas</option>
+<option value="1 Libra">1 Libra</option>
+<option value="2 Libras">2 Libras</option>
+<option value="1 Galón">1 Galón</option>
+</select>
+</div>
+<div class="filter-bar-select">
+<select id="filterFlavor" onchange="filterProducts()">
+<option value="">Todos los sabores</option>
+<option value="Nueces">Nueces</option>
+<option value="Fresa">Fresa</option>
+<option value="Vainilla">Vainilla</option>
+<option value="Mango">Mango</option>
+<option value="Coco">Coco</option>
+<option value="Piña">Piña</option>
+</select>
+</div>
+<div class="filter-bar-divider"></div>
+<div class="filter-bar-actions">
+<button class="btn-clear" onclick="clearFilters()">
+<i data-lucide="x"></i>Limpiar
+</button>
+</div>
+</div>
+
+<!-- Results Header -->
+<div class="results-header">
+<h2>
+<span>Resultados</span>
+<span class="count-badge" id="resultCount">12</span>
+</h2>
+<div class="results-actions">
+<button class="btn btn-outline"><i data-lucide="arrow-up-down"></i>Ordenar</button>
+</div>
+</div>
+
+<div class="products-grid">
+
+    <!-- CARD 1 -->
+    <div class="product-card">
+        <span class="product-card-status active">Activo</span>
+        <div class="product-card-image">
+            <img src="../../assets/ProductsImages/Trad.Vainilla_4Onzas.png">
+        </div>
+        <div class="product-card-body">
+            <h3 class="product-card-name">
+                Tradicional Nueces 4 Onz
+            </h3>
+            <div class="product-card-meta">
+                <span class="meta-tag line">
+                    <i data-lucide="tag"></i>
+                    Tradicionales
+                </span>
+                <span class="meta-tag flavor">
+                    <i data-lucide="cherry"></i>
+                    Nueces
+                </span>
+                <span class="meta-tag presentation">
+                    <i data-lucide="package"></i>
+                    4 Onzas
+                </span>
             </div>
-          </div>
-        </aside>
-      </div>
-    </main>
-    <!-- Scripts -->
-    <script src="/shared/components/sidebar/sidebar.js"></script>
-    <script src="/shared/components/topbar/topbar.js"></script>
-    <script>
-      // Inicializar iconos de Lucide
-      window.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-          if (typeof lucide !== "undefined") {
-            lucide.createIcons();
-          }
-        }, 500);
-      });
-    </script>
-  </body>
+            <div class="product-card-prices">
+                <div class="price-group">
+                    <span class="price-label">Mayoreo</span>
+                    <span class="price-value wholesale">C$35</span>
+                </div>
+                <div class="price-divider"></div>
+                <div class="price-group">
+                    <span class="price-label">Detalle</span>
+                    <span class="price-value retail">C$45</span>
+                </div>
+            </div>
+        </div>
+        <button class="btn-view">
+            <i data-lucide="eye"></i>
+        </button>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="product-card">
+        <span class="product-card-status active">Activo</span>
+        <div class="product-card-image">
+            <img src="../../assets/ProductsImages/Trad.RonConPasas_4Onzas.png">
+        </div>
+        <div class="product-card-body">
+            <h3 class="product-card-name">
+                Tradicional Ron con Pasas 4 Onz
+            </h3>
+            <div class="product-card-meta">
+                <span class="meta-tag line">
+                    <i data-lucide="tag"></i>
+                    Tradicionales
+                </span>
+                <span class="meta-tag flavor">
+                    <i data-lucide="cherry"></i>
+                    Ron con Pasas
+                </span>
+                <span class="meta-tag presentation">
+                    <i data-lucide="package"></i>
+                    4 Onzas
+                </span>
+            </div>
+            <div class="product-card-prices">
+                <div class="price-group">
+                    <span class="price-label">Mayoreo</span>
+                    <span class="price-value wholesale">C$35</span>
+                </div>
+                <div class="price-divider"></div>
+                <div class="price-group">
+                    <span class="price-label">Detalle</span>
+                    <span class="price-value retail">C$45</span>
+                </div>
+            </div>
+        </div>
+        <button class="btn-view">
+            <i data-lucide="eye"></i>
+        </button>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="product-card">
+        <span class="product-card-status active">Activo</span>
+        <div class="product-card-image">
+            <img src="../../assets/ProductsImages/Trad.RonConPasas_4Onzas.png">
+        </div>
+        <div class="product-card-body">
+            <h3 class="product-card-name">
+                Tradicional Ron con Pasas 4 Onz
+            </h3>
+            <div class="product-card-meta">
+                <span class="meta-tag line">
+                    <i data-lucide="tag"></i>
+                    Tradicionales
+                </span>
+                <span class="meta-tag flavor">
+                    <i data-lucide="cherry"></i>
+                    Ron con Pasas
+                </span>
+                <span class="meta-tag presentation">
+                    <i data-lucide="package"></i>
+                    4 Onzas
+                </span>
+            </div>
+            <div class="product-card-prices">
+                <div class="price-group">
+                    <span class="price-label">Mayoreo</span>
+                    <span class="price-value wholesale">C$35</span>
+                </div>
+                <div class="price-divider"></div>
+                <div class="price-group">
+                    <span class="price-label">Detalle</span>
+                    <span class="price-value retail">C$45</span>
+                </div>
+            </div>
+        </div>
+        <button class="btn-view">
+            <i data-lucide="eye"></i>
+        </button>
+    </div>
+
+</div>
+
+<!-- Pagination -->
+<div class="table-footer">
+<div class="rows-per-page">
+<span>Filas por página:</span>
+<select onchange="changeRowsPerPage(this.value)">
+<option value="12" selected>12</option>
+<option value="24">24</option>
+<option value="36">36</option>
+</select>
+</div>
+<div class="table-footer-info">
+Mostrando <strong id="showingFrom">1-12</strong> de <strong id="showingTotal">12</strong> registros
+</div>
+<div class="pagination">
+<button class="pagination-btn" disabled><i data-lucide="chevron-left"></i></button>
+<button class="pagination-btn active">1</button>
+<button class="pagination-btn">2</button>
+<button class="pagination-btn" disabled><i data-lucide="chevron-right"></i></button>
+</div>
+</div>
+
+</main>
+
+<script>
+lucide.createIcons();
+
+function filterProducts() {
+const query = document.getElementById('searchInput').value.toLowerCase();
+const line = document.getElementById('filterLine').value.toLowerCase();
+const presentation = document.getElementById('filterPresentation').value.toLowerCase();
+const flavor = document.getElementById('filterFlavor').value.toLowerCase();
+const cards = document.querySelectorAll('.product-card');
+let visibleCount = 0;
+
+cards.forEach(card => {
+const cardName = card.dataset.name.toLowerCase();
+const cardLine = card.dataset.line.toLowerCase();
+const cardFlavor = card.dataset.flavor.toLowerCase();
+const cardPres = card.dataset.presentation.toLowerCase();
+const matchSearch = cardName.includes(query);
+const matchLine = !line || cardLine === line;
+const matchFlavor = !flavor || cardFlavor === flavor;
+const matchPres = !presentation || cardPres === presentation;
+if (matchSearch && matchLine && matchFlavor && matchPres) {
+card.style.display = '';
+visibleCount++;
+} else {
+card.style.display = 'none';
+}
+});
+
+document.getElementById('resultCount').textContent = visibleCount;
+document.getElementById('showingFrom').textContent = visibleCount > 0 ? `1-${visibleCount}` : '0';
+document.getElementById('showingTotal').textContent = visibleCount;
+lucide.createIcons();
+}
+
+function clearFilters() {
+document.getElementById('searchInput').value = '';
+document.getElementById('filterLine').value = '';
+document.getElementById('filterPresentation').value = '';
+document.getElementById('filterFlavor').value = '';
+filterProducts();
+}
+
+function changeRowsPerPage(val) {}
+</script>
+</body>
 </html>

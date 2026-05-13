@@ -11,26 +11,7 @@
 }
 .page-header h1 { font-size: 32px; font-weight: 700; color: var(--color-text-heading); }
 
-.btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 20px; border-radius: var(--radius-button);
-    font-size: 14px; font-weight: 600; cursor: pointer;
-    transition: all 0.2s ease; border: none; text-decoration: none;
-    font-family: var(--font-primary);
-}
-.btn-primary {
-    background: var(--color-brand); color: white;
-    box-shadow: 0 4px 12px rgba(0, 194, 150, 0.3);
-}
-.btn-primary:hover {
-    background: var(--color-brand-hover);
-    box-shadow: 0 6px 20px rgba(0, 194, 150, 0.4); transform: translateY(-1px);
-}
-.btn-outline {
-    background: var(--color-white); color: var(--color-text-body);
-    border: 1.5px solid #E2E8F0;
-}
-.btn-outline:hover { border-color: var(--color-brand); color: var(--color-brand); }
+
 
 
 /* Main Content Grid */
