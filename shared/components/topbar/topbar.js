@@ -107,13 +107,7 @@ class TopBar {
       dropdown.classList.toggle('active');
     });
 
-    document.addEventListener('click', (e) => {
-      if (!dropdown.contains(e.target) && e.target !== btnBell) {
-        dropdown.classList.remove('active');
-        dropdown.classList.remove('expanded');
-        if (btnViewAll) btnViewAll.textContent = 'Ver todas las notificaciones';
-      }
-    });
+  
 
     if (btnMarkAll) {
       btnMarkAll.addEventListener('click', () => {
