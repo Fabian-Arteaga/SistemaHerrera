@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/modules/order/ordersDrawer.css" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
+ 
   <div id="layout-placeholder"></div>
   <script src="/shared/components/sidebar/sidebar.js"></script>
   <div id="topbar-placeholder"></div>
@@ -90,7 +92,7 @@
         </div>
         <div class="filter-group">
           <label>Estado</label>
-          <select id="statusFilter" onchange="filterResults()">
+          <select id="statusFilter">
             <option value="">Todos</option>
             <option value="pending">Pendiente</option>
             <option value="processing">En Proceso</option>
@@ -101,7 +103,7 @@
         <div class="filter-divider"></div>
         <div class="filter-group">
           <label>Departamento</label>
-          <select id="deptFilter" onchange="filterResults()">
+          <select id="deptFilter" >
             <option value="">Todos</option>
             <option value="managua">Managua</option>
             <option value="carazo">Carazo</option>
@@ -111,7 +113,7 @@
         </div>
         <div class="filter-group">
           <label>Municipio</label>
-          <select id="municipalityFilter" onchange="filterResults()">
+          <select id="municipalityFilter">
             <option value="">Todos</option>
             <option value="managua">Managua</option>
             <option value="tipitapa">Tipitapa</option>
@@ -125,11 +127,11 @@
           <input type="text" placeholder="Buscar por código o cliente..." id="searchInput" onkeyup="filterResults()">
         </div>
         <div class="filter-actions">
-          <button class="btn-search" onclick="filterResults()">
+          <button class="btn-search">
             <i data-lucide="search"></i>
             Buscar
           </button>
-          <button class="btn-clear" onclick="clearFilters()">
+          <button class="btn-clear">
             <i data-lucide="x" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"></i>
             Limpiar
           </button>
@@ -182,7 +184,7 @@
               </td>
               <td style="text-align:center;"><span class="status-badge status-processing">En Proceso</span></td>
               <td style="text-align:center;">
-                <button class="detail-btn" onclick="viewDetails('PED-100528')">
+                <button class="detail-btn" onclick="openDrawer('PED-10528')">
                   <i data-lucide="eye"></i> Ver
                 </button>
               </td>
@@ -340,7 +342,7 @@
         <div class="table-footer">
           <div class="rows-per-page">
             <span>Filas:</span>
-            <select onchange="changeRowsPerPage(this.value)">
+            <select>
               <option value="8" selected>8</option>
               <option value="15">15</option>
               <option value="25">25</option>
@@ -350,14 +352,14 @@
             Mostrando <strong id="showingFrom">1-8</strong> de <strong id="showingTotal">48</strong> registros
           </div>
           <div class="pagination">
-            <button class="pagination-btn" disabled id="prevBtn" onclick="prevPage()"><i data-lucide="chevron-left"></i></button>
-            <button class="pagination-btn active" onclick="goToPage(1)">1</button>
-            <button class="pagination-btn" onclick="goToPage(2)">2</button>
-            <button class="pagination-btn" onclick="goToPage(3)">3</button>
-            <button class="pagination-btn" onclick="goToPage(4)">4</button>
-            <button class="pagination-btn" onclick="goToPage(5)">5</button>
-            <button class="pagination-btn" onclick="goToPage(6)">6</button>
-            <button class="pagination-btn" id="nextBtn" onclick="nextPage()"><i data-lucide="chevron-right"></i></button>
+            <button class="pagination-btn" disabled id="prevBtn" "><i data-lucide="chevron-left"></i></button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">4</button>
+            <button class="pagination-btn">5</button>
+            <button class="pagination-btn">6</button>
+            <button class="pagination-btn"><i data-lucide="chevron-right"></i></button>
           </div>
         </div>
       </div>
@@ -453,90 +455,234 @@
   </main>
 </div>
 
+<!-- ═════ ORDER DRAWER ═════ -->
+<div class="order-drawer-overlay" id="orderDrawerOverlay"></div>
+<div class="order-drawer" id="orderDrawer">
+  
+  <div class="order-drawer-header">
+    <div class="order-drawer-header-top">
+      <div class="order-drawer-title">
+        <i data-lucide="file-text"></i>
+        Detalle del pedido
+      </div>
+      <button class="order-drawer-close" id="drawerCloseBtn">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="order-drawer-identity">
+      <span class="order-drawer-code" id="drawerCode">PED-10526</span>
+      <span class="order-drawer-status status-pending" id="drawerStatus">
+        <span class="status-dot"></span> Pendiente
+      </span>
+    </div>
+  </div>
+
+  <div class="order-drawer-body" id="drawerBody"></div>
+
+  <div class="order-drawer-footer">
+    <button class="drawer-btn drawer-btn-secondary" onclick="closeDrawer()">Cerrar</button>
+    <div class="drawer-btn-spacer"></div>
+    <button class="drawer-btn drawer-btn-primary" onclick="window.print()">
+      <i data-lucide="printer"></i> Imprimir
+    </button>
+  </div>
+
+</div>
+
+<!-- ═════ ORDER DRAWER JS ═════ -->
 <script>
-  lucide.createIcons();
-  let currentPage = 1;
-  let rowsPerPage = 8;
-  let totalPages = 6;
+  // ── Variables ──
+  const drawerOverlay = document.getElementById('orderDrawerOverlay');
+  const drawerPanel = document.getElementById('orderDrawer');
+  const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+  const drawerCode = document.getElementById('drawerCode');
+  const drawerStatus = document.getElementById('drawerStatus');
+  const drawerBody = document.getElementById('drawerBody');
 
-  function filterResults() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const status = document.getElementById('statusFilter').value;
-    const dept = document.getElementById('deptFilter').value;
-    const rows = document.querySelectorAll('#ordersTableBody tr');
-    let visibleCount = 0;
-    rows.forEach(row => {
-      const text = row.textContent.toLowerCase();
-      const rowStatus = row.getAttribute('data-status') || '';
-      const rowDept = row.getAttribute('data-dept') || '';
-      const matchSearch = !query || text.includes(query);
-      const matchStatus = !status || rowStatus === status;
-      const matchDept = !dept || rowDept === dept;
-      if (matchSearch && matchStatus && matchDept) {
-        row.style.display = '';
-        visibleCount++;
-      } else {
-        row.style.display = 'none';
-      }
-    });
-    document.getElementById('resultCount').textContent = visibleCount;
-    lucide.createIcons();
+  // ── Datos de ejemplo ──
+  const ordersData = {
+    'PED-10526': {
+      code: 'PED-10526',
+      status: 'pending',
+      statusLabel: 'Pendiente',
+      registrationDate: '02/03/2026 09:15 AM',
+      estimatedDelivery: '02/03/2026 03:00 PM',
+      realDelivery: '-',
+      registeredBy: 'Nohelia Cortes',
+      customer: { name: 'María López', initials: 'ML', pointOfSale: 'Managua Centro', customerId: 15 },
+      location: { department: 'Managua', municipality: 'Managua' },
+      summary: { totalProducts: 6, totalUnits: 24, totalPrice: 'C$1,250.00' },
+      products: [
+        { name: 'Helado de Vainilla 1L', sku: 'PROD-001', quantity: 6, unitPrice: 'C$120.00', totalPrice: 'C$720.00', lot: 'L-VA123' },
+        { name: 'Helado de Chocolate 1L', sku: 'PROD-002', quantity: 6, unitPrice: 'C$120.00', totalPrice: 'C$720.00', lot: 'L-CH456' },
+        { name: 'Cono Clásico', sku: 'PROD-015', quantity: 12, unitPrice: 'C$6.00', totalPrice: 'C$72.00', lot: 'L-CO789' }
+      ],
+      technical: { orderId: 10526, customerId: 15, orderStatusId: 1, isActive: true, posAddressId: 3 }
+    },
+    'PED-10528': {
+      code: 'PED-10528',
+      status: 'processing',
+      statusLabel: 'En Proceso',
+      registrationDate: '01/03/2026 10:30 AM',
+      estimatedDelivery: '02/03/2026 04:00 PM',
+      realDelivery: '-',
+      registeredBy: 'Ronald Narváez',
+      customer: { name: 'Yahir Guevara', initials: 'YG', pointOfSale: 'Managua Norte', customerId: 22 },
+      location: { department: 'Managua', municipality: 'Tipitapa' },
+      summary: { totalProducts: 4, totalUnits: 18, totalPrice: 'C$890.00' },
+      products: [
+        { name: 'Helado de Fresa 1L', sku: 'PROD-003', quantity: 8, unitPrice: 'C$120.00', totalPrice: 'C$960.00', lot: 'L-FR234' },
+        { name: 'Paleta de Coco', sku: 'PROD-030', quantity: 4, unitPrice: 'C$15.00', totalPrice: 'C$60.00', lot: 'L-PA890' }
+      ],
+      technical: { orderId: 10528, customerId: 22, orderStatusId: 2, isActive: true, posAddressId: 5 }
+    }
+  };
+
+  // ── Función principal: abrir drawer ──
+  function openDrawer(orderCode) {
+    const order = ordersData[orderCode] || buildGenericOrder(orderCode);
+    
+    drawerCode.textContent = order.code;
+    updateStatus(order.status, order.statusLabel);
+    renderBody(order);
+    
+    drawerOverlay.classList.add('active');
+    drawerPanel.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+     Re-renderizar íconos después de insertar HTML dinámico
+    if (typeof lucide !== 'undefined') lucide.createIcons();
   }
 
-  function clearFilters() {
-    document.getElementById('searchInput').value = '';
-    document.getElementById('statusFilter').value = '';
-    document.getElementById('deptFilter').value = '';
-    document.getElementById('municipalityFilter').value = '';
-    document.getElementById('dateFrom').value = '2025-03-01';
-    document.getElementById('dateTo').value = '2025-03-31';
-    filterResults();
+  function closeDrawer() {
+    drawerOverlay.classList.remove('active');
+    drawerPanel.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
-  function viewDetails(code) {
-    alert('Ver detalles del pedido: ' + code);
+  function updateStatus(status, label) {
+    const map = {
+      pending: 'status-pending',
+      processing: 'status-processing',
+      transit: 'status-transit',
+      delivered: 'status-delivered',
+      cancelled: 'status-cancelled'
+    };
+    drawerStatus.className = 'order-drawer-status ' + (map[status] || 'status-pending');
+    drawerStatus.innerHTML = '<span class="status-dot"></span> ' + label;
   }
 
-  function goToPage(page) {
-    currentPage = page;
-    document.querySelectorAll('.pagination-btn').forEach(btn => {
-      if (!btn.querySelector('i')) btn.classList.remove('active');
-    });
-    document.querySelectorAll('.pagination-btn').forEach(btn => {
-      if (btn.textContent == page) btn.classList.add('active');
-    });
-    updatePaginationInfo();
-    updatePaginationButtons();
+  function renderBody(o) {
+    drawerBody.innerHTML = `
+      <div class="drawer-section">
+        <div class="drawer-section-title"><i data-lucide="info"></i> Información general</div>
+        <div class="info-grid">
+          <div class="info-item"><span class="info-label">Código</span><span class="info-value mono">${o.code}</span></div>
+          <div class="info-item"><span class="info-label">Fecha registro</span><span class="info-value">${o.registrationDate}</span></div>
+          <div class="info-item"><span class="info-label">Entrega estimada</span><span class="info-value">${o.estimatedDelivery}</span></div>
+          <div class="info-item"><span class="info-label">Entrega real</span><span class="info-value">${o.realDelivery}</span></div>
+          <div class="info-item"><span class="info-label">Registrado por</span><span class="info-value">${o.registeredBy}</span></div>
+        </div>
+      </div>
+      
+      <div class="drawer-section">
+        <div class="drawer-section-title"><i data-lucide="user"></i> Cliente</div>
+        <div class="client-card">
+          <div class="client-avatar"><span>${o.customer.initials}</span></div>
+          <div class="client-info">
+            <span class="client-name">${o.customer.name}</span>
+            <span class="client-point"><i data-lucide="store"></i> ${o.customer.pointOfSale}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="drawer-section">
+        <div class="drawer-section-title"><i data-lucide="map-pin"></i> Ubicación</div>
+        <div class="location-card">
+          <div class="location-icon"><i data-lucide="map"></i></div>
+          <div class="location-info">
+            <span class="location-label">Departamento</span>
+            <span class="location-value">${o.location.department}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="drawer-section">
+        <div class="drawer-section-title"><i data-lucide="bar-chart-3"></i> Resumen</div>
+        <div class="summary-metrics">
+          <div class="summary-metric"><div class="summary-metric-value">${o.summary.totalProducts}</div><div class="summary-metric-label">Productos</div></div>
+          <div class="summary-metric"><div class="summary-metric-value">${o.summary.totalUnits}</div><div class="summary-metric-label">Unidades</div></div>
+          <div class="summary-metric"><div class="summary-metric-value total-price">${o.summary.totalPrice}</div><div class="summary-metric-label">Total</div></div>
+        </div>
+      </div>
+      
+      <div class="drawer-section">
+        <div class="drawer-section-title"><i data-lucide="package"></i> Productos</div>
+        <div class="products-table-wrapper">
+          <table class="products-table">
+            <thead><tr><th>Producto</th><th style="width:14%;text-align:center;">Cant.</th><th style="width:18%;">P. Unit.</th><th style="width:18%;">P. Total</th><th style="width:15%;">Lote</th></tr></thead>
+            <tbody>
+              ${o.products.map(p => `
+                <tr>
+                  <td><div class="product-cell"><div><div class="product-name">${p.name}</div><div style="font-size:10.5px;color:var(--color-text-hint)">${p.sku}</div></div></div></td>
+                  <td class="quantity-cell">${p.quantity}</td>
+                  <td class="price-cell">${p.unitPrice}</td>
+                  <td class="price-total-cell">${p.totalPrice}</td>
+                  <td><span style="font-family:monospace;font-size:11px;background:var(--color-bg-page);padding:3px 8px;border-radius:6px">${p.lot}</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="drawer-section">
+        <div class="drawer-section-title"><i data-lucide="code-2"></i> Técnico</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--color-bg-page);border-radius:8px">
+            <span style="font-size:11.5px;font-weight:600;color:var(--color-text-hint)">Order ID</span>
+            <span style="font-size:12px;font-weight:700">${o.technical.orderId}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--color-bg-page);border-radius:8px">
+            <span style="font-size:11.5px;font-weight:600;color:var(--color-text-hint)">Customer ID</span>
+            <span style="font-size:12px;font-weight:700">${o.technical.customerId}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--color-bg-page);border-radius:8px">
+            <span style="font-size:11.5px;font-weight:600;color:var(--color-text-hint)">Is Active</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:${o.technical.isActive ? 'rgba(0,194,150,0.15)' : 'rgba(250,137,123,0.12)'};color:${o.technical.isActive ? 'var(--color-brand)' : 'var(--color-coral)'}">
+              <span style="width:6px;height:6px;border-radius:50%;background:${o.technical.isActive ? 'var(--color-brand)' : 'var(--color-coral)'}"></span>
+              ${o.technical.isActive ? 'Activo' : 'Inactivo'}
+            </span>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
-  function nextPage() {
-    if (currentPage < totalPages) goToPage(currentPage + 1);
-  }
-  function prevPage() {
-    if (currentPage > 1) goToPage(currentPage - 1);
-  }
-
-  function changeRowsPerPage(value) {
-    rowsPerPage = parseInt(value);
-    totalPages = Math.ceil(48 / rowsPerPage);
-    currentPage = 1;
-    updatePaginationButtons();
-    updatePaginationInfo();
+  function buildGenericOrder(code) {
+    return {
+      code: code, status: 'pending', statusLabel: 'Pendiente',
+      registrationDate: '-', estimatedDelivery: '-', realDelivery: '-', registeredBy: '-',
+      customer: { name: 'Cliente', initials: 'CL', pointOfSale: '-' },
+      location: { department: '-', municipality: '-' },
+      summary: { totalProducts: 0, totalUnits: 0, totalPrice: 'C$0.00' },
+      products: [],
+      technical: { orderId: 0, customerId: 0, orderStatusId: 0, isActive: true, posAddressId: 0 }
+    };
   }
 
-  function updatePaginationInfo() {
-    const from = (currentPage - 1) * rowsPerPage + 1;
-    const to = Math.min(currentPage * rowsPerPage, 48);
-    document.getElementById('showingFrom').textContent = `${from}-${to}`;
-    document.getElementById('showingTotal').textContent = '48';
-  }
+  // ── Event Listeners ──
+  if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+  if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
-  function updatePaginationButtons() {
-    document.getElementById('prevBtn').disabled = currentPage <= 1;
-    document.getElementById('nextBtn').disabled = currentPage >= totalPages;
-  }
+  // ⚠️ IMPORTANTE: Exponer funciones al scope global para los onclick del HTML
+  window.openDrawer = openDrawer;
+  window.closeDrawer = closeDrawer;
+  window.viewDetails = function(code) { openDrawer(code); };
 
-
+  // Inicializar íconos de Lucide (para los que ya están en el DOM al cargar)
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 </script>
 </body>
 </html>
