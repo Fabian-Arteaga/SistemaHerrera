@@ -449,3 +449,151 @@
         flex-basis: 100%;
     }
 }
+
+/* =========================
+   RESPONSIVE DASHBOARD SALES
+========================= */
+
+@media (max-width: 1024px) {
+
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-bar {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .filter-bar-search {
+        width: 100%;
+    }
+
+    .filter-bar-date {
+        flex: 1;
+        min-width: 180px;
+    }
+
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .results-actions {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+    }
+
+    .results-actions .btn {
+        flex: 1;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .main-content {
+        margin-left: 0 !important;
+        padding: 16px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .page-header > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-header .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .stats-row {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-bar-divider {
+        display: none;
+    }
+
+    .filter-bar-date {
+        width: 100%;
+    }
+
+    .filter-bar-date input {
+        width: 100%;
+    }
+
+    .filter-bar-actions {
+        width: 100%;
+    }
+
+    .filter-bar-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* TABLA RESPONSIVE */
+    .results-card {
+        overflow-x: auto;
+    }
+
+    .data-table {
+        min-width: 900px;
+    }
+
+    .table-footer {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .pagination {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* MOBILE PEQUEÑO */
+@media (max-width: 480px) {
+
+    .main-content {
+        padding: 12px;
+    }
+
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-card-value {
+        font-size: 1.8rem;
+    }
+
+    .results-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .btn {
+        font-size: 0.82rem;
+        padding: 10px 14px;
+    }
+}
