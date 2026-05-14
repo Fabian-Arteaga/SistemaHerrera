@@ -28,39 +28,38 @@
         <h1 class="page-title">Vista General</h1>
       </div>
 
-     <div class="stats-row animate-in delay-1">
+      <div class="stats-row animate-in delay-1">
+        <div class="stat-card stat-card-mint">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i
+              data-lucide="circle-dollar-sign"
+              style="width: 20px; height: 20px"
+            ></i>
+          </div>
+          <div class="stat-card-label">Ventas totales de hoy</div>
+          <div class="stat-card-value">C$ 2,656</div>
+        </div>
 
-  <!-- Card 1 -->
-  <div class="stat-card stat-card-mint">
-    <div class="stat-card-decoration"></div>
-    <div class="stat-card-icon">
-      <i data-lucide="circle-dollar-sign" style="width: 20px; height: 20px"></i>
-    </div>
-    <div class="stat-card-label">Ventas totales de hoy</div>
-    <div class="stat-card-value">C$ 2,656</div>
-  </div>
+        <div class="stat-card stat-card-yellow">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i data-lucide="shopping-bag" style="width: 20px; height: 20px"></i>
+          </div>
+          <div class="stat-card-label">Pedidos pendientes</div>
+          <div class="stat-card-value">11</div>
+        </div>
 
-  <!-- Card 2 -->
-  <div class="stat-card stat-card-yellow">
-    <div class="stat-card-decoration"></div>
-    <div class="stat-card-icon">
-      <i data-lucide="shopping-bag" style="width: 20px; height: 20px"></i>
-    </div>
-    <div class="stat-card-label">Pedidos pendientes</div>
-    <div class="stat-card-value">11</div>
-  </div>
+        <div class="stat-card stat-card-coral">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i data-lucide="package-x" style="width: 20px; height: 20px"></i>
+          </div>
+          <div class="stat-card-label">Stock crítico</div>
+          <div class="stat-card-value">3</div>
+        </div>
+      </div>
 
-  <!-- Card 3 -->
-  <div class="stat-card stat-card-coral">
-    <div class="stat-card-decoration"></div>
-    <div class="stat-card-icon">
-      <i data-lucide="package-x" style="width: 20px; height: 20px"></i>
-    </div>
-    <div class="stat-card-label">Stock crítico</div>
-    <div class="stat-card-value">3</div>
-  </div>
-
-</div>
       <div class="dashboard-grid">
         <div class="panel">
           <div class="panel-header">
@@ -69,90 +68,93 @@
               >Ver todas <i data-lucide="arrow-right"></i
             ></a>
           </div>
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Fecha / Hora</th>
-                <th>Usuario</th>
-                <th>Cliente</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Hoy, 4:12 PM</td>
-                <td>Marcelo Mena</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">70.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 4:08 PM</td>
-                <td>Marcelo Mena</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">45.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 4:03 PM</td>
-                <td>Marcelo Mena</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">210.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 3:52 PM</td>
-                <td>Marcelo Mena</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">310.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 3:43 PM</td>
-                <td>Marcelo Mena</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">45.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 3:33 PM</td>
-                <td>Ronald Narvaez</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">45.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 3:43 PM</td>
-                <td>Marcelo Mena</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">45.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 3:52 PM</td>
-                <td>Ronald Narvaez</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">45.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 3:43 PM</td>
-                <td>Marcelo Mena</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">45.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 3:33 PM</td>
-                <td>Ronald Narvaez</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">45.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 3:43 PM</td>
-                <td>Marcelo Mena</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">45.00 C$</td>
-              </tr>
-              <tr>
-                <td>Hoy, 3:33 PM</td>
-                <td>Ronald Narvaez</td>
-                <td>Cliente genérico</td>
-                <td class="td-total">45.00 C$</td>
-              </tr>
-            </tbody>
-          </table>
+
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Fecha / Hora</th>
+                  <th>Usuario</th>
+                  <th>Cliente</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hoy, 4:12 PM</td>
+                  <td>Marcelo Mena</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">70.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 4:08 PM</td>
+                  <td>Marcelo Mena</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">45.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 4:03 PM</td>
+                  <td>Marcelo Mena</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">210.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 3:52 PM</td>
+                  <td>Marcelo Mena</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">310.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 3:43 PM</td>
+                  <td>Marcelo Mena</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">45.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 3:33 PM</td>
+                  <td>Ronald Narvaez</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">45.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 3:43 PM</td>
+                  <td>Marcelo Mena</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">45.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 3:52 PM</td>
+                  <td>Ronald Narvaez</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">45.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 3:43 PM</td>
+                  <td>Marcelo Mena</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">45.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 3:33 PM</td>
+                  <td>Ronald Narvaez</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">45.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 3:43 PM</td>
+                  <td>Marcelo Mena</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">45.00 C$</td>
+                </tr>
+                <tr>
+                  <td>Hoy, 3:33 PM</td>
+                  <td>Ronald Narvaez</td>
+                  <td>Cliente genérico</td>
+                  <td class="td-total">45.00 C$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div class="right-col">
@@ -163,6 +165,7 @@
                 >Ver todo <i data-lucide="arrow-right"></i
               ></a>
             </div>
+
             <div class="stock-list">
               <div class="stock-item">
                 <div class="stock-info">
@@ -195,40 +198,47 @@
                 >Ver todos <i data-lucide="arrow-right"></i
               ></a>
             </div>
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Cliente</th>
-                  <th>Entrega</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="td-primary">Juan Pérez</td>
-                  <td>25 may.</td>
-                  <td><span class="pill pill-green">Entregado</span></td>
-                </tr>
-                <tr>
-                  <td class="td-primary">María García</td>
-                  <td>20 jun.</td>
-                  <td><span class="pill pill-yellow">En producción</span></td>
-                </tr>
-                <tr>
-                  <td class="td-primary">Carlos López</td>
-                  <td>13 jul.</td>
-                  <td><span class="pill pill-gray">No iniciado</span></td>
-                </tr>
-                <tr>
-                  <td class="td-primary">Ana Martínez</td>
-                  <td>20 dic.</td>
-                  <td><span class="pill pill-green">Entregado</span></td>
-                </tr>
-              </tbody>
-            </table>
+
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Entrega</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="td-primary">Juan Pérez</td>
+                    <td>25 may.</td>
+                    <td><span class="pill pill-green">Entregado</span></td>
+                  </tr>
+                  <tr>
+                    <td class="td-primary">María García</td>
+                    <td>20 jun.</td>
+                    <td><span class="pill pill-yellow">En producción</span></td>
+                  </tr>
+                  <tr>
+                    <td class="td-primary">Carlos López</td>
+                    <td>13 jul.</td>
+                    <td><span class="pill pill-gray">No iniciado</span></td>
+                  </tr>
+                  <tr>
+                    <td class="td-primary">Ana Martínez</td>
+                    <td>20 dic.</td>
+                    <td><span class="pill pill-green">Entregado</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </main>
+
+    <script>
+      lucide.createIcons();
+    </script>
   </body>
 </html>

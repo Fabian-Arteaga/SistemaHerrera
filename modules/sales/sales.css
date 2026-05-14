@@ -1,25 +1,3 @@
-:root {
-    --primary: #10b981;
-    --primary-light: #dcfce7;
-    --primary-border: #bbf7d0;
-
-    --orange-light: #ffedd5;
-    --orange-border: #fed7aa;
-    --orange-text: #c2410c;
-
-    --bg-input: #f8fafc;
-    --border: #e2e8f0;
-    --border-light: #f1f5f9;
-
-    --text: #1e293b;
-    --text-soft: #475569;
-    --text-muted: #64748b;
-
-    --radius: 8px;
-    --transition: all .2s ease;
-}
-
-/* GRID */
 .sales-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -29,7 +7,7 @@
     margin-top: 15px;
 }
 
-/* CARDS */
+
 .card,
 .card-small {
     background: #fff;
@@ -55,7 +33,6 @@
     margin-bottom: 10px;
 }
 
-/* TEXTOS */
 .info-list p {
     margin-bottom: 3px;
     font-size: .8rem;
@@ -63,7 +40,6 @@
     line-height: 1.4;
 }
 
-/* FORM */
 .form-group {
     display: flex;
     align-items: center;
@@ -86,7 +62,6 @@
     min-width: 55px;
 }
 
-/* INPUTS */
 input,
 select {
     flex: 1;
@@ -113,7 +88,6 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(16,185,129,.08);
 }
 
-/* CANTIDAD */
 .quantity-control {
     display: flex;
     align-items: center;
@@ -150,7 +124,6 @@ select:focus {
     transform: translateY(-1px);
 }
 
-/* BOTONES */
 .btn,
 .btn-registrar-venta-new {
     border-radius: 10px;
@@ -201,7 +174,6 @@ select:focus {
     color: #065f46;
 }
 
-/* TABLA */
 .table-container {
     flex: 1;
     max-height: 300px;

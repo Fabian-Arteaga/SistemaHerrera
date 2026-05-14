@@ -5,14 +5,12 @@ body {
     overflow: hidden;
 }
 
-
 .settings-layout {
     display: flex;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
 }
-
 
 .settings-sidebar {
     background-color: var(--color-bg-sidebar);
@@ -170,7 +168,6 @@ body {
     flex-shrink: 0;
 }
 
-
 .settings-main {
     flex: 1;
     display: flex;
@@ -303,7 +300,6 @@ body {
     background-color: rgba(0, 0, 0, 0.04);
 }
 
-
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -389,7 +385,6 @@ body {
     min-height: 16px;
 }
 
-
 .toggle-list {
     display: flex;
     flex-direction: column;
@@ -462,7 +457,6 @@ input:checked+.slider {
 input:checked+.slider:before {
     transform: translateX(18px);
 }
-
 
 .theme-grid {
     display: grid;
@@ -539,7 +533,6 @@ input:checked+.slider:before {
     opacity: 1;
     transform: scale(1);
 }
-
 
 .btn-save {
     display: inline-flex;
