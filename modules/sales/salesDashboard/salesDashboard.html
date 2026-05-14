@@ -1,120 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ventas</title>
     <link rel="stylesheet" href="/shared/css/global.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
-    <link rel="stylesheet" href="salesDashboard.css"/>
+    <link rel="stylesheet" href="salesDashboard.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
     <link rel="stylesheet" href="/modules/sales/salesDrawer.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="layout-placeholder"></div>
- <script src="/shared/components/sidebar/sidebar.js"></script>
- 
+    <script src="/shared/components/sidebar/sidebar.js"></script>
 
- <div id="topbar-placeholder"></div>
- <script src="/shared/components/topbar/topbar.js"></script> 
+    <div id="topbar-placeholder"></div>
+    <script src="/shared/components/topbar/topbar.js"></script>
 
- <!-- Main Content -->
-<main class="main-content">
-    <!-- Page Header -->
-    <div class="page-header animate-in">
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Page Header -->
+      <div class="page-header animate-in">
         <h1>Reporte de Ventas</h1>
-        <div style="display:flex;gap:10px;">
-            <button class="btn btn-outline">
-                <i data-lucide="download" style="width:16px;height:16px;"></i>
-                Exportar
-            </button>
-            <button class="btn btn-primary" onclick="window.location.href='/modules/sales/sales.html'">
-                <i data-lucide="plus" style="width:18px;height:18px;"></i>
-                Nueva venta
-            </button>
+        <div style="display: flex; gap: 10px">
+          <button class="btn btn-outline">
+            <i data-lucide="download" style="width: 16px; height: 16px"></i>
+            Exportar
+          </button>
+          <button
+            class="btn btn-primary"
+            onclick="window.location.href = '/modules/sales/sales.html'"
+          >
+            <i data-lucide="plus" style="width: 18px; height: 18px"></i>
+            Nueva venta
+          </button>
         </div>
-    </div>
- 
-    <!-- Stats Row -->
-    <div class="stats-row animate-in delay-1">
+      </div>
+
+      <!-- Stats Row -->
+      <div class="stats-row animate-in delay-1">
         <!-- Card 1: Ventas del Mes -->
         <div class="stat-card stat-card-mint">
-            <div class="stat-card-decoration"></div>
-            <div class="stat-card-icon">
-                <i data-lucide="shopping-cart" style="width: 20px; height: 20px"></i>
-            </div>
-            <div class="stat-card-label">Ventas este mes</div>
-            <div class="stat-card-value">143</div>
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i
+              data-lucide="shopping-cart"
+              style="width: 20px; height: 20px"
+            ></i>
+          </div>
+          <div class="stat-card-label">Ventas este mes</div>
+          <div class="stat-card-value">143</div>
         </div>
 
         <!-- Card 2: Ingresos Totales -->
         <div class="stat-card stat-card-coral">
-            <div class="stat-card-decoration"></div>
-            <div class="stat-card-icon">
-                <i data-lucide="dollar-sign" style="width: 20px; height: 20px"></i>
-            </div>
-            <div class="stat-card-label">Ingresos totales</div>
-            <div class="stat-card-value">C$86,450</div>
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i data-lucide="dollar-sign" style="width: 20px; height: 20px"></i>
+          </div>
+          <div class="stat-card-label">Ingresos totales</div>
+          <div class="stat-card-value">C$86,450</div>
         </div>
 
         <!-- Card 3: Productos Vendidos -->
         <div class="stat-card stat-card-purple">
-            <div class="stat-card-decoration"></div>
-            <div class="stat-card-icon">
-                <i data-lucide="package" style="width: 20px; height: 20px"></i>
-            </div>
-            <div class="stat-card-label">Productos vendidos</div>
-            <div class="stat-card-value">512</div>
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i data-lucide="package" style="width: 20px; height: 20px"></i>
+          </div>
+          <div class="stat-card-label">Productos vendidos</div>
+          <div class="stat-card-value">512</div>
         </div>
-    </div>
+      </div>
 
-     <div class="filter-bar animate-in delay-2">
-    <div class="filter-bar-search">
-        <i data-lucide="search"></i>
-        <input type="text" placeholder="Buscar por código, cliente..." id="searchInput" onkeyup="filterResults()">
-    </div>
+      <div class="filter-bar animate-in delay-2">
+        <div class="filter-bar-search">
+          <i data-lucide="search"></i>
+          <input
+            type="text"
+            placeholder="Buscar por código, cliente..."
+            id="searchInput"
+            onkeyup="filterResults()"
+          />
+        </div>
 
-    <div class="filter-bar-divider"></div>
+        <div class="filter-bar-divider"></div>
 
-    <div class="filter-bar-date">
-        <label>Desde</label>
-        <input type="date" id="dateFrom" value="2024-01-01">
-    </div>
+        <div class="filter-bar-date">
+          <label>Desde</label>
+          <input type="date" id="dateFrom" value="2024-01-01" />
+        </div>
 
-    <div class="filter-bar-date">
-        <label>Hasta</label>
-        <input type="date" id="dateTo" value="2024-12-31">
-    </div>
+        <div class="filter-bar-date">
+          <label>Hasta</label>
+          <input type="date" id="dateTo" value="2024-12-31" />
+        </div>
 
-    <div class="filter-bar-divider"></div>
+        <div class="filter-bar-divider"></div>
 
     <div class="filter-bar-actions">
         <button class="btn btn-clear">
             <i data-lucide="x" style="width:14px;height:14px;"></i>
             Limpiar
-        </button>
-    </div>
-</div>
+          </button>
+        </div>
+      </div>
 
-    <!-- Results Table -->
-    <div class="results-card animate-in delay-3">
+      <!-- Results Table -->
+      <div class="results-card animate-in delay-3">
         <div class="results-header">
-            <h2>
-                <span>Resultados</span>
-                <span class="count-badge" id="resultCount">8</span>
-            </h2>
-            <div class="results-actions">
-                <button class="btn btn-outline">
-                    <i data-lucide="arrow-down-up" style="width:14px;height:14px;"></i>
-                    Ordenar
-                </button>
-                <button class="btn btn-outline">
-                    <i data-lucide="filter" style="width:14px;height:14px;"></i>
-                    Filtros
-                </button>
-            </div>
+          <h2>
+            <span>Resultados</span>
+            <span class="count-badge" id="resultCount">8</span>
+          </h2>
+          <div class="results-actions">
+            <button class="btn btn-outline">
+              <i
+                data-lucide="arrow-down-up"
+                style="width: 14px; height: 14px"
+              ></i>
+              Ordenar
+            </button>
+            <button class="btn btn-outline">
+              <i data-lucide="filter" style="width: 14px; height: 14px"></i>
+              Filtros
+            </button>
+          </div>
         </div>
 
         <table class="data-table">
@@ -340,8 +353,8 @@
                 </button>
             </div>
         </div>
-    </div>
-</main>
+      </div>
+    </main>
 
 <!-- ═════ SALE DRAWER HTML ═════ -->
 <div class="sale-drawer-overlay" id="saleDrawerOverlay"></div>

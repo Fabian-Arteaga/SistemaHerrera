@@ -29,7 +29,7 @@
             <i data-lucide="download"></i>
             <span class="btn-label">Exportar</span>
           </button>
-          <button class="btn btn-primary" onclick="alert('Nuevo producto')">
+          <button class="btn btn-primary" onclick="openModal()"('Nuevo producto')">
             <i data-lucide="plus"></i>
             <span class="btn-label">Nuevo Producto</span>
           </button>
@@ -318,9 +318,221 @@
         </div>
       </div>
     </main>
+    <!-- MODAL: NUEVO PRODUCTO -->
+    <div
+      class="modal-overlay"
+      id="modalNuevoProducto"
+      onclick="closeModalOnOverlay(event)"
+    >
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-header-icon">
+            <i data-lucide="package-plus"></i>
+          </div>
+          <div>
+            <h2 class="modal-title">Nuevo Producto</h2>
+            <p class="modal-subtitle">Completa los datos del producto</p>
+          </div>
+          <button class="modal-close" onclick="closeModal()">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <form
+          class="modal-body"
+          id="formNuevoProducto"
+          onsubmit="submitNuevoProducto(event)"
+        >
+          <!-- IMAGEN -->
+          <div
+            class="modal-image-upload"
+            id="imageUploadArea"
+            onclick="document.getElementById('inputImagen').click()"
+          >
+            <div class="image-upload-preview" id="imagePreview">
+              <i data-lucide="image-plus"></i>
+              <span>Subir imagen del producto</span>
+              <small>PNG, JPG · Máx. 2 MB</small>
+            </div>
+            <input
+              type="file"
+              id="inputImagen"
+              accept="image/*"
+              hidden
+              onchange="previewImage(event)"
+            />
+          </div>
+
+          <!-- FILA 1: Nombre + Código -->
+          <div class="modal-row">
+            <div class="modal-field">
+              <label class="modal-label" for="inputNombre">
+                <i data-lucide="type"></i> Nombre del producto
+                <span class="required">*</span>
+              </label>
+              <input
+                class="modal-input"
+                type="text"
+                id="inputNombre"
+                placeholder="Ej. Tradicional Vainilla 4 Onz"
+                required
+              />
+            </div>
+            <div class="modal-field modal-field--sm">
+              <label class="modal-label" for="inputCodigo">
+                <i data-lucide="barcode"></i> Código SKU
+              </label>
+              <input
+                class="modal-input"
+                type="text"
+                id="inputCodigo"
+                placeholder="Ej. TRAD-VAN-4OZ"
+              />
+            </div>
+          </div>
+
+          <!-- FILA 2: Línea + Sabor + Presentación -->
+          <div class="modal-row modal-row--3">
+            <div class="modal-field">
+              <label class="modal-label" for="inputLinea">
+                <i data-lucide="tag"></i> Línea <span class="required">*</span>
+              </label>
+              <select class="modal-input modal-select" id="inputLinea" required>
+                <option value="" disabled selected>Seleccionar</option>
+                <option value="Tradicionales">Tradicionales</option>
+                <option value="Especiales">Especiales</option>
+                <option value="Premium">Premium</option>
+                <option value="Light">Light</option>
+              </select>
+            </div>
+            <div class="modal-field">
+              <label class="modal-label" for="inputSabor">
+                <i data-lucide="cherry"></i> Sabor
+                <span class="required">*</span>
+              </label>
+              <select class="modal-input modal-select" id="inputSabor" required>
+                <option value="" disabled selected>Seleccionar</option>
+                <option value="Nueces">Nueces</option>
+                <option value="Fresa">Fresa</option>
+                <option value="Vainilla">Vainilla</option>
+                <option value="Mango">Mango</option>
+                <option value="Coco">Coco</option>
+                <option value="Piña">Piña</option>
+                <option value="Ron con Pasas">Ron con Pasas</option>
+              </select>
+            </div>
+            <div class="modal-field">
+              <label class="modal-label" for="inputPresentacion">
+                <i data-lucide="package"></i> Presentación
+                <span class="required">*</span>
+              </label>
+              <select
+                class="modal-input modal-select"
+                id="inputPresentacion"
+                required
+              >
+                <option value="" disabled selected>Seleccionar</option>
+                <option value="4 Onzas">4 Onzas</option>
+                <option value="8 Onzas">8 Onzas</option>
+                <option value="1 Libra">1 Libra</option>
+                <option value="2 Libras">2 Libras</option>
+                <option value="1 Galón">1 Galón</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- FILA 3: Precios -->
+          <div class="modal-row">
+            <div class="modal-field">
+              <label class="modal-label" for="inputMayoreo">
+                <i data-lucide="trending-down"></i> Precio Mayoreo
+                <span class="required">*</span>
+              </label>
+              <div class="modal-input-prefix">
+                <span class="input-prefix">C$</span>
+                <input
+                  class="modal-input modal-input--prefixed"
+                  type="number"
+                  id="inputMayoreo"
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+            </div>
+            <div class="modal-field">
+              <label class="modal-label" for="inputDetalle">
+                <i data-lucide="trending-up"></i> Precio Detalle
+                <span class="required">*</span>
+              </label>
+              <div class="modal-input-prefix">
+                <span class="input-prefix">C$</span>
+                <input
+                  class="modal-input modal-input--prefixed"
+                  type="number"
+                  id="inputDetalle"
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- ESTADO -->
+          <div class="modal-field">
+            <label class="modal-label">
+              <i data-lucide="toggle-right"></i> Estado
+            </label>
+            <div class="modal-toggle-group">
+              <label class="modal-toggle-option active-opt">
+                <input type="radio" name="estado" value="Activo" checked />
+                <span class="toggle-pill toggle-pill--active">Activo</span>
+              </label>
+              <label class="modal-toggle-option inactive-opt">
+                <input type="radio" name="estado" value="Inactivo" />
+                <span class="toggle-pill toggle-pill--inactive">Inactivo</span>
+              </label>
+            </div>
+          </div>
+        </form>
+
+        <div class="modal-footer">
+          <button class="btn btn-outline" type="button" onclick="closeModal()">
+            Cancelar
+          </button>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            form="formNuevoProducto"
+          >
+            <i data-lucide="save"></i>
+            Guardar Producto
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script>
       lucide.createIcons();
+
+      function openModal() {
+        const overlay = document.getElementById("modalNuevoProducto");
+        overlay.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        const overlay = document.getElementById("modalNuevoProducto");
+        overlay.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
 
       function filterProducts() {
         const query = document

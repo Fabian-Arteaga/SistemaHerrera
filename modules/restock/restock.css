@@ -1,6 +1,3 @@
-/* restock.css - Versión Unificada HerreraSystem */
-
-/* 1. Estructura General y Contenedor */
 .pedido-container {
     display: flex;
     flex-direction: column;
@@ -16,7 +13,6 @@
     box-shadow: var(--shadow-card);
 }
 
-/* 2. Tarjetas con Estilo Figma (Resaltadas) */
 .card-pedido {
     background-color: var(--color-white);
     padding: var(--space-6);
@@ -28,34 +24,33 @@
 }
 
 .card-highlight {
-    border-left: 5px solid #f3e5ab !important; /* Turquesa de marca */
+    border-left: 5px solid #f3e5ab ;
 }
 
 .card-title {
     font-size: 13px;
-    color: #8E9E99; /* Gris sutil de la imagen */
+    color: #8E9E99; 
     margin-bottom: var(--space-4);
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-/* 3. Grillas y Formularios */
 .grid-form {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--space-4);
 }
 
-/* Nueva configuración para que los selectores quepan en una sola fila */
+
 .selector-grid {
     display: grid;
-    grid-template-columns: 1.5fr repeat(4, 1fr); /* El buscador es más ancho que el resto[cite: 3] */
+    grid-template-columns: 1.5fr repeat(4, 1fr); 
     gap: var(--space-4);
     align-items: flex-end;
 }
 
-/* Ajuste para pantallas pequeñas */
+
 @media (max-width: 992px) {
     .selector-grid {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -74,7 +69,6 @@
     color: var(--color-text-body);
 }
 
-/* 4. Estilos de Inputs y Selects[cite: 2] */
 .form-group input, 
 .form-group select,
 .input-styled,
@@ -100,7 +94,7 @@
     color: #64748B;
 }
 
-/* Input con Icono (Buscador) */
+
 .input-icon {
     position: relative;
     display: flex;
@@ -119,11 +113,11 @@
     width: 100%;
 }
 
-/* 5. Botones de Acción[cite: 2] */
+
 .button-group {
     display: flex;
     gap: 12px;
-    justify-content: flex-start; /* Alineado a la izquierda según imagen[cite: 3] */
+    justify-content: flex-start; 
 }
 
 .mt-3 {
@@ -145,16 +139,16 @@
 }
 
 .btn-accept {
-    background-color: #86E3CE; /* Verde turquesa de selección[cite: 3] */
+    background-color: #86E3CE; 
     color: white;
 }
 
 .btn-clear {
-    background-color: #D6B4DC; /* Lavanda de selección[cite: 3] */
+    background-color: #D6B4DC; 
     color: #4A4A4A;
 }
 
-/* 6. Tabla Estilizada (Estilo Rosa Suave)[cite: 2] */
+
 .table-section {
     padding: 0;
     overflow: hidden;
@@ -167,7 +161,7 @@
 }
 
 .pedido-table th {
-    background-color: #FFE4E1; /* Rosa suave[cite: 2] */
+    background-color: #FFE4E1; 
     padding: 12px;
     text-align: left;
     font-size: 14px;
@@ -180,7 +174,7 @@
     font-size: 14px;
 }
 
-/* 7. Totales y Footer[cite: 2] */
+
 .resumen-final-container {
     display: flex;
     justify-content: flex-end;
@@ -222,7 +216,7 @@
 }
 
 .btn-registrar-venta {
-    background-color: #86E3CE; /* Turquesa HerreraSystem[cite: 2] */
+    background-color: #86E3CE; 
     color: #000;
     border: none;
     padding: 14px;
