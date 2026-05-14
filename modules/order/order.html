@@ -18,34 +18,27 @@
     <div id="topbar-placeholder"></div>
     <script src="/shared/components/topbar/topbar.js"></script>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <!-- Page Header -->
-    <div class="page-header animate-in">
-      <h1>Pedidos</h1>
-      <div style="display:flex;gap:10px;">
-        <button class="btn btn-outline">
-          <i data-lucide="download" style="width:16px;height:16px;"></i>
-          Exportar
-        </button>
-        <button class="btn btn-primary">
-          <i data-lucide="plus" style="width:18px;height:18px;"></i>
-          Nuevo Pedido
-          <a href="/modules/order/neworden.html" style="position:absolute;inset:0;"></a>
-        </button>
-      </div>
-    </div>
-
-    <!-- Stats Row -->
-    <div class="stats-row animate-in delay-1">
-      <!-- Card 1 -->
-      <div class="stat-card stat-card-mint">
-        <div class="stat-card-decoration"></div>
-        <div class="stat-card-icon">
-          <i data-lucide="shopping-cart" style="width: 20px; height: 20px"></i>
+    <main class="main-content">
+      <!-- Page Header -->
+      <div class="page-header animate-in">
+        <h1>Pedidos</h1>
+        <div style="display: flex; gap: 10px">
+          <button class="btn btn-outline" type="button">
+            <i data-lucide="download" style="width: 16px; height: 16px"></i>
+            Exportar
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            onclick="window.location.href = '/modules/order/neworden.html'"
+          >
+            <i data-lucide="plus" style="width: 18px; height: 18px"></i>
+            Nuevo Pedido
+          </button>
         </div>
       </div>
 
+      <!-- Stats Row -->
       <div class="stats-row animate-in delay-1">
         <div class="stat-card stat-card-mint">
           <div class="stat-card-decoration"></div>
@@ -58,7 +51,6 @@
           <div class="stat-card-label">Pedidos Hoy</div>
           <div class="stat-card-value">24</div>
         </div>
-
         <div class="stat-card stat-card-yellow">
           <div class="stat-card-decoration"></div>
           <div class="stat-card-icon">
@@ -67,7 +59,6 @@
           <div class="stat-card-label">Pedidos Pendientes</div>
           <div class="stat-card-value">11</div>
         </div>
-
         <div class="stat-card stat-card-coral">
           <div class="stat-card-decoration"></div>
           <div class="stat-card-icon">
@@ -79,7 +70,6 @@
           <div class="stat-card-label">Pedidos Retrasados</div>
           <div class="stat-card-value">3</div>
         </div>
-
         <div class="stat-card stat-card-purple">
           <div class="stat-card-decoration"></div>
           <div class="stat-card-icon">
@@ -93,6 +83,7 @@
         </div>
       </div>
 
+      <!-- Filter Bar -->
       <div class="filter-bar animate-in delay-2">
         <div class="filter-row">
           <div class="filter-group">
@@ -146,8 +137,7 @@
           </div>
           <div class="filter-actions">
             <button class="btn-search" type="button">
-              <i data-lucide="search"></i>
-              Buscar
+              <i data-lucide="search"></i> Buscar
             </button>
             <button class="btn-clear" type="button">
               <i
@@ -165,12 +155,14 @@
         </div>
       </div>
 
+      <!-- Content Grid -->
       <div class="content-grid animate-in delay-3">
+        <!-- Results Card -->
         <div class="results-card">
           <div class="results-header">
             <h2>
-              <span>Resultados</span>
-              <span class="count-badge" id="resultCount">48</span>
+              <span>Resultados</span
+              ><span class="count-badge" id="resultCount">48</span>
             </h2>
             <div class="results-actions">
               <button class="btn btn-outline" type="button">
@@ -468,6 +460,7 @@
           </div>
         </div>
 
+        <!-- Side Panel -->
         <div class="side-panel">
           <div class="side-card">
             <div class="side-card-header">
@@ -543,9 +536,8 @@
               </div>
               <div class="order-card-actions">
                 <button class="order-action-btn" title="Editar">
-                  <i data-lucide="pencil"></i>
-                </button>
-                <button class="order-action-btn" title="Llamar">
+                  <i data-lucide="pencil"></i></button
+                ><button class="order-action-btn" title="Llamar">
                   <i data-lucide="phone"></i>
                 </button>
               </div>
@@ -561,9 +553,8 @@
               </div>
               <div class="order-card-actions">
                 <button class="order-action-btn" title="Editar">
-                  <i data-lucide="pencil"></i>
-                </button>
-                <button class="order-action-btn" title="Llamar">
+                  <i data-lucide="pencil"></i></button
+                ><button class="order-action-btn" title="Llamar">
                   <i data-lucide="phone"></i>
                 </button>
               </div>
@@ -579,9 +570,8 @@
               </div>
               <div class="order-card-actions">
                 <button class="order-action-btn" title="Editar">
-                  <i data-lucide="pencil"></i>
-                </button>
-                <button class="order-action-btn" title="Llamar">
+                  <i data-lucide="pencil"></i></button
+                ><button class="order-action-btn" title="Llamar">
                   <i data-lucide="phone"></i>
                 </button>
               </div>
@@ -591,7 +581,10 @@
       </div>
     </main>
 
+    <!-- Drawer Overlay -->
     <div class="order-drawer-overlay" id="orderDrawerOverlay"></div>
+
+    <!-- Drawer -->
     <div class="order-drawer" id="orderDrawer">
       <div class="order-drawer-header">
         <div class="order-drawer-header-top">
@@ -604,9 +597,9 @@
         </div>
         <div class="order-drawer-identity">
           <span class="order-drawer-code">PED-10526</span>
-          <span class="order-drawer-status status-pending">
-            <span class="status-dot"></span> Pendiente
-          </span>
+          <span class="order-drawer-status status-pending"
+            ><span class="status-dot"></span> Pendiente</span
+          >
         </div>
       </div>
 
