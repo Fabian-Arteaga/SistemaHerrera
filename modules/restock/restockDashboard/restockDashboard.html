@@ -21,16 +21,15 @@
     <main class="main-content">
       <div class="page-header animate-in">
         <h1>Reabastecimientos</h1>
-        <div style="display:flex;gap:10px;">
-            <button class="btn btn-outline">
-                <i data-lucide="download" style="width:16px;height:16px;"></i>
-                <span class="btn-label">Exportar</span>
-            </button>
-            <button class="btn btn-primary">
-                <i data-lucide="plus" style="width:18px;height:18px;"></i>
-                <span class="btn-label">Rebastecimiento</span>
-                <a href="/modules/restock/restock.html" style="position:absolute;inset:0;"></a>
-            </button>
+        <div class="page-header-actions">
+          <button class="btn btn-outline" type="button">
+            <i data-lucide="download" style="width: 16px; height: 16px"></i>
+            <span class="btn-label">Exportar</span>
+          </button>
+          <button class="btn btn-primary" type="button" onclick="openModal()">
+            <i data-lucide="plus" style="width: 18px; height: 18px"></i>
+            <span class="btn-label">Reabastecimiento</span>
+          </button>
         </div>
       </div>
 
@@ -578,10 +577,8 @@
         </div>
       </div>
     </div>
-
     <script>
       lucide.createIcons();
-
       function openModal() {
         document
           .getElementById("modalReabastecimiento")
@@ -589,30 +586,22 @@
         document.body.style.overflow = "hidden";
         lucide.createIcons();
       }
-
       function closeModal() {
         document
           .getElementById("modalReabastecimiento")
           .classList.remove("is-open");
         document.body.style.overflow = "";
       }
-
       function closeModalOnOverlay(event) {
         if (event.target === document.getElementById("modalReabastecimiento"))
           closeModal();
       }
-
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closeModal();
       });
-
-      function filterResults() {}
-
-      function clearFilters() {
-        document.getElementById("searchInput").value = "";
-        document.getElementById("dateFrom").value = "";
-        document.getElementById("dateTo").value = "";
-      }
     </script>
+
+    <script src="/shared/components/sidebar/sidebar.js"></script>
+    <script src="/shared/components/topbar/topbar.js"></script>
   </body>
 </html>
