@@ -1,5 +1,3 @@
-// settings.js
-
 lucide.createIcons();
 
 const tabMeta = {
@@ -36,7 +34,6 @@ function setTheme(el) {
   el.classList.add("active");
 }
 
-// ✅ Activar pestaña según el hash de la URL
 window.addEventListener('load', () => {
   const hash = window.location.hash;
   if (!hash) return;

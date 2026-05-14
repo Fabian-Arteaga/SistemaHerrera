@@ -1,29 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/modules/customers/customer.css" />
+    <title>Clientes | Panel de Gestión</title>
+
     <link rel="stylesheet" href="/shared/css/global.css" />
+    <link rel="stylesheet" href="/shared/css/cards.css" />
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
-    <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/modules/customers/customer.css" />
+
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
   <body>
     <div id="layout-placeholder"></div>
     <script src="/shared/components/sidebar/sidebar.js"></script>
+
     <div id="topbar-placeholder"></div>
     <script src="/shared/components/topbar/topbar.js"></script>
 
-    <!-- Main Content -->
     <main class="main-content">
-      <!-- Page Header -->
       <div class="page-header animate-in">
         <div class="page-header-left">
           <h1>Clientes</h1>
         </div>
+
         <div class="page-header-right">
           <button class="btn btn-outline">
             <i data-lucide="download" style="width: 16px; height: 16px"></i>
@@ -35,43 +37,37 @@
           </button>
         </div>
       </div>
-      <!-- Stats Cards -->
+
       <div class="stats-row animate-in delay-1">
         <div class="stat-card stat-card-mint">
           <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="users" style="width: 20px; height: 20px"></i>
-          </div>
-          <div class="stat-card-label">Cientes Activos</div>
+          <div class="stat-card-icon"><i data-lucide="users"></i></div>
+          <div class="stat-card-label">Clientes Activos</div>
           <div class="stat-card-value">150</div>
         </div>
+
         <div class="stat-card stat-card-yellow">
           <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="user-check" style="width: 20px; height: 20px"></i>
-          </div>
+          <div class="stat-card-icon"><i data-lucide="user-check"></i></div>
           <div class="stat-card-label">Clientes Inactivos</div>
           <div class="stat-card-value">25</div>
         </div>
+
         <div class="stat-card stat-card-coral">
           <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="user-x" style="width: 20px; height: 20px"></i>
-          </div>
+          <div class="stat-card-icon"><i data-lucide="user-x"></i></div>
           <div class="stat-card-label">Municipios</div>
           <div class="stat-card-value">23</div>
         </div>
+
         <div class="stat-card stat-card-purple">
           <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="map-pin" style="width: 20px; height: 20px"></i>
-          </div>
+          <div class="stat-card-icon"><i data-lucide="map-pin"></i></div>
           <div class="stat-card-label">Puntos de Venta</div>
           <div class="stat-card-value">34</div>
         </div>
       </div>
 
-      <!-- Filters Bar -->
       <div class="filters-bar">
         <div class="search-box">
           <input
@@ -103,24 +99,19 @@
         </div>
       </div>
 
-      <!-- Table Card -->
       <div class="table-card animate-in delay-3">
         <div class="table-card-header">
           <h2>
             <span>Clientes Activos</span>
             <span class="count-badge">150</span>
           </h2>
+
           <div class="table-actions">
             <button class="btn btn-outline">
-              <i data-lucide="filter" style="width: 14px; height: 14px"></i>
-              Filtros
+              <i data-lucide="filter"></i> Filtros
             </button>
             <button class="btn btn-outline">
-              <i
-                data-lucide="arrow-down-up"
-                style="width: 14px; height: 14px"
-              ></i>
-              Ordenar
+              <i data-lucide="arrow-down-up"></i> Ordenar
             </button>
           </div>
         </div>
@@ -128,12 +119,12 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th style="width: 28%">Cliente</th>
-              <th style="width: 16%">Teléfono</th>
-              <th style="width: 14%">Departamento</th>
-              <th style="width: 14%">Municipio</th>
-              <th style="width: 16%">Punto de Venta</th>
-              <th style="width: 12%">Detalles</th>
+              <th>Cliente</th>
+              <th>Teléfono</th>
+              <th>Departamento</th>
+              <th>Municipio</th>
+              <th>Punto de Venta</th>
+              <th>Detalles</th>
             </tr>
           </thead>
           <tbody id="clientsTableBody">
@@ -156,11 +147,10 @@
               <td>Ticuantepe</td>
               <td>PV-001</td>
               <td>
-                <button class="btn-detail" title="Ver detalles">
-                  <i data-lucide="eye" style="width: 18px; height: 18px"></i>
-                </button>
+                <button class="btn-detail"><i data-lucide="eye"></i></button>
               </td>
             </tr>
+
             <tr>
               <td>
                 <div class="client-cell">
@@ -180,11 +170,10 @@
               <td>Jinotepe</td>
               <td>PV-003</td>
               <td>
-                <button class="btn-detail" title="Ver detalles">
-                  <i data-lucide="eye" style="width: 18px; height: 18px"></i>
-                </button>
+                <button class="btn-detail"><i data-lucide="eye"></i></button>
               </td>
             </tr>
+
             <tr>
               <td>
                 <div class="client-cell">
@@ -204,11 +193,10 @@
               <td>Estelí</td>
               <td>PV-007</td>
               <td>
-                <button class="btn-detail" title="Ver detalles">
-                  <i data-lucide="eye" style="width: 18px; height: 18px"></i>
-                </button>
+                <button class="btn-detail"><i data-lucide="eye"></i></button>
               </td>
             </tr>
+
             <tr>
               <td>
                 <div class="client-cell">
@@ -228,11 +216,10 @@
               <td>Matagalpa</td>
               <td>PV-012</td>
               <td>
-                <button class="btn-detail" title="Ver detalles">
-                  <i data-lucide="eye" style="width: 18px; height: 18px"></i>
-                </button>
+                <button class="btn-detail"><i data-lucide="eye"></i></button>
               </td>
             </tr>
+
             <tr>
               <td>
                 <div class="client-cell">
@@ -252,11 +239,10 @@
               <td>Tipitapa</td>
               <td>PV-002</td>
               <td>
-                <button class="btn-detail" title="Ver detalles">
-                  <i data-lucide="eye" style="width: 18px; height: 18px"></i>
-                </button>
+                <button class="btn-detail"><i data-lucide="eye"></i></button>
               </td>
             </tr>
+
             <tr>
               <td>
                 <div class="client-cell">
@@ -276,11 +262,10 @@
               <td>Chinandega</td>
               <td>PV-015</td>
               <td>
-                <button class="btn-detail" title="Ver detalles">
-                  <i data-lucide="eye" style="width: 18px; height: 18px"></i>
-                </button>
+                <button class="btn-detail"><i data-lucide="eye"></i></button>
               </td>
             </tr>
+
             <tr>
               <td>
                 <div class="client-cell">
@@ -300,11 +285,10 @@
               <td>Granada</td>
               <td>PV-020</td>
               <td>
-                <button class="btn-detail" title="Ver detalles">
-                  <i data-lucide="eye" style="width: 18px; height: 18px"></i>
-                </button>
+                <button class="btn-detail"><i data-lucide="eye"></i></button>
               </td>
             </tr>
+
             <tr>
               <td>
                 <div class="client-cell">
@@ -324,19 +308,17 @@
               <td>León</td>
               <td>PV-025</td>
               <td>
-                <button class="btn-detail" title="Ver detalles">
-                  <i data-lucide="eye" style="width: 18px; height: 18px"></i>
-                </button>
+                <button class="btn-detail"><i data-lucide="eye"></i></button>
               </td>
             </tr>
           </tbody>
         </table>
 
-        <!-- Table Footer / Pagination -->
         <div class="table-footer">
           <div class="table-footer-info">
             Mostrando <strong>1-8</strong> de <strong>248</strong> clientes
           </div>
+
           <div class="pagination">
             <button class="pagination-btn" disabled>
               <i data-lucide="chevron-left"></i>
@@ -353,7 +335,7 @@
         </div>
       </div>
     </main>
-    <!-- Modal Nuevo Cliente -->
+
     <div class="modal-overlay" id="modal-new-client">
       <div class="modal">
         <div class="modal-header">
@@ -362,8 +344,10 @@
             <i data-lucide="x"></i>
           </button>
         </div>
+
         <form class="modal-form" id="form-new-client">
           <div class="form-section-label">Datos del cliente</div>
+
           <div class="form-grid">
             <div class="form-group">
               <label for="client-fullname">Nombre completo</label>
@@ -374,6 +358,7 @@
                 required
               />
             </div>
+
             <div class="form-group">
               <label for="client-phone">Teléfono</label>
               <input
@@ -383,6 +368,7 @@
                 required
               />
             </div>
+
             <div class="form-group">
               <label for="client-department">Departamento</label>
               <select id="client-department" required>
@@ -396,6 +382,7 @@
                 <option value="chinandega">Chinandega</option>
               </select>
             </div>
+
             <div class="form-group">
               <label for="client-municipality">Municipio</label>
               <input
@@ -405,6 +392,7 @@
                 required
               />
             </div>
+
             <div class="form-group">
               <label for="client-address">Dirección</label>
               <input
@@ -414,6 +402,7 @@
                 required
               />
             </div>
+
             <div class="form-group">
               <label for="client-pv">Punto de Venta</label>
               <input
@@ -424,19 +413,20 @@
               />
             </div>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn-cancel" id="btn-cancel-new-client">
               Cancelar
             </button>
             <button type="submit" class="btn-submit-modal">
-              <i data-lucide="plus"></i> Registrar
+              <i data-lucide="plus"></i>
+              Registrar
             </button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- Modal Ver Detalles -->
     <div class="modal-overlay" id="modal-detail-client">
       <div class="modal modal-detail">
         <div class="modal-header">
@@ -450,6 +440,7 @@
             </button>
           </div>
         </div>
+
         <div class="detail-grid">
           <div class="detail-row">
             <span class="detail-label">Nombre completo:</span>
@@ -478,6 +469,7 @@
         </div>
       </div>
     </div>
+
     <script src="./customer.js"></script>
   </body>
 </html>

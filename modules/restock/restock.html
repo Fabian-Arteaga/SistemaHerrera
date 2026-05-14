@@ -11,7 +11,6 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <!-- Contenedores para carga dinámica -->
     <div id="layout-placeholder"></div>
     <div id="topbar-placeholder"></div>
 
@@ -23,7 +22,6 @@
 
         <form class="pedido-container">
             
-            <!-- SECCIÓN 1: DATOS DE ENCABEZADO -->
             <div class="card card-pedido card-highlight">
                 <h3 class="card-title">DATOS DE ENCABEZADO</h3>
                 <div class="grid-form">
@@ -42,7 +40,6 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 2: SELECCIONAR PRODUCTOS (Inspirado en Ventas) -->
             <div class="card card-pedido card-highlight">
                 <h3 class="card-title">SELECCIONAR PRODUCTOS</h3>
                 <div class="selector-grid">
@@ -76,14 +73,12 @@
                         <input type="number" value="1" class="input-styled">
                     </div>
                 </div>
-                <!-- Botones de acción de selección -->
                 <div class="button-group mt-3">
                     <button type="button" class="btn-action btn-clear">Limpiar</button>
                     <button type="button" class="btn-action btn-accept">Aceptar</button>
                 </div>
             </div>
 
-            <!-- SECCIÓN 3: DETALLES DE REABASTECIMIENTO -->
             <div class="card card-pedido card-highlight">
                 <h3 class="card-title">DETALLES DE REABASTECIMIENTO</h3>
                 <div class="selector-grid">
@@ -112,18 +107,14 @@
                     <div class="form-group">
                         <label>Estado Inicial de Lote:</label>
                         <select class="form-input">
-                          <option value="disponible">Disponible</option>
-                          <option value="cuarentena">En Cuarentena</option>
-                             <option value="revision">En Revisión</option>
+                        <option value="disponible">Disponible</option>
+                        <option value="cuarentena">En Cuarentena</option>
+                        <option value="revision">En Revisión</option>
                         </select>
                     </div>
-
-
-
                 </div>
             </div>
 
-            <!-- SECCIÓN 4: TABLA DE PRODUCTOS -->
             <div class="card card-pedido table-section">
                 <div class="table-wrapper">
                     <table class="pedido-table">
@@ -149,7 +140,6 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 5: TOTALES Y CIERRE -->
             <div class="resumen-final-container">
                 <div class="resumen-card">
                     <div class="resumen-row total-row">

@@ -22,7 +22,6 @@
     <script src="/shared/components/topbar/topbar.js"></script>
 
     <main class="main-content">
-      <!-- Header -->
       <div class="page-header">
         <div class="header-title">
           <h1>Reportes de Rendimiento</h1>
@@ -80,52 +79,49 @@
         </div>
       </div>
 
-     <!-- Stats Row -->
-<div class="stats-row animate-in delay-1">
+      <div class="stats-row animate-in delay-1">
+        <div class="stat-card stat-card-mint">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i
+              data-lucide="circle-dollar-sign"
+              style="width: 20px; height: 20px"
+            ></i>
+          </div>
+          <div class="stat-card-label">Ingresos Totales</div>
+          <div class="stat-card-value">C$ 45,230</div>
+        </div>
 
-  <!-- Card 1 -->
-  <div class="stat-card stat-card-mint">
-    <div class="stat-card-decoration"></div>
-    <div class="stat-card-icon">
-      <i data-lucide="circle-dollar-sign" style="width: 20px; height: 20px"></i>
-    </div>
-    <div class="stat-card-label">Ingresos Totales</div>
-    <div class="stat-card-value">C$ 45,230</div>
-  </div>
+        <!-- Card 2 -->
+        <div class="stat-card stat-card-yellow">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i data-lucide="shopping-bag" style="width: 20px; height: 20px"></i>
+          </div>
+          <div class="stat-card-label">Pedidos Completados</div>
+          <div class="stat-card-value">128</div>
+        </div>
 
-  <!-- Card 2 -->
-  <div class="stat-card stat-card-yellow">
-    <div class="stat-card-decoration"></div>
-    <div class="stat-card-icon">
-      <i data-lucide="shopping-bag" style="width: 20px; height: 20px"></i>
-    </div>
-    <div class="stat-card-label">Pedidos Completados</div>
-    <div class="stat-card-value">128</div>
-  </div>
+        <!-- Card 3 -->
+        <div class="stat-card stat-card-coral">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i data-lucide="receipt" style="width: 20px; height: 20px"></i>
+          </div>
+          <div class="stat-card-label">Promedio por Pedido</div>
+          <div class="stat-card-value">C$ 353</div>
+        </div>
 
-  <!-- Card 3 -->
-  <div class="stat-card stat-card-coral">
-    <div class="stat-card-decoration"></div>
-    <div class="stat-card-icon">
-      <i data-lucide="receipt" style="width: 20px; height: 20px"></i>
-    </div>
-    <div class="stat-card-label">Promedio por Pedido</div>
-    <div class="stat-card-value">C$ 353</div>
-  </div>
-
-  <!-- Card 4 -->
-  <div class="stat-card stat-card-purple">
-    <div class="stat-card-decoration"></div>
-    <div class="stat-card-icon">
-      <i data-lucide="award" style="width: 20px; height: 20px"></i>
-    </div>
-    <div class="stat-card-label">Producto Estrella</div>
-    <div class="stat-card-value" style="font-size: 20px;">
-      Trad. Fresa
-    </div>
-  </div>
-
-</div>
+        <!-- Card 4 -->
+        <div class="stat-card stat-card-purple">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon">
+            <i data-lucide="award" style="width: 20px; height: 20px"></i>
+          </div>
+          <div class="stat-card-label">Producto Estrella</div>
+          <div class="stat-card-value" style="font-size: 20px">Trad. Fresa</div>
+        </div>
+      </div>
 
       <div class="charts-grid">
         <div class="chart-card">
@@ -368,7 +364,6 @@
         },
       });
 
-      // --- Funciones ---
       function actualizarGraficoVentas() {
         const modo = document.getElementById("chartMode").value;
         const datos = modo === "semanal" ? datosSemanales : datosDiarios;
@@ -384,17 +379,14 @@
       }
 
       function aplicarFiltros() {
-        // Aquí conectarás con tu API cuando esté lista
         const rango = document.getElementById("dateRange").value;
         console.log("Filtro aplicado:", rango);
       }
 
       function exportarExcel() {
-        // Aquí conectarás con tu endpoint de exportación
         alert("Exportación próximamente disponible.");
       }
 
-      // Ocultar fechas custom al inicio
       onRangeChange();
     </script>
   </body>
