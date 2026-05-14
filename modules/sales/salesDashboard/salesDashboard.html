@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="salesDashboard.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/modules/sales/salesDrawer.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body>
@@ -99,9 +100,9 @@
 
         <div class="filter-bar-divider"></div>
 
-        <div class="filter-bar-actions">
-          <button class="btn btn-clear" onclick="clearFilters()">
-            <i data-lucide="x" style="width: 14px; height: 14px"></i>
+    <div class="filter-bar-actions">
+        <button class="btn btn-clear">
+            <i data-lucide="x" style="width:14px;height:14px;"></i>
             Limpiar
           </button>
         </div>
@@ -130,327 +131,527 @@
         </div>
 
         <table class="data-table">
-          <thead>
-            <tr>
-              <th style="width: 12%">Código</th>
-              <th style="width: 16%">Fecha</th>
-              <th style="width: 18%">Cliente</th>
-              <th style="width: 10%; text-align: center">Productos</th>
-              <th style="width: 12%; text-align: right">Total</th>
-              <th style="width: 16%; text-align: center">Método de Pago</th>
-              <th style="width: 16%; text-align: center">Detalles</th>
-            </tr>
-          </thead>
-          <tbody id="ventasTableBody">
-            <tr>
-              <td><span class="code-cell">#VTA-027</span></td>
-              <td>
-                <div class="date-cell">
-                  <span class="date-main">02/03/2024</span>
-                  <span class="date-time">5:45 PM</span>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar bg-1">CS</div>
-                  <span class="user-name">Carlos Sánchez</span>
-                </div>
-              </td>
-              <td style="text-align: center">8</td>
-              <td style="text-align: right">
-                <span class="total-cell">C$152.00</span>
-              </td>
-              <td style="text-align: center">Contado</td>
-              <td style="text-align: center">
-                <button class="detail-btn">
-                  <i data-lucide="eye"></i> Ver
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="code-cell">#VTA-026</span></td>
-              <td>
-                <div class="date-cell">
-                  <span class="date-main">02/03/2024</span>
-                  <span class="date-time">2:15 PM</span>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar bg-2">RM</div>
-                  <span class="user-name">Rosa Mendoza</span>
-                </div>
-              </td>
-              <td style="text-align: center">10</td>
-              <td style="text-align: right">
-                <span class="total-cell">C$285.50</span>
-              </td>
-              <td style="text-align: center">Contado</td>
-              <td style="text-align: center">
-                <button class="detail-btn">
-                  <i data-lucide="eye"></i> Ver
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="code-cell">#VTA-025</span></td>
-              <td>
-                <div class="date-cell">
-                  <span class="date-main">01/03/2025</span>
-                  <span class="date-time">10:30 AM</span>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar bg-3">JP</div>
-                  <span class="user-name">Jorge Pérez</span>
-                </div>
-              </td>
-              <td style="text-align: center">5</td>
-              <td style="text-align: right">
-                <span class="total-cell">C$420.00</span>
-              </td>
-              <td style="text-align: center">Contado</td>
-              <td style="text-align: center">
-                <button class="detail-btn">
-                  <i data-lucide="eye"></i> Ver
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="code-cell">#VTA-024</span></td>
-              <td>
-                <div class="date-cell">
-                  <span class="date-main">01/03/2025</span>
-                  <span class="date-time">9:00 AM</span>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar bg-4">ML</div>
-                  <span class="user-name">María López</span>
-                </div>
-              </td>
-              <td style="text-align: center">5</td>
-              <td style="text-align: right">
-                <span class="total-cell">C$195.00</span>
-              </td>
-              <td style="text-align: center">Contado</td>
-              <td style="text-align: center">
-                <button class="detail-btn">
-                  <i data-lucide="eye"></i> Ver
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="code-cell">#VTA-023</span></td>
-              <td>
-                <div class="date-cell">
-                  <span class="date-main">28/02/2025</span>
-                  <span class="date-time">4:20 PM</span>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar bg-5">DG</div>
-                  <span class="user-name">Diego García</span>
-                </div>
-              </td>
-              <td style="text-align: center">12</td>
-              <td style="text-align: right">
-                <span class="total-cell">C$485.00</span>
-              </td>
-              <td style="text-align: center">Contado</td>
-              <td style="text-align: center">
-                <button class="detail-btn">
-                  <i data-lucide="eye"></i> Ver
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="code-cell">#VTA-022</span></td>
-              <td>
-                <div class="date-cell">
-                  <span class="date-main">28/02/2025</span>
-                  <span class="date-time">11:00 AM</span>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar bg-6">LT</div>
-                  <span class="user-name">Laura Torres</span>
-                </div>
-              </td>
-              <td style="text-align: center">3</td>
-              <td style="text-align: right">
-                <span class="total-cell">C$125.00</span>
-              </td>
-              <td style="text-align: center">Contado</td>
-              <td style="text-align: center">
-                <button class="detail-btn">
-                  <i data-lucide="eye"></i> Ver
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="code-cell">#VTA-021</span></td>
-              <td>
-                <div class="date-cell">
-                  <span class="date-main">27/02/2025</span>
-                  <span class="date-time">3:00 PM</span>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar bg-7">PV</div>
-                  <span class="user-name">Pedro Vargas</span>
-                </div>
-              </td>
-              <td style="text-align: center">7</td>
-              <td style="text-align: right">
-                <span class="total-cell">C$315.00</span>
-              </td>
-              <td style="text-align: center">Contado</td>
-              <td style="text-align: center">
-                <button class="detail-btn">
-                  <i data-lucide="eye"></i> Ver
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="code-cell">#VTA-020</span></td>
-              <td>
-                <div class="date-cell">
-                  <span class="date-main">27/02/2025</span>
-                  <span class="date-time">10:15 AM</span>
-                </div>
-              </td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar bg-8">SA</div>
-                  <span class="user-name">Sofía Álvarez</span>
-                </div>
-              </td>
-              <td style="text-align: center">6</td>
-              <td style="text-align: right">
-                <span class="total-cell">C$240.00</span>
-              </td>
-              <td style="text-align: center">Contado</td>
-              <td style="text-align: center">
-                <button class="detail-btn">
-                  <i data-lucide="eye"></i> Ver
-                </button>
-              </td>
-            </tr>
-          </tbody>
+            <thead>
+                <tr>
+                    <th style="width:12%;">Código</th>
+                    <th style="width:16%;">Fecha</th>
+                    <th style="width:18%;">Cliente</th>
+                    <th style="width:10%;text-align:center;">Productos</th>
+                    <th style="width:12%;text-align:right;">Total</th>
+                    <th style="width:16%;text-align:center;">Método de Pago</th>
+                    <th style="width:16%;text-align:center;">Detalles</th>
+                </tr>
+            </thead>
+            <tbody id="ventasTableBody">
+                <tr>
+                    <td><span class="code-cell">#VTA-027</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">02/03/2024</span>
+                            <span class="date-time">5:45 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-1">CS</div>
+                            <span class="user-name">Carlos Sánchez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">8</td>
+                    <td style="text-align:right;"><span class="total-cell">C$152.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn" onclick="openSaleDrawer()">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-026</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">02/03/2024</span>
+                            <span class="date-time">2:15 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-2">RM</div>
+                            <span class="user-name">Rosa Mendoza</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">10</td>
+                    <td style="text-align:right;"><span class="total-cell">C$285.50</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-025</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">01/03/2025</span>
+                            <span class="date-time">10:30 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-3">JP</div>
+                            <span class="user-name">Jorge Pérez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">5</td>
+                    <td style="text-align:right;"><span class="total-cell">C$420.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-024</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">01/03/2025</span>
+                            <span class="date-time">9:00 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-4">ML</div>
+                            <span class="user-name">María López</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">5</td>
+                    <td style="text-align:right;"><span class="total-cell">C$195.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-023</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">28/02/2025</span>
+                            <span class="date-time">4:20 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-5">DG</div>
+                            <span class="user-name">Diego García</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">12</td>
+                    <td style="text-align:right;"><span class="total-cell">C$485.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-022</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">28/02/2025</span>
+                            <span class="date-time">11:00 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-6">LT</div>
+                            <span class="user-name">Laura Torres</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">3</td>
+                    <td style="text-align:right;"><span class="total-cell">C$125.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-021</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">27/02/2025</span>
+                            <span class="date-time">3:00 PM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-7">PV</div>
+                            <span class="user-name">Pedro Vargas</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">7</td>
+                    <td style="text-align:right;"><span class="total-cell">C$315.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="code-cell">#VTA-020</span></td>
+                    <td>
+                        <div class="date-cell">
+                            <span class="date-main">27/02/2025</span>
+                            <span class="date-time">10:15 AM</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar bg-8">SA</div>
+                            <span class="user-name">Sofía Álvarez</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;">6</td>
+                    <td style="text-align:right;"><span class="total-cell">C$240.00</span></td>
+                    <td style="text-align:center;">Contado</td>
+                    <td style="text-align:center;">
+                        <button class="detail-btn">
+                            <i data-lucide="eye"></i> Ver
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
 
         <!-- Pagination -->
         <div class="table-footer">
-          <div class="rows-per-page">
-            <span>Filas por página:</span>
-            <select onchange="changeRowsPerPage(this.value)">
-              <option value="8" selected>8</option>
-              <option value="5">5</option>
-              <option value="4">4</option>
-            </select>
-          </div>
-          <div class="table-footer-info">
-            Mostrando <strong id="showingFrom">1-8</strong> de
-            <strong id="showingTotal">8</strong> registros
-          </div>
-          <div class="pagination">
-            <button
-              class="pagination-btn"
-              disabled
-              id="prevBtn"
-              onclick="prevPage()"
-            >
-              <i data-lucide="chevron-left"></i>
-            </button>
-            <button class="pagination-btn active" onclick="goToPage(1)">
-              1
-            </button>
-            <button class="pagination-btn" id="nextBtn" onclick="nextPage()">
-              <i data-lucide="chevron-right"></i>
-            </button>
-          </div>
+            <div class="rows-per-page">
+                <span>Filas por página:</span>
+                <select>
+                    <option value="8" selected>8</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="table-footer-info">
+                Mostrando <strong id="showingFrom">1-8</strong> de <strong id="showingTotal">8</strong> registros
+            </div>
+            <div class="pagination">
+                <button class="pagination-btn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn" id="nextBtn">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
         </div>
       </div>
     </main>
 
-    <script>
-      lucide.createIcons();
+<!-- ═════ SALE DRAWER HTML ═════ -->
+<div class="sale-drawer-overlay" id="saleDrawerOverlay"></div>
+<div class="sale-drawer" id="saleDrawer">
+  
+  <div class="sale-drawer-header">
+    <div class="sale-drawer-header-top">
+      <div class="sale-drawer-title">
+        <i data-lucide="file-text"></i>
+        Detalle de la venta
+      </div>
+      <button class="sale-drawer-close" id="saleDrawerCloseBtn">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="sale-drawer-identity">
+      <div>
+        <span class="sale-drawer-code">VEN-10526</span>
+        <span class="sale-drawer-status" style="margin-left: 12px;">
+          <i data-lucide="check-circle"></i> Pagado
+        </span>
+      </div>
+      <div class="sale-drawer-total">
+        <div class="sale-drawer-total-label">Total de la venta</div>
+        <div class="sale-drawer-total-value">C$1,250.00</div>
+      </div>
+    </div>
+  </div>
 
-      let currentPage = 1;
-      let rowsPerPage = 8;
-      let totalPages = 1;
+  <div class="sale-drawer-body">
+    
+    <!-- Info General -->
+    <div class="drawer-section">
+      <div class="sale-info-grid">
+        <div class="sale-info-item">
+          <span class="sale-info-label">Código de venta</span>
+          <span class="sale-info-value mono">VEN-10526</span>
+        </div>
+        <div class="sale-info-item">
+          <span class="sale-info-label">Código del pedido relacionado</span>
+          <span class="sale-info-value mono">PED-100526</span>
+        </div>
+        <div class="sale-info-item">
+          <span class="sale-info-label">Fecha de venta</span>
+          <span class="sale-info-value">02/03/2026 09:15 AM</span>
+        </div>
+        <div class="sale-info-item">
+          <span class="sale-info-label">Tipo de pago</span>
+          <span class="sale-info-value">Contado</span>
+        </div>
+        <div class="sale-info-item">
+          <span class="sale-info-label">Registrado por</span>
+          <span class="sale-info-value">Nohelia Cortes</span>
+        </div>
+        <div class="sale-info-item">
+          <span class="sale-info-label">Referencia de transacción</span>
+          <span class="sale-info-value mono brand">TRX-789456123</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cliente y Tipo -->
+    <div class="drawer-section">
+      <div class="sale-meta-cards">
+        <div class="sale-meta-card">
+          <div class="sale-meta-icon">
+            <i data-lucide="user"></i>
+          </div>
+          <div class="sale-meta-info">
+            <span class="sale-meta-label">Información del cliente</span>
+            <span class="sale-meta-value">María López</span>
+          </div>
+        </div>
+        <div class="sale-meta-card">
+          <div class="sale-meta-icon">
+            <i data-lucide="store"></i>
+          </div>
+          <div class="sale-meta-info">
+            <span class="sale-meta-label">Tipo de venta</span>
+            <span class="sale-meta-value">Mostrador</span>
+            <span class="sale-meta-sub">Venta directa en punto de venta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Productos Vendidos -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="package"></i> Productos vendidos</div>
+      <div class="products-table-wrapper">
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th style="width:12%;text-align:center;">Cantidad</th>
+              <th style="width:18%;">Precio aplicado</th>
+              <th style="width:18%;text-align:right;">Subtotal</th>
+              <th style="width:12%;">Lote</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-thumb"><i data-lucide="package"></i></div>
+                  <div>
+                    <div class="product-name">Helado de Vainilla 1L</div>
+                    <div class="product-sku">PROD-001</div>
+                  </div>
+                </div>
+              </td>
+              <td class="quantity-cell">2</td>
+              <td class="price-cell">C$120.00</td>
+              <td class="price-total-cell">C$240.00</td>
+              <td><span class="lot-cell">L-VA123</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-thumb"><i data-lucide="package"></i></div>
+                  <div>
+                    <div class="product-name">Helado de Chocolate 1L</div>
+                    <div class="product-sku">PROD-002</div>
+                  </div>
+                </div>
+              </td>
+              <td class="quantity-cell">2</td>
+              <td class="price-cell">C$120.00</td>
+              <td class="price-total-cell">C$240.00</td>
+              <td><span class="lot-cell">L-CH456</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-thumb"><i data-lucide="package"></i></div>
+                  <div>
+                    <div class="product-name">Cono Clásico</div>
+                    <div class="product-sku">PROD-015</div>
+                  </div>
+                </div>
+              </td>
+              <td class="quantity-cell">6</td>
+              <td class="price-cell">C$6.00</td>
+              <td class="price-total-cell">C$36.00</td>
+              <td><span class="lot-cell">-</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-thumb"><i data-lucide="package"></i></div>
+                  <div>
+                    <div class="product-name">Topping Chocolate 250g</div>
+                    <div class="product-sku">PROD-022</div>
+                  </div>
+                </div>
+              </td>
+              <td class="quantity-cell">2</td>
+              <td class="price-cell">C$45.00</td>
+              <td class="price-total-cell">C$90.00</td>
+              <td><span class="lot-cell">L-TO321</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-thumb"><i data-lucide="package"></i></div>
+                  <div>
+                    <div class="product-name">Topping Caramelo 250g</div>
+                    <div class="product-sku">PROD-023</div>
+                  </div>
+                </div>
+              </td>
+              <td class="quantity-cell">1</td>
+              <td class="price-cell">C$45.00</td>
+              <td class="price-total-cell">C$45.00</td>
+              <td><span class="lot-cell">L-TO322</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="products-summary">
+          <div class="summary-item">
+            <span class="summary-label">Total productos: 5</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Total unidades: 13</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Subtotal: C$651.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pagos Realizados -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="wallet"></i> Pagos realizados</div>
+      <div class="payment-card">
+        <div class="payment-header">
+          <div class="payment-method">
+            <i data-lucide="banknote"></i>
+            <span class="payment-method-name">Efectivo</span>
+            <span style="padding:3px 10px;border-radius:20px;background:rgba(0,194,150,0.1);color:var(--color-brand);font-size:11px;font-weight:600">Pago completo</span>
+          </div>
+          <span class="payment-amount">C$1,250.00</span>
+        </div>
+        <div class="payment-details">
+          <div class="payment-detail">
+            <span class="payment-detail-label">Tipo de pago</span>
+            <span class="payment-detail-value">Contado</span>
+          </div>
+          <div class="payment-detail">
+            <span class="payment-detail-label">Referencia</span>
+            <span class="payment-detail-value">#########</span>
+          </div>
+          <div class="payment-detail">
+            <span class="payment-detail-label">Fecha</span>
+            <span class="payment-detail-value">02/03/2026 09:15 AM</span>
+          </div>
+        </div>
+      </div>
+      <div class="change-row">
+        <span class="change-label">Cambio entregado</span>
+        <span class="change-value">C$0.00</span>
+      </div>
+    </div>
+    
+    <!-- Info Técnica -->
+    <div class="drawer-section">
+      <div class="drawer-section-title"><i data-lucide="code-2"></i> Información técnica</div>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <span class="tech-key">Codigo de venta</span>
+          <span class="tech-value">10526</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-key">Estado de pago</span>
+          <span class="tech-value">Completado</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-key">Tipo de venta</span>
+          <span class="tech-value">Detalle</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-key">Created By</span>
+          <span class="tech-value">Nohelia Cortes</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-key">Tipo de pago</span>
+          <span class="tech-value">Efectivo</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-key">Is Active</span>
+          <span class="tech-badge active"><span class="dot"></span> Activo</span>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="sale-drawer-footer">
+    <button class="drawer-btn drawer-btn-secondary" onclick="closeSaleDrawer()">Cerrar</button>
+    <div class="drawer-btn-spacer"></div>
+    <button class="drawer-btn drawer-btn-ghost">
+      Más opciones
+      <i data-lucide="more-vertical"></i>
+    </button>
+    <button class="drawer-btn drawer-btn-primary" onclick="window.print()">
+      <i data-lucide="printer"></i> Imprimir
+    </button>
+  </div>
 
-      function filterResults() {
-        const query = document
-          .getElementById("searchInput")
-          .value.toLowerCase();
-        const rows = document.querySelectorAll("#ventasTableBody tr");
-        let visibleCount = 0;
-        rows.forEach((row) => {
-          const text = row.textContent.toLowerCase();
-          if (text.includes(query)) {
-            row.style.display = "";
-            visibleCount++;
-          } else {
-            row.style.display = "none";
-          }
-        });
-        document.getElementById("resultCount").textContent = visibleCount;
-        lucide.createIcons();
-      }
+</div>
 
-      function clearFilters() {
-        document.getElementById("searchInput").value = "";
-        document.getElementById("dateFrom").value = "2024-01-01";
-        document.getElementById("dateTo").value = "2024-12-31";
-        filterResults();
-      }
 
-      function goToPage(page) {
-        currentPage = page;
-        document.querySelectorAll(".pagination-btn").forEach((btn) => {
-          if (!btn.querySelector("i")) btn.classList.remove("active");
-        });
-        document.querySelectorAll(".pagination-btn").forEach((btn) => {
-          if (btn.textContent == page) btn.classList.add("active");
-        });
-        updatePaginationInfo();
-        updatePaginationButtons();
-      }
+<script>
+lucide.createIcons();
+function openSaleDrawer() {
+    document.getElementById('saleDrawerOverlay').classList.add('active');
+    document.getElementById('saleDrawer').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  }
+  
+  function closeSaleDrawer() {
+    document.getElementById('saleDrawerOverlay').classList.remove('active');
+    document.getElementById('saleDrawer').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  // Event listeners
+  document.getElementById('saleDrawerOverlay')?.addEventListener('click', closeSaleDrawer);
+  document.getElementById('saleDrawerCloseBtn')?.addEventListener('click', closeSaleDrawer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSaleDrawer(); });
+  
+  // Exponer para onclick del HTML
+  window.openSaleDrawer = openSaleDrawer;
+  window.closeSaleDrawer = closeSaleDrawer;
+  
+  // Inicializar íconos
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 
-      function nextPage() {
-        if (currentPage < totalPages) goToPage(currentPage + 1);
-      }
-
-      function prevPage() {
-        if (currentPage > 1) goToPage(currentPage - 1);
-      }
-
-      function changeRowsPerPage(value) {
-        rowsPerPage = parseInt(value);
-        totalPages = Math.ceil(8 / rowsPerPage);
-        currentPage = 1;
-        updatePaginationButtons();
-        updatePaginationInfo();
-      }
-
-      function updatePaginationInfo() {
-        const from = (currentPage - 1) * rowsPerPage + 1;
-        const to = Math.min(currentPage * rowsPerPage, 8);
-        document.getElementById("showingFrom").textContent = `${from}-${to}`;
-        document.getElementById("showingTotal").textContent = "8";
-      }
-
-      function updatePaginationButtons() {
-        document.getElementById("prevBtn").disabled = currentPage <= 1;
-        document.getElementById("nextBtn").disabled = currentPage >= totalPages;
-      }
-    </script>
-  </body>
-</html>
+</script>
