@@ -225,14 +225,11 @@
                   <button class="btn-detail" title="Editar">
                     <i data-lucide="edit-2"></i>
                   </button>
-                  <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key"></i>
-                  </button>
                   <button
-                    class="btn-detail btn-toggle-status"
-                    title="Desactivar"
+                    class="btn-detail btn-change-password"
+                    title="Cambiar clave"
                   >
-                    <i data-lucide="power-off"></i>
+                    <i data-lucide="key"></i>
                   </button>
                 </div>
               </td>
@@ -260,14 +257,11 @@
                   <button class="btn-detail" title="Editar">
                     <i data-lucide="edit-2"></i>
                   </button>
-                  <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key"></i>
-                  </button>
                   <button
-                    class="btn-detail btn-toggle-status"
-                    title="Desactivar"
+                    class="btn-detail btn-change-password"
+                    title="Cambiar clave"
                   >
-                    <i data-lucide="power-off"></i>
+                    <i data-lucide="key"></i>
                   </button>
                 </div>
               </td>
@@ -295,14 +289,11 @@
                   <button class="btn-detail" title="Editar">
                     <i data-lucide="edit-2"></i>
                   </button>
-                  <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key"></i>
-                  </button>
                   <button
-                    class="btn-detail btn-toggle-status"
-                    title="Desactivar"
+                    class="btn-detail btn-change-password"
+                    title="Cambiar clave"
                   >
-                    <i data-lucide="power-off"></i>
+                    <i data-lucide="key"></i>
                   </button>
                 </div>
               </td>
@@ -330,14 +321,11 @@
                   <button class="btn-detail" title="Editar">
                     <i data-lucide="edit-2"></i>
                   </button>
-                  <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key"></i>
-                  </button>
                   <button
-                    class="btn-detail btn-toggle-status"
-                    title="Desactivar"
+                    class="btn-detail btn-change-password"
+                    title="Cambiar clave"
                   >
-                    <i data-lucide="power-off"></i>
+                    <i data-lucide="key"></i>
                   </button>
                 </div>
               </td>
@@ -365,14 +353,11 @@
                   <button class="btn-detail" title="Editar">
                     <i data-lucide="edit-2"></i>
                   </button>
-                  <button class="btn-detail" title="Cambiar clave">
-                    <i data-lucide="key"></i>
-                  </button>
                   <button
-                    class="btn-detail btn-toggle-status"
-                    title="Desactivar"
+                    class="btn-detail btn-change-password"
+                    title="Cambiar clave"
                   >
-                    <i data-lucide="power-off"></i>
+                    <i data-lucide="key"></i>
                   </button>
                 </div>
               </td>
@@ -403,11 +388,11 @@
                   <button class="btn-detail" title="Editar">
                     <i data-lucide="edit-2"></i>
                   </button>
-                  <button class="btn-detail" title="Cambiar clave">
+                  <button
+                    class="btn-detail btn-change-password"
+                    title="Cambiar clave"
+                  >
                     <i data-lucide="key"></i>
-                  </button>
-                  <button class="btn-detail btn-toggle-status" title="Activar">
-                    <i data-lucide="power"></i>
                   </button>
                 </div>
               </td>
@@ -640,6 +625,93 @@
               id="btn-save-user"
             >
               <i data-lucide="save"></i> Guardar cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- MODAL CAMBIAR CLAVE -->
+    <div class="modal-overlay hidden" id="modal-password">
+      <div class="modal modal-password">
+        <div class="modal-header">
+          <h2>Cambiar clave</h2>
+          <button
+            class="btn-close-modal"
+            id="btn-close-password-modal"
+            type="button"
+          >
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <form class="modal-form" id="form-password">
+          <div class="form-section-label">Seguridad de acceso</div>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="current-password">Contraseña actual</label>
+              <div class="input-password">
+                <input
+                  type="password"
+                  id="current-password"
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  class="btn-toggle-pass"
+                  data-target="current-password"
+                >
+                  <i data-lucide="eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="new-password">Nueva contraseña</label>
+              <div class="input-password">
+                <input
+                  type="password"
+                  id="new-password"
+                  placeholder="Mínimo 8 caracteres"
+                  required
+                />
+                <button
+                  type="button"
+                  class="btn-toggle-pass"
+                  data-target="new-password"
+                >
+                  <i data-lucide="eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password">Confirmar contraseña</label>
+              <div class="input-password">
+                <input
+                  type="password"
+                  id="confirm-password"
+                  placeholder="Repite la nueva contraseña"
+                  required
+                />
+                <button
+                  type="button"
+                  class="btn-toggle-pass"
+                  data-target="confirm-password"
+                >
+                  <i data-lucide="eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" id="btn-cancel-password">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-submit-modal">
+              <i data-lucide="save"></i> Guardar clave
             </button>
           </div>
         </form>

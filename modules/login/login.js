@@ -30,7 +30,7 @@ class LoginForm {
         const password = document.getElementById('password').value;
 
         const users = [
-            { user: 'admin', pass: '123456', rol: 'administrador' },
+            { user: 'Admin', pass: 'Admin2026!', rol: 'administrador' },
             { user: 'vendedor', pass: 'vendedor123', rol: 'vendedor' }
         ];
 
