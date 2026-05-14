@@ -388,7 +388,7 @@
 }
 
 .detail-btn {
-display: inline-flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 36px;
@@ -401,7 +401,7 @@ display: inline-flex;
   color: var(--color-brand, #3b82f6);
   cursor: pointer;
   transition: all 0.2s ease;
-  
+
 }
 
 .detail-btn:hover {
