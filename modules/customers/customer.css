@@ -334,7 +334,7 @@
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.05);
     background-color: var(--color-white, #ffffff);
-    color: var(--color-brand, #3b82f6);
+    color: var(--color-brand);
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -474,6 +474,7 @@ td:last-child {
 
 ::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -733,10 +734,6 @@ td:last-child {
     padding: 8px 12px;
     border-radius: 8px;
 }
-
-/* =========================================
-   BREAKPOINTS ESTANDARIZADOS (1024, 768, 480)
-========================================= */
 
 @media (max-width: 1024px) {
     .main-content {

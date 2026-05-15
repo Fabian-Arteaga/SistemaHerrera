@@ -8,125 +8,135 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/modules/sales/sales.css" />
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
   <body>
-     <div id="layout-placeholder"></div>
+    <div id="layout-placeholder"></div>
     <script src="/shared/components/sidebar/sidebar.js"></script>
     <div id="topbar-placeholder"></div>
     <script src="/shared/components/topbar/topbar.js"></script>
 
-    <div class="layout-wrapper">
-      <script src="/shared/components/sidebar/sidebar.js"></script>
+    <div class="main-content">
+      <main class="container">
+        <div class="page-header">
+          <h1 class="page-title">Nueva venta</h1>
+          <p class="page-subtitle">Gestión de facturación</p>
+        </div>
 
-      <div class="main-content">
-        <script src="/shared/components/topbar/topbar.js"></script>
+        <div class="sales-grid">
+          <section class="card card-small">
+            <h3>Detalles Fijos</h3>
+            <div class="info-list">
+              <p><strong>Venta:</strong> [Detalle]</p>
+              <p><strong>Nro Venta:</strong> [Automatic]</p>
+              <p><strong>Fecha:</strong> [Automatic]</p>
+              <p><strong>Venta:</strong> [Contado]</p>
+            </div>
+          </section>
 
-       <main class="container">
-                <div class="page-header">
-                    <h1 class="page-title">Nueva venta</h1>
-                    <p class="page-subtitle">Gestión de facturación</p>
-                </div>
+          <section class="card card-small">
+            <h3>Información Cliente</h3>
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input type="text" placeholder="Ingrese su nombre" />
+            </div>
+          </section>
+          <section class="card">
+            <h3>Seleccionar linea</h3>
+            <div class="form-group">
+              <label>Linea:</label>
+              <select>
+                <option>Seleccione una linea</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Nombre:</label>
+              <select>
+                <option>Seleccione un producto</option>
+                <option>Fresa</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Sabor:</label>
+              <select>
+                <option>Seleccione sabor</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Presentación:</label>
+              <select>
+                <option>Seleccione presentación</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>CANTIDAD:</label>
+              <div class="quantity-control">
+                <button type="button" class="qty-btn">-</button>
+                <input type="number" value="1" />
+                <button type="button" class="qty-btn">+</button>
+              </div>
+            </div>
+            <div class="selector-buttons">
+              <button type="button" class="btn btn-limpiar">Limpiar</button>
+              <button type="button" class="btn btn-aceptar">Aceptar</button>
+            </div>
+          </section>
 
-                <div class="sales-grid">
-                    <section class="card card-small">
-                        <h3>Detalles Fijos</h3>
-                        <div class="info-list">
-                             <p><strong>Venta:</strong> [Detalle]</p>
-                            <p><strong>Nro Venta:</strong> [Automatic]</p>
-                            <p><strong>Fecha:</strong> [Automatic]</p>
-                            <p><strong>Venta:</strong> [Contado]</p>
-                        </div>
-                    </section>
+          <section class="card">
+            <h3>Resumen de Venta</h3>
+            <div class="table-container">
+              <table class="sales-table">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Cant.</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sorbete tradicional fresa</td>
+                    <td>4</td>
+                    <td>152.00C$</td>
+                    <td>608.00C$</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="more-products-action">
+                <button type="button" class="btn-show-more">
+                  +4 más productos
+                </button>
+              </div>
+            </div>
 
-                    <section class="card card-small">
-                        <h3>Información Cliente</h3>
-                        <div class="form-group">
-                            <label>Nombre:</label>
-                            <input type="text" placeholder="Ingrese su nombre" />
-                        </div>
-                    </section>
-                    <section class="card">
-                        <h3>Seleccionar linea</h3>
-                        <div class="form-group">
-                            <label>Linea:</label>
-                            <select><option>Seleccione una linea</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label>Nombre:</label>
-                            <select><option>Seleccione un producto</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label>Sabor:</label>
-                            <select><option>Seleccione sabor</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label>Presentación:</label>
-                            <select><option>Seleccione presentación</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label>CANTIDAD:</label>
-                            <div class="quantity-control">
-                                <button type="button" class="qty-btn">-</button>
-                                <input type="number" value="1" />
-                                <button type="button" class="qty-btn">+</button>
-                            </div>
-                        </div>
-                        <div class="selector-buttons">
-                            <button type="button" class="btn btn-limpiar">Limpiar</button>
-                            <button type="button" class="btn btn-aceptar">Aceptar</button>
-                        </div>
-                    </section>
+            <hr class="divider" />
 
-                    <section class="card">
-                        <h3>Resumen de Venta</h3>
-                        <div class="table-container">
-                            <table class="sales-table">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Cant.</th>
-                                        <th>Precio</th>
-                                        <th>Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Sorbete tradicional fresa</td>
-                                        <td>4</td>
-                                        <td>152.00C$</td>
-                                        <td>608.00C$</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="more-products-action">
-                                <button type="button" class="btn-show-more">+4 más productos (v)</button>
-                            </div>
-                        </div>
-
-                        <hr class="divider">
-
-                        <div class="summary-totals">
-                            <div class="total-row">
-                                <label>Total:</label>
-                                <input type="text" value="608.00" readonly />
-                            </div>
-                            <div class="total-row">
-                                <label>Pago:</label>
-                                <input type="text" placeholder="0.00" />
-                            </div>
-                            <div class="total-row">
-                                <label>Cambio:</label>
-                                <input type="text" value="0.00" readonly />
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn-registrar-venta-new">Registrar venta</button>
-                    </section>
-                </div>
-            </main>
-      </div>
-
+            <div class="summary-totals">
+              <div class="total-row">
+                <label>Total:</label>
+                <input type="text" value="608.00" readonly />
+              </div>
+              <div class="total-row">
+                <label>Pago:</label>
+                <input type="text" placeholder="0.00" />
+              </div>
+              <div class="total-row">
+                <label>Cambio:</label>
+                <input type="text" value="0.00" readonly />
+              </div>
+            </div>
+            <button type="button" class="btn-registrar-venta-new">
+              <i
+                data-lucide="check-circle"
+                style="width: 20px; height: 20px; margin-right: 8px"
+              ></i>
+              Registrar venta
+            </button>
+          </section>
+        </div>
+      </main>
+    </div>
 
     <script>
       window.addEventListener("DOMContentLoaded", () => {
