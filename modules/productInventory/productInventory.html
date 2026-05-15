@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/shared/css/filterBar.css" />
     <link rel="stylesheet" href="/modules/productInventory/productInventoryDrawer.css" />
     <link
       rel="stylesheet"
@@ -82,84 +83,32 @@
         </div>
       </div>
 
-      <div class="filter-card animate-in delay-2">
-        <div class="filter-card-header">
-          <i
-            data-lucide="sliders-horizontal"
-            style="width: 18px; height: 18px"
-          ></i>
-          <h3>Filtrar</h3>
-        </div>
-        <div class="filter-grid">
-          <div class="filter-field full-width">
-            <label>Buscar</label>
-            <div style="position: relative">
-              <input
-                type="text"
-                placeholder="Buscar por nombre de producto, SKU..."
-                id="searchInput"
-                onkeyup="filterProducts()"
-                style="width: 100%; padding-left: 40px"
-              />
-              <i
-                data-lucide="search"
-                style="
-                  position: absolute;
-                  left: 12px;
-                  top: 50%;
-                  transform: translateY(-50%);
-                  width: 18px;
-                  height: 18px;
-                  color: #cbd5e1;
-                "
-              ></i>
-            </div>
-          </div>
-          <div class="filter-field">
-            <label>Línea</label>
-            <select id="lineaFilter">
-              <option value="">Todas las líneas</option>
-              <option value="tradicional">Tradicional</option>
-              <option value="premium">Premium</option>
-              <option value="especial">Especial</option>
-              <option value="artesanal">Artesanal</option>
-            </select>
-          </div>
-          <div class="filter-field">
-            <label>Sabor</label>
-            <select id="saborFilter">
-              <option value="">Todos los sabores</option>
-              <option value="fresa">Fresa</option>
-              <option value="chocolate">Chocolate</option>
-              <option value="vainilla">Vainilla</option>
-              <option value="limon">Limón</option>
-              <option value="mora">Mora</option>
-              <option value="coco">Coco</option>
-            </select>
-          </div>
-          <div class="filter-field">
-            <label>Presentación</label>
-            <select id="presentacionFilter">
-              <option value="">Todas</option>
-              <option value="4oz">4 Onzas</option>
-              <option value="8oz">8 Onzas</option>
-              <option value="16oz">16 Onzas</option>
-              <option value="32oz">32 Onzas</option>
-            </select>
-          </div>
-        </div>
-        <div class="filter-actions">
-          <button class="btn btn-clear">
-            <i data-lucide="rotate-ccw" style="width: 16px; height: 16px"></i>
-            Limpiar
-          </button>
-          <button class="btn btn-filter">
-            <i data-lucide="filter" style="width: 16px; height: 16px"></i>
-            Filtrar
-          </button>
-        </div>
-      </div>
-
+      <div class="filter-bar">
+  <div class="filter-field filter-search">
+    <label class="filter-label">Buscar</label>
+     <div class="filter-input-wrapper">
+    <input type="text" class="filter-input" placeholder="Buscar por producto, SKU..." />
+    <i data-lucide="search" class="filter-icon"></i>
+    </div>
+  </div>
+  <div class="filter-divider"></div>
+  <div class="filter-field">
+    <label class="filter-label">Línea</label>
+    <select class="filter-select" id="lineaFilter">...</select>
+  </div>
+  <div class="filter-field">
+    <label class="filter-label">Sabor</label>
+    <select class="filter-select" id="saborFilter">...</select>
+  </div>
+  <div class="filter-field">
+    <label class="filter-label">Presentación</label>
+    <select class="filter-select" id="presFilter">...</select>
+  </div>
+  <div class="filter-actions">
+    <button class="filter-btn filter-btn--clear">Limpiar</button>
+    <button class="filter-btn filter-btn--primary">Filtrar</button>
+  </div>
+</div>
       <div class="content-grid animate-in delay-3">
         <div class="results-card">
           <div class="results-header">

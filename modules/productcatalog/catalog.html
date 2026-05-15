@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/shared/css/filterBar.css" />
     <link rel="stylesheet" href="catalog.css" />
 
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -112,60 +113,54 @@
       </div>
 
       <div class="filter-bar">
-        <div class="filter-bar-search">
-          <i data-lucide="search"></i>
-          <input
-            type="text"
-            placeholder="Buscar por nombre, código..."
-            id="searchInput"
-            onkeyup="filterProducts()"
-          />
-        </div>
-
-        <div class="filter-bar-divider"></div>
-
-        <div class="filter-bar-select">
-          <select id="filterLine" onchange="filterProducts()">
-            <option value="">Todas las líneas</option>
-            <option value="Tradicionales">Tradicionales</option>
-            <option value="Especiales">Especiales</option>
-            <option value="Premium">Premium</option>
-            <option value="Light">Light</option>
-          </select>
-        </div>
-
-        <div class="filter-bar-select">
-          <select id="filterPresentation" onchange="filterProducts()">
-            <option value="">Todas</option>
-            <option value="4 Onzas">4 Onzas</option>
-            <option value="8 Onzas">8 Onzas</option>
-            <option value="1 Libra">1 Libra</option>
-            <option value="2 Libras">2 Libras</option>
-            <option value="1 Galón">1 Galón</option>
-          </select>
-        </div>
-
-        <div class="filter-bar-select">
-          <select id="filterFlavor" onchange="filterProducts()">
-            <option value="">Todos los sabores</option>
-            <option value="Nueces">Nueces</option>
-            <option value="Fresa">Fresa</option>
-            <option value="Vainilla">Vainilla</option>
-            <option value="Mango">Mango</option>
-            <option value="Coco">Coco</option>
-            <option value="Piña">Piña</option>
-          </select>
-        </div>
-
-        <div class="filter-bar-divider"></div>
-
-        <div class="filter-bar-actions">
-          <button class="btn-clear" onclick="clearFilters()">
-            <i data-lucide="x"></i>
-            Limpiar
-          </button>
-        </div>
-      </div>
+  <div class="filter-field filter-search">
+    <label class="filter-label">Buscar</label>
+     <div class="filter-input-wrapper">
+    <input type="text" class="filter-input" placeholder="Buscar por nombre, código..." id="searchInput" onkeyup="filterProducts()" />
+    <i data-lucide="search" class="filter-icon"></i>
+     </div>
+  </div>
+  <div class="filter-divider"></div>
+  <div class="filter-field">
+    <label class="filter-label">Línea</label>
+    <select class="filter-select" id="filterLine">
+      <option value="">Todas las líneas</option>
+      <option value="Tradicionales">Tradicionales</option>
+      <option value="Especiales">Especiales</option>
+      <option value="Premium">Premium</option>
+      <option value="Light">Light</option>
+    </select>
+  </div>
+  <div class="filter-field">
+    <label class="filter-label">Presentación</label>
+    <select class="filter-select" id="filterPresentation">
+      <option value="">Todas</option>
+      <option value="4 Onzas">4 Onzas</option>
+      <option value="8 Onzas">8 Onzas</option>
+      <option value="1 Libra">1 Libra</option>
+      <option value="2 Libras">2 Libras</option>
+      <option value="1 Galón">1 Galón</option>
+    </select>
+  </div>
+  <div class="filter-field">
+    <label class="filter-label">Sabor</label>
+    <select class="filter-select" id="filterFlavor">
+      <option value="">Todos los sabores</option>
+      <option value="Nueces">Nueces</option>
+      <option value="Fresa">Fresa</option>
+      <option value="Vainilla">Vainilla</option>
+      <option value="Mango">Mango</option>
+      <option value="Coco">Coco</option>
+      <option value="Piña">Piña</option>
+    </select>
+  </div>
+  <div class="filter-divider"></div>
+  <div class="filter-actions">
+     <button type="button" class="filter-btn filter-btn--primary" onclick="applyFilters()">
+      <i data-lucide="search"></i> Buscar
+    </button>
+  </div>
+</div>
 
       <div class="results-header">
         <h2>

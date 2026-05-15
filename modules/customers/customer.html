@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/shared/css/cards.css" />
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
+    <link rel="stylesheet" href="/shared/css/filterBar.css" />
     <link rel="stylesheet" href="/modules/customers/customer.css" />
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -68,36 +69,40 @@
         </div>
       </div>
 
-      <div class="filters-bar">
-        <div class="search-box">
-          <input
-            type="text"
-            placeholder="Buscar clientes..."
-            id="searchInput"
-            onkeyup="filterClients()"
-          />
-        </div>
-
-        <div class="filter-group">
-          <div class="select-wrapper">
-            <select class="filter-select select-pink">
-              <option value="">Departamento</option>
-              <option value="managua">Managua</option>
-              <option value="carazo">Carazo</option>
-            </select>
-            <i data-lucide="chevron-down" class="select-icon"></i>
-          </div>
-
-          <div class="select-wrapper">
-            <select class="filter-select select-yellow">
-              <option value="">Municipio</option>
-              <option value="jinotepe">Jinotepe</option>
-              <option value="san-marcos">San Marcos</option>
-            </select>
-            <i data-lucide="chevron-down" class="select-icon"></i>
-          </div>
-        </div>
-      </div>
+    <div class="filter-bar">
+  <div class="filter-field filter-search">
+    <label class="filter-label">Buscar</label>
+     <div class="filter-input-wrapper">
+    <input type="text" class="filter-input" placeholder="Buscar clientes..." id="searchInput" onkeyup="filterClients()" />
+    <i data-lucide="search" class="filter-icon"></i>
+     </div>
+  </div>
+  <div class="filter-divider"></div>
+  <div class="filter-field">
+    <label class="filter-label">Departamento</label>
+    <select class="filter-select" id="deptFilter">
+      <option value="">Todos</option>
+      <option value="managua">Managua</option>
+      <option value="carazo">Carazo</option>
+    </select>
+  </div>
+  <div class="filter-field">
+    <label class="filter-label">Municipio</label>
+    <select class="filter-select" id="municipalityFilter">
+      <option value="">Todos</option>
+      <option value="jinotepe">Jinotepe</option>
+      <option value="san-marcos">San Marcos</option>
+    </select>
+  </div>
+  <div class="filter-actions">
+    <button type="button" class="filter-btn filter-btn--clear" onclick="clearFilters()">
+      <i data-lucide="x"></i> Limpiar
+    </button>
+    <button type="button" class="filter-btn filter-btn--primary" onclick="applyFilters()">
+      <i data-lucide="search"></i> Buscar
+    </button>
+  </div>
+</div>
 
       <div class="table-card animate-in delay-3">
         <div class="table-card-header">
