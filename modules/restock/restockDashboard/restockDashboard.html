@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
     <link rel="stylesheet" href="restockDashboard.css" />
+    <link rel="stylesheet" href="/modules/restock/restockDrawer.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body>
@@ -150,7 +151,7 @@
                 </td>
                 <td style="text-align: center">
                   <button
-                    class="btn-detail"
+                    class="btn-detail" onclick="openRestockDrawer()"
                     type="button"
                     aria-label="Ver detalle"
                   >
@@ -183,7 +184,7 @@
                 </td>
                 <td style="text-align: center">
                   <button
-                    class="btn-detail"
+                    class="btn-detail" onclick="openRestockDrawer()"
                     type="button"
                     aria-label="Ver detalle"
                   >
@@ -216,7 +217,7 @@
                 </td>
                 <td style="text-align: center">
                   <button
-                    class="btn-detail"
+                    class="btn-detail" onclick="openRestockDrawer()"
                     type="button"
                     aria-label="Ver detalle"
                   >
@@ -249,7 +250,7 @@
                 </td>
                 <td style="text-align: center">
                   <button
-                    class="btn-detail"
+                    class="btn-detail" onclick="openRestockDrawer()"
                     type="button"
                     aria-label="Ver detalle"
                   >
@@ -348,7 +349,7 @@
                 </td>
                 <td style="text-align: center">
                   <button
-                    class="btn-detail"
+                    class="btn-detail" onclick="openRestockDrawer()"
                     type="button"
                     aria-label="Ver detalle"
                   >
@@ -381,7 +382,7 @@
                 </td>
                 <td style="text-align: center">
                   <button
-                    class="btn-detail"
+                    class="btn-detail" onclick="openRestockDrawer()"
                     type="button"
                     aria-label="Ver detalle"
                   >
@@ -577,6 +578,236 @@
         </div>
       </div>
     </div>
+
+<!-- ═════ RESTOCK DRAWER HTML ═════ -->
+<div class="restock-drawer-overlay" id="restockDrawerOverlay"></div>
+<div class="restock-drawer" id="restockDrawer">
+  
+  <!-- Header -->
+  <div class="restock-drawer-header">
+    <div class="restock-drawer-header-top">
+      <div class="restock-drawer-title">
+        <i data-lucide="package-plus"></i>
+        Detalle del reabastecimiento
+      </div>
+      <button class="restock-drawer-close" id="restockDrawerCloseBtn">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    
+    <div class="restock-identity">
+      <div class="restock-identity-left">
+        <div class="restock-identity-icon">
+          <i data-lucide="package-plus"></i>
+        </div>
+        <div>
+          <div class="restock-code">RBT-027</div>
+          <span class="restock-status">
+            <span class="restock-status-dot"></span>
+            Completado
+          </span>
+        </div>
+      </div>
+      <div class="restock-identity-right">
+        <div class="restock-date">
+          <i data-lucide="calendar"></i>
+          02/03/2025 - 3:45 PM
+        </div>
+        <div class="restock-user">
+          <span>Registrado por</span>
+          <div class="restock-user-avatar">NC</div>
+          <span class="restock-user-name">Nohelia Cortes</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Metrics -->
+    <div class="restock-metrics">
+      <div class="restock-metric purple">
+        <div class="restock-metric-label">Lotes creados</div>
+        <div class="restock-metric-value">8</div>
+      </div>
+      <div class="restock-metric green">
+        <div class="restock-metric-label">Unidades totales</div>
+        <div class="restock-metric-value">100</div>
+      </div>
+      <div class="restock-metric orange">
+        <div class="restock-metric-label">Inversión total</div>
+        <div class="restock-metric-value">C$10,000</div>
+      </div>
+      <div class="restock-metric blue">
+        <div class="restock-metric-label">Productos</div>
+        <div class="restock-metric-value">3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="restock-drawer-body">
+    
+    <!-- Información del Reabastecimiento -->
+    <div class="restock-section">
+      <div class="restock-section-title">Información del reabastecimiento</div>
+      <div class="restock-info-grid">
+        <div class="restock-info-item">
+          <span class="restock-info-label">Código interno</span>
+          <span class="restock-info-value mono">RB-2025-027</span>
+        </div>
+        <div class="restock-info-item">
+          <span class="restock-info-label">Fecha de ingreso</span>
+          <span class="restock-info-value">02/03/2025 - 3:45 PM</span>
+        </div>
+        
+        <div class="restock-info-item">
+          <span class="restock-info-label">Registrado por</span>
+          <span class="restock-info-value">Nohelia Cortes</span>
+        </div>
+        <div class="restock-info-item">
+          <span class="restock-info-label">Total de lotes</span>
+          <span class="restock-info-value">8 lotes</span>
+        </div>
+        <div class="restock-info-item">
+          <span class="restock-info-label">Total de unidades</span>
+          <span class="restock-info-value">100 unidades</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Lotes Creados -->
+    <div class="restock-section">
+      <div class="restock-section-title">Lotes creados</div>
+      <table class="restock-lots-table">
+        <thead>
+          <tr>
+            <th>Código Lote</th>
+            <th>Producto</th>
+            <th>Estado</th>
+            <th style="text-align:right;">Cantidad inicial</th>
+            <th style="text-align:right;">Costo Unit.</th>
+            <th style="text-align:center;">Vencimiento</th>
+            <th style="text-align:right;">Días Restantes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="restock-lot-code">FR4010426</span></td>
+            <td>
+              <div class="restock-lot-product">
+                <span class="restock-lot-dot strawberry"></span>
+                Fresa 8 Onz
+              </div>
+            </td>
+            <td><span class="restock-lot-status active">Activo</span></td>
+            <td class="restock-lot-cell-num">100</td>
+            <td class="restock-lot-cell-num">C$30.00</td>
+            <td style="text-align:center;">01/04/2025</td>
+            <td class="restock-lot-cell-days mid">30</td>
+          </tr>
+          <tr>
+            <td><span class="restock-lot-code">CH4010427</span></td>
+            <td>
+              <div class="restock-lot-product">
+                <span class="restock-lot-dot chocolate"></span>
+                Chocolate 16 Onz
+              </div>
+            </td>
+            <td><span class="restock-lot-status active">Activo</span></td>
+            <td class="restock-lot-cell-num">80</td>
+            <td class="restock-lot-cell-num">C$32.00</td>
+            <td style="text-align:center;">10/04/2025</td>
+            <td class="restock-lot-cell-days high">39</td>
+          </tr>
+          <tr>
+            <td><span class="restock-lot-code">VA4010428</span></td>
+            <td>
+              <div class="restock-lot-product">
+                <span class="restock-lot-dot vanilla"></span>
+                Vainilla 8 Onz
+              </div>
+            </td>
+            <td><span class="restock-lot-status warning">Próximo a vencer</span></td>
+            <td class="restock-lot-cell-num">60</td>
+            <td class="restock-lot-cell-num">C$28.00</td>
+            <td style="text-align:center;">25/03/2025</td>
+            <td class="restock-lot-cell-days low">13</td>
+          </tr>
+          <tr>
+            <td><span class="restock-lot-code">CO4010429</span></td>
+            <td>
+              <div class="restock-lot-product">
+                <span class="restock-lot-dot coconut"></span>
+                Coco 8 Onz
+              </div>
+            </td>
+            <td><span class="restock-lot-status active">Activo</span></td>
+            <td class="restock-lot-cell-num">40</td>
+            <td class="restock-lot-cell-num">C$29.00</td>
+            <td style="text-align:center;">15/04/2025</td>
+            <td class="restock-lot-cell-days high">44</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="restock-view-all">
+        <i data-lucide="eye"></i>
+        Ver todos los lotes (8)
+      </button>
+    </div>
+    
+    <!-- Resumen Financiero -->
+    <div class="restock-section">
+      <div class="restock-section-title">Resumen financiero</div>
+      <div class="restock-financial-grid">
+        <div class="restock-financial-card orange">
+          <div class="restock-financial-icon"><i data-lucide="wallet"></i></div>
+          <div class="restock-financial-info">
+            <span class="restock-financial-label">Inversión total</span>
+            <span class="restock-financial-value" style="color:#FA897B;">C$10,000</span>
+          </div>
+        </div>
+        <div class="restock-financial-card blue">
+          <div class="restock-financial-icon"><i data-lucide="coins"></i></div>
+          <div class="restock-financial-info">
+            <span class="restock-financial-label">Costo promedio unitario</span>
+            <span class="restock-financial-value" style="color:#4A90D9;">C$30.25</span>
+          </div>
+        </div>
+        <div class="restock-financial-card green">
+          <div class="restock-financial-icon"><i data-lucide="trending-up"></i></div>
+          <div class="restock-financial-info">
+            <span class="restock-financial-label">Valor potencial de venta</span>
+            <span class="restock-financial-value" style="color:var(--color-brand);">C$15,600</span>
+          </div>
+        </div>
+        <div class="restock-financial-card purple">
+          <div class="restock-financial-icon"><i data-lucide="line-chart"></i></div>
+          <div class="restock-financial-info">
+            <span class="restock-financial-label">Ganancia estimada</span>
+            <span class="restock-financial-value" style="color:#8b5fbf;">C$5,600</span>
+            <span class="restock-financial-change">+56.0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Footer -->
+  <div class="restock-drawer-footer">
+    <button class="drawer-btn drawer-btn-secondary" onclick="closeRestockDrawer()">Cerrar</button>
+    <button class="drawer-btn drawer-btn-secondary">
+      <i data-lucide="file-text"></i> Exportar PDF
+    </button>
+    <button class="drawer-btn drawer-btn-secondary">
+      <i data-lucide="printer"></i> Imprimir
+    </button>
+    <div class="drawer-btn-spacer"></div>
+    <button class="drawer-btn drawer-btn-primary">
+      <i data-lucide="list"></i> Ver movimientos
+    </button>
+  </div>
+
+</div>
+
     <script>
       lucide.createIcons();
       function openModal() {
@@ -599,6 +830,28 @@
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closeModal();
       });
+
+      function openRestockDrawer() {
+    document.getElementById('restockDrawerOverlay').classList.add('active');
+    document.getElementById('restockDrawer').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  }
+  
+  function closeRestockDrawer() {
+    document.getElementById('restockDrawerOverlay').classList.remove('active');
+    document.getElementById('restockDrawer').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  document.getElementById('restockDrawerOverlay')?.addEventListener('click', closeRestockDrawer);
+  document.getElementById('restockDrawerCloseBtn')?.addEventListener('click', closeRestockDrawer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeRestockDrawer(); });
+  
+  window.openRestockDrawer = openRestockDrawer;
+  window.closeRestockDrawer = closeRestockDrawer;
+  
+  if (typeof lucide !== 'undefined') lucide.createIcons();
     </script>
 
     <script src="/shared/components/sidebar/sidebar.js"></script>
