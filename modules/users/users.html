@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/shared/css/filterBar.css" />
     <link rel="stylesheet" href="./users.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -78,16 +79,23 @@
         </div>
       </div>
 
-      <div class="filters-bar animate-in delay-2">
-        <div class="search-box">
-          <i data-lucide="search"></i>
-          <input
-            type="text"
-            placeholder="Buscar por nombre, cédula o usuario..."
-            id="search-input"
-          />
-        </div>
-      </div>
+    <div class="filter-bar">
+  <div class="filter-field filter-search">
+    <label class="filter-label">Buscar</label>
+    <div class="filter-input-wrapper">
+      <input type="text" class="filter-input" placeholder="Buscar por nombre, cédula o usuario..." id="search-input" />
+      <i data-lucide="search" class="filter-icon"></i>
+    </div>
+  </div>
+  <div class="filter-actions">
+    <button type="button" class="filter-btn filter-btn--clear" onclick="clearFilters()">
+      <i data-lucide="x"></i> Limpiar
+    </button>
+    <button type="button" class="filter-btn filter-btn--primary" onclick="applyFilters()">
+      <i data-lucide="search"></i> Buscar
+    </button>
+  </div>
+</div>
 
       <div class="table-card animate-in delay-3">
         <div class="table-card-header">

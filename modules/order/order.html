@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/shared/css/filterBar.css" />
     <link rel="stylesheet" href="/modules/order/ordersDrawer.css" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
@@ -83,77 +84,60 @@
         </div>
       </div>
 
-      <!-- Filter Bar -->
-      <div class="filter-bar animate-in delay-2">
-        <div class="filter-row">
-          <div class="filter-group">
-            <label>Desde</label>
-            <input type="date" id="dateFrom" value="2025-03-01" />
-          </div>
-          <div class="filter-group">
-            <label>Hasta</label>
-            <input type="date" id="dateTo" value="2025-03-31" />
-          </div>
-          <div class="filter-group">
-            <label>Estado</label>
-            <select id="statusFilter">
-              <option value="">Todos</option>
-              <option value="pending">Pendiente</option>
-              <option value="processing">En Proceso</option>
-              <option value="delivered">Entregado</option>
-              <option value="cancelled">Cancelado</option>
-            </select>
-          </div>
-          <div class="filter-divider"></div>
-          <div class="filter-group">
-            <label>Departamento</label>
-            <select id="deptFilter">
-              <option value="">Todos</option>
-              <option value="managua">Managua</option>
-              <option value="carazo">Carazo</option>
-              <option value="esteli">Estelí</option>
-              <option value="matagalpa">Matagalpa</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label>Municipio</label>
-            <select id="municipalityFilter">
-              <option value="">Todos</option>
-              <option value="managua">Managua</option>
-              <option value="tipitapa">Tipitapa</option>
-              <option value="ticuantepe">Ticuantepe</option>
-              <option value="jinotepe">Jinotepe</option>
-            </select>
-          </div>
-          <div class="filter-divider"></div>
-          <div class="filter-search">
-            <i data-lucide="search"></i>
-            <input
-              type="text"
-              placeholder="Buscar por código o cliente..."
-              id="searchInput"
-              onkeyup="filterResults()"
-            />
-          </div>
-          <div class="filter-actions">
-            <button class="btn-search" type="button">
-              <i data-lucide="search"></i> Buscar
-            </button>
-            <button class="btn-clear" type="button">
-              <i
-                data-lucide="x"
-                style="
-                  width: 14px;
-                  height: 14px;
-                  vertical-align: middle;
-                  margin-right: 4px;
-                "
-              ></i>
-              Limpiar
-            </button>
-          </div>
-        </div>
-      </div>
+      <div class="filter-bar">
+  <div class="filter-field">
+    <label class="filter-label">Desde</label>
+    <input type="date" class="filter-input" id="dateFrom" />
+  </div>
+  <div class="filter-field">
+    <label class="filter-label">Hasta</label>
+    <input type="date" class="filter-input" id="dateTo" />
+  </div>
+  <div class="filter-field">
+    <label class="filter-label">Estado</label>
+    <select class="filter-select" id="statusFilter">
+      <option value="">Todos</option>
+      <option value="pending">Pendiente</option>
+      <option value="processing">En Proceso</option>
+      <option value="delivered">Entregado</option>
+      <option value="cancelled">Cancelado</option>
+    </select>
+  </div>
+  <div class="filter-divider"></div>
+  <div class="filter-field">
+    <label class="filter-label">Departamento</label>
+    <select class="filter-select" id="deptFilter">
+      <option value="">Todos</option>
+      <option value="managua">Managua</option>
+      <option value="carazo">Carazo</option>
+      <option value="esteli">Estelí</option>
+      <option value="matagalpa">Matagalpa</option>
+    </select>
+  </div>
+  <div class="filter-field">
+    <label class="filter-label">Municipio</label>
+    <select class="filter-select" id="municipalityFilter">
+      <option value="">Todos</option>
+      <option value="managua">Managua</option>
+      <option value="tipitapa">Tipitapa</option>
+      <option value="ticuantepe">Ticuantepe</option>
+      <option value="jinotepe">Jinotepe</option>
+    </select>
+  </div>
+  <div class="filter-divider"></div>
+  <div class="filter-field filter-search">
+    <input type="text" class="filter-input" placeholder="Buscar por código o cliente..." id="searchInput" onkeyup="filterResults()" />
+    <i data-lucide="search" class="filter-icon"></i>
+  </div>
+  <div class="filter-actions">
+    <button type="button" class="filter-btn filter-btn--clear" onclick="clearFilters()">
+      <i data-lucide="x"></i> Limpiar
+    </button>
+    <button type="button" class="filter-btn filter-btn--primary" onclick="applyFilters()">
+      <i data-lucide="search"></i> Buscar
+    </button>
+  </div>
+</div>
 
       <!-- Content Grid -->
       <div class="content-grid animate-in delay-3">

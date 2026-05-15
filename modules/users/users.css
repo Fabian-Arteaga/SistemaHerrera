@@ -30,37 +30,7 @@
     flex-wrap: nowrap;
 }
 
-.filters-bar {
-    background: white;
-    border-radius: 12px;
-    padding: 16px 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    border: 1px solid #f1f5f9;
-    margin-bottom: 24px;
-}
 
-.search-box {
-    flex: 1;
-    max-width: 400px;
-    position: relative;
-}
-
-.search-box input {
-    width: 100%;
-    padding: 10px 16px 10px 40px;
-    border: 1.5px solid #E2E8F0;
-    border-radius: 10px;
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    background: white;
-    outline: none;
-    transition: all 0.2s;
-}
-
-.search-box input:focus,
 .form-group input:focus,
 .form-group select:focus {
     border-color: #00C296;
@@ -68,19 +38,12 @@
     box-shadow: 0 0 0 3px rgba(0, 194, 150, 0.1);
 }
 
-.search-box svg {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9CA3AF;
-}
+
 
 .btn-primary svg,
 .btn-outline svg,
 .btn-detail svg,
 .btn-close-modal svg,
-.search-box svg,
 .btn-toggle-pass svg,
 .btn-submit-modal svg {
     width: 16px;

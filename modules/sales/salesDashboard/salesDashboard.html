@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="salesDashboard.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/shared/css/filterBar.css" />
     <link rel="stylesheet" href="/modules/sales/salesDrawer.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
@@ -71,38 +72,33 @@
         </div>
       </div>
 
-      <div class="filter-bar animate-in delay-2">
-        <div class="filter-bar-search">
-          <i data-lucide="search"></i>
-          <input
-            type="text"
-            placeholder="Buscar por código, cliente..."
-            id="searchInput"
-            onkeyup="filterResults()"
-          />
-        </div>
-
-        <div class="filter-bar-divider"></div>
-
-        <div class="filter-bar-date">
-          <label>Desde</label>
-          <input type="date" id="dateFrom" value="2024-01-01" />
-        </div>
-
-        <div class="filter-bar-date">
-          <label>Hasta</label>
-          <input type="date" id="dateTo" value="2024-12-31" />
-        </div>
-
-        <div class="filter-bar-divider"></div>
-
-        <div class="filter-bar-actions">
-          <button class="btn btn-clear">
-            <i data-lucide="x" style="width: 14px; height: 14px"></i>
-            Limpiar
-          </button>
-        </div>
-      </div>
+      <div class="filter-bar">
+  <div class="filter-field filter-search">
+    <label class="filter-label">Buscar</label>
+    <div class="filter-input-wrapper">
+      <input type="text" class="filter-input" placeholder="Buscar por código, cliente..." id="searchInput" onkeyup="filterResults()" />
+      <i data-lucide="search" class="filter-icon"></i>
+    </div>
+  </div>
+  <div class="filter-divider"></div>
+  <div class="filter-field">
+    <label class="filter-label">Desde</label>
+    <input type="date" class="filter-input" id="dateFrom" />
+  </div>
+  <div class="filter-field">
+    <label class="filter-label">Hasta</label>
+    <input type="date" class="filter-input" id="dateTo" />
+  </div>
+  <div class="filter-divider"></div>
+  <div class="filter-actions">
+    <button type="button" class="filter-btn filter-btn--clear" onclick="clearFilters()">
+      <i data-lucide="x"></i> Limpiar
+    </button>
+    <button type="button" class="filter-btn filter-btn--primary" onclick="applyFilters()">
+      <i data-lucide="search"></i> Buscar
+    </button>
+  </div>
+</div>
 
       <!-- Results Table -->
       <div class="results-card animate-in delay-3">
