@@ -659,12 +659,6 @@
   background: #94A3B8;
 }
 
-@media (max-width: 1400px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 1200px) {
   .stats-row {
     flex-wrap: wrap;
