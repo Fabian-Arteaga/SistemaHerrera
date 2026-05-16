@@ -5,10 +5,12 @@
     background-color: #F8FAFC;
     min-height: calc(100vh - 60px);
     overflow-y: auto;
+    
 }
 
-.page-header {
+.page-header-sales {
     display: flex;
+   
     flex-direction: column;
     margin-bottom: 24px;
 }
