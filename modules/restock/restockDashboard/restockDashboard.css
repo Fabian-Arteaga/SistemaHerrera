@@ -1,30 +1,10 @@
-.main-content {
-    margin-left: 240px;
-    margin-top: 60px;
-    padding: 24px 32px;
-    background-color: var(--color-bg-page);
-    min-height: calc(100vh - 60px);
-    overflow-y: auto;
-}
+/* MAIN GLOBAL STYLES */
 
-.page-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 24px;
-}
+/*HEADER GLOBAL STYLES*/
 
-.page-header h1 {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--color-text-heading);
-}
+/*STATS ROW GLOBAL STYLES*/
 
-.page-header-actions {
-    display: flex;
-    gap: 10px;
-}
-
+/*FILTER BAR GLOBAL STYLES*/
 
 .results-card {
     background: var(--color-white);

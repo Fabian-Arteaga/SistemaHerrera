@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Precios</title>
 
+    <!-- Estilos Globales y de Componentes -->
     <link rel="stylesheet" href="/shared/css/global.css" />
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/shared/css/cards.css" />
     <link rel="stylesheet" href="/modules/prices/prices.css" />
 
+    <!-- Iconos Lucide -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
   <body>
+    
+
     <div id="layout-placeholder"></div>
     <script src="/shared/components/sidebar/sidebar.js"></script>
 
@@ -21,21 +25,24 @@
     <script src="/shared/components/topbar/topbar.js"></script>
 
     <main class="main-content">
-      <div class="page-header animate-in">
-        <h1>Precios</h1>
+    
+    <div class="page-header animate-in">
+  <div class="page-header-left">
+    <h1>Precios</h1>
+  </div>
+  <div class="page-header-actions">
+    <button class="btn btn-outline">
+      <i data-lucide="download" style="width: 16px; height: 16px"></i>
+      <span class="btn-label">Exportar</span>
+    </button>
+    <button class="btn btn-primary" onclick="openBulkEditModal()">
+      <i data-lucide="edit-3" style="width: 18px; height: 18px"></i>
+      <span class="btn-label">Editar masivo</span>
+    </button>
+  </div>
+</div>
 
-        <div class="page-header-actions">
-          <button class="btn btn-outline">
-            <i data-lucide="download" style="width: 16px; height: 16px"></i>
-            <span class="btn-label">Exportar</span>
-          </button>
-          <button class="btn btn-primary" onclick="openBulkEditModal()">
-            <i data-lucide="edit-3" style="width: 18px; height: 18px"></i>
-            <span class="btn-label">Editar masivo</span>
-          </button>
-        </div>
-      </div>
-
+      <!-- Tarjetas de Estadísticas -->
       <div class="stats-row animate-in delay-1">
         <div class="stat-card stat-card-mint">
           <div class="stat-card-decoration"></div>
@@ -49,10 +56,7 @@
         <div class="stat-card stat-card-yellow">
           <div class="stat-card-decoration"></div>
           <div class="stat-card-icon">
-            <i
-              data-lucide="badge-percent"
-              style="width: 20px; height: 20px"
-            ></i>
+            <i data-lucide="badge-percent" style="width: 20px; height: 20px"></i>
           </div>
           <div class="stat-card-label">Precios Especiales Activos</div>
           <div class="stat-card-value">8</div>
@@ -77,29 +81,25 @@
         </div>
       </div>
 
+      <!-- Grid de Contenido: Precios Generales y Especiales -->
       <div class="content-grid animate-in delay-2">
+        
+        <!-- SECCIÓN: Precios Generales (Tabla) -->
         <div class="general-prices-card">
           <div class="section-header">
             <h2><i data-lucide="tag"></i> Gestionar precios generales</h2>
           </div>
 
+          <!-- Pestañas de Categorías -->
           <div class="category-tabs">
-            <button class="category-tab active" onclick="switchCategory(this)">
-              Tradicionales
-            </button>
-            <button class="category-tab" onclick="switchCategory(this)">
-              Lights
-            </button>
-            <button class="category-tab" onclick="switchCategory(this)">
-              Nieves
-            </button>
-            <button class="category-tab" onclick="switchCategory(this)">
-              Fantasía
-            </button>
-            <button class="category-tab" onclick="switchCategory(this)">
-              Paletas
-            </button>
+            <button class="category-tab active" onclick="switchCategory(this)">Tradicionales</button>
+            <button class="category-tab" onclick="switchCategory(this)">Lights</button>
+            <button class="category-tab" onclick="switchCategory(this)">Nieves</button>
+            <button class="category-tab" onclick="switchCategory(this)">Fantasía</button>
+            <button class="category-tab" onclick="switchCategory(this)">Paletas</button>
           </div>
+
+          <!-- Tabla de Precios -->
           <div class="table-scroll">
             <table class="price-table">
               <thead>
@@ -112,6 +112,7 @@
                 </tr>
               </thead>
               <tbody>
+                <!-- Fila 1: 4 Onzas -->
                 <tr>
                   <td>
                     <div class="presentation-cell">
@@ -131,16 +132,14 @@
                     <span class="products-badge">42</span>
                   </td>
                   <td style="text-align: center">
-                    <button
-                      class="edit-btn"
-                      onclick="
-                        openEditModal('Tradicionales', '4 Onzas', '45', '38')
-                      "
-                    >
+                    <!-- Botón simplificado sin paso de parámetros -->
+                    <button class="edit-btn" onclick="openEditModal()">
                       <i data-lucide="pencil"></i>
                     </button>
                   </td>
                 </tr>
+
+                <!-- Fila 2: 8 Onzas -->
                 <tr>
                   <td>
                     <div class="presentation-cell">
@@ -160,14 +159,13 @@
                     <span class="products-badge">42</span>
                   </td>
                   <td style="text-align: center">
-                    <button
-                      class="edit-btn"
-                      onclick="openEditModal('8 Onzas', '75', '65')"
-                    >
+                    <button class="edit-btn" onclick="openEditModal()">
                       <i data-lucide="pencil"></i>
                     </button>
                   </td>
                 </tr>
+
+                <!-- Fila 3: 1/4 Galón -->
                 <tr>
                   <td>
                     <div class="presentation-cell">
@@ -187,14 +185,13 @@
                     <span class="products-badge">42</span>
                   </td>
                   <td style="text-align: center">
-                    <button
-                      class="edit-btn"
-                      onclick="openEditModal('1/4 Galón', '100', '90')"
-                    >
+                    <button class="edit-btn" onclick="openEditModal()">
                       <i data-lucide="pencil"></i>
                     </button>
                   </td>
                 </tr>
+
+                <!-- Fila 4: 1/2 Galón -->
                 <tr>
                   <td>
                     <div class="presentation-cell">
@@ -214,10 +211,7 @@
                     <span class="products-badge">42</span>
                   </td>
                   <td style="text-align: center">
-                    <button
-                      class="edit-btn"
-                      onclick="openEditModal('1/2 Galón', '150', '135')"
-                    >
+                    <button class="edit-btn" onclick="openEditModal()">
                       <i data-lucide="pencil"></i>
                     </button>
                   </td>
@@ -227,6 +221,7 @@
           </div>
         </div>
 
+        <!-- SECCIÓN: Precios Especiales -->
         <div class="special-prices-card">
           <div class="special-prices-header">
             <h2><i data-lucide="sparkles"></i> Precios especiales</h2>
@@ -236,52 +231,37 @@
           </div>
 
           <div class="special-prices-list">
+            <!-- Item Especial 1 -->
             <div class="special-price-card card-purple">
               <div class="special-product-img">
                 <img
                   src="/assets/ProductsImages/Trad.RonConPasas_4Onzas.png"
                   alt="Sorbete Ron con Pasas"
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    border-radius: 6px;
-                  "
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"
                 />
               </div>
               <div class="special-product-info">
-                <span class="special-product-name"
-                  >Sorbete tradicional Ron con pasas 4 Oz</span
-                >
+                <span class="special-product-name">Sorbete tradicional Ron con pasas 4 Oz</span>
                 <span class="special-product-price">C$20</span>
                 <span class="special-product-discount">
-                  <i
-                    data-lucide="trending-down"
-                    style="width: 12px; height: 12px"
-                  ></i>
+                  <i data-lucide="trending-down" style="width: 12px; height: 12px"></i>
                   40% Descuento
                 </span>
                 <span class="special-product-date">Inicio: 03/03/25</span>
               </div>
             </div>
 
+            <!-- Item Especial 2 -->
             <div class="special-price-card card-yellow">
               <div class="special-product-img">
                 <img
                   src="/assets/ProductsImages/Trad.Vainilla_4Onzas.png"
                   alt="Sorbete Vainilla"
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    border-radius: 6px;
-                  "
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"
                 />
               </div>
               <div class="special-product-info">
-                <span class="special-product-name"
-                  >Sorbete tradicional Vainilla 8 Oz</span
-                >
+                <span class="special-product-name">Sorbete tradicional Vainilla 8 Oz</span>
                 <span class="special-product-price">C$50</span>
                 <span class="special-product-discount">
                   <i data-lucide="heart" style="width: 12px; height: 12px"></i>
@@ -291,23 +271,17 @@
               </div>
             </div>
 
+            <!-- Item Especial 3 -->
             <div class="special-price-card card-pink">
               <div class="special-product-img">
                 <img
                   src="/assets/ProductsImages/Trad.Fresas_1.4Galon.png"
                   alt="Sorbete Fresas"
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    border-radius: 6px;
-                  "
+                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"
                 />
               </div>
               <div class="special-product-info">
-                <span class="special-product-name"
-                  >Sorbete Tradicional Fresa 1/4 Gal</span
-                >
+                <span class="special-product-name">Sorbete Tradicional Fresa 1/4 Gal</span>
                 <span class="special-product-price">C$85</span>
                 <span class="special-product-discount">
                   <i data-lucide="tag" style="width: 12px; height: 12px"></i>
@@ -318,9 +292,13 @@
             </div>
           </div>
         </div>
+
       </div>
     </main>
 
+    <!-- =========================================
+         MODAL: Editar Precio (Datos Fijos de Ejemplo)
+    ========================================== -->
     <div
       id="editModal"
       class="modal-overlay"
@@ -342,9 +320,11 @@
 
         <div class="modal-form-group">
           <label>Línea</label>
+          <!-- Valor fijo para ejemplo -->
           <input
             type="text"
             id="editLine"
+            value="Tradicionales"
             readonly
             style="background: #f8fafc"
           />
@@ -352,9 +332,11 @@
 
         <div class="modal-form-group">
           <label>Presentación</label>
+          <!-- Valor fijo para ejemplo -->
           <input
             type="text"
             id="editPresentation"
+            value="4 Onzas"
             readonly
             style="background: #f8fafc"
           />
@@ -363,12 +345,14 @@
         <div class="modal-form-row">
           <div class="modal-form-group">
             <label>Precio Detalle</label>
-            <input type="number" id="editPriceDetail" placeholder="C$0.00" />
+            <!-- Valor fijo para ejemplo -->
+            <input type="number" id="editPriceDetail" value="45" placeholder="C$0.00" />
           </div>
 
           <div class="modal-form-group">
             <label>Precio Mayoreo</label>
-            <input type="number" id="editPriceWholesale" placeholder="C$0.00" />
+            <!-- Valor fijo para ejemplo -->
+            <input type="number" id="editPriceWholesale" value="38" placeholder="C$0.00" />
           </div>
         </div>
 
@@ -384,9 +368,12 @@
       </div>
     </div>
 
+    <!-- Scripts de Funcionalidad Básica -->
     <script>
+      // Inicializar iconos al cargar
       lucide.createIcons();
 
+      // Cambiar pestaña activa
       function switchCategory(el) {
         document
           .querySelectorAll(".category-tab")
@@ -394,37 +381,25 @@
         el.classList.add("active");
       }
 
-      function openEditModal(line, presentation, detail, wholesale) {
-        document.getElementById("editLine").value = line;
-        document.getElementById("editPresentation").value = presentation;
-        document.getElementById("editPriceDetail").value = detail;
-        document.getElementById("editPriceWholesale").value = wholesale;
+      // Abrir modal (sin lógica de carga de datos dinámica)
+      function openEditModal() {
         document.getElementById("editModal").classList.add("active");
         lucide.createIcons();
       }
 
+      // Cerrar modal
       function closeEditModal() {
         document.getElementById("editModal").classList.remove("active");
       }
 
+  
       function savePriceEdit() {
         closeEditModal();
-        const card = document.querySelector(".general-prices-card");
-        card.style.transition = "box-shadow 0.3s";
-        card.style.boxShadow = "0 0 0 3px rgba(0, 194, 150, 0.2)";
-        setTimeout(() => {
-          card.style.boxShadow = "";
-        }, 800);
-      }
-
-      function openSpecialPriceModal() {
-        document.getElementById("specialModal").classList.add("active");
-        lucide.createIcons();
       }
 
       function openBulkEditModal() {
-        document.getElementById("bulkModal").classList.add("active");
-        lucide.createIcons();
+        console.log("Abrir modal de edición masiva");
+        // document.getElementById("bulkModal").classList.add("active");
       }
     </script>
   </body>

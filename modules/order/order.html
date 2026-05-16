@@ -20,24 +20,21 @@
     <script src="/shared/components/topbar/topbar.js"></script>
 
     <main class="main-content">
-      <!-- Page Header -->
-      <div class="page-header animate-in">
-        <h1>Pedidos</h1>
-        <div style="display: flex; gap: 10px">
-          <button class="btn btn-outline" type="button">
-            <i data-lucide="download" style="width: 16px; height: 16px"></i>
-            Exportar
-          </button>
-          <button
-            class="btn btn-primary"
-            type="button"
-            onclick="window.location.href = '/modules/order/neworden.html'"
-          >
-            <i data-lucide="plus" style="width: 18px; height: 18px"></i>
-            Nuevo Pedido
-          </button>
-        </div>
-      </div>
+     <div class="page-header animate-in">
+  <div class="page-header-left">
+    <h1>Pedidos</h1>
+  </div>
+  <div class="page-header-actions">
+    <button class="btn btn-outline" type="button">
+      <i data-lucide="download" style="width: 16px; height: 16px"></i>
+      <span class="btn-label">Exportar</span>
+    </button>
+    <button class="btn btn-primary" type="button" onclick="window.location.href = '/modules/order/neworden.html'">
+      <i data-lucide="plus" style="width: 18px; height: 18px"></i>
+      <span class="btn-label">Nuevo Pedido</span>
+    </button>
+  </div>
+</div>
 
       <!-- Stats Row -->
       <div class="stats-row animate-in delay-1">
