@@ -24,6 +24,21 @@
   --fb-font-family: system-ui, -apple-system, 'Inter', 'Segoe UI', sans-serif;
 }
 
+/* Animación de entrada */
+@keyframes filterBarEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
 /*  Contenedor Principal */
 .filter-bar {
   background: var(--fb-bg);
@@ -36,6 +51,7 @@
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 16px;
+  animation: filterBarEnter 0.45s ease-out;
 }
 
 /* Grupo de Campo (Label + Input/Select) */
@@ -77,11 +93,11 @@
 }
 
 .filter-input-wrapper .filter-input {
-  padding-left: 42px; /* Deja espacio para el icono */
+  padding-left: 42px; 
   display: block;
 }
 
-/* El icono ahora se centra perfectamente de forma vertical respecto al INPUT */
+
 .filter-input-wrapper .filter-icon {
   position: absolute;
   left: 14px;

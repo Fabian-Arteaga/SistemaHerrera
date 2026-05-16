@@ -22,21 +22,21 @@
     <script src="/shared/components/topbar/topbar.js"></script>
 
     <main class="main-content">
-      <div class="page-header">
-        <h1>Productos</h1>
-
-        <div class="page-header-actions">
-          <button class="btn btn-outline" onclick="alert('Exportar catálogo')">
-            <i data-lucide="download"></i>
-            <span class="btn-label">Exportar</span>
-          </button>
-          <button class="btn btn-primary" onclick="openModal()"('Nuevo producto')">
-            <i data-lucide="plus"></i>
-            <span class="btn-label">Nuevo Producto</span>
-          </button>
-        </div>
-      </div>
-
+      <div class="page-header animate-in">
+  <div class="page-header-left">
+    <h1>Productos</h1>
+  </div>
+  <div class="page-header-actions">
+    <button class="btn btn-outline" onclick="alert('Exportar catálogo')">
+      <i data-lucide="download" style="width: 16px; height: 16px"></i>
+      <span class="btn-label">Exportar</span>
+    </button>
+    <button class="btn btn-primary" onclick="openModal()">
+      <i data-lucide="plus" style="width: 18px; height: 18px"></i>
+      <span class="btn-label">Nuevo Producto</span>
+    </button>
+  </div>
+</div>
       <div class="stats-row">
         <div class="stat-card stat-card-mint">
           <div class="stat-card-decoration"></div>

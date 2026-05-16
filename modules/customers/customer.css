@@ -1,34 +1,12 @@
-.main-content {
-    margin-left: 240px;
-    margin-top: 60px;
-    padding: 24px 32px;
-    background-color: var(--color-bg-page);
-    min-height: calc(100vh - 60px);
-    overflow-y: auto;
-}
+/* MAIN GLOBAL STYLES */
 
-.page-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 24px;
-}
+/*HEADER GLOBAL STYLES*/
 
-.page-header-left h1 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 32px;
-    color: var(--color-text-heading);
-    margin-bottom: 4px;
-}
+/*STATS ROW GLOBAL STYLES*/
 
-.page-header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+/*FILTER BAR GLOBAL STYLES*/
 
-
+/* TABLE GLOBAL STYLES */
 
 .table-card {
     background: var(--color-white);

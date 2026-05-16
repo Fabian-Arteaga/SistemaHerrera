@@ -1,49 +1,11 @@
-/* MAIN */
-.main-content {
-  margin-left: 240px;
-  margin-top: 60px;
-  padding: 28px 32px 40px;
-  min-height: calc(100vh - 60px);
-  background: var(--color-bg-page);
-}
+/* MAIN GLOBAL STYLES */
 
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.main-content > * {
-  animation: fadeSlideIn 0.35s ease forwards;
-}
+/*HEADER GLOBAL STYLES*/
 
-/* PAGE HEADER */
-.page-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-}
-.page-header h1 {
-  font-size: 30px;
-  font-weight: 800;
-  color: var(--color-text-heading);
-  letter-spacing: -0.02em;
-}
-.page-header-actions {
-  display: flex;
-  gap: 10px;
-}
+/*STATS ROW GLOBAL STYLES*/
 
-/* BUTTONS */
-.btn svg {
-  width: 17px;
-  height: 17px;
-}
+/*FILTER BAR GLOBAL STYLES*/
+
 
 /* QUICK ACTIONS BAR */
 .quick-actions-bar {
