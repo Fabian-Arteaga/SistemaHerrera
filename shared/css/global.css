@@ -108,7 +108,10 @@
   margin: 0;
   line-height: 1.2;
 }
-
+.page-subtitle{
+  font-size: 14px;
+  color: #667085;
+}
 /* --- ACCIONES (BOTONES) --- */
 .page-header-actions {
   display: flex;
