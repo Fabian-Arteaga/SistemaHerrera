@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sabores — Sorbetería Herrera</title>
+
+    <link rel="stylesheet" href="/shared/css/global.css" />
+    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
+    <link rel="stylesheet" href="/shared/css/cards.css" />
+    <link rel="stylesheet" href="/shared/css/filterBar.css" />
+    <link rel="stylesheet" href="flavors.css" />
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  </head>
+  <body>
+    <div id="layout-placeholder"></div>
+    <script src="/shared/components/sidebar/sidebar.js"></script>
+
+    <div id="topbar-placeholder"></div>
+    <script src="/shared/components/topbar/topbar.js"></script>
+
+    <main class="main-content flavors-page">
+      <div class="page-header animate-in">
+        <div class="page-header-left">
+          <h1>Catálogo de sabores</h1>
+          <p class="page-subtitle">
+            Gestiona todos los sabores disponibles en tu catálogo
+          </p>
+        </div>
+
+        <div class="page-header-actions">
+          <button
+            class="btn btn-primary"
+            type="button"
+            onclick="openCreateFlavorModal()"
+          >
+            <i data-lucide="plus"></i>
+            <span class="btn-label">Nuevo sabor</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card stat-card-mint">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon"><i data-lucide="ice-cream-bowl"></i></div>
+          <div class="stat-card-label">Total sabores</div>
+          <div class="stat-card-value">17</div>
+        </div>
+
+        <div class="stat-card stat-card-purple">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon"><i data-lucide="check-circle"></i></div>
+          <div class="stat-card-label">Sabores activos</div>
+          <div class="stat-card-value">14</div>
+        </div>
+
+        <div class="stat-card stat-card-coral">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon"><i data-lucide="clock-3"></i></div>
+          <div class="stat-card-label">Próximos a inactivar</div>
+          <div class="stat-card-value">1</div>
+        </div>
+
+        <div class="stat-card stat-card-yellow">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon"><i data-lucide="x-circle"></i></div>
+          <div class="stat-card-label">Inactivos</div>
+          <div class="stat-card-value">2</div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-field filter-search">
+          <label class="filter-label">Buscar</label>
+          <div class="filter-input-wrapper">
+            <input
+              type="text"
+              class="filter-input"
+              placeholder="Buscar sabor..."
+            />
+            <i data-lucide="search" class="filter-icon"></i>
+          </div>
+        </div>
+
+        <div class="filter-divider"></div>
+
+        <div class="filter-field">
+          <label class="filter-label">Estado</label>
+          <select class="filter-select">
+            <option>Todos</option>
+            <option>Activo</option>
+            <option>Inactivo</option>
+            <option>Próximo a inactivar</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label class="filter-label">Categoría</label>
+          <select class="filter-select">
+            <option>Todas</option>
+            <option>Frutales</option>
+            <option>Tropicales</option>
+            <option>Clásicos</option>
+            <option>Premium</option>
+          </select>
+        </div>
+
+        <div class="filter-divider"></div>
+
+        <div class="filter-actions">
+          <button class="filter-btn filter-btn--clear">Limpiar</button>
+          <button class="filter-btn filter-btn--primary">Buscar</button>
+        </div>
+      </div>
+
+      <div class="results-header">
+        <h2>
+          <span>Sabores</span>
+          <span class="count-badge">17</span>
+        </h2>
+      </div>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <span class="product-card-status active">Activo</span>
+          <div class="product-card-image flavor-image-wrap">
+            <img
+              src="../../../assets/FlavorsImages/SaborFresa.png"
+              alt="Sabor Fresa"
+            />
+          </div>
+          <div class="product-card-body">
+            <h3 class="product-card-name">Fresa</h3>
+            <div class="product-card-meta">
+              <span class="meta-tag flavor"
+                ><i data-lucide="cherry"></i> Frutales</span
+              >
+            </div>
+            <p class="product-card-usage">Disponible en 8 productos</p>
+            <p class="product-card-code">SAB-007-FRE</p>
+          </div>
+          <button
+            class="btn-view"
+            type="button"
+            onclick="openDetailFlavorModal()"
+          >
+            <i data-lucide="eye"></i>
+          </button>
+        </div>
+
+        <div class="product-card">
+          <span class="product-card-status active">Activo</span>
+          <div class="product-card-image flavor-image-wrap">
+            <img
+              src="../../../assets/FlavorsImages/SaborChocolate.png"
+              alt="Sabor Chocolate"
+            />
+          </div>
+          <div class="product-card-body">
+            <h3 class="product-card-name">Chocolate</h3>
+            <div class="product-card-meta">
+              <span class="meta-tag line"
+                ><i data-lucide="tag"></i> Clásicos</span
+              >
+            </div>
+            <p class="product-card-usage">Disponible en 8 productos</p>
+            <p class="product-card-code">SAB-004-CHO</p>
+          </div>
+          <button
+            class="btn-view"
+            type="button"
+            onclick="openDetailFlavorModal()"
+          >
+            <i data-lucide="eye"></i>
+          </button>
+        </div>
+
+        <div class="product-card">
+          <span class="product-card-status active">Activo</span>
+          <div class="product-card-image flavor-image-wrap">
+            <img
+              src="../../../assets/FlavorsImages/SaborMango.png"
+              alt="Sabor Mango"
+            />
+          </div>
+          <div class="product-card-body">
+            <h3 class="product-card-name">Mango</h3>
+            <div class="product-card-meta">
+              <span class="meta-tag flavor"
+                ><i data-lucide="cherry"></i> Tropicales</span
+              >
+            </div>
+            <p class="product-card-usage">Disponible en 6 productos</p>
+            <p class="product-card-code">SAB-012-MAN</p>
+          </div>
+          <button
+            class="btn-view"
+            type="button"
+            onclick="openDetailFlavorModal()"
+          >
+            <i data-lucide="eye"></i>
+          </button>
+        </div>
+
+        <div class="product-card">
+          <span class="product-card-status warning">Próximo a inactivar</span>
+          <div class="product-card-image flavor-image-wrap">
+            <img
+              src="../../../assets/FlavorsImages/SaborPistacho.png"
+              alt="Sabor Pistacho"
+            />
+          </div>
+          <div class="product-card-body">
+            <h3 class="product-card-name">Pistacho</h3>
+            <div class="product-card-meta">
+              <span class="meta-tag presentation"
+                ><i data-lucide="gem"></i> Premium</span
+              >
+            </div>
+            <p class="product-card-usage">Disponible en 2 productos</p>
+            <p class="product-card-code">SAB-015-PIS</p>
+          </div>
+          <button
+            class="btn-view"
+            type="button"
+            onclick="openDetailFlavorModal()"
+          >
+            <i data-lucide="eye"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <div class="flavor-modal-overlay" id="detailFlavorModal">
+      <div class="flavor-modal">
+        <div class="flavor-modal-header">
+          <h2 class="flavor-modal-title">Detalle del sabor</h2>
+          <button
+            class="flavor-modal-close"
+            type="button"
+            onclick="closeDetailFlavorModal()"
+          >
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <div class="flavor-modal-hero">
+          <div class="flavor-modal-hero-image">
+            <img
+              src="../../../assets/FlavorsImages/SaborFresa.png"
+              alt="Sabor Fresa"
+            />
+          </div>
+
+          <div class="flavor-modal-hero-info">
+            <div class="flavor-modal-hero-top">
+              <h3>Fresa</h3>
+              <span class="flavor-status-badge active">Activo</span>
+            </div>
+            <p class="flavor-modal-subtitle">Sabor frutal</p>
+            <p class="flavor-modal-code">Código: SAB-007-FRE</p>
+            <p class="flavor-modal-usage">Disponible en 8 productos</p>
+          </div>
+        </div>
+
+        <div class="flavor-modal-body">
+          <div class="flavor-info-card">
+            <h4>Información general</h4>
+
+            <div class="flavor-info-grid">
+              <div class="flavor-info-column">
+                <div class="flavor-info-item">
+                  <span class="info-label">Nombre del sabor</span>
+                  <span class="info-value">Fresa</span>
+                </div>
+
+                <div class="flavor-info-item">
+                  <span class="info-label">Categoría</span>
+                  <span class="info-value">
+                    <span class="info-pill category-fruit">Frutales</span>
+                  </span>
+                </div>
+
+                <div class="flavor-info-item">
+                  <span class="info-label">Color</span>
+                  <span class="info-value color-value">
+                    <span class="color-dot"></span>
+                    #FF6B6B
+                  </span>
+                </div>
+
+                <div class="flavor-info-item">
+                  <span class="info-label">Disponibilidad</span>
+                  <span class="info-value">8 productos asociados</span>
+                </div>
+              </div>
+
+              <div class="flavor-info-column">
+                <div class="flavor-info-item">
+                  <span class="info-label">Estado</span>
+                  <span class="info-value">
+                    <span class="info-pill status-active">Activo</span>
+                  </span>
+                </div>
+
+                <div class="flavor-info-item">
+                  <span class="info-label">Fecha de creación</span>
+                  <span class="info-value">02/01/2025 - 10:30 AM</span>
+                </div>
+
+                <div class="flavor-info-item">
+                  <span class="info-label">Última actualización</span>
+                  <span class="info-value">15/01/2025 - 02:45 PM</span>
+                </div>
+
+                <div class="flavor-info-item">
+                  <span class="info-label">Creado por</span>
+                  <span class="info-value">Indiana Herrera</span>
+                </div>
+
+                <div class="flavor-info-item">
+                  <span class="info-label">Modificado por</span>
+                  <span class="info-value">Fabian Arteaga</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flavor-modal-overlay" id="createFlavorModal">
+      <div class="create-flavor-modal">
+        <div class="create-flavor-header">
+          <div class="create-flavor-header-left">
+            <div class="create-flavor-icon">
+              <i data-lucide="cherry"></i>
+            </div>
+            <div>
+              <h2>Nuevo sabor</h2>
+              <p>Completa los datos del sabor</p>
+            </div>
+          </div>
+
+          <button
+            class="create-flavor-close"
+            type="button"
+            onclick="closeCreateFlavorModal()"
+          >
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <div class="create-flavor-body">
+          <div class="create-flavor-upload">
+            <div class="create-flavor-upload-icon">
+              <i data-lucide="image-plus"></i>
+            </div>
+            <p class="upload-title">Subir imagen del sabor</p>
+            <p class="upload-subtitle">PNG, JPG · Máx. 2 MB</p>
+          </div>
+
+          <div class="create-flavor-grid">
+            <div class="create-flavor-field create-flavor-field-full">
+              <label class="create-flavor-label">
+                <i data-lucide="type"></i>
+                Nombre del sabor <span>*</span>
+              </label>
+              <input
+                type="text"
+                class="create-flavor-input"
+                placeholder="Ej. Fresa"
+              />
+            </div>
+
+            <div class="create-flavor-field">
+              <label class="create-flavor-label">
+                <i data-lucide="barcode"></i>
+                Código <span>*</span>
+              </label>
+              <input
+                type="text"
+                class="create-flavor-input"
+                placeholder="Ej. SAB-FRE-001"
+              />
+            </div>
+
+            <div class="create-flavor-field">
+              <label class="create-flavor-label">
+                <i data-lucide="tags"></i>
+                Categoría <span>*</span>
+              </label>
+              <select class="create-flavor-input">
+                <option selected>Seleccionar</option>
+                <option>Frutales</option>
+                <option>Tropicales</option>
+                <option>Clásicos</option>
+                <option>Premium</option>
+              </select>
+            </div>
+
+            <div class="create-flavor-field">
+              <label class="create-flavor-label">
+                <i data-lucide="palette"></i>
+                Color referencial
+              </label>
+              <input
+                type="text"
+                class="create-flavor-input"
+                placeholder="Ej. #FF6B6B"
+              />
+            </div>
+
+            <div class="create-flavor-field create-flavor-field-full">
+              <label class="create-flavor-label">
+                <i data-lucide="file-text"></i>
+                Descripción
+              </label>
+              <textarea
+                class="create-flavor-textarea"
+                placeholder="Describe el sabor..."
+              ></textarea>
+            </div>
+
+            <div class="create-flavor-field create-flavor-field-full">
+              <label class="create-flavor-label">
+                <i data-lucide="badge-check"></i>
+                Estado
+              </label>
+
+              <div class="create-flavor-status">
+                <button class="status-chip active" type="button">Activo</button>
+                <button class="status-chip" type="button">Inactivo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="create-flavor-footer">
+          <button
+            class="btn btn-outline"
+            type="button"
+            onclick="closeCreateFlavorModal()"
+          >
+            Cancelar
+          </button>
+          <button class="btn btn-primary" type="button">
+            <i data-lucide="save"></i>
+            <span class="btn-label">Guardar sabor</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openDetailFlavorModal() {
+        document.getElementById("detailFlavorModal").classList.add("is-open");
+      }
+
+      function closeDetailFlavorModal() {
+        document
+          .getElementById("detailFlavorModal")
+          .classList.remove("is-open");
+      }
+
+      function openCreateFlavorModal() {
+        document.getElementById("createFlavorModal").classList.add("is-open");
+      }
+
+      function closeCreateFlavorModal() {
+        document
+          .getElementById("createFlavorModal")
+          .classList.remove("is-open");
+      }
+
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
