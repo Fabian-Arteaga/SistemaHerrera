@@ -1,209 +1,507 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuevo Reabastecimiento</title>
     <link rel="stylesheet" href="/shared/css/global.css" />
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/modules/restock/restock.css" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="layout-placeholder"></div>
     <script src="/shared/components/sidebar/sidebar.js"></script>
 
     <div id="topbar-placeholder"></div>
     <script src="/shared/components/topbar/topbar.js"></script>
- 
- <!-- Main Content -->
-        <main class="main-content">
-            <div class="page-header">
+
+    <main class="main-content">
+      <div class="page-header">
         <div class="header-title">
           <h1>Nuevo reabastecimiento</h1>
           <p>
-            Registro de una nueva entrada de productos al inventario a través de un reabastecimiento. 
+            Registro de una nueva entrada de productos al inventario a través de
+            un reabastecimiento.
           </p>
         </div>
       </div>
-            <!-- Scrollable Content -->
-            <div class="scroll-area">
-                
-                <!-- Info Section -->
-                <div class="form-card">
-                    <div class="section-header">
-                        <h3 class="section-title">Información del reabastecimiento</h3>
-                    </div>
-                    <div class="grid-3">
-                        <div class="form-group">
-                            <label class="form-label">Código del reabastecimiento</label>
-                            <input type="text" class="form-input" value="EL-RBT-028" readonly style="background:#F9FAFB;">
-                            <span class="form-helper">Código único para identificar el reabastecimiento</span>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Fecha del reabastecimiento</label>
-                            <input type="date" class="form-input" value="2026-03-02">
-                            <span class="form-helper">Fecha en la que se realiza el ingreso</span>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Usuario responsable</label>
-                            <select class="form-select">
-                                <option>Indiana Herrera</option>
-                                <option>Marcelo Mena</option>
-                                <option>Ronald Narvaez</option>
-                            </select>
-                            <span class="form-helper">Selecciona el usuario que registra el reabastecimiento</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Lots Section -->
-                <div class="form-card">
-                    <div class="section-header">
-                        <h3 class="section-title">Lotes del reabastecimiento</h3>
-                        <button class="btn-primary">
-                            <i data-lucide="plus" style="width:16px; height:16px;"></i> Agregar lote
-                        </button>
-                    </div>
-                    <p style="font-size:13px; color:var(--color-text-hint); margin-bottom:16px;">Agrega los lotes creados en este reabastecimiento.</p>
-                    
-                    <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th style="width:40px;">#</th>
-                                    <th>Código del lote</th>
-                                    <th>Producto</th>
-                                    <th>Cantidad inicial</th>
-                                    <th>Costo de producción por unidad</th>
-                                  
-                                    <th>Fecha de vencimiento</th>
-                                    <th style="text-align:center;">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td style="font-weight:500; color:var(--color-text-heading);">FR2016426</td>
-                                    <td>
-                                        <div class="product-cell">
-                                            <div class="product-dot" style="background:#F87171;"></div>
-                                            <span>Fresa 8 Onz</span>
-                                        </div>
-                                    </td>
-                                    <td>100 <span style="color:var(--color-text-hint); font-size:11px;">unidades</span></td>
-                                    <td>C$ 30.00</td>
-                                    <td>01/04/2026</td>
-                                    <td style="text-align:center;">
-                                        <div style="display:flex; justify-content:center; gap:4px;">
-                                            <button class="action-btn"><i data-lucide="edit-2" style="width:14px; height:14px;"></i></button>
-                                            <button class="action-btn delete"><i data-lucide="trash-2" style="width:14px; height:14px;"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td style="font-weight:500; color:var(--color-text-heading);">CH1010427</td>
-                                    <td>
-                                        <div class="product-cell">
-                                            <div class="product-dot" style="background:#78350F;"></div>
-                                            <span>Chocolate 16 Onz</span>
-                                        </div>
-                                    </td>
-                                    <td>80 <span style="color:var(--color-text-hint); font-size:11px;">unidades</span></td>
-                                    <td>C$ 32.00</td>
-                                    <td>10/04/2026</td>
-                                    <td style="text-align:center;">
-                                        <div style="display:flex; justify-content:center; gap:4px;">
-                                            <button class="action-btn"><i data-lucide="edit-2" style="width:14px; height:14px;"></i></button>
-                                            <button class="action-btn delete"><i data-lucide="trash-2" style="width:14px; height:14px;"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td style="font-weight:500; color:var(--color-text-heading);">VA1010428</td>
-                                    <td>
-                                        <div class="product-cell">
-                                            <div class="product-dot" style="background:#FCD34D;"></div>
-                                            <span>Vainilla 8 Onz</span>
-                                        </div>
-                                    </td>
-                                    <td>60 <span style="color:var(--color-text-hint); font-size:11px;">unidades</span></td>
-                                    <td>C$ 28.00</td>
-                                    <td>25/03/2026</td>
-                                    <td style="text-align:center;">
-                                        <div style="display:flex; justify-content:center; gap:4px;">
-                                            <button class="action-btn"><i data-lucide="edit-2" style="width:14px; height:14px;"></i></button>
-                                            <button class="action-btn delete"><i data-lucide="trash-2" style="width:14px; height:14px;"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td style="font-weight:500; color:var(--color-text-heading);">CO1010429</td>
-                                    <td>
-                                        <div class="product-cell">
-                                            <div class="product-dot" style="background:#D1D5DB;"></div>
-                                            <span>Coco 8 Onz</span>
-                                        </div>
-                                    </td>
-                                    <td>40 <span style="color:var(--color-text-hint); font-size:11px;">unidades</span></td>
-                                    <td>C$ 28.00</td>
-                                    <td>15/04/2026</td>
-                                    <td style="text-align:center;">
-                                        <div style="display:flex; justify-content:center; gap:4px;">
-                                            <button class="action-btn"><i data-lucide="edit-2" style="width:14px; height:14px;"></i></button>
-                                            <button class="action-btn delete"><i data-lucide="trash-2" style="width:14px; height:14px;"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Summary -->
-                <div class="summary-grid">
-                    <div class="summary-item">
-                        <span class="summary-label">Resumen del reabastecimiento</span>
-                        <span class="summary-sub">Resumen general de los lotes que estás agregando.</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-value">4</span>
-                        <span class="summary-label">Lotes</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-value">280</span>
-                        <span class="summary-label">Unidades totales</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-value">C$ 7,840.00</span>
-                        <span class="summary-label">Inversión total</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-value">C$ 28.00</span>
-                        <span class="summary-label">Costo promedio por unidad</span>
-                    </div>
-                </div>
-
-                <!-- Actions -->
-                <div class="bottom-actions">
-                    <button class="btn-outline">Guardar como borrador</button>
-                    <button class="btn-primary">
-                        <i data-lucide="check-circle" style="width:18px; height:18px;"></i>
-                        Guardar reabastecimiento
-                    </button>
-                </div>
-
+      <div class="scroll-area">
+        <div class="form-card">
+          <div class="section-header">
+            <h3 class="section-title">Información del reabastecimiento</h3>
+          </div>
+          <div class="grid-3">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-input"
+                value="EL-RBT-028"
+                placeholder="Código del reabastecimiento"
+                readonly
+                style="background: #f9fafb"
+              />
+              <span class="form-helper"
+                >Código único para identificar el reabastecimiento</span
+              >
             </div>
-        </main>
+            <div class="form-group">
+              <input
+                type="date"
+                class="form-input"
+                value="2026-03-02"
+                placeholder="Fecha del reabastecimiento"
+              />
+              <span class="form-helper"
+                >Fecha en la que se realiza el ingreso</span
+              >
+            </div>
+            <div class="form-group">
+              <select class="form-select">
+                <option value="" disabled selected>Usuario responsable</option>
+                <option>Indiana Herrera</option>
+                <option>Marcelo Mena</option>
+                <option>Ronald Narvaez</option>
+              </select>
+              <span class="form-helper"
+                >Selecciona el usuario que registra el reabastecimiento</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="section-header">
+            <h3 class="section-title">Lotes del reabastecimiento</h3>
+            <button class="btn-primary" type="button" onclick="openModal()">
+              <i data-lucide="plus" style="width: 16px; height: 16px"></i>
+              Agregar lote
+            </button>
+          </div>
+          <p
+            style="
+              font-size: 13px;
+              color: var(--color-text-hint);
+              margin-bottom: 16px;
+            "
+          >
+            Agrega los lotes creados en este reabastecimiento.
+          </p>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 40px">#</th>
+                  <th>Código del lote</th>
+                  <th>Producto</th>
+                  <th>Cantidad inicial</th>
+                  <th>Costo de producción por unidad</th>
+                  <th>Fecha de vencimiento</th>
+                  <th style="text-align: center">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td
+                    style="font-weight: 500; color: var(--color-text-heading)"
+                  >
+                    FR2016426
+                  </td>
+                  <td>
+                    <div class="product-cell">
+                      <div
+                        class="product-dot"
+                        style="background: #f87171"
+                      ></div>
+                      <span>Fresa 8 Onz</span>
+                    </div>
+                  </td>
+                  <td>
+                    100
+                    <span style="color: var(--color-text-hint); font-size: 11px"
+                      >unidades</span
+                    >
+                  </td>
+                  <td>C$ 30.00</td>
+                  <td>01/04/2026</td>
+                  <td style="text-align: center">
+                    <div
+                      style="display: flex; justify-content: center; gap: 4px"
+                    >
+                      <button class="action-btn" aria-label="Editar lote">
+                        <i
+                          data-lucide="edit-2"
+                          style="width: 14px; height: 14px"
+                        ></i>
+                      </button>
+                      <button
+                        class="action-btn delete"
+                        aria-label="Eliminar lote"
+                      >
+                        <i
+                          data-lucide="trash-2"
+                          style="width: 14px; height: 14px"
+                        ></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td
+                    style="font-weight: 500; color: var(--color-text-heading)"
+                  >
+                    CH1010427
+                  </td>
+                  <td>
+                    <div class="product-cell">
+                      <div
+                        class="product-dot"
+                        style="background: #78350f"
+                      ></div>
+                      <span>Chocolate 16 Onz</span>
+                    </div>
+                  </td>
+                  <td>
+                    80
+                    <span style="color: var(--color-text-hint); font-size: 11px"
+                      >unidades</span
+                    >
+                  </td>
+                  <td>C$ 32.00</td>
+                  <td>10/04/2026</td>
+                  <td style="text-align: center">
+                    <div
+                      style="display: flex; justify-content: center; gap: 4px"
+                    >
+                      <button class="action-btn" aria-label="Editar lote">
+                        <i
+                          data-lucide="edit-2"
+                          style="width: 14px; height: 14px"
+                        ></i>
+                      </button>
+                      <button
+                        class="action-btn delete"
+                        aria-label="Eliminar lote"
+                      >
+                        <i
+                          data-lucide="trash-2"
+                          style="width: 14px; height: 14px"
+                        ></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td
+                    style="font-weight: 500; color: var(--color-text-heading)"
+                  >
+                    VA1010428
+                  </td>
+                  <td>
+                    <div class="product-cell">
+                      <div
+                        class="product-dot"
+                        style="background: #fcd34d"
+                      ></div>
+                      <span>Vainilla 8 Onz</span>
+                    </div>
+                  </td>
+                  <td>
+                    60
+                    <span style="color: var(--color-text-hint); font-size: 11px"
+                      >unidades</span
+                    >
+                  </td>
+                  <td>C$ 28.00</td>
+                  <td>25/03/2026</td>
+                  <td style="text-align: center">
+                    <div
+                      style="display: flex; justify-content: center; gap: 4px"
+                    >
+                      <button class="action-btn" aria-label="Editar lote">
+                        <i
+                          data-lucide="edit-2"
+                          style="width: 14px; height: 14px"
+                        ></i>
+                      </button>
+                      <button
+                        class="action-btn delete"
+                        aria-label="Eliminar lote"
+                      >
+                        <i
+                          data-lucide="trash-2"
+                          style="width: 14px; height: 14px"
+                        ></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td
+                    style="font-weight: 500; color: var(--color-text-heading)"
+                  >
+                    CO1010429
+                  </td>
+                  <td>
+                    <div class="product-cell">
+                      <div
+                        class="product-dot"
+                        style="background: #d1d5db"
+                      ></div>
+                      <span>Coco 8 Onz</span>
+                    </div>
+                  </td>
+                  <td>
+                    40
+                    <span style="color: var(--color-text-hint); font-size: 11px"
+                      >unidades</span
+                    >
+                  </td>
+                  <td>C$ 28.00</td>
+                  <td>15/04/2026</td>
+                  <td style="text-align: center">
+                    <div
+                      style="display: flex; justify-content: center; gap: 4px"
+                    >
+                      <button class="action-btn" aria-label="Editar lote">
+                        <i
+                          data-lucide="edit-2"
+                          style="width: 14px; height: 14px"
+                        ></i>
+                      </button>
+                      <button
+                        class="action-btn delete"
+                        aria-label="Eliminar lote"
+                      >
+                        <i
+                          data-lucide="trash-2"
+                          style="width: 14px; height: 14px"
+                        ></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span class="summary-label">Resumen del reabastecimiento</span>
+            <span class="summary-sub"
+              >Resumen general de los lotes que estás agregando.</span
+            >
+          </div>
+          <div class="summary-item">
+            <span class="summary-value">4</span>
+            <span class="summary-label">Lotes</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-value">280</span>
+            <span class="summary-label">Unidades totales</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-value">C$ 7,840.00</span>
+            <span class="summary-label">Inversión total</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-value">C$ 28.00</span>
+            <span class="summary-label">Costo promedio por unidad</span>
+          </div>
+        </div>
+
+        <div class="bottom-actions">
+          <button class="btn-outline">Guardar como borrador</button>
+          <button class="btn-primary">
+            <i data-lucide="check-circle" style="width: 18px; height: 18px"></i>
+            Guardar reabastecimiento
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="modal-overlay"
+      id="modalReabastecimiento"
+      onclick="closeModalOnOverlay(event)"
+    >
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-header-icon">
+            <i data-lucide="package-plus"></i>
+          </div>
+          <div>
+            <h2 class="modal-title">Nuevo Reabastecimiento</h2>
+            <p class="modal-subtitle">Registra la entrada de un nuevo lote</p>
+          </div>
+          <button class="modal-close" type="button" onclick="closeModal()">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <form class="modal-body" id="formReabastecimiento">
+          <div class="modal-row">
+            <div class="modal-field">
+              <input
+                class="modal-input"
+                type="text"
+                id="modalLote"
+                placeholder="Lote * (Ej: LT-0001)"
+                required
+              />
+            </div>
+            <div class="modal-field">
+              <input
+                class="modal-input"
+                type="date"
+                id="modalFecha"
+                placeholder="Fecha *"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="modal-row modal-row--3">
+            <div class="modal-field">
+              <select class="modal-input modal-select" id="modalLinea">
+                <option value="" disabled selected>Línea</option>
+                <option>Tradicional</option>
+                <option>Especial</option>
+                <option>Premium</option>
+                <option>Light</option>
+              </select>
+            </div>
+            <div class="modal-field">
+              <select class="modal-input modal-select" id="modalSabor">
+                <option value="" disabled selected>Sabor</option>
+                <option>Mango</option>
+                <option>Fresa</option>
+                <option>Vainilla</option>
+                <option>Coco</option>
+              </select>
+            </div>
+            <div class="modal-field">
+              <select class="modal-input modal-select" id="modalPresentacion">
+                <option value="" disabled selected>Presentación</option>
+                <option>4 Onzas</option>
+                <option>8 Onzas</option>
+                <option>1 Libra</option>
+                <option>1 Galón</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-row">
+            <div class="modal-field">
+              <input
+                class="modal-input"
+                type="number"
+                id="modalCantidad"
+                min="1"
+                placeholder="Cantidad (0)"
+              />
+            </div>
+            <div class="modal-field">
+              <div class="modal-input-prefix">
+                <span class="input-prefix">C$</span>
+                <input
+                  class="modal-input modal-input--prefixed"
+                  type="number"
+                  id="modalCosto"
+                  step="0.01"
+                  placeholder="Costo Unitario (0.00)"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-row modal-row--3">
+            <div class="modal-field">
+              <input
+                class="modal-input"
+                type="date"
+                id="modalVencimiento"
+                placeholder="Vencimiento"
+              />
+            </div>
+            <div class="modal-field">
+              <select class="modal-input modal-select" id="modalUbicacion">
+                <option value="" disabled selected>Ubicación</option>
+                <option>Bodega Central</option>
+                <option>Congelador 1</option>
+                <option>Congelador 2</option>
+              </select>
+            </div>
+            <div class="modal-field">
+              <select class="modal-input modal-select" id="modalEstado">
+                <option value="" disabled selected>Estado</option>
+                <option value="disponible">Disponible</option>
+                <option value="cuarentena">En Cuarentena</option>
+                <option value="revision">En Revisión</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              class="btn btn-outline"
+              type="button"
+              onclick="closeModal()"
+            >
+              Cancelar
+            </button>
+            <button class="btn btn-primary" type="submit">
+              <i data-lucide="save"></i> Guardar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script>
-        lucide.createIcons();
-    </script>
+      lucide.createIcons();
 
-</body>
+      function openModal() {
+        document
+          .getElementById("modalReabastecimiento")
+          .classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        document
+          .getElementById("modalReabastecimiento")
+          .classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+
+      function closeModalOnOverlay(event) {
+        if (event.target === document.getElementById("modalReabastecimiento")) {
+          closeModal();
+        }
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+
+      document
+        .getElementById("formReabastecimiento")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          alert("Lote guardado correctamente");
+          closeModal();
+        });
+    </script>
+  </body>
 </html>
