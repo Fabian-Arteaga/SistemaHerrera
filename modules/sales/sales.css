@@ -10,8 +10,8 @@
 
 .page-header-sales {
     display: flex;
-   
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 24px;
 }
 
@@ -23,14 +23,6 @@
     margin-bottom: 4px;
 }
 
-.page-subtitle {
-    font-size: 14px;
-    color: #6B7280;
-}
-
-/* =========================================
-   GRID DE VENTAS (Diseño principal)
-========================================= */
 .sales-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -60,6 +52,19 @@
     border-bottom: 1px solid #F1F5F9;
 }
 
+.action-header{
+    display: flex;
+    justify-content: flex-end;
+    
+}
+.btn-primary{
+    margin: 0;
+}
+
+.btn-primary svg{
+    height: 16px;
+    width: 16px;
+}
 /* Detalles Fijos */
 .info-list {
     display: grid;
@@ -287,9 +292,6 @@
     font-size: 18px;
 }
 
-/* =========================================
-   BOTÓN PRINCIPAL: REGISTRAR VENTA
-========================================= */
 .btn-registrar-venta-new {
     width: 100%;
     background: #00C296;
@@ -314,7 +316,6 @@
     box-shadow: 0 6px 16px rgba(0, 194, 150, 0.35);
 }
 
-/* Personalización de Scrollbars */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -333,9 +334,6 @@
     background: #94A3B8;
 }
 
-/* =========================================
-   BREAKPOINTS ESTANDARIZADOS (1024, 768, 480)
-========================================= */
 
 @media (max-width: 1024px) {
     .main-content {
