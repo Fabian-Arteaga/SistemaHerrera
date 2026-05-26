@@ -437,162 +437,6 @@
         </div>
       </div>
     </main>
-    <div
-      class="modal-overlay"
-      id="modalReabastecimiento"
-      onclick="closeModalOnOverlay(event)"
-    >
-      <div class="modal">
-        <div class="modal-header">
-          <div class="modal-header-icon">
-            <i data-lucide="package-plus"></i>
-          </div>
-          <div>
-            <h2 class="modal-title">Nuevo Reabastecimiento</h2>
-            <p class="modal-subtitle">Registra la entrada de un nuevo lote</p>
-          </div>
-          <button class="modal-close" type="button" onclick="closeModal()">
-            <i data-lucide="x"></i>
-          </button>
-        </div>
-
-        <form class="modal-body" id="formReabastecimiento">
-          <div class="modal-row">
-            <div class="modal-field">
-              <label class="modal-label" for="modalLote">
-                <i data-lucide="hash"></i> Lote
-                <span class="required">*</span>
-              </label>
-              <input
-                class="modal-input"
-                type="text"
-                id="modalLote"
-                placeholder="LT-0001"
-              />
-            </div>
-            <div class="modal-field">
-              <label class="modal-label" for="modalFecha">
-                <i data-lucide="calendar"></i> Fecha
-                <span class="required">*</span>
-              </label>
-              <input class="modal-input" type="date" id="modalFecha" />
-            </div>
-          </div>
-
-          <div class="modal-row modal-row--3">
-            <div class="modal-field">
-              <label class="modal-label" for="modalLinea">
-                <i data-lucide="tag"></i> Línea
-              </label>
-              <select class="modal-input modal-select" id="modalLinea">
-                <option value="">Seleccionar</option>
-                <option>Tradicional</option>
-                <option>Especial</option>
-                <option>Premium</option>
-                <option>Light</option>
-              </select>
-            </div>
-            <div class="modal-field">
-              <label class="modal-label" for="modalSabor">
-                <i data-lucide="cherry"></i> Sabor
-              </label>
-              <select class="modal-input modal-select" id="modalSabor">
-                <option value="">Seleccionar</option>
-                <option>Mango</option>
-                <option>Fresa</option>
-                <option>Vainilla</option>
-                <option>Coco</option>
-              </select>
-            </div>
-            <div class="modal-field">
-              <label class="modal-label" for="modalPresentacion">
-                <i data-lucide="package"></i> Presentación
-              </label>
-              <select class="modal-input modal-select" id="modalPresentacion">
-                <option value="">Seleccionar</option>
-                <option>4 Onzas</option>
-                <option>8 Onzas</option>
-                <option>1 Libra</option>
-                <option>1 Galón</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="modal-row">
-            <div class="modal-field">
-              <label class="modal-label" for="modalCantidad">
-                <i data-lucide="boxes"></i> Cantidad
-              </label>
-              <input
-                class="modal-input"
-                type="number"
-                id="modalCantidad"
-                min="1"
-                placeholder="0"
-              />
-            </div>
-            <div class="modal-field">
-              <label class="modal-label" for="modalCosto">
-                <i data-lucide="banknote"></i> Costo Unitario
-              </label>
-              <div class="modal-input-prefix">
-                <span class="input-prefix">C$</span>
-                <input
-                  class="modal-input modal-input--prefixed"
-                  type="number"
-                  id="modalCosto"
-                  step="0.01"
-                  placeholder="0.00"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-row modal-row--3">
-            <div class="modal-field">
-              <label class="modal-label" for="modalVencimiento">
-                <i data-lucide="clock-3"></i> Vencimiento
-              </label>
-              <input class="modal-input" type="date" id="modalVencimiento" />
-            </div>
-            <div class="modal-field">
-              <label class="modal-label" for="modalUbicacion">
-                <i data-lucide="warehouse"></i> Ubicación
-              </label>
-              <select class="modal-input modal-select" id="modalUbicacion">
-                <option>Bodega Central</option>
-                <option>Congelador 1</option>
-                <option>Congelador 2</option>
-              </select>
-            </div>
-            <div class="modal-field">
-              <label class="modal-label" for="modalEstado">
-                <i data-lucide="toggle-right"></i> Estado
-              </label>
-              <select class="modal-input modal-select" id="modalEstado">
-                <option value="disponible">Disponible</option>
-                <option value="cuarentena">En Cuarentena</option>
-                <option value="revision">En Revisión</option>
-              </select>
-            </div>
-          </div>
-        </form>
-
-        <div class="modal-footer">
-          <button class="btn btn-outline" type="button" onclick="closeModal()">
-            Cancelar
-          </button>
-          <button
-            class="btn btn-primary"
-            type="button"
-            onclick="alert('Guardar reabastecimiento')"
-          >
-            <i data-lucide="save"></i>
-            Guardar
-          </button>
-        </div>
-      </div>
-    </div>
 
     <!-- ═════ RESTOCK DRAWER HTML ═════ -->
     <div class="restock-drawer-overlay" id="restockDrawerOverlay"></div>
@@ -854,26 +698,6 @@
 
     <script>
       lucide.createIcons();
-      function openModal() {
-        document
-          .getElementById("modalReabastecimiento")
-          .classList.add("is-open");
-        document.body.style.overflow = "hidden";
-        lucide.createIcons();
-      }
-      function closeModal() {
-        document
-          .getElementById("modalReabastecimiento")
-          .classList.remove("is-open");
-        document.body.style.overflow = "";
-      }
-      function closeModalOnOverlay(event) {
-        if (event.target === document.getElementById("modalReabastecimiento"))
-          closeModal();
-      }
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") closeModal();
-      });
 
       function openRestockDrawer() {
         document.getElementById("restockDrawerOverlay").classList.add("active");
@@ -905,8 +729,5 @@
 
       if (typeof lucide !== "undefined") lucide.createIcons();
     </script>
-
-    <script src="/shared/components/sidebar/sidebar.js"></script>
-    <script src="/shared/components/topbar/topbar.js"></script>
   </body>
 </html>
