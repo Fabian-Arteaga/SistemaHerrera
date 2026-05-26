@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ventas - Sorbetería Herrera</title>
     <link rel="stylesheet" href="/shared/css/global.css" />
+    <link rel="stylesheet" href="/shared/css/cards.css" />
     <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
     <link rel="stylesheet" href="/modules/sales/sales.css" />
@@ -15,12 +16,18 @@
     <script src="/shared/components/sidebar/sidebar.js"></script>
     <div id="topbar-placeholder"></div>
     <script src="/shared/components/topbar/topbar.js"></script>
-
-    <div class="main-content">
+    <div class="main-content animate-in">
       <main class="container">
         <div class="page-header-sales">
           <h1 class="page-title">Nueva venta</h1>
-          <p class="page-subtitle">Gestión de facturación</p>
+          <div class="action-header">
+            <a
+              class="btn btn-primary"
+              href="/modules/sales/salesDashboard/salesDashboard.html"
+            >
+              <i data-lucide="file-chart-column"></i>Reportes de ventas</a
+            >
+          </div>
         </div>
 
         <div class="sales-grid">
