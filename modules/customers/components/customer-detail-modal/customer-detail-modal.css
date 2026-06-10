@@ -1,0 +1,179 @@
+/* ============================================================
+   customer-detail-modal.component.css
+   Estilos del modal de detalles de cliente
+   ============================================================ */
+
+/* Reutiliza .modal-overlay, .modal, .modal-header, .btn-close-modal
+   definidos en customer-form-modal.component.css */
+
+.modal-detail {
+    max-width: 500px;
+}
+
+.modal-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-edit-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(139, 95, 191, 0.1);
+    color: #8b5fbf;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-edit-detail svg {
+    width: 14px;
+    height: 14px;
+}
+
+.btn-edit-detail:hover {
+    background: rgba(139, 95, 191, 0.2);
+}
+
+/* ─── Grid de datos ───────────────────────────────────────── */
+
+.detail-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #F3F4F6;
+    gap: 16px;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    min-width: 150px;
+}
+
+.detail-value {
+    font-size: 14px;
+    color: #6B7280;
+    flex: 1;
+    background: #F8FAFC;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+/* Badge de estado dentro del detalle */
+.detail-value .status-badge-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.detail-value .status-badge-inline.active {
+    background: rgba(0, 194, 150, 0.12);
+    color: #00C296;
+}
+
+.detail-value .status-badge-inline.active::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00C296;
+}
+
+.detail-value .status-badge-inline.inactive {
+    background: rgba(250, 137, 123, 0.12);
+    color: #FA897B;
+}
+
+.detail-value .status-badge-inline.inactive::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #FA897B;
+}
+
+/* ─── Footer con botón eliminar ───────────────────────────── */
+
+.detail-modal-footer {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 20px;
+    border-top: 1px solid #F3F4F6;
+    margin-top: 4px;
+}
+
+.btn-delete-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(250, 137, 123, 0.4);
+    background: rgba(250, 137, 123, 0.06);
+    color: #FA897B;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-delete-detail svg {
+    width: 14px;
+    height: 14px;
+}
+
+.btn-delete-detail:hover {
+    background: rgba(250, 137, 123, 0.15);
+    border-color: #FA897B;
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .modal-detail {
+        max-width: 100%;
+    }
+
+    .detail-label {
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .detail-label {
+        min-width: unset;
+    }
+
+    .detail-value {
+        width: 100%;
+    }
+}
