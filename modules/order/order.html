@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pedidos</title>
     <link rel="stylesheet" href="/modules/order/order.css" />
-    <link rel="stylesheet" href="/shared/css/global.css" />
-    <link rel="stylesheet" href="/shared/components/sidebar/sidebar.css" />
-    <link rel="stylesheet" href="/shared/components/topbar/topbar.css" />
-    <link rel="stylesheet" href="/shared/css/cards.css" />
-    <link rel="stylesheet" href="/shared/css/filterBar.css" />
+    <link rel="stylesheet" href="../../styles/variables.css" />
+    <link rel="stylesheet" href="../../styles/reset.css" />
+    <link rel="stylesheet" href="../../styles/global.css" />
+    <link rel="stylesheet" href="../../styles/layout.css" />
+
+    <link rel="stylesheet" href="../shared/components/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="../shared/components/topbar/topbar.css" />
+    <link rel="stylesheet" href="../shared/components/filter-bar/filter-bar.css" />
+    <link rel="stylesheet" href="../shared/components/stat-card/stat-card.css" />
+    <link rel="stylesheet" href="../shared/components/buttons/buttons.css" />
     <link rel="stylesheet" href="/modules/order/ordersDrawer.css" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
   <body>
     <div id="layout-placeholder"></div>
-    <script src="/shared/components/sidebar/sidebar.js"></script>
+    <script src="../shared/components/sidebar/sidebar.js"></script>
     <div id="topbar-placeholder"></div>
-    <script src="/shared/components/topbar/topbar.js"></script>
+    <script src="../shared/components/topbar/topbar.js"></script>
 
     <main class="main-content">
      <div class="page-header animate-in">
@@ -29,7 +34,7 @@
       <i data-lucide="download" style="width: 16px; height: 16px"></i>
       <span class="btn-label">Exportar</span>
     </button>
-    <button class="btn btn-primary" type="button" onclick="window.location.href = '/modules/order/neworden.html'">
+    <button class="btn btn-primary" type="button" onclick="window.location.href = '/modules/order/neworder.html'">
       <i data-lucide="plus" style="width: 18px; height: 18px"></i>
       <span class="btn-label">Nuevo Pedido</span>
     </button>

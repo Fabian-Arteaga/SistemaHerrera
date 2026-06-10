@@ -7,7 +7,7 @@ class TopBar {
     if (!this.container) return;
 
     try {
-      const response = await fetch('/shared/components/topbar/topbar.html');
+      const response = await fetch('/modules/shared/components/topbar/topbar.html');
 
       if (!response.ok) {
         throw new Error(`Error loading topbar: ${response.status}`);
