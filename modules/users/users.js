@@ -1,294 +1,318 @@
+import { UsersService } from './services/users.service.js';
+
+let activeUserId = null;
+
+async function loadUsersTable() {
+    const tbody = document.getElementById('users-table-body');
+    if (!tbody) return;
+
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Cargando usuarios...</td></tr>';
+
+    try {
+        const response = await UsersService.getAllUsers();
+        const usersList = response.data || []; 
+
+        tbody.innerHTML = ''; 
+        document.getElementById('users-count').textContent = usersList.length;
+        document.getElementById('table-info-text').innerHTML = `Mostrando <strong>1-${usersList.length}</strong> de <strong>${usersList.length}</strong> usuarios`;
+
+        let actives = 0, inactives = 0, admins = 0, sellers = 0;
+
+        if (usersList.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No hay usuarios registrados.</td></tr>';
+            return;
+        }
+
+        usersList.forEach(user => {
+            const userRole = (user.roles && user.roles.length > 0) ? user.roles[0] : 'Vendedor';
+            const roleClass = (userRole === 'Administrador' || userRole === 'Admin') ? 'role-admin' : 'role-seller';
+            const statusClass = user.isActive ? 'status-active' : 'status-inactive';
+            const statusText = user.isActive ? 'Activo' : 'Inactivo';
+
+            if (user.isActive) actives++; else inactives++;
+            if (userRole === 'Administrador' || userRole === 'Admin') admins++; else sellers++;
+
+            const fName = user.firstName || '';
+            const lName = user.lastName || '';
+            const initials = (fName.charAt(0) + lName.charAt(0)).toUpperCase() || 'U';
+
+            const row = `
+                <tr data-id="${user.id}" 
+                    data-firstname="${fName}" 
+                    data-lastname="${lName}" 
+                    data-username="${user.userName || ''}" 
+                    data-idnumber="${user.idNumber || 'N/A'}" 
+                    data-email="${user.email || ''}" 
+                    data-role="${userRole}" 
+                    data-status="${user.isActive ? 'active' : 'inactive'}">
+                    <td>
+                        <div class="client-cell">
+                            <div class="client-avatar avatar-1">${initials}</div>
+                            <div class="client-info">
+                                <span class="client-name">${fName} ${lName}</span>
+                                <span class="client-sub">@ ${user.userName || 'N/A'}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${user.idNumber || 'N/A'}</td>
+                    <td>${user.email || 'N/A'}</td>
+                    <td><span class="role-badge ${roleClass}">${userRole}</span></td>
+                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                    <td>
+                        <div class="row-actions">
+                            <button type="button" class="btn-detail btn-edit" title="Ver Detalles"><i data-lucide="eye"></i></button>
+                            <button type="button" class="btn-detail btn-toggle-status" title="Cambiar Estado"><i data-lucide="refresh-cw"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            tbody.insertAdjacentHTML('beforeend', row);
+        });
+
+        document.getElementById('count-active').textContent = actives;
+        document.getElementById('count-inactive').textContent = inactives;
+        document.getElementById('count-admins').textContent = admins;
+        document.getElementById('count-sellers').textContent = sellers;
+
+        if (window.lucide) lucide.createIcons();
+
+    } catch (error) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: red;">Error al conectar con el servidor</td></tr>';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
+    loadUsersTable();
+    loadRolesDropdowns();
 
-  // ========== MODAL AGREGAR USUARIO ==========
-  const overlay = document.getElementById('modal-user');
-  const btnOpen = document.getElementById('btn-open-modal');
-  const btnClose = document.getElementById('btn-close-modal');
-  const btnCancel = document.getElementById('btn-cancel');
-  const togglePass = document.querySelector('.btn-toggle-pass');
-  const passInput = document.getElementById('password');
+    const overlay = document.getElementById('modal-user');
+    document.getElementById('btn-open-modal')?.addEventListener('click', () => overlay.classList.add('active'));
+    document.getElementById('btn-close-modal')?.addEventListener('click', () => overlay.classList.remove('active'));
+    document.getElementById('btn-cancel')?.addEventListener('click', () => overlay.classList.remove('active'));
 
-  btnOpen.addEventListener('click', () => overlay.classList.add('active'));
-  btnClose.addEventListener('click', () => overlay.classList.remove('active'));
-  btnCancel.addEventListener('click', () => overlay.classList.remove('active'));
+    const togglePass = document.querySelector('.btn-toggle-pass');
+    const passInput = document.getElementById('password');
 
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.classList.remove('active');
-  });
-
-  togglePass.addEventListener('click', () => {
-    const isHidden = passInput.type === 'password';
-    passInput.type = isHidden ? 'text' : 'password';
-    togglePass.innerHTML = isHidden
-      ? '<i data-lucide="eye-off"></i>'
-      : '<i data-lucide="eye"></i>';
-    lucide.createIcons();
-  });
-
-  // ========== MODAL CAMBIAR CLAVE ==========
-  const overlayPassword = document.getElementById('modal-password');
-  const btnClosePassword = document.getElementById('btn-close-password-modal');
-  const btnCancelPassword = document.getElementById('btn-cancel-password');
-  const btnChangePassword = document.querySelectorAll('.btn-change-password');
-
-  function openPasswordModal() {
-    overlayPassword.classList.add('active');
-    overlayPassword.classList.remove('hidden');
-  }
-
-  function closePasswordModal() {
-    overlayPassword.classList.remove('active');
-    setTimeout(() => overlayPassword.classList.add('hidden'), 200);
-  }
-
-  btnChangePassword.forEach((btn) => {
-    btn.addEventListener('click', openPasswordModal);
-  });
-
-  btnClosePassword.addEventListener('click', closePasswordModal);
-  btnCancelPassword.addEventListener('click', closePasswordModal);
-
-  overlayPassword.addEventListener('click', (e) => {
-    if (e.target === overlayPassword) closePasswordModal();
-  });
-
-  overlayPassword.querySelectorAll('.btn-toggle-pass').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const inputId = btn.dataset.target;
-      const input = document.getElementById(inputId);
-      const icon = btn.querySelector('i');
-
-      if (input.type === 'password') {
-        input.type = 'text';
-        icon.setAttribute('data-lucide', 'eye-off');
-      } else {
-        input.type = 'password';
-        icon.setAttribute('data-lucide', 'eye');
-      }
-
-      lucide.createIcons();
-    });
-  });
-
-  // ========== MODAL VER/EDITAR USUARIO ==========
-  const overlayViewUser = document.getElementById('modal-view-user');
-  const btnCloseViewModal = document.getElementById('btn-close-view-modal');
-  const btnCancelView = document.getElementById('btn-cancel-view');
-  const btnEditToggle = document.getElementById('btn-edit-toggle');
-  const btnCancelEdit = document.getElementById('btn-cancel-edit');
-  const btnSaveUser = document.getElementById('btn-save-user');
-  const formViewUser = document.getElementById('form-view-user');
-  const viewMode = document.getElementById('view-mode');
-  const editMode = document.getElementById('edit-mode');
-
-  const viewUserTitle = document.getElementById('view-user-title');
-  const viewUserAvatar = document.getElementById('view-user-avatar');
-  const viewFullName = document.getElementById('view-full-name');
-  const viewUsername = document.getElementById('view-username');
-  const viewFirstName = document.getElementById('view-first-name');
-  const viewLastName = document.getElementById('view-last-name');
-  const viewIdNumber = document.getElementById('view-id-number');
-  const viewUsernameDisplay = document.getElementById('view-username-display');
-  const viewRole = document.getElementById('view-role');
-  const viewStatus = document.getElementById('view-status');
-
-  const editFirstName = document.getElementById('edit-first-name');
-  const editLastName = document.getElementById('edit-last-name');
-  const editRole = document.getElementById('edit-role');
-  const editStatus = document.getElementById('edit-status');
-
-  let currentEditingUser = null;
-
-  function getRoleLabel(role) {
-    return role === 'admin' ? 'Administrador' : 'Vendedor';
-  }
-
-  function getStatusLabel(status) {
-    return status === 'active' ? 'Activo' : 'Inactivo';
-  }
-
-  function getInitials(firstName, lastName) {
-    return (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
-  }
-
-  function getAvatarClass() {
-    const avatarClasses = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4', 'avatar-5'];
-    return avatarClasses[Math.floor(Math.random() * avatarClasses.length)];
-  }
-
-  function populateViewUser(userData) {
-    const firstName = userData.firstName || userData.name?.split(' ')[0] || 'Usuario';
-    const lastName = userData.lastName || userData.name?.split(' ')[1] || '';
-    const fullName = `${firstName} ${lastName}`.trim();
-    const username = userData.username || 'unknown';
-    const role = userData.role || 'seller';
-    const status = userData.status || 'active';
-    const idNumber = userData.idNumber || 'N/A';
-    const avatar = userData.avatar || getInitials(firstName, lastName);
-
-    viewFullName.textContent = fullName;
-    viewUsername.textContent = `@${username}`;
-    viewFirstName.textContent = firstName;
-    viewLastName.textContent = lastName;
-    viewIdNumber.textContent = idNumber;
-    viewUsernameDisplay.textContent = username;
-
-    viewUserAvatar.textContent = avatar;
-    viewUserAvatar.className = `user-avatar-large ${userData.avatarClass || getAvatarClass()}`;
-
-    viewRole.textContent = getRoleLabel(role);
-    viewRole.className = `info-value info-badge ${role}`;
-
-    viewStatus.textContent = getStatusLabel(status);
-    viewStatus.className = `info-value info-badge ${status}`;
-
-    editFirstName.value = firstName;
-    editLastName.value = lastName;
-    editRole.value = role;
-    editStatus.value = status;
-
-    currentEditingUser = {
-      firstName,
-      lastName,
-      username,
-      idNumber,
-      role,
-      status,
-      avatar,
-      avatarClass: userData.avatarClass || getAvatarClass()
-    };
-  }
-
-  document.addEventListener('click', (e) => {
-    const editButton = e.target.closest('button[title="Editar"]');
-    if (editButton) {
-      const row = editButton.closest('tr');
-      if (row) {
-        const userData = {
-          name: row.querySelector('.client-name')?.textContent || '',
-          username: row.querySelector('.client-sub')?.textContent?.replace('@', '') || '',
-          idNumber: row.querySelector('td:nth-child(2)')?.textContent?.trim() || '',
-          role: row.querySelector('.role-badge')?.textContent?.toLowerCase() === 'administrador' ? 'admin' : 'seller',
-          status: row.querySelector('.status-badge')?.textContent?.toLowerCase() === 'activo' ? 'active' : 'inactive',
-          avatarClass: row.querySelector('.client-avatar')?.className || 'avatar-1'
-        };
-
-        viewUserTitle.textContent = 'Ver Usuario';
-        populateViewUser(userData);
-        switchToViewMode();
-        overlayViewUser.classList.add('active');
-      }
-    }
-  });
-
-  function switchToViewMode() {
-    viewMode.classList.remove('hidden');
-    editMode.classList.add('hidden');
-    btnEditToggle.classList.remove('hidden');
-    btnCancelEdit.classList.add('hidden');
-    btnCancelView.classList.remove('hidden');
-    btnSaveUser.classList.add('hidden');
-    btnCancelView.textContent = 'Cerrar';
-    viewUserTitle.textContent = 'Ver Usuario';
-  }
-
-  function switchToEditMode() {
-    viewMode.classList.add('hidden');
-    editMode.classList.remove('hidden');
-    btnEditToggle.classList.add('hidden');
-    btnCancelEdit.classList.remove('hidden');
-    btnCancelView.classList.add('hidden');
-    btnSaveUser.classList.remove('hidden');
-    btnCancelEdit.textContent = 'Cancelar';
-    viewUserTitle.textContent = 'Editar Usuario';
-  }
-
-  btnCloseViewModal.addEventListener('click', () => {
-    overlayViewUser.classList.remove('active');
-    switchToViewMode();
-  });
-
-  btnCancelView.addEventListener('click', () => {
-    if (editMode.classList.contains('hidden')) {
-      overlayViewUser.classList.remove('active');
-    } else {
-      switchToViewMode();
-    }
-  });
-
-  btnEditToggle.addEventListener('click', () => {
-    switchToEditMode();
-  });
-
-  btnCancelEdit.addEventListener('click', () => {
-    switchToViewMode();
-  });
-
-  overlayViewUser.addEventListener('click', (e) => {
-    if (e.target === overlayViewUser) {
-      overlayViewUser.classList.remove('active');
-      switchToViewMode();
-    }
-  });
-
-  formViewUser.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    if (!currentEditingUser) return;
-
-    const updatedData = {
-      firstName: editFirstName.value.trim(),
-      lastName: editLastName.value.trim(),
-      role: editRole.value,
-      status: editStatus.value
-    };
-
-    if (!updatedData.firstName || !updatedData.lastName) {
-      alert('Por favor, completa el nombre y apellido');
-      return;
+    if (togglePass && passInput) {
+        togglePass.addEventListener('click', () => {
+            const isHidden = passInput.type === 'password';
+            passInput.type = isHidden ? 'text' : 'password';
+            togglePass.innerHTML = isHidden ? '<i data-lucide="eye-off"></i>' : '<i data-lucide="eye"></i>';
+            if (window.lucide) lucide.createIcons();
+        });
     }
 
-    console.log('Guardando cambios:', {
-      username: currentEditingUser.username,
-      idNumber: currentEditingUser.idNumber,
-      ...updatedData
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#users-table-body tr');
+
+            rows.forEach(row => {
+                const fName = (row.dataset.firstname || '').toLowerCase();
+                const lName = (row.dataset.lastname || '').toLowerCase();
+                const uName = (row.dataset.username || '').toLowerCase();
+                const email = (row.dataset.email || '').toLowerCase();
+                const fullName = `${fName} ${lName}`;
+
+                if (fullName.includes(searchTerm) || uName.includes(searchTerm) || email.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    const formUser = document.getElementById('form-user');
+    if (formUser) {
+        formUser.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newUser = {
+                userName: document.getElementById('username').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                idNumber: document.getElementById('id-number').value.trim(), 
+                password: document.getElementById('password').value,
+                firstName: document.getElementById('first-name').value.trim(),
+                lastName: document.getElementById('last-name').value.trim(),
+                roleName: document.getElementById('role').value,
+            };
+            try {
+                await UsersService.createUser(newUser);
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: 'Usuario registrado correctamente.',
+                    icon: 'success',
+                    confirmButtonColor: '#10b981'
+                });
+                overlay.classList.remove('active');
+                formUser.reset();
+                loadUsersTable();
+            } catch (error) {
+                Swal.fire({
+                    title: 'No se pudo registrar',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonColor: '#10b981'
+                });
+            }
+        });
+    }
+
+    async function loadRolesDropdowns() {
+        try {
+            const response = await UsersService.getRoles();
+            
+            if (!response.success) {
+                return;
+            }
+
+            const rolesList = response.data || []; 
+            const selectCreate = document.getElementById('role');
+            const selectEdit = document.getElementById('edit-role');
+
+            if (!selectCreate || !selectEdit) return;
+
+            selectCreate.innerHTML = '<option value="" disabled selected>Seleccione un rol</option>';
+            selectEdit.innerHTML = '';
+
+            rolesList.forEach(role => {
+                if(role.isActive) {
+                     const optionHTML = `<option value="${role.roleName}">${role.roleName}</option>`;
+                     selectCreate.insertAdjacentHTML('beforeend', optionHTML);
+                     selectEdit.insertAdjacentHTML('beforeend', optionHTML);
+                }
+            });
+
+        } catch (error) {
+        }
+    }
+
+    const overlayViewUser = document.getElementById('modal-view-user');
+    
+    document.addEventListener('click', async (e) => {
+        const editButton = e.target.closest('.btn-edit');
+        if (editButton) {
+            const row = editButton.closest('tr');
+            if (row) {
+                const d = row.dataset;
+                activeUserId = parseInt(d.id);
+
+                document.getElementById('view-full-name').textContent = `${d.firstname} ${d.lastname}`;
+                document.getElementById('view-username').textContent = `@${d.username}`;
+                document.getElementById('view-first-name').textContent = d.firstname;
+                document.getElementById('view-last-name').textContent = d.lastname;
+                document.getElementById('view-id-number').textContent = d.idnumber;
+                document.getElementById('view-email').textContent = d.email;
+                document.getElementById('view-role').textContent = d.role;
+                document.getElementById('view-status').textContent = d.status === 'active' ? 'Activo' : 'Inactivo';
+                
+                document.getElementById('edit-first-name').value = d.firstname;
+                document.getElementById('edit-last-name').value = d.lastname;
+                document.getElementById('edit-id-number').value = d.idnumber;
+                document.getElementById('edit-email').value = d.email;
+                document.getElementById('edit-username').value = d.username;
+                document.getElementById('edit-role').value = d.role;
+                document.getElementById('edit-status').value = d.status;
+                
+                switchToViewMode();
+                overlayViewUser.classList.add('active');
+            }
+        }
+
+        const statusButton = e.target.closest('.btn-toggle-status');
+        if (statusButton) {
+            const row = statusButton.closest('tr');
+            if (row) {
+                const id = row.dataset.id;
+                try {
+                    await UsersService.toggleStatus(id);
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Estado actualizado'
+                    });
+                    loadUsersTable();
+                } catch (error) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.message,
+                        icon: 'error',
+                        confirmButtonColor: '#10b981'
+                    });
+                }
+            }
+        }
     });
 
-    currentEditingUser = {
-      ...currentEditingUser,
-      ...updatedData
-    };
+    const formViewUser = document.getElementById('form-view-user');
+    if (formViewUser) {
+        formViewUser.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!activeUserId) return;
 
-    populateViewUser(currentEditingUser);
-    switchToViewMode();
-    alert('Cambios guardados exitosamente');
-  });
+            const updatedUser = {
+                id: activeUserId,
+                firstName: document.getElementById('edit-first-name').value.trim(),
+                lastName: document.getElementById('edit-last-name').value.trim(),
+                idNumber: document.getElementById('edit-id-number').value.trim(),
+                email: document.getElementById('edit-email').value.trim(),
+                userName: document.getElementById('edit-username').value.trim(),
+                roleName: document.getElementById('edit-role').value,
+                isActive: document.getElementById('edit-status').value === 'active'
+            };
 
-  // ========== FILTROS Y ORDENAR ==========
-  const btnFilters = document.getElementById('btn-filters');
-  const filterDropdown = document.getElementById('filter-dropdown');
-  const btnSort = document.getElementById('btn-sort');
-  const sortDropdown = document.getElementById('sort-dropdown');
-
-  btnFilters?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    filterDropdown.classList.toggle('active');
-    sortDropdown.classList.remove('active');
-  });
-
-  btnSort?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    sortDropdown.classList.toggle('active');
-    filterDropdown.classList.remove('active');
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!filterDropdown?.contains(e.target) && e.target !== btnFilters) {
-      filterDropdown?.classList.remove('active');
+            try {
+                await UsersService.updateUser(updatedUser);
+                Swal.fire({
+                    title: '¡Actualizado!',
+                    text: 'Usuario actualizado con éxito.',
+                    icon: 'success',
+                    confirmButtonColor: '#10b981'
+                });
+                overlayViewUser.classList.remove('active');
+                switchToViewMode();
+                loadUsersTable();
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error al actualizar',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonColor: '#10b981'
+                });
+            }
+        });
     }
-    if (!sortDropdown?.contains(e.target) && e.target !== btnSort) {
-      sortDropdown?.classList.remove('active');
+
+    function switchToViewMode() {
+        document.getElementById('view-user-title').textContent = 'Ver Usuario';
+        document.getElementById('view-mode').classList.remove('hidden');
+        document.getElementById('edit-mode').classList.add('hidden');
+        document.getElementById('btn-edit-toggle').classList.remove('hidden');
+        document.getElementById('btn-cancel-edit').classList.add('hidden');
+        document.getElementById('btn-cancel-view').classList.remove('hidden');
+        document.getElementById('btn-save-user').classList.add('hidden');
     }
-  });
+
+    function switchToEditMode() {
+        document.getElementById('view-user-title').textContent = 'Editar Usuario';
+        document.getElementById('view-mode').classList.add('hidden');
+        document.getElementById('edit-mode').classList.remove('hidden');
+        document.getElementById('btn-edit-toggle').classList.add('hidden');
+        document.getElementById('btn-cancel-edit').classList.remove('hidden');
+        document.getElementById('btn-cancel-view').classList.add('hidden');
+        document.getElementById('btn-save-user').classList.remove('hidden');
+    }
+
+    document.getElementById('btn-edit-toggle')?.addEventListener('click', switchToEditMode);
+    document.getElementById('btn-cancel-edit')?.addEventListener('click', switchToViewMode);
+    document.getElementById('btn-close-view-modal')?.addEventListener('click', () => { overlayViewUser.classList.remove('active'); switchToViewMode(); });
+    document.getElementById('btn-cancel-view')?.addEventListener('click', () => { overlayViewUser.classList.remove('active'); switchToViewMode(); });
 });
