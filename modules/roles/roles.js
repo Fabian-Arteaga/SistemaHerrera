@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-close-modal')?.addEventListener('click', () => overlayRole.classList.remove('active'));
     document.getElementById('btn-cancel')?.addEventListener('click', () => overlayRole.classList.remove('active'));
 
-    // Buscador en tiempo real
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
@@ -95,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // POST: Crear Rol
     const formRole = document.getElementById('form-role');
     if (formRole) {
         formRole.addEventListener('submit', async (e) => {
@@ -118,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Modal Ver/Editar
     const overlayViewRole = document.getElementById('modal-view-role');
     
     document.addEventListener('click', async (e) => {
@@ -159,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // PUT: Actualizar Rol
+   
     const formViewRole = document.getElementById('form-view-role');
     if (formViewRole) {
         formViewRole.addEventListener('submit', async (e) => {

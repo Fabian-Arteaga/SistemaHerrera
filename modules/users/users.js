@@ -62,6 +62,7 @@ async function loadUsersTable() {
                         <div class="row-actions">
                             <button type="button" class="btn-detail btn-edit" title="Ver Detalles"><i data-lucide="eye"></i></button>
                             <button type="button" class="btn-detail btn-toggle-status" title="Cambiar Estado"><i data-lucide="refresh-cw"></i></button>
+                            <button type="button" class="btn-detail btn-reset-pass" title="Resetear Contraseña"><i data-lucide="key"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -129,11 +130,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formUser) {
         formUser.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+        
+            const passValue = document.getElementById('password').value;
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/;
+            
+            if (!passwordRegex.test(passValue)) {
+                Swal.fire({
+                    title: 'Contraseña débil',
+                    text: 'Usa una contraseña más segura. Intenta combinar letras, números y símbolos.',
+                    icon: 'warning',
+                    confirmButtonColor: '#10b981'
+                });
+                return;
+            }
+
             const newUser = {
                 userName: document.getElementById('username').value.trim(),
                 email: document.getElementById('email').value.trim(),
                 idNumber: document.getElementById('id-number').value.trim(), 
-                password: document.getElementById('password').value,
+                password: passValue,
                 firstName: document.getElementById('first-name').value.trim(),
                 lastName: document.getElementById('last-name').value.trim(),
                 roleName: document.getElementById('role').value,
@@ -190,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const overlayViewUser = document.getElementById('modal-view-user');
+    const modalResetPass = document.getElementById('modal-reset-pass');
     
     document.addEventListener('click', async (e) => {
         const editButton = e.target.closest('.btn-edit');
@@ -250,6 +267,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+
+        const resetPassButton = e.target.closest('.btn-reset-pass');
+        if (resetPassButton) {
+            const row = resetPassButton.closest('tr');
+            if (row) {
+                const d = row.dataset;
+                activeUserId = parseInt(d.id);
+                document.getElementById('reset-user-name').textContent = `${d.firstname} ${d.lastname}`;
+                document.getElementById('new-password').value = '';
+                modalResetPass.classList.add('active');
+            }
+        }
     });
 
     const formViewUser = document.getElementById('form-view-user');
@@ -283,6 +312,50 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 Swal.fire({
                     title: 'Error al actualizar',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonColor: '#10b981'
+                });
+            }
+        });
+    }
+
+    document.getElementById('btn-close-reset-modal')?.addEventListener('click', () => modalResetPass.classList.remove('active'));
+    document.getElementById('btn-cancel-reset')?.addEventListener('click', () => modalResetPass.classList.remove('active'));
+
+    const formResetPass = document.getElementById('form-reset-pass');
+    if (formResetPass) {
+        formResetPass.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!activeUserId) return;
+
+            const newPass = document.getElementById('new-password').value.trim();
+
+            
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/;
+            
+            if (!passwordRegex.test(newPass)) {
+                Swal.fire({
+                    title: 'Contraseña débil',
+                    text: 'Usa una contraseña más segura. Intenta combinar letras, números y símbolos.',
+                    icon: 'warning',
+                    confirmButtonColor: '#10b981'
+                });
+                return;
+            }
+
+            try {
+                await UsersService.resetPassword(activeUserId, newPass);
+                Swal.fire({
+                    title: '¡Clave actualizada!',
+                    text: 'La contraseña fue forzada exitosamente.',
+                    icon: 'success',
+                    confirmButtonColor: '#10b981'
+                });
+                modalResetPass.classList.remove('active');
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error de reseteo',
                     text: error.message,
                     icon: 'error',
                     confirmButtonColor: '#10b981'
