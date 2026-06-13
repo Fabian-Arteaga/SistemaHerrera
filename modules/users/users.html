@@ -16,8 +16,14 @@
 
     <link rel="stylesheet" href="../shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="../shared/components/topbar/topbar.css" />
-    <link rel="stylesheet" href="../shared/components/filter-bar/filter-bar.css" />
-    <link rel="stylesheet" href="../shared/components/stat-card/stat-card.css" />
+    <link
+      rel="stylesheet"
+      href="../shared/components/filter-bar/filter-bar.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../shared/components/stat-card/stat-card.css"
+    />
     <link rel="stylesheet" href="../shared/components/buttons/buttons.css" />
     <link rel="stylesheet" href="./users.css" />
     <link
@@ -25,6 +31,7 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <div id="layout-placeholder"></div>
@@ -34,174 +41,77 @@
 
     <main class="main-content">
       <div class="page-header animate-in">
-  <div class="page-header-left">
-    <h1>Usuarios</h1>
-  </div>
-  <div class="page-header-actions">
-    <button class="btn btn-outline">
-      <i data-lucide="download" style="width: 16px; height: 16px"></i>
-      <span class="btn-label">Exportar</span>
-    </button>
-    <button class="btn btn-primary">
-      <i data-lucide="plus" style="width: 18px; height: 18px"></i>
-      <span class="btn-label">Nuevo usuario</span>
-    </button>
-  </div>
-</div>
-      <div class="stats-row animate-in delay-1">
-        <div class="stat-card stat-card-mint">
-          <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="users"></i>
-          </div>
-          <div class="stat-card-label">Usuarios Activos</div>
-          <div class="stat-card-value">5</div>
+        <div class="page-header-left">
+          <h1>Usuarios</h1>
         </div>
-        <div class="stat-card stat-card-coral">
-          <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="user-x"></i>
-          </div>
-          <div class="stat-card-label">Usuarios Inactivos</div>
-          <div class="stat-card-value">1</div>
-        </div>
-        <div class="stat-card stat-card-yellow">
-          <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="shield-check"></i>
-          </div>
-          <div class="stat-card-label">Administradores</div>
-          <div class="stat-card-value">2</div>
-        </div>
-        <div class="stat-card stat-card-purple">
-          <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="user-round"></i>
-          </div>
-          <div class="stat-card-label">Vendedores</div>
-          <div class="stat-card-value">4</div>
+        <div class="page-header-actions">
+          <button class="btn btn-outline">
+            <i data-lucide="download" style="width: 16px; height: 16px"></i>
+            <span class="btn-label">Exportar</span>
+          </button>
+          <button
+            class="btn btn-outline"
+            id="btn-manage-roles"
+            onclick="window.location.href = '/modules/roles/roles.html'"
+          >
+            <i data-lucide="user-key" style="width: 18px; height: 18px"></i>
+            <span class="btn-label">Gestionar Roles</span>
+          </button>
+          <button class="btn btn-primary" id="btn-open-modal">
+            <i data-lucide="plus" style="width: 18px; height: 18px"></i>
+            <span class="btn-label">Nuevo usuario</span>
+          </button>
         </div>
       </div>
 
-    <div class="filter-bar">
-  <div class="filter-field filter-search">
-    <label class="filter-label">Buscar</label>
-    <div class="filter-input-wrapper">
-      <input type="text" class="filter-input" placeholder="Buscar por nombre, cédula o usuario..." id="search-input" />
-      <i data-lucide="search" class="filter-icon"></i>
-    </div>
-  </div>
-  <div class="filter-actions">
-    <button type="button" class="filter-btn filter-btn--clear" onclick="clearFilters()">
-      <i data-lucide="x"></i> Limpiar
-    </button>
-    <button type="button" class="filter-btn filter-btn--primary" onclick="applyFilters()">
-      <i data-lucide="search"></i> Buscar
-    </button>
-  </div>
-</div>
+      <div class="stats-row animate-in delay-1">
+        <div class="stat-card stat-card-mint">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon"><i data-lucide="users"></i></div>
+          <div class="stat-card-label">Usuarios Activos</div>
+          <div class="stat-card-value" id="count-active">0</div>
+        </div>
+        <div class="stat-card stat-card-coral">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon"><i data-lucide="user-x"></i></div>
+          <div class="stat-card-label">Usuarios Inactivos</div>
+          <div class="stat-card-value" id="count-inactive">0</div>
+        </div>
+        <div class="stat-card stat-card-yellow">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon"><i data-lucide="shield-check"></i></div>
+          <div class="stat-card-label">Administradores</div>
+          <div class="stat-card-value" id="count-admins">0</div>
+        </div>
+        <div class="stat-card stat-card-purple">
+          <div class="stat-card-decoration"></div>
+          <div class="stat-card-icon"><i data-lucide="user-round"></i></div>
+          <div class="stat-card-label">Vendedores</div>
+          <div class="stat-card-value" id="count-sellers">0</div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-field filter-search">
+          <label class="filter-label">Buscar</label>
+          <div class="filter-input-wrapper">
+            <input
+              type="text"
+              class="filter-input"
+              placeholder="Buscar por nombre, correo o usuario..."
+              id="search-input"
+            />
+            <i data-lucide="search" class="filter-icon"></i>
+          </div>
+        </div>
+      </div>
 
       <div class="table-card animate-in delay-3">
         <div class="table-card-header">
           <h2>
             <span>Lista de Usuarios</span>
-            <span class="count-badge">6</span>
+            <span class="count-badge" id="users-count">0</span>
           </h2>
-          <div class="table-actions">
-            <div class="filter-wrapper">
-              <button class="btn btn-outline" id="btn-filters">
-                <i data-lucide="sliders-horizontal"></i>
-                Filtros
-              </button>
-              <div class="filter-dropdown" id="filter-dropdown">
-                <div class="filter-section">
-                  <span class="filter-label">Rol</span>
-                  <label class="filter-option">
-                    <input
-                      type="radio"
-                      name="filter-role"
-                      value="all"
-                      checked
-                    />
-                    <div class="custom-radio"></div>
-                    Todos
-                  </label>
-                  <label class="filter-option">
-                    <input type="radio" name="filter-role" value="admin" />
-                    <div class="custom-radio"></div>
-                    Administrador
-                  </label>
-                  <label class="filter-option">
-                    <input type="radio" name="filter-role" value="seller" />
-                    <div class="custom-radio"></div>
-                    Vendedor
-                  </label>
-                </div>
-                <div class="filter-section">
-                  <span class="filter-label">Estado</span>
-                  <label class="filter-option">
-                    <input
-                      type="radio"
-                      name="filter-status"
-                      value="all"
-                      checked
-                    />
-                    <div class="custom-radio"></div>
-                    Todos
-                  </label>
-                  <label class="filter-option">
-                    <input type="radio" name="filter-status" value="active" />
-                    <div class="custom-radio"></div>
-                    Activo
-                  </label>
-                  <label class="filter-option">
-                    <input type="radio" name="filter-status" value="inactive" />
-                    <div class="custom-radio"></div>
-                    Inactivo
-                  </label>
-                </div>
-                <div class="filter-footer">
-                  <button class="btn-filter-clear" id="btn-filter-clear">
-                    Limpiar
-                  </button>
-                  <button class="btn-filter-apply" id="btn-filter-apply">
-                    Aplicar
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="sort-wrapper">
-              <button class="btn btn-outline" id="btn-sort">
-                <i data-lucide="arrow-down-up"></i>
-                Ordenar
-              </button>
-              <div class="sort-dropdown" id="sort-dropdown">
-                <div class="filter-section">
-                  <label class="filter-option">
-                    <input type="radio" name="sort" value="name-asc" checked />
-                    <div class="custom-radio"></div>
-                    Nombre A → Z
-                  </label>
-                  <label class="filter-option">
-                    <input type="radio" name="sort" value="name-desc" />
-                    <div class="custom-radio"></div>
-                    Nombre Z → A
-                  </label>
-                  <label class="filter-option">
-                    <input type="radio" name="sort" value="role" />
-                    <div class="custom-radio"></div>
-                    Por Rol
-                  </label>
-                  <label class="filter-option">
-                    <input type="radio" name="sort" value="status" />
-                    <div class="custom-radio"></div>
-                    Por Estado
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="table-scroll">
@@ -210,217 +120,18 @@
               <tr>
                 <th class="col-user">Usuario</th>
                 <th class="col-id">Cédula</th>
+                <th class="col-email">Correo</th>
                 <th class="col-role">Rol</th>
                 <th class="col-status">Estado</th>
                 <th class="col-actions">Acciones</th>
               </tr>
             </thead>
-            <tbody id="users-table-body">
-              <tr
-                data-name="enmanuel mena"
-                data-username="emena"
-                data-id="042-221003-3333p"
-              >
-                <td>
-                  <div class="client-cell">
-                    <div class="client-avatar avatar-1">EM</div>
-                    <div class="client-info">
-                      <span class="client-name">Enmanuel Mena</span>
-                      <span class="client-sub">@ emena</span>
-                    </div>
-                  </div>
-                </td>
-                <td>042-221003-3333P</td>
-                <td>
-                  <span class="role-badge role-admin">Administrador</span>
-                </td>
-                <td><span class="status-badge status-active">Activo</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button class="btn-detail" title="Editar">
-                      <i data-lucide="edit-2"></i>
-                    </button>
-                    <button
-                      class="btn-detail btn-change-password"
-                      title="Cambiar clave"
-                    >
-                      <i data-lucide="key"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr
-                data-name="ericka peña"
-                data-username="epena"
-                data-id="041-220821-1003p"
-              >
-                <td>
-                  <div class="client-cell">
-                    <div class="client-avatar avatar-2">EP</div>
-                    <div class="client-info">
-                      <span class="client-name">Ericka Peña</span>
-                      <span class="client-sub">@ epena</span>
-                    </div>
-                  </div>
-                </td>
-                <td>041-220821-1003P</td>
-                <td><span class="role-badge role-seller">Vendedor</span></td>
-                <td><span class="status-badge status-active">Activo</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button class="btn-detail" title="Editar">
-                      <i data-lucide="edit-2"></i>
-                    </button>
-                    <button
-                      class="btn-detail btn-change-password"
-                      title="Cambiar clave"
-                    >
-                      <i data-lucide="key"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr
-                data-name="victoria perez"
-                data-username="vperez"
-                data-id="043-110909-3233h"
-              >
-                <td>
-                  <div class="client-cell">
-                    <div class="client-avatar avatar-3">VP</div>
-                    <div class="client-info">
-                      <span class="client-name">Victoria Perez</span>
-                      <span class="client-sub">@ vperez</span>
-                    </div>
-                  </div>
-                </td>
-                <td>043-110909-3233H</td>
-                <td><span class="role-badge role-seller">Vendedor</span></td>
-                <td><span class="status-badge status-active">Activo</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button class="btn-detail" title="Editar">
-                      <i data-lucide="edit-2"></i>
-                    </button>
-                    <button
-                      class="btn-detail btn-change-password"
-                      title="Cambiar clave"
-                    >
-                      <i data-lucide="key"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr
-                data-name="cristofher lopez"
-                data-username="clopez"
-                data-id="044-200908-2222p"
-              >
-                <td>
-                  <div class="client-cell">
-                    <div class="client-avatar avatar-4">CL</div>
-                    <div class="client-info">
-                      <span class="client-name">Cristofher Lopez</span>
-                      <span class="client-sub">@ clopez</span>
-                    </div>
-                  </div>
-                </td>
-                <td>044-200908-2222P</td>
-                <td><span class="role-badge role-seller">Vendedor</span></td>
-                <td><span class="status-badge status-active">Activo</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button class="btn-detail" title="Editar">
-                      <i data-lucide="edit-2"></i>
-                    </button>
-                    <button
-                      class="btn-detail btn-change-password"
-                      title="Cambiar clave"
-                    >
-                      <i data-lucide="key"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr
-                data-name="rachael campos"
-                data-username="rcampos"
-                data-id="042-220908-1003p"
-              >
-                <td>
-                  <div class="client-cell">
-                    <div class="client-avatar avatar-5">RC</div>
-                    <div class="client-info">
-                      <span class="client-name">Rachael Campos</span>
-                      <span class="client-sub">@ rcampos</span>
-                    </div>
-                  </div>
-                </td>
-                <td>042-220908-1003P</td>
-                <td>
-                  <span class="role-badge role-admin">Administrador</span>
-                </td>
-                <td><span class="status-badge status-active">Activo</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button class="btn-detail" title="Editar">
-                      <i data-lucide="edit-2"></i>
-                    </button>
-                    <button
-                      class="btn-detail btn-change-password"
-                      title="Cambiar clave"
-                    >
-                      <i data-lucide="key"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr
-                data-name="alexandra arteaga"
-                data-username="aarteaga"
-                data-id="093-220933-1004p"
-                class="row-inactive"
-              >
-                <td>
-                  <div class="client-cell">
-                    <div class="client-avatar avatar-inactive">AA</div>
-                    <div class="client-info">
-                      <span class="client-name">Alexandra Arteaga</span>
-                      <span class="client-sub">@ aarteaga</span>
-                    </div>
-                  </div>
-                </td>
-                <td>093-220933-1004P</td>
-                <td><span class="role-badge role-seller">Vendedor</span></td>
-                <td>
-                  <span class="status-badge status-inactive">Inactivo</span>
-                </td>
-                <td>
-                  <div class="row-actions">
-                    <button class="btn-detail" title="Editar">
-                      <i data-lucide="edit-2"></i>
-                    </button>
-                    <button
-                      class="btn-detail btn-change-password"
-                      title="Cambiar clave"
-                    >
-                      <i data-lucide="key"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
+            <tbody id="users-table-body"></tbody>
           </table>
         </div>
-
         <div class="table-footer">
-          <div class="table-footer-info">
-            Mostrando <strong>1-6</strong> de <strong>6</strong> usuarios
+          <div class="table-footer-info" id="table-info-text">
+            Cargando información...
           </div>
         </div>
       </div>
@@ -434,34 +145,37 @@
             <i data-lucide="x"></i>
           </button>
         </div>
-        <form class="modal-form" id="form-user">
+        <form class="modal-form" id="form-user" autocomplete="off">
           <div class="form-section-label">Datos del usuario</div>
           <div class="form-grid">
             <div class="form-group">
               <label for="first-name">Nombre</label>
-              <input
-                type="text"
-                id="first-name"
-                placeholder="Ej: Enmanuel"
-                required
-              />
+              <input type="text" id="first-name" required />
             </div>
             <div class="form-group">
               <label for="last-name">Apellido</label>
-              <input
-                type="text"
-                id="last-name"
-                placeholder="Ej: Mena"
-                required
-              />
+              <input type="text" id="last-name" required />
             </div>
             <div class="form-group">
               <label for="id-number">Cédula</label>
               <input
                 type="text"
                 id="id-number"
-                placeholder="Ej: 042-221003-3333P"
                 required
+                maxlength="14"
+                pattern="^[0-9]{13}[a-zA-Z]$"
+                title="Debe contener 13 números seguidos de una letra (Ej: 041221006100F)"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Correo Electrónico</label>
+              <input
+                type="email"
+                id="email"
+                required
+                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                title="Ingresa un correo válido (Ej: usuario@gmail.com)"
+                autocomplete="off"
               />
             </div>
             <div class="form-group">
@@ -469,9 +183,12 @@
               <input
                 type="text"
                 id="username"
-                placeholder="Ej: emena"
-                autocomplete="off"
                 required
+                minlength="3"
+                maxlength="20"
+                pattern="^[a-zA-Z0-9_]+$"
+                title="Solo letras, números y guión bajo. Sin espacios."
+                autocomplete="off"
               />
             </div>
             <div class="form-group">
@@ -480,9 +197,8 @@
                 <input
                   type="password"
                   id="password"
-                  placeholder="••••••••"
-                  autocomplete="new-password"
                   required
+                  autocomplete="new-password"
                 />
                 <button type="button" class="btn-toggle-pass">
                   <i data-lucide="eye"></i>
@@ -492,9 +208,7 @@
             <div class="form-group">
               <label for="role">Rol</label>
               <select id="role" required>
-                <option value="" disabled selected>Seleccionar rol</option>
-                <option value="admin">Administrador</option>
-                <option value="seller">Vendedor</option>
+                <option value="" disabled selected>Seleccione un rol</option>
               </select>
             </div>
             <div class="form-group">
@@ -521,58 +235,51 @@
       <div class="modal">
         <div class="modal-header">
           <h2 id="view-user-title">Ver Usuario</h2>
-          <button class="btn-close-modal" id="btn-close-view-modal">
+          <button
+            type="button"
+            class="btn-close-modal"
+            id="btn-close-view-modal"
+          >
             <i data-lucide="x"></i>
           </button>
         </div>
-        <form class="modal-form" id="form-view-user">
-          <div class="form-section-label">Información del usuario</div>
-
+        <form class="modal-form" id="form-view-user" autocomplete="off">
           <div class="view-mode" id="view-mode">
             <div class="user-header">
-              <div class="user-avatar-large" id="view-user-avatar">EM</div>
+              <div class="user-avatar-large" id="view-user-avatar">U</div>
               <div class="user-header-info">
-                <h3 id="view-full-name">Enmanuel Mena</h3>
-                <p id="view-username">@emena</p>
+                <h3 id="view-full-name">-</h3>
+                <p id="view-username">@username</p>
               </div>
             </div>
-
             <div class="info-section">
               <div class="info-item">
-                <span class="info-label">Nombre</span>
-                <span class="info-value" id="view-first-name">Enmanuel</span>
+                <span class="info-label">Nombre</span
+                ><span class="info-value" id="view-first-name">-</span>
               </div>
               <div class="info-item">
-                <span class="info-label">Apellido</span>
-                <span class="info-value" id="view-last-name">Mena</span>
+                <span class="info-label">Apellido</span
+                ><span class="info-value" id="view-last-name">-</span>
               </div>
             </div>
-
             <div class="info-section">
               <div class="info-item">
-                <span class="info-label">Cédula</span>
-                <span class="info-value" id="view-id-number"
-                  >042-221003-3333P</span
-                >
+                <span class="info-label">Cédula</span
+                ><span class="info-value" id="view-id-number">-</span>
               </div>
               <div class="info-item">
-                <span class="info-label">Usuario</span>
-                <span class="info-value" id="view-username-display">emena</span>
+                <span class="info-label">Correo</span
+                ><span class="info-value" id="view-email">-</span>
               </div>
             </div>
-
             <div class="info-section">
               <div class="info-item">
-                <span class="info-label">Rol</span>
-                <span class="info-value info-badge" id="view-role"
-                  >Administrador</span
-                >
+                <span class="info-label">Rol</span
+                ><span class="info-value info-badge" id="view-role">-</span>
               </div>
               <div class="info-item">
-                <span class="info-label">Estado</span>
-                <span class="info-value info-badge" id="view-status"
-                  >Activo</span
-                >
+                <span class="info-label">Estado</span
+                ><span class="info-value info-badge" id="view-status">-</span>
               </div>
             </div>
           </div>
@@ -581,29 +288,50 @@
             <div class="form-grid">
               <div class="form-group">
                 <label for="edit-first-name">Nombre</label>
-                <input
-                  type="text"
-                  id="edit-first-name"
-                  placeholder="Ej: Enmanuel"
-                  required
-                />
+                <input type="text" id="edit-first-name" required />
               </div>
               <div class="form-group">
                 <label for="edit-last-name">Apellido</label>
+                <input type="text" id="edit-last-name" required />
+              </div>
+              <div class="form-group">
+                <label for="edit-id-number">Cédula</label>
                 <input
                   type="text"
-                  id="edit-last-name"
-                  placeholder="Ej: Mena"
+                  id="id-number"
                   required
+                  maxlength="14"
+                  pattern="^[0-9]{13}[a-zA-Z]$"
+                  title="Debe contener 13 números seguidos de una letra (Ej: 041221006100F)"
                 />
               </div>
-              <div class="form-group full-width">
+              <div class="form-group">
+                <label for="edit-email">Correo</label>
+                <input
+                  type="email"
+                  id="edit-email"
+                  required
+                  pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                  title="Ingresa un correo válido (Ej: usuario@gmail.com)"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="form-group">
+                <label for="edit-username">Nombre de Usuario</label>
+                <input
+                  type="text"
+                  id="username"
+                  required
+                  minlength="3"
+                  maxlength="20"
+                  pattern="^[a-zA-Z0-9_]+$"
+                  title="Solo letras, números y guión bajo. Sin espacios."
+                  autocomplete="off"
+                />
+              </div>
+              <div class="form-group">
                 <label for="edit-role">Rol</label>
-                <select id="edit-role" required>
-                  <option value="" disabled>Seleccionar rol</option>
-                  <option value="admin">Administrador</option>
-                  <option value="seller">Vendedor</option>
-                </select>
+                <select id="edit-role" required></select>
               </div>
               <div class="form-group full-width">
                 <label for="edit-status">Estado</label>
@@ -619,11 +347,7 @@
             <button type="button" class="btn-cancel" id="btn-cancel-view">
               Cerrar
             </button>
-            <button
-              type="button"
-              class="btn btn-outline btn-edit-toggle hidden"
-              id="btn-edit-toggle"
-            >
+            <button type="button" class="btn btn-outline" id="btn-edit-toggle">
               <i data-lucide="edit-2"></i> Editar
             </button>
             <button
@@ -638,95 +362,13 @@
               class="btn-submit-modal hidden"
               id="btn-save-user"
             >
-              <i data-lucide="save"></i> Guardar cambios
+              <i data-lucide="save"></i> Guardar
             </button>
           </div>
         </form>
       </div>
     </div>
 
-    <div class="modal-overlay hidden" id="modal-password">
-      <div class="modal modal-password">
-        <div class="modal-header">
-          <h2>Cambiar clave</h2>
-          <button
-            class="btn-close-modal"
-            id="btn-close-password-modal"
-            type="button"
-          >
-            <i data-lucide="x"></i>
-          </button>
-        </div>
-        <form class="modal-form" id="form-password">
-          <div class="form-section-label">Seguridad de acceso</div>
-          <div class="form-grid">
-            <div class="form-group full-width">
-              <label for="current-password">Contraseña actual</label>
-              <div class="input-password">
-                <input
-                  type="password"
-                  id="current-password"
-                  placeholder="••••••••"
-                  required
-                />
-                <button
-                  type="button"
-                  class="btn-toggle-pass"
-                  data-target="current-password"
-                >
-                  <i data-lucide="eye"></i>
-                </button>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="new-password">Nueva contraseña</label>
-              <div class="input-password">
-                <input
-                  type="password"
-                  id="new-password"
-                  placeholder="Mínimo 8 caracteres"
-                  required
-                />
-                <button
-                  type="button"
-                  class="btn-toggle-pass"
-                  data-target="new-password"
-                >
-                  <i data-lucide="eye"></i>
-                </button>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="confirm-password">Confirmar contraseña</label>
-              <div class="input-password">
-                <input
-                  type="password"
-                  id="confirm-password"
-                  placeholder="Repite la nueva contraseña"
-                  required
-                />
-                <button
-                  type="button"
-                  class="btn-toggle-pass"
-                  data-target="confirm-password"
-                >
-                  <i data-lucide="eye"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn-cancel" id="btn-cancel-password">
-              Cancelar
-            </button>
-            <button type="submit" class="btn-submit-modal">
-              <i data-lucide="save"></i> Guardar clave
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <script src="./users.js"></script>
+    <script type="module" src="./users.js"></script>
   </body>
 </html>

@@ -19,10 +19,81 @@ class TopBar {
       if (window.lucide) lucide.createIcons();
 
       this.#setupEvents();
+      this.#loadUserData(); // <-- Nueva llamada para cargar datos
 
     } catch (error) {
       console.error('Topbar error:', error);
       this.container.innerHTML = `<p style="color:red; padding:1rem;">Error al cargar el menú</p>`;
+    }
+  }
+
+  // --- MÉTODO PARA LEER JWT Y PINTAR USUARIO ---
+  // --- MÉTODO PARA LEER JWT Y PINTAR USUARIO ---
+  // --- MÉTODO PARA LEER JWT Y PINTAR USUARIO ---
+  #loadUserData() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      const decoded = JSON.parse(jsonPayload);
+      console.log("Token JWT decodificado:", decoded); // Chivato en consola por si acaso
+
+      // 1. Extraer Rol (Esto ya te funciona bien)
+      const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] 
+                || decoded.role || decoded.Role || decoded.RoleName || 'Usuario';
+
+      // 2. Extraer Nombre (Ignorando números como el ID "3")
+      let username = "Usuario";
+      
+      const possibleKeys = [
+          'FullName', // <-- Agregamos esta de primerita, es la prioridad
+          'FirstName', 'UserName', 'unique_name', 'name', 'email',
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name',
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+      ];
+
+      for (let key of possibleKeys) {
+          let value = decoded[key];
+          if (value && isNaN(value)) {
+              username = value;
+              break; 
+          }
+      }
+
+    
+      if (username.includes('@')) {
+          username = username.split('@')[0];
+      }
+
+    
+      const initials = username.substring(0, 2).toUpperCase();
+
+    
+      const topbarAvatar = this.container.querySelector('#topbar-avatar');
+      const topbarName = this.container.querySelector('#topbar-name');
+      const topbarRole = this.container.querySelector('#topbar-role');
+
+      if (topbarAvatar) topbarAvatar.textContent = initials;
+      if (topbarName) topbarName.textContent = username;
+      if (topbarRole) topbarRole.textContent = role;
+
+   
+      const offcanvasAvatar = this.container.querySelector('#offcanvas-avatar');
+      const offcanvasName = this.container.querySelector('#offcanvas-name');
+      const offcanvasRole = this.container.querySelector('#offcanvas-role');
+
+      if (offcanvasAvatar) offcanvasAvatar.textContent = initials;
+      if (offcanvasName) offcanvasName.textContent = username;
+      if (offcanvasRole) offcanvasRole.textContent = role;
+
+    } catch (e) {
+      console.error("Error al leer el token JWT:", e);
     }
   }
 
@@ -90,6 +161,7 @@ class TopBar {
 
     btn.addEventListener('click', () => {
       localStorage.removeItem('token');
+      localStorage.removeItem('isLoggedIn');
       window.location.href = '/modules/login/login.html';
     });
   }
@@ -121,7 +193,6 @@ class TopBar {
         }
       });
     }
-
   }
 }
 

@@ -1,5 +1,5 @@
 <div class="topbar">
-    <button
+  <button
     class="topbar-menu-btn"
     onclick="toggleSidebar()"
     aria-label="Abrir menú"
@@ -100,10 +100,10 @@
     </div>
 
     <div class="topbar-user" id="btn-open-profile">
-      <div class="topbar-user-avatar">IH</div>
+      <div class="topbar-user-avatar" id="topbar-avatar">--</div>
       <div class="topbar-user-info">
-        <span>Indiana Herrera</span>
-        <span>Administrador</span>
+        <span id="topbar-name">Cargando...</span>
+        <span id="topbar-role">--</span>
       </div>
     </div>
   </div>
@@ -120,10 +120,10 @@
 
   <div class="offcanvas-body">
     <div class="user-card">
-      <div class="avatar">IH</div>
+      <div class="avatar" id="offcanvas-avatar">--</div>
       <div class="user-details">
-        <h4 class="user-name">Indiana Herrera</h4>
-        <span class="role-badge">Administrador</span>
+        <h4 class="user-name" id="offcanvas-name">Cargando...</h4>
+        <span class="role-badge" id="offcanvas-role">--</span>
       </div>
     </div>
 

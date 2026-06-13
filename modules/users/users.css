@@ -311,23 +311,49 @@ td:last-child {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border-radius: 8px;
-    border: 1px solid #E5E7EB;
-    background: white;
-    color: #6B7280;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: var(--color-white, #ffffff);
+    color: var(--color-brand);
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .btn-detail:hover {
-    background: #00C296;
+    background-color: var(--color-brand, #3b82f6);
     color: white;
-    border-color: #00C296;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.detail-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-brand);
+    background: rgba(0, 194, 150, 0.08);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.detail-btn:hover {
+    background: var(--color-brand);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 194, 150, 0.3);
+}
+
+.detail-btn i {
+    width: 14px;
+    height: 14px;
+}
 .hidden,
 .view-mode.hidden,
 .edit-mode.hidden {
