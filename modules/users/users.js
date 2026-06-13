@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         toast: true,
                         position: 'top-end',
                         showConfirmButton: false,
-                        timer: 2000,
+                        timer: 1000,
                         timerProgressBar: true
                     });
                     Toast.fire({

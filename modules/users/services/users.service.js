@@ -68,9 +68,17 @@ export const UsersService = {
     },
 
     toggleStatus: async (id) => {
-        const r = await fetch(`${CONFIG.API_URL}/Users/${id}/toggle-status`, { method: 'PATCH', headers: getHeaders() });
-        if (!r.ok) throw new Error("Error al cambiar el estado del usuario");
-        return await r.json();
+        const response = await fetch(`${CONFIG.API_URL}/Users/${id}/toggle-status`, {
+            method: 'PATCH',
+            headers: getHeaders()
+        });
+        
+        const data = await response.json();
+        if (!response.ok || data.success === false) {
+            throw new Error(data.message || "Error al cambiar el estado del usuario");
+        }
+        
+        return data;
     },
     
     getRoles: async () => {

@@ -3,7 +3,7 @@ class Sidebar {
         this.paginaActual = paginaActual;
         this.contenedor = document.getElementById('layout-placeholder');
     }
- 
+
     async cargar() {
         if (!this.contenedor) return;
 
@@ -13,13 +13,41 @@ class Sidebar {
 
             const html = await respuesta.text();
             this.contenedor.innerHTML = html;
-            lucide.createIcons();
+            this.#aplicarPermisos();
+            if (window.lucide) lucide.createIcons();
             this.#marcarActivo();
             this.#iniciarResponsive();
 
         } catch (error) {
             console.error('error en sidebar:', error);
             this.contenedor.innerHTML = `<p style="color:red; padding:1rem;">Error al cargar el menu</p>`;
+        }
+    }
+
+    #aplicarPermisos() {
+        const userRole = localStorage.getItem('rol');
+
+        if (userRole !== 'Administrador' && userRole !== 'Admin') {
+            
+            const rutasProhibidas = [
+                '/modules/users/users.html',
+                '/modules/roles/roles.html'
+            ];
+
+            const links = this.contenedor.querySelectorAll('.nav-link');
+            
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                
+                if (rutasProhibidas.includes(href)) {
+                    const parentLi = link.closest('li');
+                    if (parentLi) {
+                        parentLi.remove();
+                    } else {
+                        link.remove();
+                    }
+                }
+            });
         }
     }
 
@@ -33,7 +61,6 @@ class Sidebar {
     }
 
     #iniciarResponsive() {
-        // Crear overlay
         const overlay = document.createElement('div');
         overlay.classList.add('sidebar-overlay');
         overlay.addEventListener('click', () => this.#cerrar());
@@ -46,16 +73,15 @@ class Sidebar {
             });
         });
 
-
         window.toggleSidebar = () => {
             const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.contains('open') ? this.#cerrar() : this.#abrir();
+            if (sidebar) sidebar.classList.contains('open') ? this.#cerrar() : this.#abrir();
         };
     }
 
     #abrir() {
-        document.querySelector('.sidebar').classList.add('open');
-        document.querySelector('.sidebar-overlay').classList.add('active');
+        document.querySelector('.sidebar')?.classList.add('open');
+        document.querySelector('.sidebar-overlay')?.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 
