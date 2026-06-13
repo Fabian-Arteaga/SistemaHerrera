@@ -11,12 +11,14 @@
  *  - Escuchar eventos 'customer:saved' y 'customer:deleted' para recargar
  */
 
+let _currentPage  = 1;
+const PAGE_SIZE   = 10;
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     // ─── Estado de la página ─────────────────────────────────────────────────────
 
-    let _currentPage  = 1;
-    const PAGE_SIZE   = 10;
+    
 
     // ─── Inicializar componentes de modales ──────────────────────────────────────
 
@@ -63,7 +65,7 @@ async function _loadPage(pageNumber) {
 
     try {
         const result = await CustomerService.getAll(pageNumber, 10);
-
+   
         _renderTable(result.items);
         _renderPagination(result);
         _updateFooterInfo(result);

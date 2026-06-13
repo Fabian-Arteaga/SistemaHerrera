@@ -48,25 +48,26 @@ const CustomerService = (() => {
      * @returns {Promise<{items: Customer[], totalCount, pageNumber, pageSize, totalPages, hasPreviousPage, hasNextPage}>}
      */
     async function getAll(pageNumber = 1, pageSize = 10) {
-        const url = `${BASE_URL}?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+    // CORRECCIÓN: Cambiamos ?pageNumber por ?page para que coincida con C#
+    const url = `${BASE_URL}?page=${pageNumber}&pageSize=${pageSize}`;
 
-        const res = await fetch(url, {
-            method:  'GET',
-            headers: _buildHeaders(),
-        });
+    const res = await fetch(url, {
+        method:  'GET',
+        headers: _buildHeaders(),
+    });
 
-        const pagedData = await _handleResponse(res);
+    const pagedData = await _handleResponse(res);
 
-       return {
-    items:           pagedData.data.map(dto => new Customer(dto)),
-    totalCount:      pagedData.totalRecords,
-    pageNumber:      pagedData.currentPage,
-    pageSize:        pagedData.pageSize,
-    totalPages:      pagedData.totalPages,
-    hasPreviousPage: pagedData.hasPreviousPage,
-    hasNextPage:     pagedData.hasNextPage,
-};
-    }
+    return {
+        items:           pagedData.data.map(dto => new Customer(dto)),
+        totalCount:      pagedData.totalRecords, 
+        pageNumber:      pagedData.currentPage,  
+        pageSize:        pagedData.pageSize,     
+        totalPages:      pagedData.totalPages,   
+        hasPreviousPage: pagedData.hasPreviousPage,
+        hasNextPage:     pagedData.hasNextPage
+    };
+}
 
     // ─── GET /api/Customers/{id} ─────────────────────────────────────────────────
 
