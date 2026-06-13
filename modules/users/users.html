@@ -368,6 +368,45 @@
         </form>
       </div>
     </div>
+    <div class="modal-overlay" id="modal-reset-pass">
+      <div class="modal modal-reset">
+        <div class="modal-header">
+          <h2>Resetear Contraseña</h2>
+          <button class="btn-close-modal" id="btn-close-reset-modal">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <form class="modal-form" id="form-reset-pass" autocomplete="off">
+          <div class="form-grid reset-form-grid">
+            <p class="reset-subtitle">
+              Nueva contraseña para: <strong id="reset-user-name"></strong>
+            </p>
+            <div class="form-group full-width">
+              <label for="new-password">Contraseña</label>
+              <input
+                type="text"
+                id="new-password"
+                required
+                autocomplete="off"
+              />
+              <span class="reset-help-text">
+                Mínimo 6 caracteres. Se recomienda combinar letras, números y
+                símbolos.
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" id="btn-cancel-reset">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-submit-modal">
+              <i data-lucide="key" style="width: 18px; height: 18px"></i>
+              Guardar Clave
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script type="module" src="./users.js"></script>
   </body>

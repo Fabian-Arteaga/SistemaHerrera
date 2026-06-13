@@ -80,6 +80,21 @@ export const UsersService = {
         
         return data;
     },
+    resetPassword: async (id, newPassword) => {
+        const response = await fetch(`${CONFIG.API_URL}/Users/${id}/reset-password`, {
+            method: 'PATCH',
+            headers: getHeaders(),
+            body: JSON.stringify({ userId: parseInt(id), newPassword: newPassword })
+        });
+        
+        let data;
+        try { data = await response.json(); } catch (e) { throw new Error(`Fallo en el servidor (${response.status}).`); }
+
+        if (!response.ok || data.success === false) {
+            throw new Error(data.message || data.errorMessage || "Error al resetear la contraseña.");
+        }
+        return data;
+    },
     
     getRoles: async () => {
         const response = await fetch(`${CONFIG.API_URL}/Roles`, { 
