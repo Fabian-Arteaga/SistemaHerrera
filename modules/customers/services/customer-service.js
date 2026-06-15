@@ -39,36 +39,71 @@ const CustomerService = (() => {
         return envelope.data;
     }
 
-    // ─── GET /api/Customers?pageNumber=&pageSize= ────────────────────────────────
+    // ─── NUEVO: GET /api/Customers/stats ──────────────────────────────────────────
 
     /**
-     * Obtiene la lista paginada de clientes.
-     * @param {number} pageNumber - Página (desde 1)
-     * @param {number} pageSize   - Registros por página
-     * @returns {Promise<{items: Customer[], totalCount, pageNumber, pageSize, totalPages, hasPreviousPage, hasNextPage}>}
+     * Obtiene el DTO con el resumen estadístico de clientes para las Cards.
+     * @returns {Promise<{activeCustomers: number, inactiveCustomers: number, distinctMunicipalitiesWithCustomers: number, activePointsOfSale: number}>}
      */
-    async function getAll(pageNumber = 1, pageSize = 10) {
-    // CORRECCIÓN: Cambiamos ?pageNumber por ?page para que coincida con C#
-    const url = `${BASE_URL}?page=${pageNumber}&pageSize=${pageSize}`;
+    async function getStats() {
+        const res = await fetch(`${BASE_URL}/stats`, {
+            method:  'GET',
+            headers: _buildHeaders(),
+        });
 
-    const res = await fetch(url, {
-        method:  'GET',
-        headers: _buildHeaders(),
-    });
+        return await _handleResponse(res);
+    }
 
-    const pagedData = await _handleResponse(res);
+    // ─── MODIFICADO: GET /api/Customers con Filtros y Paginación ──────────────────
 
-    return {
-        items:           pagedData.data.map(dto => new Customer(dto)),
-        totalCount:      pagedData.totalRecords, 
-        pageNumber:      pagedData.currentPage,  
-        pageSize:        pagedData.pageSize,     
-        totalPages:      pagedData.totalPages,   
-        hasPreviousPage: pagedData.hasPreviousPage,
-        hasNextPage:     pagedData.hasNextPage
-    };
-}
+    /**
+     * Obtiene la lista filtrada y paginada de clientes desde el servidor.
+     * @param {number} pageNumber - Página actual (desde 1)
+     * @param {number} pageSize   - Cantidad de registros por página
+     * @param {string} search     - Texto de búsqueda opcional (nombre, apellido, POS)
+     * @param {number|string} departmentId   - ID numérico del departamento (opcional)
+     * @param {number|string} municipalityId - ID numérico del municipio (opcional)
+     * @returns {Promise<{items: Customer[], totalCount: number, pageNumber: number, pageSize: number, totalPages: number, hasPreviousPage: boolean, hasNextPage: boolean}>}
+     */
+    async function getAll(pageNumber = 1, pageSize = 10, search = '', departmentId = '', municipalityId = '') {
+        
+        // Construcción dinámica de los parámetros de consulta (Query Strings)
+        const params = new URLSearchParams({
+            page: pageNumber,
+            pageSize: pageSize
+        });
 
+        // Solo agregamos los filtros a la URL si contienen un valor real
+        if (search && search.trim() !== '') {
+            params.append('search', search.trim());
+        }
+        if (departmentId) {
+            params.append('departmentId', departmentId);
+        }
+        if (municipalityId) {
+            params.append('municipalityId', municipalityId);
+        }
+
+        const url = `${BASE_URL}?${params.toString()}`;
+
+        const res = await fetch(url, {
+            method:  'GET',
+            headers: _buildHeaders(),
+        });
+
+        const pagedData = await _handleResponse(res);
+
+        // Mapeo adaptado a la respuesta estructurada de tu API de C#
+        return {
+            items:           pagedData.data.map(dto => new Customer(dto)),
+            totalCount:      pagedData.totalRecords, 
+            pageNumber:      pagedData.currentPage,  
+            pageSize:        pagedData.pageSize,     
+            totalPages:      pagedData.totalPages,   
+            hasPreviousPage: pagedData.hasPreviousPage,
+            hasNextPage:     pagedData.hasNextPage
+        };
+    }
     // ─── GET /api/Customers/{id} ─────────────────────────────────────────────────
 
     /**
@@ -148,6 +183,6 @@ const CustomerService = (() => {
 
     // ─── API pública ─────────────────────────────────────────────────────────────
 
-    return { getAll, getById, create, update, remove };
+    return { getAll, getById, create, update, remove, getStats };
 
 })();

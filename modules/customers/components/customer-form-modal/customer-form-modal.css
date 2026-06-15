@@ -31,6 +31,8 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
     transform: translateY(12px);
     transition: transform 0.25s ease;
+    max-height: 85vh;    /* Limita la altura del modal en computadoras al 85% de la pantalla */
+    overflow-y: auto;
 }
 
 .modal-overlay.active .modal {
