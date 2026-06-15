@@ -13,6 +13,7 @@
 
     let _editingId = null;
     let _onSavedCb = null;
+    let _departmentsLoaded = false;
 
     // ─── Template HTML incrustado ────────────────────────────────────────────────
 
@@ -42,21 +43,18 @@
                 <input type="text" id="cf-phone" placeholder="Ej: 8888-0000" maxlength="20" />
               </div>
               <div class="form-group">
-                <label for="cf-municipalityId">Municipio</label>
-                <select id="cf-municipalityId" required>
-                  <option value="" disabled selected>Seleccionar municipio</option>
-                  <option value="1">Managua</option>
-                  <option value="2">Ticuantepe</option>
-                  <option value="3">Tipitapa</option>
-                  <option value="4">Jinotepe</option>
-                  <option value="5">San Marcos</option>
-                  <option value="6">Estelí</option>
-                  <option value="7">Matagalpa</option>
-                  <option value="8">Granada</option>
-                  <option value="9">León</option>
-                  <option value="10">Chinandega</option>
+                <label for="cf-departmentId">Departamento</label>
+                <select id="cf-departmentId" required>
+                <option value="">Seleccionar departamento</option>
                 </select>
-              </div>
+                </div>
+
+                <div class="form-group">
+                <label for="cf-municipalityId">Municipio</label>
+                <select id="cf-municipalityId" required disabled>
+                <option value="">Seleccionar municipio</option>
+                </select>
+                </div>
               <div class="form-group form-group--full">
                 <label for="cf-pointOfSale">Punto de Venta</label>
                 <input type="text" id="cf-pointOfSale" placeholder="Ej: Distribuidora Central" maxlength="150" />
@@ -108,11 +106,12 @@
         document.getElementById('modal-customer-form').addEventListener('click', (e) => {
             if (e.target.id === 'modal-customer-form') closeCustomerFormModal();
         });
+        document.getElementById('cf-departmentId').addEventListener('change', _onDepartmentChange);
     }
 
     // ─── Apertura modo CREAR ─────────────────────────────────────────────────────
 
-    function openCustomerFormModal(onSaved) {
+    async function openCustomerFormModal(onSaved) {
         _editingId = null;
         _onSavedCb = onSaved || null;
 
@@ -122,6 +121,9 @@
         document.getElementById('cf-status-group').style.display = 'none';
 
         _clearForm();
+        if (!_departmentsLoaded) {
+            await _loadDepartments();
+        }
         _showOverlay();
         lucide.createIcons();
     }
@@ -142,8 +144,11 @@
         _showOverlay();
 
         try {
+            if (!_departmentsLoaded) {
+            await _loadDepartments();
+        }
             const customer = await CustomerService.getById(id);
-            _populateForm(customer);
+            await _populateForm(customer);
         } catch (err) {
             _showApiError(err.message);
         } finally {
@@ -202,15 +207,31 @@
         };
     }
 
-    function _populateForm(customer) {
-        document.getElementById('cf-firstName').value      = customer.firstName;
-        document.getElementById('cf-lastName').value       = customer.lastName;
-        document.getElementById('cf-phone').value          = customer.phone !== '—' ? customer.phone : '';
-        document.getElementById('cf-municipalityId').value = customer.municipalityId;
-        document.getElementById('cf-pointOfSale').value    = customer.pointOfSale !== '—' ? customer.pointOfSale : '';
-        document.getElementById('cf-posaddress').value     = customer.posaddress  !== '—' ? customer.posaddress  : '';
-        document.getElementById('cf-isActive').value       = String(customer.isActive);
+    async function _populateForm(customer) {
+        document.getElementById('cf-firstName').value = customer.firstName;
+    document.getElementById('cf-lastName').value = customer.lastName;
+    document.getElementById('cf-phone').value =
+        customer.phone !== '—' ? customer.phone : '';
+
+    document.getElementById('cf-pointOfSale').value =
+        customer.pointOfSale !== '—' ? customer.pointOfSale : '';
+
+    document.getElementById('cf-posaddress').value =
+        customer.posaddress !== '—' ? customer.posaddress : '';
+
+    document.getElementById('cf-isActive').value =
+        String(customer.isActive);
+
+    document.getElementById('cf-departmentId').value =
+        customer.departmentId;
+
+    await _loadMunicipalities(customer.departmentId);
+
+    document.getElementById('cf-municipalityId').value =
+        customer.municipalityId;
     }
+
+    
 
     function _clearForm() {
         ['cf-firstName', 'cf-lastName', 'cf-phone', 'cf-pointOfSale', 'cf-posaddress'].forEach(id => {
@@ -220,6 +241,21 @@
         const sel = document.getElementById('cf-municipalityId');
         if (sel) { sel.value = ''; sel.classList.remove('input-error'); }
         _clearApiError();
+        const dep =
+            document.getElementById('cf-departmentId');
+
+        if (dep) {
+            dep.value = '';
+            dep.classList.remove('input-error');
+        }
+
+        const mun =
+            document.getElementById('cf-municipalityId');
+
+        if (mun) {
+            mun.value = '';
+            mun.classList.remove('input-error');
+        }
     }
 
     function _validateForm(data) {
@@ -228,8 +264,101 @@
         if (!data.lastName.trim())  { document.getElementById('cf-lastName').classList.add('input-error');  valid = false; }
         if (!data.municipalityId)   { document.getElementById('cf-municipalityId').classList.add('input-error'); valid = false; }
         if (!valid) _showApiError('Por favor completá los campos requeridos.');
+        if (!document.getElementById('cf-departmentId').value) {
+            document
+                .getElementById('cf-departmentId')
+                .classList.add('input-error');
+
+            valid = false;
+        }
         return valid;
     }
+
+     async function _loadDepartments() {
+
+        const departments =
+            await LocationService.getDepartments();
+
+        const select =
+            document.getElementById('cf-departmentId');
+
+        select.innerHTML =
+            '<option value="">Seleccionar departamento</option>';
+
+        departments.forEach(dep => {
+
+            select.insertAdjacentHTML(
+                'beforeend',
+                `
+                <option value="${dep.id}">
+                    ${dep.departmentName}
+                </option>
+                `
+            );
+
+        });
+
+        _departmentsLoaded = true;
+        }
+
+            async function _loadMunicipalities(departmentId) {
+
+            const select =
+                document.getElementById('cf-municipalityId');
+
+            if (!departmentId) {
+
+                select.innerHTML =
+                    '<option value="">Seleccionar municipio</option>';
+
+                select.disabled = true;
+                return;
+            }
+
+            const municipalities =
+                await LocationService
+                    .getMunicipalitiesByDepartment(departmentId);
+
+            select.innerHTML =
+                '<option value="">Seleccionar municipio</option>';
+
+            if (municipalities.length === 0) {
+
+                select.innerHTML =
+                    '<option value="">No hay municipios disponibles</option>';
+
+                select.disabled = true;
+                return;
+            }
+
+            municipalities.forEach(m => {
+
+                select.insertAdjacentHTML(
+                    'beforeend',
+                    `
+                    <option value="${m.id}">
+                        ${m.municipalityName}
+                    </option>
+                    `
+                );
+
+            });
+
+            select.disabled = false;
+        }
+
+        async function _onDepartmentChange(event) {
+
+            const departmentId =
+                event.target.value;
+
+            const municipalitySelect =
+                document.getElementById('cf-municipalityId');
+
+            municipalitySelect.value = '';
+
+            await _loadMunicipalities(departmentId);
+        }
 
     // ─── UI helpers ──────────────────────────────────────────────────────────────
 
