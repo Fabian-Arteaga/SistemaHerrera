@@ -19,7 +19,7 @@ class TopBar {
       if (window.lucide) lucide.createIcons();
 
       this.#setupEvents();
-      this.#loadUserData(); // <-- Nueva llamada para cargar datos
+      this.#loadUserData(); 
 
     } catch (error) {
       console.error('Topbar error:', error);
@@ -27,9 +27,6 @@ class TopBar {
     }
   }
 
-  // --- MÉTODO PARA LEER JWT Y PINTAR USUARIO ---
-  // --- MÉTODO PARA LEER JWT Y PINTAR USUARIO ---
-  // --- MÉTODO PARA LEER JWT Y PINTAR USUARIO ---
   #loadUserData() {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -42,17 +39,14 @@ class TopBar {
       }).join(''));
 
       const decoded = JSON.parse(jsonPayload);
-      console.log("Token JWT decodificado:", decoded); // Chivato en consola por si acaso
+      console.log("Token JWT decodificado:", decoded);
 
-      // 1. Extraer Rol (Esto ya te funciona bien)
       const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] 
                 || decoded.role || decoded.Role || decoded.RoleName || 'Usuario';
-
-      // 2. Extraer Nombre (Ignorando números como el ID "3")
       let username = "Usuario";
       
       const possibleKeys = [
-          'FullName', // <-- Agregamos esta de primerita, es la prioridad
+          'FullName', 
           'FirstName', 'UserName', 'unique_name', 'name', 'email',
           'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name',
           'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
