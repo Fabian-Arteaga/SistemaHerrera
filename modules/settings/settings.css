@@ -577,7 +577,11 @@ input:checked+.slider:before {
         grid-template-columns: 1fr;
     }
 }
-
+.form-actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+}
 @media (max-width: 768px) {
     body {
         overflow: auto;
