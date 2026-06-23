@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inventario | Sistema de Gestión</title>
+    <title>Inventario | Sistema de Gestion</title>
 
-   <link rel="stylesheet" href="../../styles/variables.css" />
+    <link rel="stylesheet" href="../../styles/variables.css" />
     <link rel="stylesheet" href="../../styles/reset.css" />
     <link rel="stylesheet" href="../../styles/global.css" />
     <link rel="stylesheet" href="../../styles/layout.css" />
@@ -22,29 +22,31 @@
   </head>
 
   <body>
-   <div id="layout-placeholder"></div>
+    <div id="layout-placeholder"></div>
     <script src="../shared/components/sidebar/sidebar.js"></script>
 
     <div id="topbar-placeholder"></div>
     <script src="../shared/components/topbar/topbar.js"></script>
 
+    <div id="inventory-drawer-placeholder"></div>
 
     <main class="main-content">
       <div class="page-header animate-in">
-  <div class="page-header-left">
-    <h1>Inventario</h1>
-  </div>
-  <div class="page-header-actions">
-    <button class="btn btn-outline">
-      <i data-lucide="download" style="width: 16px; height: 16px"></i>
-      <span class="btn-label">Exportar</span>
-    </button>
-    <button class="btn btn-primary" onclick="window.location.href='/modules/restock/restock.html'">
-      <i data-lucide="plus" style="width: 18px; height: 18px"></i>
-      <span class="btn-label">Reabastecer</span>
-    </button>
-  </div>
-</div>
+        <div class="page-header-left">
+          <h1>Inventario</h1>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-outline" type="button">
+            <i data-lucide="download" style="width: 16px; height: 16px"></i>
+            <span class="btn-label">Exportar</span>
+          </button>
+          <button class="btn btn-primary" type="button" onclick="window.location.href='/modules/restock/restock.html'">
+            <i data-lucide="plus" style="width: 18px; height: 18px"></i>
+            <span class="btn-label">Reabastecer</span>
+          </button>
+        </div>
+      </div>
+
       <div class="stats-row animate-in delay-1">
         <div class="stat-card stat-card-mint">
           <div class="stat-card-decoration"></div>
@@ -52,19 +54,16 @@
             <i data-lucide="package" style="width: 20px; height: 20px"></i>
           </div>
           <div class="stat-card-label">Total Productos</div>
-          <div class="stat-card-value">156</div>
+          <div class="stat-card-value" id="stat-total-products">-</div>
         </div>
 
         <div class="stat-card stat-card-yellow">
           <div class="stat-card-decoration"></div>
           <div class="stat-card-icon">
-            <i
-              data-lucide="alert-triangle"
-              style="width: 20px; height: 20px"
-            ></i>
+            <i data-lucide="alert-triangle" style="width: 20px; height: 20px"></i>
           </div>
           <div class="stat-card-label">Stock Bajo</div>
-          <div class="stat-card-value">12</div>
+          <div class="stat-card-value" id="stat-low-stock">-</div>
         </div>
 
         <div class="stat-card stat-card-coral">
@@ -72,8 +71,8 @@
           <div class="stat-card-icon">
             <i data-lucide="trending-up" style="width: 20px; height: 20px"></i>
           </div>
-          <div class="stat-card-label">Más Vendido</div>
-          <div class="stat-card-value">Fresa</div>
+          <div class="stat-card-label">Mas Vendido</div>
+          <div class="stat-card-value" id="stat-best-flavor">-</div>
         </div>
 
         <div class="stat-card stat-card-purple">
@@ -82,49 +81,57 @@
             <i data-lucide="dollar-sign" style="width: 20px; height: 20px"></i>
           </div>
           <div class="stat-card-label">Valor Inventario</div>
-          <div class="stat-card-value">48,250</div>
+          <div class="stat-card-value" id="stat-inventory-value">-</div>
         </div>
       </div>
 
-      <div class="filter-bar">
-  <div class="filter-field filter-search">
-    <label class="filter-label">Buscar</label>
-     <div class="filter-input-wrapper">
-    <input type="text" class="filter-input" placeholder="Buscar por producto, SKU..." />
-    <i data-lucide="search" class="filter-icon"></i>
-    </div>
-  </div>
-  <div class="filter-divider"></div>
-  <div class="filter-field">
-    <label class="filter-label">Línea</label>
-    <select class="filter-select" id="lineaFilter">...</select>
-  </div>
-  <div class="filter-field">
-    <label class="filter-label">Sabor</label>
-    <select class="filter-select" id="saborFilter">...</select>
-  </div>
-  <div class="filter-field">
-    <label class="filter-label">Presentación</label>
-    <select class="filter-select" id="presFilter">...</select>
-  </div>
-  <div class="filter-actions">
-    <button class="filter-btn filter-btn--clear">Limpiar</button>
-    <button class="filter-btn filter-btn--primary">Filtrar</button>
-  </div>
-</div>
+      <div class="filter-bar animate-in delay-2">
+        <div class="filter-field filter-search">
+          <label class="filter-label">Buscar</label>
+          <div class="filter-input-wrapper">
+            <input type="text" class="filter-input" placeholder="Buscar por producto..." id="searchInput" />
+            <i data-lucide="search" class="filter-icon"></i>
+          </div>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="filter-field">
+          <label class="filter-label">Linea</label>
+          <select class="filter-select" id="filterLine">
+            <option value="">Todas las lineas</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label class="filter-label">Sabor</label>
+          <select class="filter-select" id="filterFlavor">
+            <option value="">Todos los sabores</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label class="filter-label">Presentacion</label>
+          <select class="filter-select" id="filterPresentation" disabled>
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button type="button" class="filter-btn filter-btn--clear" onclick="clearFilters()">
+            <i data-lucide="x"></i> Limpiar
+          </button>
+          <button type="button" class="filter-btn filter-btn--primary" onclick="applyFilters()">
+            <i data-lucide="search"></i> Filtrar
+          </button>
+        </div>
+      </div>
+
       <div class="content-grid animate-in delay-3">
         <div class="results-card">
           <div class="results-header">
             <h2>
               <span>Resultados</span>
-              <span class="count-badge" id="resultCount">156</span>
+              <span class="count-badge" id="resultCount">-</span>
             </h2>
             <div class="results-actions">
-              <button class="btn btn-outline" style="padding: 8px 12px">
-                <i
-                  data-lucide="arrow-down-up"
-                  style="width: 14px; height: 14px"
-                ></i>
+              <button class="btn btn-outline" type="button" style="padding: 8px 12px">
+                <i data-lucide="arrow-down-up" style="width: 14px; height: 14px"></i>
                 Ordenar
               </button>
             </div>
@@ -139,535 +146,31 @@
                   <th style="text-align: center">Stock Bodega</th>
                   <th style="text-align: center">Stock Reservado</th>
                   <th style="text-align: center">Stock Total</th>
-                  <th style="text-align: right">Precio Detalle</th>
-                  <th style="text-align: right">Precio Mayoritario</th>
                   <th style="text-align: center"></th>
                 </tr>
               </thead>
               <tbody id="inventoryTableBody">
-                <tr
-                  data-linea="tradicional"
-                  data-sabor="fresa"
-                  data-presentacion="8oz"
-                >
-                  <td>
-                    <div class="product-cell">
-                      <div class="product-icon fresa">🍓</div>
-                      <div class="product-info">
-                        <span class="product-name"
-                          >S. Tradicional Fresa 8 Onz</span
-                        >
-                        <span class="product-sku">SKU-001-FRE</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">15</td>
-                  <td style="text-align: center">45</td>
-                  <td style="text-align: center">12</td>
-                  <td style="text-align: center; font-weight: 600">72</td>
-                  <td style="text-align: right">70.00 C$</td>
-                  <td style="text-align: right">65.00 C$</td>
-                  <td style="text-align: center">
-                    <button class="action-btn" onclick="openInventoryDrawer()"title="Ver detalles">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr
-                  data-linea="premium"
-                  data-sabor="chocolate"
-                  data-presentacion="16oz"
-                >
-                  <td>
-                    <div class="product-cell">
-                      <div class="product-icon chocolate">🍫</div>
-                      <div class="product-info">
-                        <span class="product-name"
-                          >S. Premium Chocolate 16 Onz</span
-                        >
-                        <span class="product-sku">SKU-009-CHO</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">12</td>
-                  <td style="text-align: center">28</td>
-                  <td style="text-align: center">6</td>
-                  <td style="text-align: center; font-weight: 600">46</td>
-                  <td style="text-align: right">130.00 C$</td>
-                  <td style="text-align: right">120.00 C$</td>
-                  <td style="text-align: center">
-                    <button class="action-btn">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr
-                  data-linea="tradicional"
-                  data-sabor="vainilla"
-                  data-presentacion="8oz"
-                >
-                  <td>
-                    <div class="product-cell">
-                      <div class="product-icon vainilla"></div>
-                      <div class="product-info">
-                        <span class="product-name"
-                          >S. Tradicional Vainilla 8 Onz</span
-                        >
-                        <span class="product-sku">SKU-010-VAN</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">18</td>
-                  <td style="text-align: center">36</td>
-                  <td style="text-align: center">10</td>
-                  <td style="text-align: center; font-weight: 600">64</td>
-                  <td style="text-align: right">70.00 C$</td>
-                  <td style="text-align: right">65.00 C$</td>
-                  <td style="text-align: center">
-                    <button class="action-btn">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr
-                  data-linea="especial"
-                  data-sabor="coco"
-                  data-presentacion="8oz"
-                >
-                  <td>
-                    <div class="product-cell">
-                      <div class="product-icon coco">🥥</div>
-                      <div class="product-info">
-                        <span class="product-name">S. Especial Coco 8 Onz</span>
-                        <span class="product-sku">SKU-011-COC</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">6</td>
-                  <td style="text-align: center">22</td>
-                  <td style="text-align: center">4</td>
-                  <td style="text-align: center; font-weight: 600">32</td>
-                  <td style="text-align: right">90.00 C$</td>
-                  <td style="text-align: right">82.00 C$</td>
-                  <td style="text-align: center">
-                    <button class="action-btn">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr
-                  data-linea="artesanal"
-                  data-sabor="mora"
-                  data-presentacion="16oz"
-                >
-                  <td>
-                    <div class="product-cell">
-                      <div class="product-icon mora">🫐</div>
-                      <div class="product-info">
-                        <span class="product-name"
-                          >S. Artesanal Mora 16 Onz</span
-                        >
-                        <span class="product-sku">SKU-012-MOR</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">9</td>
-                  <td style="text-align: center">27</td>
-                  <td style="text-align: center">5</td>
-                  <td style="text-align: center; font-weight: 600">41</td>
-                  <td style="text-align: right">135.00 C$</td>
-                  <td style="text-align: right">125.00 C$</td>
-                  <td style="text-align: center">
-                    <button class="action-btn">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr
-                  data-linea="premium"
-                  data-sabor="limon"
-                  data-presentacion="32oz"
-                >
-                  <td>
-                    <div class="product-cell">
-                      <div class="product-icon limon">🍋</div>
-                      <div class="product-info">
-                        <span class="product-name"
-                          >S. Premium Limón 32 Onz</span
-                        >
-                        <span class="product-sku">SKU-013-LIM</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">14</td>
-                  <td style="text-align: center">34</td>
-                  <td style="text-align: center">8</td>
-                  <td style="text-align: center; font-weight: 600">56</td>
-                  <td style="text-align: right">195.00 C$</td>
-                  <td style="text-align: right">180.00 C$</td>
-                  <td style="text-align: center">
-                    <button class="action-btn">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr
-                  data-linea="tradicional"
-                  data-sabor="coco"
-                  data-presentacion="4oz"
-                >
-                  <td>
-                    <div class="product-cell">
-                      <div class="product-icon coco">🥥</div>
-                      <div class="product-info">
-                        <span class="product-name"
-                          >S. Tradicional Coco 4 Onz</span
-                        >
-                        <span class="product-sku">SKU-014-COC</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">20</td>
-                  <td style="text-align: center">40</td>
-                  <td style="text-align: center">6</td>
-                  <td style="text-align: center; font-weight: 600">66</td>
-                  <td style="text-align: right">45.00 C$</td>
-                  <td style="text-align: right">40.00 C$</td>
-                  <td style="text-align: center">
-                    <button class="action-btn">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </td>
+                <tr>
+                  <td colspan="6" class="table-loading">Cargando inventario...</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <!-- fin .table-wrapper -->
 
           <div class="table-footer">
             <div class="table-footer-info">
-              Mostrando <strong id="showingFrom">1-7</strong> de
-              <strong id="showingTotal">156</strong> productos
+              Mostrando <strong id="showingFrom">0-0</strong> de
+              <strong id="showingTotal">0</strong> productos
             </div>
-            <div class="pagination">
-              <button class="pagination-btn" disabled>
-                <i data-lucide="chevron-left"></i>
-              </button>
-              <button class="pagination-btn active">1</button>
-              <button class="pagination-btn">2</button>
-              <button class="pagination-btn">3</button>
-              <button class="pagination-btn">...</button>
-              <button class="pagination-btn">20</button>
-              <button class="pagination-btn">
-                <i data-lucide="chevron-right"></i>
-              </button>
-            </div>
+            <div class="pagination"></div>
           </div>
         </div>
       </div>
     </main>
 
-   <!-- ═════ INVENTORY DRAWER HTML ═════ -->
-<div class="inventory-drawer-overlay" id="inventoryDrawerOverlay"></div>
-<div class="inventory-drawer" id="inventoryDrawer">
-  
-  <!-- Header (Producto + Resumen General) -->
-  <div class="inventory-drawer-header">
-    <div class="inventory-drawer-header-top">
-      <div class="inventory-drawer-title">
-        <i data-lucide="package"></i>
-        Detalle del inventario
-      </div>
-      <button class="inventory-drawer-close" id="inventoryDrawerCloseBtn">
-        <i data-lucide="x"></i>
-      </button>
-    </div>
-    
-    <!-- Product Info -->
-    <div class="inv-product-header">
-      <div class="inv-product-image">
-        <i data-lucide="strawberry"></i>
-      </div>
-      <div class="inv-product-info">
-        <div class="inv-product-name">Fresa 8 Onz</div>
-        <div class="inv-product-sku">SKU-001-FRE</div>
-        <span class="inv-product-status">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--color-brand);display:inline-block;"></span>
-          Producto activo
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <div class="inventory-drawer-body">
-     <div class="inv-overview-container">
-
-  <!-- Meta Attributes -->
-  <div class="inv-product-meta">
-    <div class="inv-meta-item">
-      <span class="inv-meta-label">Línea</span>
-      <span class="inv-meta-value">Tradicional</span>
-    </div>
-
-    <div class="inv-meta-item">
-      <span class="inv-meta-label">Sabor</span>
-      <span class="inv-meta-value">Fresa</span>
-    </div>
-
-    <div class="inv-meta-item">
-      <span class="inv-meta-label">Categoría</span>
-      <span class="inv-meta-value">8 Onzas</span>
-    </div>
-
-    <div class="inv-meta-item">
-      <span class="inv-meta-label">Presentación</span>
-      <span class="inv-meta-value">Envase</span>
-    </div>
-  </div>
-
-  <!-- Inventory Summary Cards -->
-  <div class="inv-summary-grid">
-
-    <div class="inv-summary-card show">
-      <div class="inv-summary-icon">
-        <i data-lucide="store"></i>
-      </div>
-
-      <div class="inv-summary-info">
-        <span class="inv-summary-label">Mostrador</span>
-        <span class="inv-summary-value">15</span>
-      </div>
-    </div>
-
-    <div class="inv-summary-card warehouse">
-      <div class="inv-summary-icon">
-        <i data-lucide="warehouse"></i>
-      </div>
-
-      <div class="inv-summary-info">
-        <span class="inv-summary-label">Bodega</span>
-        <span class="inv-summary-value">45</span>
-      </div>
-    </div>
-
-    <div class="inv-summary-card reserved">
-      <div class="inv-summary-icon">
-        <i data-lucide="alert-circle"></i>
-      </div>
-
-      <div class="inv-summary-info">
-        <span class="inv-summary-label">Reservado</span>
-        <span class="inv-summary-value">12</span>
-      </div>
-    </div>
-
-    <div class="inv-summary-card total">
-      <div class="inv-summary-icon">
-        <i data-lucide="layers"></i>
-      </div>
-
-      <div class="inv-summary-info">
-        <span class="inv-summary-label">Total</span>
-        <span class="inv-summary-value">72</span>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-    <!-- Section: Available Lots -->
-    <div class="drawer-section">
-      <div class="drawer-section-title"><i data-lucide="list"></i> Lotes disponibles (3)</div>
-      <table class="inv-lots-table">
-        <thead>
-          <tr>
-            <th>Lote</th>
-            <th style="text-align:center;">Stock Mostrador</th>
-            <th style="text-align:center;">Stock Bodega</th>
-            <th style="text-align:center;">Reservado</th>
-            <th style="text-align:center;">Stock Total</th>
-            <th style="width:40px;"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="inv-lot-code">FR4010426</div>
-              <span class="inv-lot-status">
-                <span style="width:5px;height:5px;border-radius:50%;background:var(--color-brand);display:inline-block;"></span>
-                Activo
-              </span>
-            </td>
-            <td class="inv-lot-cell-num" style="text-align:center;">10</td>
-            <td class="inv-lot-cell-num" style="text-align:center;">50</td>
-            <td class="inv-lot-cell-num" style="text-align:center;">20</td>
-            <td class="inv-lot-cell-num" style="text-align:center;font-weight:700;">80</td>
-            <td><button class="inv-lot-view-btn"><i data-lucide="eye"></i></button></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="inv-lot-code">FR4010389</div>
-              <span class="inv-lot-status">
-                <span style="width:5px;height:5px;border-radius:50%;background:var(--color-brand);display:inline-block;"></span>
-                Activo
-              </span>
-            </td>
-            <td class="inv-lot-cell-num" style="text-align:center;">5</td>
-            <td class="inv-lot-cell-num" style="text-align:center;">20</td>
-            <td class="inv-lot-cell-num" style="text-align:center;">0</td>
-            <td class="inv-lot-cell-num" style="text-align:center;font-weight:700;">25</td>
-            <td><button class="inv-lot-view-btn"><i data-lucide="eye"></i></button></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="inv-lot-code">FR4010321</div>
-              <span class="inv-lot-status">
-                <span style="width:5px;height:5px;border-radius:50%;background:var(--color-brand);display:inline-block;"></span>
-                Activo
-              </span>
-            </td>
-            <td class="inv-lot-cell-num" style="text-align:center;">0</td>
-            <td class="inv-lot-cell-num" style="text-align:center;">0</td>
-            <td class="inv-lot-cell-num" style="text-align:center;">0</td>
-            <td class="inv-lot-cell-num" style="text-align:center;font-weight:700;">0</td>
-            <td><button class="inv-lot-view-btn"><i data-lucide="eye"></i></button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    <!-- Section: Selected Lot Details -->
-    <div class="drawer-section">
-      <div class="drawer-section-title"><i data-lucide="box"></i> Detalle del lote seleccionado</div>
-      <div class="inv-selected-lot-header">
-        <div>
-          <span class="inv-selected-lot-code">FR4010426</span>
-          <span class="inv-lot-status" style="margin-left: 8px;">
-            <span style="width:5px;height:5px;border-radius:50%;background:var(--color-brand);display:inline-block;"></span>
-            Activo
-          </span>
-        </div>
-        <span class="inv-selected-lot-date">Fecha ingreso: 02/03/2026</span>
-      </div>
-      
-      <!-- Tabs -->
-      <div class="inv-tabs">
-        <button class="inv-tab active">Stock</button>
-        <button class="inv-tab">Costos</button>
-        <button class="inv-tab">Ganancias</button>
-        <button class="inv-tab">Información adicional</button>
-      </div>
-      
-      <!-- Stock Grid -->
-      <div class="inv-stock-grid">
-        <div class="inv-stock-item">
-          <span class="inv-stock-label">Cantidad inicial</span>
-          <span class="inv-stock-value">100</span>
-        </div>
-        <div class="inv-stock-item">
-          <span class="inv-stock-label">Vendido detalle</span>
-          <span class="inv-stock-value">4</span>
-        </div>
-        <div class="inv-stock-item">
-          <span class="inv-stock-label">Vendido mayoreo</span>
-          <span class="inv-stock-value">16</span>
-        </div>
-        <div class="inv-stock-item">
-          <span class="inv-stock-label">Vendido total</span>
-          <span class="inv-stock-value">20</span>
-        </div>
-        <div class="inv-stock-item">
-          <span class="inv-stock-label">Disponible mostrador</span>
-          <span class="inv-stock-value" style="color:var(--color-brand);">10</span>
-        </div>
-        <div class="inv-stock-item">
-          <span class="inv-stock-label">Disponible bodega</span>
-          <span class="inv-stock-value" style="color:#4A90D9;">50</span>
-        </div>
-        <div class="inv-stock-item">
-          <span class="inv-stock-label">Reservado</span>
-          <span class="inv-stock-value" style="color:#FA897B;">20</span>
-        </div>
-        <div class="inv-stock-item">
-          <span class="inv-stock-label">Disponible para venta</span>
-          <span class="inv-stock-value">60</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Section: Location -->
-    <div class="drawer-section">
-      <div class="drawer-section-title"><i data-lucide="map-pin"></i> Ubicación del lote</div>
-      <div class="inv-location-grid">
-        <div class="inv-location-card show">
-          <div class="inv-location-icon"><i data-lucide="store"></i></div>
-          <div class="inv-location-info">
-            <span class="inv-location-name">Mostrador</span>
-            <span class="inv-location-detail">10 unidades</span>
-            <span class="inv-location-detail" style="color:var(--color-brand);font-weight:600;">Disponibles para venta</span>
-          </div>
-        </div>
-        <div class="inv-location-card warehouse">
-          <div class="inv-location-icon"><i data-lucide="warehouse"></i></div>
-          <div class="inv-location-info">
-            <span class="inv-location-name">Bodega</span>
-            <span class="inv-location-detail">50 unidades</span>
-            <span class="inv-location-detail" style="color:#4A90D9;font-weight:600;">Stock almacenado</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Section: Notes -->
-    <div class="drawer-section">
-      <div class="drawer-section-title"><i data-lucide="sticky-note"></i> Notas</div>
-      <div class="inv-notes-card">
-        <span class="inv-notes-text">Sin notas registradas para este lote.</span>
-        <button class="inv-notes-edit"><i data-lucide="pencil"></i></button>
-      </div>
-    </div>
-    
-  </div>
-
-  <!-- Footer (Sticky) -->
-  <div class="inventory-drawer-footer">
-    <button class="drawer-btn drawer-btn-secondary" onclick="closeInventoryDrawer()">Cerrar</button>
-    <div class="drawer-btn-spacer"></div>
-    <button class="drawer-btn drawer-btn-primary">
-      <i data-lucide="list"></i> Ver movimientos
-    </button>
-  </div>
-
-</div>
-
-</div>
-
-    <script>
-      lucide.createIcons();
-      function openInventoryDrawer() {
-    document.getElementById('inventoryDrawerOverlay').classList.add('active');
-    document.getElementById('inventoryDrawer').classList.add('active');
-    document.body.style.overflow = 'hidden';
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-  }
-  
-  function closeInventoryDrawer() {
-    document.getElementById('inventoryDrawerOverlay').classList.remove('active');
-    document.getElementById('inventoryDrawer').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-  
-  // Event listeners
-  document.getElementById('inventoryDrawerOverlay')?.addEventListener('click', closeInventoryDrawer);
-  document.getElementById('inventoryDrawerCloseBtn')?.addEventListener('click', closeInventoryDrawer);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeInventoryDrawer(); });
-  
-  // Exponer para onclick del HTML
-  window.openInventoryDrawer = openInventoryDrawer;
-  window.closeInventoryDrawer = closeInventoryDrawer;
-  
-  // Inicializar íconos
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-    </script>
+    <script src="./models/inventory-model.js"></script>
+    <script src="./services/inventory.service.js"></script>
+    <script src="./components/inventory-drawer/inventory-drawer.js"></script>
+    <script src="./pages/productInventory.js"></script>
   </body>
 </html>
