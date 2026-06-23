@@ -48,6 +48,9 @@ class LoginForm {
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('token', result.data.token);
                 localStorage.setItem('username', result.data.userName);
+                localStorage.setItem('firstName', result.data.firstName);
+                localStorage.setItem('lastName', result.data.lastName);
+                localStorage.setItem('email', result.data.email);
 
                 if (result.data.roles && result.data.roles.length > 0) {
                     localStorage.setItem('rol', result.data.roles[0]);
@@ -79,4 +82,28 @@ class LoginForm {
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = new LoginForm();
     loginForm.init();
+    
+    loadBusinessBranding();
 });
+
+
+async function loadBusinessBranding() {
+    try {
+        const response = await fetch('https://localhost:7035/api/BusinessProfile');
+        if (response.ok) {
+            const data = await response.json();
+            
+            // CORRECCIÓN: Clases exactas de tu login.html
+            if (data.name) {
+                const titleEl = document.querySelector('.brand-content h1');
+                if (titleEl) titleEl.textContent = data.name;
+            }
+            if (data.logoUrl) {
+                const imgEl = document.querySelector('.brand-logo-container img');
+                if (imgEl) imgEl.src = `https://localhost:7035${data.logoUrl}`;
+            }
+        }
+    } catch (error) {
+        console.log("No se pudo cargar el diseño de la empresa:", error);
+    }
+}
