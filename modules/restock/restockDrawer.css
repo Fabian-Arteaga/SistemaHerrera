@@ -204,6 +204,7 @@
 .restock-lot-dot.chocolate { background: #8B5E3C; }
 .restock-lot-dot.vanilla { background: #F4C542; }
 .restock-lot-dot.coconut { background: #E2E8F0; }
+.restock-lot-dot.default { background: var(--color-brand); }
 
 .restock-lot-status {
   display: inline-flex; align-items: center; gap: 4px;
@@ -223,6 +224,17 @@
 .restock-lot-cell-days.mid { color: #b8930a; }
 .restock-lot-cell-days.high { color: var(--color-brand); }
 
+.restock-drawer-state {
+  padding: 22px 12px !important;
+  text-align: center;
+  color: var(--color-text-hint);
+  font-weight: 600;
+}
+
+.restock-drawer-state--error {
+  color: var(--color-error, #ef4444);
+}
+
 /* View All Button */
 .restock-view-all {
   display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -236,7 +248,7 @@
 
 /* Financial Summary */
 .restock-financial-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
 }
 .restock-financial-card {
   padding: 14px; border-radius: 10px;
