@@ -4,48 +4,25 @@
  */
 
 const RestockService = (() => {
-    let _baseUrl = null;
+    const API_SERVICE_SRC = '/modules/core/services/api.service.js';
 
-    async function _getBaseUrl() {
-        if (_baseUrl) return _baseUrl;
+    async function _ensureApiService() {
+        if (typeof ApiService !== 'undefined') return;
 
-        const configModule = await import('../../core/config/app.config.js');
-        _baseUrl = `${configModule.CONFIG.API_URL}/restocks`;
+        await new Promise((resolve, reject) => {
+            const existingScript = document.querySelector(`script[src="${API_SERVICE_SRC}"]`);
+            if (existingScript) {
+                existingScript.addEventListener('load', resolve, { once: true });
+                existingScript.addEventListener('error', reject, { once: true });
+                return;
+            }
 
-        return _baseUrl;
-    }
-
-    function _buildJsonHeaders() {
-        const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        };
-
-        const token = localStorage.getItem('token');
-        if (token) headers.Authorization = `Bearer ${token}`;
-
-        return headers;
-    }
-
-    async function _readEnvelope(response) {
-        let envelope = null;
-
-        try {
-            envelope = await response.json();
-        } catch {
-            throw new Error(`Error HTTP ${response.status}`);
-        }
-
-        const success = envelope.success ?? envelope.Success;
-        const message = envelope.message ?? envelope.Message;
-        const data = envelope.data ?? envelope.Data;
-
-        if (!response.ok || success === false) {
-            if (Array.isArray(data)) throw new Error(data.join('\n'));
-            throw new Error(message || `Error HTTP ${response.status}`);
-        }
-
-        return data;
+            const script = document.createElement('script');
+            script.src = API_SERVICE_SRC;
+            script.onload = resolve;
+            script.onerror = () => reject(new Error('No se pudo cargar ApiService'));
+            document.head.appendChild(script);
+        });
     }
 
     function _appendParam(params, key, value) {
@@ -67,17 +44,12 @@ const RestockService = (() => {
     }
 
     async function getStatistics() {
-        const baseUrl = await _getBaseUrl();
-        const response = await fetch(`${baseUrl}/statistics`, {
-            method: 'GET',
-            headers: _buildJsonHeaders(),
-        });
-
-        return new RestockStatistics(await _readEnvelope(response));
+        await _ensureApiService();
+        return new RestockStatistics(await ApiService.get('/restocks/statistics'));
     }
 
     async function getRestocks(query = {}) {
-        const baseUrl = await _getBaseUrl();
+        await _ensureApiService();
         const params = new URLSearchParams();
         _appendParam(params, 'page', query.page ?? 1);
         _appendParam(params, 'pageSize', query.pageSize ?? 10);
@@ -85,27 +57,63 @@ const RestockService = (() => {
         _appendParam(params, 'toDate', query.toDate);
         _appendParam(params, 'search', query.search?.trim());
 
-        const response = await fetch(`${baseUrl}?${params.toString()}`, {
-            method: 'GET',
-            headers: _buildJsonHeaders(),
-        });
-
-        return _mapPagedResponse(await _readEnvelope(response));
+        return _mapPagedResponse(await ApiService.get(`/restocks?${params.toString()}`));
     }
 
     async function getDetail(restockId) {
-        const baseUrl = await _getBaseUrl();
-        const response = await fetch(`${baseUrl}/${restockId}/detail`, {
-            method: 'GET',
-            headers: _buildJsonHeaders(),
-        });
+        await _ensureApiService();
+        return new RestockDetail(await ApiService.get(`/restocks/${restockId}/detail`));
+    }
 
-        return new RestockDetail(await _readEnvelope(response));
+    async function createRestock(formData) {
+        await _ensureApiService();
+        const payload = RestockCreateRequest.toApiPayload(formData);
+        return new RestockResponse(await ApiService.post('/restocks', payload));
+    }
+
+    async function getLines() {
+        await _ensureApiService();
+        const data = await ApiService.get('/Lines');
+        return _asArray(data).map(dto => new RestockLineOption(dto));
+    }
+
+    async function getLinePresentations() {
+        await _ensureApiService();
+        const data = await ApiService.get('/LinePresentations');
+        return _asArray(data).map(dto => new RestockLinePresentationOption(dto));
+    }
+
+    async function getLinePresentationsByLine(lineId) {
+        const selectedLineId = Number(lineId);
+        return (await getLinePresentations())
+            .filter(item => Number(item.lineId) === selectedLineId);
+    }
+
+    async function getProductsByLinePresentation(linePresentationId) {
+        await _ensureApiService();
+        if (!linePresentationId) return [];
+
+        const params = new URLSearchParams();
+        params.set('linePresentationId', String(linePresentationId));
+
+        const data = await ApiService.get(`/Products/by-line-presentation?${params.toString()}`);
+        return _asArray(data).map(dto => new RestockProductOption(dto));
+    }
+
+    function _asArray(data) {
+        if (Array.isArray(data)) return data;
+        if (Array.isArray(data?.data)) return data.data;
+        return [];
     }
 
     return {
         getStatistics,
         getRestocks,
         getDetail,
+        createRestock,
+        getLines,
+        getLinePresentations,
+        getLinePresentationsByLine,
+        getProductsByLinePresentation,
     };
 })();
