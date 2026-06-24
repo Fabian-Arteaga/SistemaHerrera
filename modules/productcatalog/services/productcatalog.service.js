@@ -4,46 +4,8 @@
  */
 
 const ProductCatalogService = (() => {
-    const API_ORIGIN = 'https://localhost:7035';
-    const BASE_URL = `${API_ORIGIN}/api`;
-
     function getApiOrigin() {
-        return API_ORIGIN;
-    }
-
-    function _buildJsonHeaders() {
-        return {
-            ..._buildAuthHeaders(),
-            'Content-Type': 'application/json',
-        };
-    }
-
-    function _buildAuthHeaders() {
-        const headers = { 'Accept': 'application/json' };
-        const token = localStorage.getItem('token');
-        if (token) headers.Authorization = `Bearer ${token}`;
-        return headers;
-    }
-
-    async function _readEnvelope(response) {
-        let envelope = null;
-
-        try {
-            envelope = await response.json();
-        } catch {
-            throw new Error(`Error HTTP ${response.status}`);
-        }
-
-        const success = envelope.success ?? envelope.Success;
-        const message = envelope.message ?? envelope.Message;
-        const data = envelope.data ?? envelope.Data;
-
-        if (!response.ok || success === false) {
-            if (Array.isArray(data)) throw new Error(data.join('\n'));
-            throw new Error(message || `Error HTTP ${response.status}`);
-        }
-
-        return data;
+        return ApiService.getApiOrigin();
     }
 
     function _appendParam(params, key, value) {
@@ -69,78 +31,45 @@ const ProductCatalogService = (() => {
         _appendParam(params, 'page', query.page ?? 1);
         _appendParam(params, 'pageSize', query.pageSize ?? 12);
         _appendParam(params, 'lineId', query.lineId);
+        _appendParam(params, 'presentationId', query.presentationId);
         _appendParam(params, 'flavorId', query.flavorId);
         _appendParam(params, 'search', query.search?.trim());
         _appendParam(params, 'active', query.active);
 
-        const response = await fetch(`${BASE_URL}/Products/catalog?${params.toString()}`, {
-            method: 'GET',
-            headers: _buildJsonHeaders(),
-        });
+        return _mapPagedResponse(await ApiService.get(`/Products/catalog?${params.toString()}`));
+    }
 
-        return _mapPagedResponse(await _readEnvelope(response));
+    async function getStats() {
+        return await ApiService.get('/Products/stats');
     }
 
     async function getById(id) {
-        const response = await fetch(`${BASE_URL}/Products/${id}`, {
-            method: 'GET',
-            headers: _buildJsonHeaders(),
-        });
-
-        return new Product(await _readEnvelope(response));
+        return new Product(await ApiService.get(`/Products/${id}`));
     }
 
     async function uploadProductImage(file) {
         const formData = new FormData();
         formData.append('file', file);
 
-        const response = await fetch(`${BASE_URL}/uploads/products`, {
-            method: 'POST',
-            headers: _buildAuthHeaders(),
-            body: formData,
-        });
-
-        return await _readEnvelope(response);
+        return await ApiService.postFormData('/uploads/products', formData);
     }
 
     async function create(formData) {
         const payload = Product.toCreateDto(formData);
-        const response = await fetch(`${BASE_URL}/Products`, {
-            method: 'POST',
-            headers: _buildJsonHeaders(),
-            body: JSON.stringify(payload),
-        });
-
-        return new Product(await _readEnvelope(response));
+        return new Product(await ApiService.post('/Products', payload));
     }
 
     async function update(id, formData) {
         const payload = Product.toUpdateDto(formData);
-        const response = await fetch(`${BASE_URL}/Products/${id}`, {
-            method: 'PUT',
-            headers: _buildJsonHeaders(),
-            body: JSON.stringify(payload),
-        });
-
-        await _readEnvelope(response);
+        await ApiService.put(`/Products/${id}`, payload);
     }
 
     async function remove(id) {
-        const response = await fetch(`${BASE_URL}/Products/${id}`, {
-            method: 'DELETE',
-            headers: _buildJsonHeaders(),
-        });
-
-        await _readEnvelope(response);
+        await ApiService.delete(`/Products/${id}`);
     }
 
     async function getLines() {
-        const response = await fetch(`${BASE_URL}/Lines`, {
-            method: 'GET',
-            headers: _buildJsonHeaders(),
-        });
-
-        return _asArray(await _readEnvelope(response));
+        return _asArray(await ApiService.get('/Lines'));
     }
 
     async function getFlavors() {
@@ -149,12 +78,7 @@ const ProductCatalogService = (() => {
         let hasNextPage = true;
 
         while (hasNextPage) {
-            const response = await fetch(`${BASE_URL}/Flavors?page=${page}&pageSize=50`, {
-                method: 'GET',
-                headers: _buildJsonHeaders(),
-            });
-
-            const pagedData = await _readEnvelope(response);
+            const pagedData = await ApiService.get(`/Flavors?page=${page}&pageSize=50`);
             flavors.push(...(pagedData?.data ?? []));
             hasNextPage = Boolean(pagedData?.hasNextPage);
             page += 1;
@@ -164,12 +88,7 @@ const ProductCatalogService = (() => {
     }
 
     async function getLinePresentations() {
-        const response = await fetch(`${BASE_URL}/LinePresentations`, {
-            method: 'GET',
-            headers: _buildJsonHeaders(),
-        });
-
-        return _asArray(await _readEnvelope(response));
+        return _asArray(await ApiService.get('/LinePresentations'));
     }
 
     async function getLinePresentationsByLine(lineId) {
@@ -188,6 +107,7 @@ const ProductCatalogService = (() => {
     return {
         getApiOrigin,
         getCatalog,
+        getStats,
         getById,
         uploadProductImage,
         create,

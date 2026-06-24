@@ -20,7 +20,6 @@ class Product {
             linePresentationId: Number(formData.linePresentationId),
             flavorId: Number(formData.flavorId),
             productName: formData.productName.trim(),
-            createdBy: Product.getCurrentUserId(),
             imageUrl: ProductImage.toApiUrl(formData.imageUrl),
             minimumStock: Number(formData.minimumStock || 0),
         };

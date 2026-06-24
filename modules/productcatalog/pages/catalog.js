@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     _bindEvents();
 
     await _loadFiltersData();
+    await _loadStats();
     await _loadPage(1);
     lucide.createIcons();
 });
@@ -21,6 +22,9 @@ function _bindEvents() {
     });
 
     document.getElementById('filterLine')?.addEventListener('change', _onFilterLineChange);
+    document.getElementById('filterPresentation')?.addEventListener('change', () => _loadPage(1));
+    document.getElementById('filterFlavor')?.addEventListener('change', () => _loadPage(1));
+    document.getElementById('filterStatus')?.addEventListener('change', () => _loadPage(1));
     document.getElementById('rowsPerPage')?.addEventListener('change', (event) => {
         _pageSize = Number(event.target.value);
         _loadPage(1);
@@ -47,6 +51,7 @@ async function _loadLines() {
         _linePresentations = await ProductCatalogService.getLinePresentations();
         const lines = _getUniqueLines(_linePresentations);
         _fillSelect('filterLine', lines, 'Todas las lineas', item => item.name || `Linea ${item.id}`);
+        _populatePresentationFilter();
         _linesLoaded = true;
     } catch (error) {
         console.error('Error cargando lineas:', error.message);
@@ -85,33 +90,21 @@ async function _loadPage(pageNumber) {
             pageSize: _pageSize,
             search: document.getElementById('searchInput')?.value || '',
             lineId: document.getElementById('filterLine')?.value || '',
+            presentationId: document.getElementById('filterPresentation')?.value || '',
             flavorId: document.getElementById('filterFlavor')?.value || '',
+            active: document.getElementById('filterStatus')?.value || '',
         });
 
-        _catalogItems = _applyPresentationFilter(result.items);
+        _catalogItems = result.items;
         _renderProducts(_catalogItems);
         _renderPagination(result);
-        _updateStats(result.totalCount, _catalogItems);
+        _updateResultCount(result.totalCount);
         _updateFooterInfo(result, _catalogItems.length);
     } catch (error) {
         _showCatalogError(error.message);
     } finally {
         lucide.createIcons();
     }
-}
-
-function _applyPresentationFilter(items) {
-    const selectedLinePresentationId = document.getElementById('filterPresentation')?.value;
-    if (!selectedLinePresentationId) return items;
-
-    const selectedText = document
-        .querySelector(`#filterPresentation option[value="${CSS.escape(selectedLinePresentationId)}"]`)
-        ?.textContent
-        ?.trim()
-        ?.toLowerCase();
-
-    if (!selectedText) return items;
-    return items.filter(product => product.presentationName?.toLowerCase() === selectedText);
 }
 
 function _renderProducts(products) {
@@ -180,11 +173,34 @@ function _buildPageWindow(current, total) {
     return pages;
 }
 
-function _updateStats(totalCount, products) {
-    document.getElementById('stat-total').textContent = totalCount;
-    document.getElementById('stat-active').textContent = products.filter(product => product.isActive).length;
-    document.getElementById('stat-inactive').textContent = products.filter(product => product.isActive === false).length;
+async function _loadStats() {
+    _showStatsLoading();
+
+    try {
+        const stats = await ProductCatalogService.getStats();
+        document.getElementById('stat-total').textContent = stats.totalProducts ?? 0;
+        document.getElementById('stat-active').textContent = stats.activeProducts ?? 0;
+        document.getElementById('stat-inactive').textContent = stats.inactiveProducts ?? 0;
+    } catch (error) {
+        console.error('Error cargando estadisticas de productos:', error.message);
+        _showStatsError();
+    }
+}
+
+function _updateResultCount(totalCount) {
     document.getElementById('resultCount').textContent = totalCount;
+}
+
+function _showStatsLoading() {
+    document.getElementById('stat-total').textContent = '-';
+    document.getElementById('stat-active').textContent = '-';
+    document.getElementById('stat-inactive').textContent = '-';
+}
+
+function _showStatsError() {
+    document.getElementById('stat-total').textContent = '-';
+    document.getElementById('stat-active').textContent = '-';
+    document.getElementById('stat-inactive').textContent = '-';
 }
 
 function _updateFooterInfo(result, visibleCount) {
@@ -217,16 +233,22 @@ function _showCatalogError(message) {
 }
 
 async function _onFilterLineChange(event) {
+    _populatePresentationFilter(event.target.value);
+    await _loadPage(1);
+}
+
+function _populatePresentationFilter(lineId = '') {
     const select = document.getElementById('filterPresentation');
     select.innerHTML = '<option value="">Todas</option>';
-    select.disabled = true;
-
-    if (!event.target.value) return;
+    select.disabled = false;
 
     try {
-        const presentations = _getPresentationOptionsByLine(event.target.value);
+        const presentations = lineId
+            ? _getPresentationOptionsByLine(lineId)
+            : _getUniquePresentations(_linePresentations);
+
         presentations.forEach(item => {
-            select.insertAdjacentHTML('beforeend', `<option value="${item.linePresentationId}">${_escape(item.presentationName)}</option>`);
+            select.insertAdjacentHTML('beforeend', `<option value="${item.presentationId}">${_escape(item.presentationName)}</option>`);
         });
         select.disabled = presentations.length === 0;
     } catch (error) {
@@ -236,6 +258,7 @@ async function _onFilterLineChange(event) {
 
 function _reloadCurrentPage() {
     _loadPage(_currentPage);
+    _loadStats();
 }
 
 function _getLineName(line) {
@@ -268,6 +291,22 @@ function _getPresentationOptionsByLine(lineId) {
         .sort((a, b) => String(a.presentationName).localeCompare(String(b.presentationName), 'es'));
 }
 
+function _getUniquePresentations(relations) {
+    const map = new Map();
+
+    relations.forEach(relation => {
+        const presentation = relation.presentation;
+        if (!presentation?.id || map.has(presentation.id)) return;
+        map.set(presentation.id, {
+            presentationId: presentation.id,
+            presentationName: presentation.name || `Presentacion ${presentation.id}`,
+        });
+    });
+
+    return Array.from(map.values())
+        .sort((a, b) => String(a.presentationName).localeCompare(String(b.presentationName), 'es'));
+}
+
 function _getFlavorName(flavor) {
     return flavor.flavorName || flavor.name || flavor.nombre || `Sabor ${flavor.id}`;
 }
@@ -289,7 +328,7 @@ function clearFilters() {
     document.getElementById('searchInput').value = '';
     document.getElementById('filterLine').value = '';
     document.getElementById('filterFlavor').value = '';
-    document.getElementById('filterPresentation').innerHTML = '<option value="">Todas</option>';
-    document.getElementById('filterPresentation').disabled = true;
+    document.getElementById('filterStatus').value = '';
+    _populatePresentationFilter();
     _loadPage(1);
 }

@@ -121,6 +121,14 @@
             <option value="">Todos los sabores</option>
           </select>
         </div>
+        <div class="filter-field">
+          <label class="filter-label">Estado</label>
+          <select class="filter-select" id="filterStatus">
+            <option value="">Todos</option>
+            <option value="true">Activos</option>
+            <option value="false">Inactivos</option>
+          </select>
+        </div>
         <div class="filter-divider"></div>
         <div class="filter-actions">
           <button type="button" class="filter-btn filter-btn--clear" onclick="clearFilters()">
@@ -159,6 +167,7 @@
     </main>
 
     <script src="../models/product-model.js"></script>
+    <script src="../../core/services/api.service.js"></script>
     <script src="../services/productcatalog.service.js"></script>
     <script src="../components/product-card/product-card.js"></script>
     <script src="../components/product-form-modal/product-form-modal.js"></script>
