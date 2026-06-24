@@ -17,13 +17,15 @@ class Sidebar {
             if (window.lucide) lucide.createIcons();
             this.#marcarActivo();
             this.#iniciarResponsive();
+            
+            await this.#cargarDatosNegocio();
 
         } catch (error) {
             console.error('error en sidebar:', error);
             this.contenedor.innerHTML = `<p style="color:red; padding:1rem;">Error al cargar el menu</p>`;
         }
     }
-
+    
     #aplicarPermisos() {
         const userRole = localStorage.getItem('rol');
 
@@ -50,7 +52,7 @@ class Sidebar {
             });
         }
     }
-
+    
     #marcarActivo() {
         const links = this.contenedor.querySelectorAll('.nav-link');
         links.forEach(link => {
@@ -89,6 +91,27 @@ class Sidebar {
         document.querySelector('.sidebar')?.classList.remove('open');
         document.querySelector('.sidebar-overlay')?.classList.remove('active');
         document.body.style.overflow = '';
+    }
+
+    async #cargarDatosNegocio() {
+        try {
+            const response = await fetch('https://localhost:7035/api/BusinessProfile');
+            if (response.ok) {
+                const data = await response.json();
+                
+                if (data.name) {
+                    const nameEl = this.contenedor.querySelector('.sidebar-user-name-company');
+                    if (nameEl) nameEl.textContent = data.name;
+                }
+                
+                if (data.logoUrl) {
+                    const imgEl = this.contenedor.querySelector('.sidebar-avatar img');
+                    if (imgEl) imgEl.src = `https://localhost:7035${data.logoUrl}`;
+                }
+            }
+        } catch (error) {
+            console.log("No se pudo cargar el diseño de la empresa:", error);
+        }
     }
 }
 

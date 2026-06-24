@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../../styles/variables.css" />
     <link rel="stylesheet" href="./settings.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <div class="settings-layout">
@@ -30,24 +31,27 @@
           <button
             class="settings-menu-item active"
             onclick="showTab('perfil', this)"
+            id="btn-tab-perfil"
           >
             <span class="nav-icon"><i data-lucide="user-circle"></i></span>
             Mi Perfil
           </button>
+
+          <p class="settings-menu-label" id="label-admin">Administración</p>
           <button
             class="settings-menu-item"
-            onclick="showTab('seguridad', this)"
+            onclick="showTab('negocio', this)"
+            id="btn-tab-negocio"
           >
-            <span class="nav-icon"><i data-lucide="shield-check"></i></span>
-            Seguridad y Acceso
-          </button>
-
-          <p class="settings-menu-label">Administración</p>
-          <button class="settings-menu-item" onclick="showTab('negocio', this)">
             <span class="nav-icon"><i data-lucide="building-2"></i></span>
             Datos del Negocio
           </button>
-          <button class="settings-menu-item" onclick="showTab('sistema', this)">
+
+          <button
+            class="settings-menu-item"
+            onclick="showTab('sistema', this)"
+            id="btn-tab-sistema"
+          >
             <span class="nav-icon"
               ><i data-lucide="sliders-horizontal"></i
             ></span>
@@ -61,13 +65,9 @@
           <div class="settings-topbar-info">
             <h3 id="tab-title">Mi Perfil</h3>
             <p id="tab-desc">
-              Gestiona tu información personal y nombre de usuario.
+              Visualiza tu información personal y nivel de acceso.
             </p>
           </div>
-          <button class="btn-save">
-            <i data-lucide="save"></i>
-            Guardar Cambios
-          </button>
         </div>
 
         <div class="settings-body">
@@ -77,66 +77,30 @@
                 <h4>Información del Usuario</h4>
                 <p>
                   Esta información identifica tu actividad dentro del sistema.
+                  Si necesitas modificarla, contacta a la administración.
                 </p>
               </div>
 
               <div class="form-grid">
                 <div class="form-group">
                   <label>Nombre de Usuario</label>
-                  <input type="text" value="admin_indiana" readonly />
+                  <input type="text" id="profile-username" readonly />
                 </div>
                 <div class="form-group">
                   <label>Rol de Usuario</label>
-                  <input type="text" value="Administrador" readonly />
+                  <input type="text" id="profile-role" readonly />
                 </div>
                 <div class="form-group">
-                  <label>Nombre Completo</label>
-                  <input type="text" value="Indiana Herrera" />
+                  <label>Primer Nombre</label>
+                  <input type="text" id="profile-firstname" readonly />
                 </div>
                 <div class="form-group">
-                  <label>Teléfono de Contacto</label>
-                  <input type="text" value="+505 8888-0000" />
+                  <label>Apellido</label>
+                  <input type="text" id="profile-lastname" readonly />
                 </div>
-              </div>
-            </section>
-          </div>
-
-          <div class="tab-panel" id="panel-seguridad" style="display: none">
-            <section class="settings-card">
-              <div class="settings-card-header">
-                <h4>Cambiar Contraseña</h4>
-                <p>
-                  Actualiza tu contraseña periódicamente para mayor seguridad.
-                </p>
-              </div>
-              <div class="form-grid">
                 <div class="form-group full">
-                  <label>Contraseña Actual</label>
-                  <div class="input-password-wrap">
-                    <input type="password" placeholder="••••••••" />
-                    <button type="button" class="btn-eye">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Nueva Contraseña</label>
-                  <div class="input-password-wrap">
-                    <input type="password" placeholder="Mínimo 8 caracteres" />
-                    <button type="button" class="btn-eye">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>Confirmar Nueva Contraseña</label>
-                  <div class="input-password-wrap">
-                    <input type="password" placeholder="••••••••" />
-                    <button type="button" class="btn-eye">
-                      <i data-lucide="eye"></i>
-                    </button>
-                  </div>
-                  <span class="match-label" id="match-label"></span>
+                  <label>Correo Electrónico</label>
+                  <input type="email" id="profile-email" readonly />
                 </div>
               </div>
             </section>
@@ -155,7 +119,7 @@
                 <div class="avatar-preview">
                   <img
                     src="/assets/img/logo.jpg"
-                    alt="Avatar"
+                    alt="Logo Sorbetería"
                     id="avatar-img"
                   />
                 </div>
@@ -176,20 +140,25 @@
               <div class="form-grid">
                 <div class="form-group full">
                   <label>Nombre Comercial</label>
-                  <input type="text" value="Sorbetería Herrera" />
+                  <input
+                    type="text"
+                    id="business-name"
+                    value="Sorbetería Herrera"
+                  />
                 </div>
                 <div class="form-group">
                   <label>RUC / NIT</label>
-                  <input type="text" value="J0310000000001" />
+                  <input type="text" id="business-ruc" value="J0310000000001" />
                 </div>
                 <div class="form-group">
                   <label>Teléfono Comercial</label>
-                  <input type="text" value="2255-0000" />
+                  <input type="text" id="business-phone" value="2255-0000" />
                 </div>
                 <div class="form-group full">
                   <label>Dirección</label>
                   <input
                     type="text"
+                    id="business-address"
                     placeholder="Ej: Jinotepe, Carazo, Nicaragua"
                   />
                 </div>
@@ -197,9 +166,17 @@
                   <label>Correo de Contacto</label>
                   <input
                     type="email"
+                    id="business-email"
                     placeholder="correo@sorbeteriaherrera.com"
                   />
                 </div>
+              </div>
+
+              <div class="form-actions">
+                <button id="btn-save-business" class="btn-save">
+                  <i data-lucide="save"></i>
+                  Guardar Datos del Negocio
+                </button>
               </div>
             </section>
           </div>
@@ -212,18 +189,14 @@
               </div>
               <div class="theme-grid">
                 <div class="theme-card" onclick="setTheme(this)">
-                  <div class="theme-icon-wrap">
-                    <i data-lucide="sun"></i>
-                  </div>
+                  <div class="theme-icon-wrap"><i data-lucide="sun"></i></div>
                   <div class="theme-info">
                     <span class="theme-name">Claro</span>
                     <i data-lucide="check" class="check-icon"></i>
                   </div>
                 </div>
                 <div class="theme-card" onclick="setTheme(this)">
-                  <div class="theme-icon-wrap">
-                    <i data-lucide="moon"></i>
-                  </div>
+                  <div class="theme-icon-wrap"><i data-lucide="moon"></i></div>
                   <div class="theme-info">
                     <span class="theme-name">Oscuro</span>
                     <i data-lucide="check" class="check-icon"></i>
@@ -241,7 +214,7 @@
               </div>
             </section>
 
-            <section class="settings-card" style="margin-top: 20px">
+            <section class="settings-card">
               <div class="settings-card-header">
                 <h4>Notificaciones</h4>
                 <p>Controla qué alertas quieres recibir dentro del sistema.</p>
