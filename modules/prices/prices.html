@@ -17,12 +17,9 @@
     <link rel="stylesheet" href="../shared/components/buttons/buttons.css" />
     <link rel="stylesheet" href="/modules/prices/prices.css" />
 
-    <!-- Iconos Lucide -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
   <body>
-    
-
     <div id="layout-placeholder"></div>
     <script src="../shared/components/sidebar/sidebar.js"></script>
 
@@ -30,24 +27,22 @@
     <script src="../shared/components/topbar/topbar.js"></script>
 
     <main class="main-content">
-    
-    <div class="page-header animate-in">
-  <div class="page-header-left">
-    <h1>Precios</h1>
-  </div>
-  <div class="page-header-actions">
-    <button class="btn btn-outline">
-      <i data-lucide="download" style="width: 16px; height: 16px"></i>
-      <span class="btn-label">Exportar</span>
-    </button>
-    <button class="btn btn-primary" onclick="openBulkEditModal()">
-      <i data-lucide="edit-3" style="width: 18px; height: 18px"></i>
-      <span class="btn-label">Editar masivo</span>
-    </button>
-  </div>
-</div>
+      <div class="page-header animate-in">
+        <div class="page-header-left">
+          <h1>Precios</h1>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-outline" type="button">
+            <i data-lucide="download" style="width: 16px; height: 16px"></i>
+            <span class="btn-label">Exportar</span>
+          </button>
+          <button class="btn btn-primary" type="button" id="btn-new-general-price">
+            <i data-lucide="edit-3" style="width: 18px; height: 18px"></i>
+            <span class="btn-label">Nuevo precio</span>
+          </button>
+        </div>
+      </div>
 
-      <!-- Tarjetas de Estadísticas -->
       <div class="stats-row animate-in delay-1">
         <div class="stat-card stat-card-mint">
           <div class="stat-card-decoration"></div>
@@ -55,7 +50,7 @@
             <i data-lucide="tags" style="width: 20px; height: 20px"></i>
           </div>
           <div class="stat-card-label">Productos con Precio</div>
-          <div class="stat-card-value">156</div>
+          <div class="stat-card-value" id="stat-products-with-price">-</div>
         </div>
 
         <div class="stat-card stat-card-yellow">
@@ -64,7 +59,7 @@
             <i data-lucide="badge-percent" style="width: 20px; height: 20px"></i>
           </div>
           <div class="stat-card-label">Precios Especiales Activos</div>
-          <div class="stat-card-value">8</div>
+          <div class="stat-card-value" id="stat-active-special-prices">-</div>
         </div>
 
         <div class="stat-card stat-card-coral">
@@ -72,8 +67,8 @@
           <div class="stat-card-icon">
             <i data-lucide="chart-column" style="width: 20px; height: 20px"></i>
           </div>
-          <div class="stat-card-label">Margen Promedio</div>
-          <div class="stat-card-value">35%</div>
+          <div class="stat-card-label">Promociones por vencer</div>
+          <div class="stat-card-value" id="stat-promotions-expiring">-</div>
         </div>
 
         <div class="stat-card stat-card-purple">
@@ -81,162 +76,50 @@
           <div class="stat-card-icon">
             <i data-lucide="clock-3" style="width: 20px; height: 20px"></i>
           </div>
-          <div class="stat-card-label">Última Actualización</div>
-          <div class="stat-card-value">Hoy</div>
+          <div class="stat-card-label">&Uacute;ltima Actualizaci&oacute;n</div>
+          <div class="stat-card-value" id="stat-last-update">-</div>
         </div>
       </div>
 
-      <!-- Grid de Contenido: Precios Generales y Especiales -->
       <div class="content-grid animate-in delay-2">
-        
-        <!-- SECCIÓN: Precios Generales (Tabla) -->
         <div class="general-prices-card">
           <div class="section-header">
             <h2><i data-lucide="tag"></i> Gestionar precios generales</h2>
           </div>
 
-          <!-- Pestañas de Categorías -->
-          <div class="category-tabs">
-            <button class="category-tab active" onclick="switchCategory(this)">Tradicionales</button>
-            <button class="category-tab" onclick="switchCategory(this)">Lights</button>
-            <button class="category-tab" onclick="switchCategory(this)">Nieves</button>
-            <button class="category-tab" onclick="switchCategory(this)">Fantasía</button>
-            <button class="category-tab" onclick="switchCategory(this)">Paletas</button>
+          <div class="category-tabs" id="line-tabs">
+            <button class="category-tab active" type="button" data-line-id="">Todas</button>
           </div>
 
-          <!-- Tabla de Precios -->
           <div class="table-scroll">
             <table class="price-table">
               <thead>
                 <tr>
-                  <th style="width: 25%">Presentación</th>
+                  <th style="width: 25%">Presentaci&oacute;n</th>
                   <th style="width: 25%; text-align: center">Precio Detalle</th>
                   <th style="width: 25%; text-align: center">Precio Mayoreo</th>
                   <th style="width: 15%; text-align: center">Productos</th>
                   <th style="width: 10%; text-align: center"></th>
                 </tr>
               </thead>
-              <tbody>
-                <!-- Fila 1: 4 Onzas -->
+              <tbody id="general-prices-body">
                 <tr>
-                  <td>
-                    <div class="presentation-cell">
-                      <div class="presentation-icon oz4">🍦</div>
-                      <div class="presentation-info">
-                        <span class="presentation-name">4 Onzas</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="price-value detail">C$45</span>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="price-value wholesale">C$38</span>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="products-badge">42</span>
-                  </td>
-                  <td style="text-align: center">
-                    <!-- Botón simplificado sin paso de parámetros -->
-                    <button class="edit-btn" onclick="openEditModal()">
-                      <i data-lucide="pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- Fila 2: 8 Onzas -->
-                <tr>
-                  <td>
-                    <div class="presentation-cell">
-                      <div class="presentation-icon oz8">🍨</div>
-                      <div class="presentation-info">
-                        <span class="presentation-name">8 Onzas</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="price-value detail">C$75</span>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="price-value wholesale">C$65</span>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="products-badge">42</span>
-                  </td>
-                  <td style="text-align: center">
-                    <button class="edit-btn" onclick="openEditModal()">
-                      <i data-lucide="pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- Fila 3: 1/4 Galón -->
-                <tr>
-                  <td>
-                    <div class="presentation-cell">
-                      <div class="presentation-icon galon4"></div>
-                      <div class="presentation-info">
-                        <span class="presentation-name">1/4 Galón</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="price-value detail">C$100</span>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="price-value wholesale">C$90</span>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="products-badge">42</span>
-                  </td>
-                  <td style="text-align: center">
-                    <button class="edit-btn" onclick="openEditModal()">
-                      <i data-lucide="pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- Fila 4: 1/2 Galón -->
-                <tr>
-                  <td>
-                    <div class="presentation-cell">
-                      <div class="presentation-icon galon2">🫙</div>
-                      <div class="presentation-info">
-                        <span class="presentation-name">1/2 Galón</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="price-value detail">C$150</span>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="price-value wholesale">C$135</span>
-                  </td>
-                  <td style="text-align: center">
-                    <span class="products-badge">42</span>
-                  </td>
-                  <td style="text-align: center">
-                    <button class="edit-btn" onclick="openEditModal()">
-                      <i data-lucide="pencil"></i>
-                    </button>
-                  </td>
+                  <td colspan="5" class="prices-state-cell">Cargando precios...</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- SECCIÓN: Precios Especiales -->
         <div class="special-prices-card">
           <div class="special-prices-header">
             <h2><i data-lucide="sparkles"></i> Precios especiales</h2>
-            <button class="add-special-btn" onclick="openSpecialPriceModal()">
+            <button class="add-special-btn" type="button" disabled title="Endpoint no disponible">
               <i data-lucide="plus"></i>
             </button>
           </div>
 
           <div class="special-prices-list">
-            <!-- Item Especial 1 -->
             <div class="special-price-card card-purple">
               <div class="special-product-img">
                 <img
@@ -256,7 +139,6 @@
               </div>
             </div>
 
-            <!-- Item Especial 2 -->
             <div class="special-price-card card-yellow">
               <div class="special-product-img">
                 <img
@@ -270,13 +152,12 @@
                 <span class="special-product-price">C$50</span>
                 <span class="special-product-discount">
                   <i data-lucide="heart" style="width: 12px; height: 12px"></i>
-                  Especial Día de Madres
+                  Especial Dia de Madres
                 </span>
                 <span class="special-product-date">Inicio: 02/03/25</span>
               </div>
             </div>
 
-            <!-- Item Especial 3 -->
             <div class="special-price-card card-pink">
               <div class="special-product-img">
                 <img
@@ -297,75 +178,63 @@
             </div>
           </div>
         </div>
-
       </div>
     </main>
 
-    <!-- =========================================
-         MODAL: Editar Precio (Datos Fijos de Ejemplo)
-    ========================================== -->
-    <div
-      id="editModal"
-      class="modal-overlay"
-      onclick="if (event.target === this) closeEditModal();"
-    >
+    <div id="editModal" class="modal-overlay">
       <div class="modal-content">
         <div class="modal-header">
           <h2>
-            <i
-              data-lucide="pencil"
-              style="width: 22px; height: 22px; color: var(--color-brand)"
-            ></i>
+            <i data-lucide="pencil" style="width: 22px; height: 22px; color: var(--color-brand)"></i>
             Editar Precios
           </h2>
-          <button class="modal-close" onclick="closeEditModal()">
+          <button class="modal-close" type="button" id="btn-close-edit-modal">
             <i data-lucide="x"></i>
           </button>
         </div>
 
         <div class="modal-form-group">
-          <label>Línea</label>
-          <!-- Valor fijo para ejemplo -->
-          <input
-            type="text"
-            id="editLine"
-            value="Tradicionales"
-            readonly
-            style="background: #f8fafc"
-          />
+          <label>L&iacute;nea</label>
+          <select id="editLine"></select>
         </div>
 
         <div class="modal-form-group">
-          <label>Presentación</label>
-          <!-- Valor fijo para ejemplo -->
-          <input
-            type="text"
-            id="editPresentation"
-            value="4 Onzas"
-            readonly
-            style="background: #f8fafc"
-          />
+          <label>Presentaci&oacute;n</label>
+          <select id="editPresentation"></select>
         </div>
 
         <div class="modal-form-row">
           <div class="modal-form-group">
             <label>Precio Detalle</label>
-            <!-- Valor fijo para ejemplo -->
-            <input type="number" id="editPriceDetail" value="45" placeholder="C$0.00" />
+            <input type="number" id="editPriceDetail" min="0" step="0.01" placeholder="C$0.00" />
           </div>
 
           <div class="modal-form-group">
             <label>Precio Mayoreo</label>
-            <!-- Valor fijo para ejemplo -->
-            <input type="number" id="editPriceWholesale" value="38" placeholder="C$0.00" />
+            <input type="number" id="editPriceWholesale" min="0" step="0.01" placeholder="C$0.00" />
           </div>
         </div>
 
+        <div class="modal-form-row">
+          <div class="modal-form-group">
+            <label>Vigente desde</label>
+            <input type="date" id="editValidFrom" />
+          </div>
+
+          <div class="modal-form-group">
+            <label>Vigente hasta</label>
+            <input type="date" id="editValidTo" />
+          </div>
+        </div>
+
+        <div class="modal-helper" id="editModalHelper">
+          El cambio cerrara el precio vigente y creara un nuevo registro historico.
+        </div>
+        <div class="modal-error" id="editModalError"></div>
+
         <div class="modal-actions">
-          <button class="btn btn-outline" onclick="closeEditModal()">
-            Cancelar
-          </button>
-          <button class="btn btn-primary" onclick="savePriceEdit()">
+          <button class="btn btn-outline" type="button" id="btn-cancel-edit-modal">Cancelar</button>
+          <button class="btn btn-primary" type="button" id="btn-save-price">
             <i data-lucide="check" style="width: 16px; height: 16px"></i>
             Guardar cambios
           </button>
@@ -373,39 +242,8 @@
       </div>
     </div>
 
-    <!-- Scripts de Funcionalidad Básica -->
-    <script>
-      // Inicializar iconos al cargar
-      lucide.createIcons();
-
-      // Cambiar pestaña activa
-      function switchCategory(el) {
-        document
-          .querySelectorAll(".category-tab")
-          .forEach((t) => t.classList.remove("active"));
-        el.classList.add("active");
-      }
-
-      // Abrir modal (sin lógica de carga de datos dinámica)
-      function openEditModal() {
-        document.getElementById("editModal").classList.add("active");
-        lucide.createIcons();
-      }
-
-      // Cerrar modal
-      function closeEditModal() {
-        document.getElementById("editModal").classList.remove("active");
-      }
-
-  
-      function savePriceEdit() {
-        closeEditModal();
-      }
-
-      function openBulkEditModal() {
-        console.log("Abrir modal de edición masiva");
-        // document.getElementById("bulkModal").classList.add("active");
-      }
-    </script>
+    <script src="./models/price-model.js"></script>
+    <script src="./services/prices.service.js"></script>
+    <script src="./prices.js"></script>
   </body>
 </html>
