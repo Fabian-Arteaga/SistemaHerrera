@@ -42,6 +42,14 @@ const SalesService = (() => {
         };
     }
 
+    function _mapProductPagedResponse(pagedData) {
+        const data = pagedData?.data ?? pagedData?.Data ?? [];
+        return {
+            items: data.map(dto => new SaleRetailProductOption(dto)),
+            hasNextPage: Boolean(pagedData?.hasNextPage ?? pagedData?.HasNextPage),
+        };
+    }
+
     async function getStatistics() {
         await _ensureApiService();
         return new SaleStatistics(await ApiService.get('/Sales/stats'));
@@ -86,6 +94,34 @@ const SalesService = (() => {
         return { header, details, payments };
     }
 
+    async function getActiveRetailProducts() {
+        await _ensureApiService();
+
+        const products = [];
+        let page = 1;
+        let hasNextPage = true;
+
+        while (hasNextPage) {
+            const params = new URLSearchParams();
+            _appendParam(params, 'page', page);
+            _appendParam(params, 'pageSize', 50);
+            _appendParam(params, 'active', true);
+
+            const result = _mapProductPagedResponse(await ApiService.get(`/Products/catalog?${params.toString()}`));
+            products.push(...result.items);
+            hasNextPage = result.hasNextPage;
+            page += 1;
+        }
+
+        return products;
+    }
+
+    async function createRetailSale(formData) {
+        await _ensureApiService();
+        const payload = SaleRetailCreateRequest.toApiPayload(formData);
+        return new SaleRetailResponse(await ApiService.post('/Sales/retail', payload));
+    }
+
     function _asArray(data) {
         if (Array.isArray(data)) return data;
         if (Array.isArray(data?.data)) return data.data;
@@ -99,5 +135,7 @@ const SalesService = (() => {
         getDetails,
         getPayments,
         getCompleteDetail,
+        getActiveRetailProducts,
+        createRetailSale,
     };
 })();

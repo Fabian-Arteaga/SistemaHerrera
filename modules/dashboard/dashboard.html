@@ -16,12 +16,9 @@
 
     <link rel="stylesheet" href="../shared/components/sidebar/sidebar.css" />
     <link rel="stylesheet" href="../shared/components/topbar/topbar.css" />
-    <link rel="stylesheet" href="../shared/components/filter-bar/filter-bar.css" />
-    <link rel="stylesheet" href="../shared/components/stat-card/stat-card.css" />
     <link rel="stylesheet" href="../shared/components/buttons/buttons.css" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <link rel="stylesheet" href="/modules/dashboard/dashboard.css" />
-    
   </head>
   <body>
     <div id="layout-placeholder"></div>
@@ -35,213 +32,45 @@
         <h1 class="page-title">Vista General</h1>
       </div>
 
-      <div class="stats-row animate-in delay-1">
-        <div class="stat-card stat-card-mint">
-          <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i
-              data-lucide="circle-dollar-sign"
-              style="width: 20px; height: 20px"
-            ></i>
+      <section class="powerbi-panel animate-in delay-1">
+        <div class="panel-header powerbi-header">
+          <div>
+            <h2 class="panel-title">An&aacute;lisis de ventas e inventario</h2>
+            <p class="panel-description">
+              Reporte BI generado desde Integration Services, Data Warehouse y Power BI.
+            </p>
           </div>
-          <div class="stat-card-label">Ventas totales de hoy</div>
-          <div class="stat-card-value">C$ 2,656</div>
+          <a
+            href="https://app.powerbi.com/view?r=eyJrIjoiZWU4OTJjZTgtODlkNi00OTIxLTk1N2YtOThkMzhlZTAzMWNjIiwidCI6ImU0NzY0NmZlLWRhMjctNDUxOC04NDM2LTVmOGIxNThiYTEyNyIsImMiOjR9"
+            class="btn-link powerbi-open-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Abrir reporte <i data-lucide="external-link"></i>
+          </a>
         </div>
 
-        <div class="stat-card stat-card-yellow">
-          <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="shopping-bag" style="width: 20px; height: 20px"></i>
-          </div>
-          <div class="stat-card-label">Pedidos pendientes</div>
-          <div class="stat-card-value">11</div>
+        <div class="powerbi-frame-wrapper">
+          <iframe
+            class="powerbi-frame"
+            src="https://app.powerbi.com/view?r=eyJrIjoiZWU4OTJjZTgtODlkNi00OTIxLTk1N2YtOThkMzhlZTAzMWNjIiwidCI6ImU0NzY0NmZlLWRhMjctNDUxOC04NDM2LTVmOGIxNThiYTEyNyIsImMiOjR9"
+            title="Dashboard Power BI"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
         </div>
 
-        <div class="stat-card stat-card-coral">
-          <div class="stat-card-decoration"></div>
-          <div class="stat-card-icon">
-            <i data-lucide="package-x" style="width: 20px; height: 20px"></i>
-          </div>
-          <div class="stat-card-label">Stock crítico</div>
-          <div class="stat-card-value">3</div>
+        <div class="powerbi-fallback">
+          
+          <a
+            href="https://app.powerbi.com/view?r=eyJrIjoiZWU4OTJjZTgtODlkNi00OTIxLTk1N2YtOThkMzhlZTAzMWNjIiwidCI6ImU0NzY0NmZlLWRhMjctNDUxOC04NDM2LTVmOGIxNThiYTEyNyIsImMiOjR9"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Abrir reporte en Power BI
+          </a>
         </div>
-      </div>
-
-      <div class="dashboard-grid">
-        <div class="panel">
-          <div class="panel-header">
-            <h2 class="panel-title">Ventas Recientes</h2>
-            <a href="#" class="btn-link"
-              >Ver todas <i data-lucide="arrow-right"></i
-            ></a>
-          </div>
-
-          <div class="table-wrapper">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Fecha / Hora</th>
-                  <th>Usuario</th>
-                  <th>Cliente</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Hoy, 4:12 PM</td>
-                  <td>Marcelo Mena</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">70.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 4:08 PM</td>
-                  <td>Marcelo Mena</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">45.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 4:03 PM</td>
-                  <td>Marcelo Mena</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">210.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 3:52 PM</td>
-                  <td>Marcelo Mena</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">310.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 3:43 PM</td>
-                  <td>Marcelo Mena</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">45.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 3:33 PM</td>
-                  <td>Ronald Narvaez</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">45.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 3:43 PM</td>
-                  <td>Marcelo Mena</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">45.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 3:52 PM</td>
-                  <td>Ronald Narvaez</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">45.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 3:43 PM</td>
-                  <td>Marcelo Mena</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">45.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 3:33 PM</td>
-                  <td>Ronald Narvaez</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">45.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 3:43 PM</td>
-                  <td>Marcelo Mena</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">45.00 C$</td>
-                </tr>
-                <tr>
-                  <td>Hoy, 3:33 PM</td>
-                  <td>Ronald Narvaez</td>
-                  <td>Cliente genérico</td>
-                  <td class="td-total">45.00 C$</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="right-col">
-          <div class="panel">
-            <div class="panel-header">
-              <h2 class="panel-title">Stock Crítico</h2>
-              <a href="#" class="btn-link"
-                >Ver todo <i data-lucide="arrow-right"></i
-              ></a>
-            </div>
-
-            <div class="stock-list">
-              <div class="stock-item">
-                <div class="stock-info">
-                  <span class="stock-name">Sorbete Tradicional Fresa</span>
-                  <span class="stock-variant">8 Onzas</span>
-                </div>
-                <span class="stock-badge">8 restantes</span>
-              </div>
-              <div class="stock-item">
-                <div class="stock-info">
-                  <span class="stock-name">Sorbete Mango</span>
-                  <span class="stock-variant">4 Onzas</span>
-                </div>
-                <span class="stock-badge">5 restantes</span>
-              </div>
-              <div class="stock-item">
-                <div class="stock-info">
-                  <span class="stock-name">Fresa Light</span>
-                  <span class="stock-variant">¼ Galón</span>
-                </div>
-                <span class="stock-badge">2 restantes</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="panel-header">
-              <h2 class="panel-title">Pedidos</h2>
-              <a href="#" class="btn-link"
-                >Ver todos <i data-lucide="arrow-right"></i
-              ></a>
-            </div>
-
-            <div class="table-wrapper">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Cliente</th>
-                    <th>Entrega</th>
-                    <th>Estado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="td-primary">Juan Pérez</td>
-                    <td>25 may.</td>
-                    <td><span class="pill pill-green">Entregado</span></td>
-                  </tr>
-                  <tr>
-                    <td class="td-primary">María García</td>
-                    <td>20 jun.</td>
-                    <td><span class="pill pill-yellow">En producción</span></td>
-                  </tr>
-                  <tr>
-                    <td class="td-primary">Carlos López</td>
-                    <td>13 jul.</td>
-                    <td><span class="pill pill-gray">No iniciado</span></td>
-                  </tr>
-                  <tr>
-                    <td class="td-primary">Ana Martínez</td>
-                    <td>20 dic.</td>
-                    <td><span class="pill pill-green">Entregado</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
     </main>
 
     <script>

@@ -2,11 +2,11 @@
     margin-left: 240px;
     margin-top: 60px;
     min-height: calc(100vh - 60px);
-    padding: 16px 24px;
+    padding: 14px 18px 18px;
     background-color: #F5F6F8;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     overflow-y: auto;
     overflow-x: hidden;
     min-width: 0;
@@ -27,219 +27,41 @@
     margin: 0;
 }
 
-.page-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: auto;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: var(--radius-button);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: none;
-    text-decoration: none;
-}
-
-.btn-primary {
-    background: var(--color-brand);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 194, 150, 0.3);
-}
-
-.btn-primary:hover {
-    background: var(--color-brand-hover);
-    box-shadow: 0 6px 20px rgba(0, 194, 150, 0.4);
-    transform: translateY(-1px);
-}
-
-.btn-outline {
-    background: var(--color-white);
-    color: var(--color-text-body);
-    border: 1.5px solid #E2E8F0;
-}
-
-.btn-outline:hover {
-    border-color: var(--color-brand);
-    color: var(--color-brand);
-}
-
-.btn-ghost {
-    background: transparent;
-    color: var(--color-brand);
-}
-
-.btn-ghost:hover {
-    background: rgba(0, 194, 150, 0.08);
-}
-
-
-.stats-row {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 10px;
-}
-
-.stat-card {
+.powerbi-panel {
     flex: 1;
-    border-radius: 16px;
-    padding: 20px 24px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    min-width: 0;
-}
-
-.stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.stat-card-mint {
-    background: linear-gradient(135deg,
-            rgba(0, 194, 150, 0.1),
-            rgba(0, 194, 150, 0.05));
-    border: 1px solid rgba(0, 194, 150, 0.15);
-}
-
-.stat-card-yellow {
-    background: linear-gradient(135deg,
-            rgba(244, 197, 66, 0.12),
-            rgba(244, 197, 66, 0.05));
-    border: 1px solid rgba(244, 197, 66, 0.2);
-}
-
-.stat-card-coral {
-    background: linear-gradient(135deg,
-            rgba(250, 137, 123, 0.1),
-            rgba(250, 137, 123, 0.05));
-    border: 1px solid rgba(250, 137, 123, 0.15);
-}
-
-.stat-card-purple {
-    background: linear-gradient(135deg,
-            rgba(204, 171, 216, 0.15),
-            rgba(204, 171, 216, 0.05));
-    border: 1px solid rgba(204, 171, 216, 0.2);
-}
-
-.stat-card-decoration {
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    opacity: 0.2;
-}
-
-.stat-card-mint .stat-card-decoration {
-    background: var(--color-mint);
-}
-
-.stat-card-yellow .stat-card-decoration {
-    background: #F4C542;
-}
-
-.stat-card-coral .stat-card-decoration {
-    background: #FA897B;
-}
-
-.stat-card-purple .stat-card-decoration {
-    background: var(--color-lavender);
-}
-
-.stat-card-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-}
-
-.stat-card-mint .stat-card-icon {
-    background: rgba(0, 194, 150, 0.15);
-    color: var(--color-brand);
-}
-
-.stat-card-yellow .stat-card-icon {
-    background: rgba(244, 197, 66, 0.2);
-    color: #b8930a;
-}
-
-.stat-card-coral .stat-card-icon {
-    background: rgba(250, 137, 123, 0.15);
-    color: #FA897B;
-}
-
-.stat-card-purple .stat-card-icon {
-    background: rgba(204, 171, 216, 0.2);
-    color: #8b5fbf;
-}
-
-.stat-card-label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--color-text-hint);
-    margin-bottom: 4px;
-}
-
-.stat-card-value {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--color-text-heading);
-    line-height: 1.1;
-}
-
-
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 16px;
-    min-width: 0;
-}
-
-.right-col {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 0;
-}
-
-.panel {
+    min-height: 0;
     background: #ffffff;
     border-radius: 16px;
-    padding: 16px 20px;
+    padding: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
+    gap: 12px;
     overflow: hidden;
-    min-width: 0;
 }
 
 .panel-header {
+    flex-shrink: 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 16px;
     padding-bottom: 10px;
     border-bottom: 1px solid #f0f0f0;
-    margin-bottom: 10px;
 }
 
 .panel-title {
     font-size: 14px;
     font-weight: 600;
     color: #111827;
+    margin: 0;
+}
+
+.panel-description {
+    margin: 4px 0 0;
+    color: var(--color-text-hint);
+    font-size: 12px;
+    line-height: 1.45;
 }
 
 .btn-link {
@@ -262,223 +84,109 @@
     gap: 7px;
 }
 
-.table-wrapper {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    min-width: 0;
+.powerbi-open-link {
+    flex-shrink: 0;
+    padding-top: 2px;
 }
 
-.data-table {
+.powerbi-frame-wrapper {
+    flex: 1;
+    min-height: 640px;
     width: 100%;
-    min-width: 0;
-    border-collapse: collapse;
-    font-size: 12px;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #F8F9FA;
 }
 
-.data-table thead th {
-    background-color: #F8F9FA;
-    text-align: left;
-    font-size: 10px;
-    font-weight: 600;
+.powerbi-frame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 640px;
+    border: 0;
+}
+
+.powerbi-fallback {
+    flex-shrink: 0;
     color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    padding: 8px 10px;
-    white-space: nowrap;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-}
-
-.data-table tbody td {
-    padding: 9px 10px;
-    color: #4b5563;
-    border-bottom: 1px solid #f5f5f5;
-    white-space: nowrap;
-}
-
-.data-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.data-table tbody tr:hover {
-    background-color: #fafafa;
-}
-
-.td-total {
-    text-align: right;
-    font-weight: 600;
-    color: #111827;
-}
-
-.td-primary {
-    font-weight: 500;
-    color: #111827;
-}
-
-.pill {
-    display: inline-flex;
-    padding: 3px 9px;
-    border-radius: 99px;
-    font-size: 10px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.pill-green {
-    background: #D1FAE5;
-    color: #059669;
-}
-
-.pill-yellow {
-    background: #FEF3C7;
-    color: #D97706;
-}
-
-.pill-gray {
-    background: #F4F4F5;
-    color: #52525B;
-}
-
-.stock-list {
-    display: flex;
-    flex-direction: column;
-}
-
-.stock-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 9px 0;
-    border-bottom: 1px solid #f5f5f5;
-    gap: 12px;
-}
-
-.stock-item:last-child {
-    border-bottom: none;
-}
-
-.stock-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-}
-
-.stock-name {
     font-size: 12px;
-    font-weight: 500;
-    color: #111827;
+    line-height: 1.45;
 }
 
-.stock-variant {
-    font-size: 11px;
-    color: #9ca3af;
+.powerbi-fallback a {
+    color: var(--color-brand);
+    font-weight: 600;
+    text-decoration: none;
 }
 
-.stock-badge {
-    font-size: 11px;
-    font-weight: 700;
-    color: #dc2626;
-    background: #FEE2E2;
-    padding: 3px 9px;
-    border-radius: 99px;
-    white-space: nowrap;
+.powerbi-fallback a:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 1024px) {
     .main-content {
-        padding: 20px;
+        padding: 14px;
     }
 
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stats-row {
-        flex-wrap: wrap;
-    }
-
-    .stat-card {
-        min-width: calc(50% - 10px);
-    }
-
-    .data-table {
-        min-width: 720px;
+    .powerbi-frame-wrapper,
+    .powerbi-frame {
+        min-height: 560px;
     }
 }
 
 @media (max-width: 768px) {
     .main-content {
         margin-left: 0;
-        padding: 16px;
+        padding: 12px;
+        gap: 10px;
     }
 
     .page-header {
-        flex-direction: column;
         align-items: stretch;
     }
 
-    .page-header-actions {
-        width: 100%;
-        justify-content: flex-end;
+    .powerbi-panel {
+        padding: 12px;
+        border-radius: 14px;
     }
 
-    .stats-row {
+    .panel-header {
         flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
     }
 
-    .stat-card {
-        min-width: 100%;
+    .powerbi-open-link {
+        align-self: flex-start;
     }
 
-    .table-wrapper {
-        overflow-x: auto;
-        overflow-y: hidden;
-    }
-
-    .data-table {
-        min-width: 650px;
-    }
-
-    .stock-item {
-        align-items: flex-start;
-    }
-
-    .btn {
-        padding: 10px;
-        justify-content: center;
-        gap: 0;
-    }
-
-    .btn-label {
-        display: none;
-    }
-
-    .btn i {
-        margin: 0;
+    .powerbi-frame-wrapper,
+    .powerbi-frame {
+        min-height: 480px;
     }
 }
 
 @media (max-width: 480px) {
     .main-content {
-        padding: 12px;
+        padding: 10px;
     }
 
     .page-title {
         font-size: 20px;
     }
 
-    .stat-card {
-        padding: 18px;
+    .powerbi-panel {
+        padding: 10px;
+        border-radius: 12px;
     }
 
-    .stat-card-value {
-        font-size: 24px;
+    .powerbi-frame-wrapper {
+        border-radius: 10px;
     }
 
-    .data-table {
-        min-width: 560px;
+    .powerbi-frame-wrapper,
+    .powerbi-frame {
+        min-height: 420px;
     }
 }

@@ -77,3 +77,55 @@ class SalePayment {
         this.registeredByUserName = dto.registeredByUserName || '';
     }
 }
+
+class SaleRetailProductOption {
+    constructor(dto = {}) {
+        this.productId = dto.id ?? dto.Id ?? dto.productId ?? dto.ProductId;
+        this.productName = dto.productName ?? dto.ProductName ?? '';
+        this.isActive = dto.isActive ?? dto.IsActive ?? true;
+        const retailPrice = dto.retailPrice ?? dto.RetailPrice;
+        this.retailPrice = retailPrice === null || retailPrice === undefined
+            ? null
+            : Number(retailPrice);
+    }
+
+    get hasValidRetailPrice() {
+        return Number(this.retailPrice) > 0;
+    }
+}
+
+class SaleRetailCreateRequest {
+    static toApiPayload(formData = {}) {
+        return {
+            paymentMethodId: Number(formData.paymentMethodId),
+            transactionReference: formData.transactionReference?.trim() || null,
+            notes: formData.notes?.trim() || null,
+            items: (formData.items ?? []).map(item => ({
+                productId: Number(item.productId),
+                quantity: Number(item.quantity),
+            })),
+        };
+    }
+}
+
+class SaleRetailResponse {
+    constructor(dto = {}) {
+        this.saleId = dto.saleId ?? dto.SaleId;
+        this.saleCode = dto.saleCode ?? dto.SaleCode ?? '';
+        this.totalSale = Number(dto.totalSale ?? dto.TotalSale ?? 0);
+        this.saleDate = dto.saleDate ?? dto.SaleDate ?? null;
+        this.paymentStatus = dto.paymentStatus ?? dto.PaymentStatus ?? '';
+        this.inventoryMovementId = dto.inventoryMovementId ?? dto.InventoryMovementId;
+        this.items = (dto.items ?? dto.Items ?? []).map(item => new SaleRetailResponseItem(item));
+    }
+}
+
+class SaleRetailResponseItem {
+    constructor(dto = {}) {
+        this.productId = dto.productId ?? dto.ProductId;
+        this.productName = dto.productName ?? dto.ProductName ?? '';
+        this.quantity = Number(dto.quantity ?? dto.Quantity ?? 0);
+        this.appliedPrice = Number(dto.appliedPrice ?? dto.AppliedPrice ?? 0);
+        this.lineSubtotal = Number(dto.lineSubtotal ?? dto.LineSubtotal ?? 0);
+    }
+}
