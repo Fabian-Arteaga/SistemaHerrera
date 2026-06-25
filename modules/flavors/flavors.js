@@ -53,9 +53,7 @@ function setupEventListeners() {
     const searchInput = document.getElementById('search-flavor');
     if (searchInput) {
         searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                applyFiltersAndRender(1);
-            }
+            if (e.key === 'Enter') applyFiltersAndRender(1);
         });
     }
 
@@ -77,6 +75,11 @@ function setupEventListeners() {
         });
     }
 
+    const btnStatusActive = document.getElementById('btn-status-active');
+    const btnStatusInactive = document.getElementById('btn-status-inactive');
+    if (btnStatusActive) btnStatusActive.addEventListener('click', () => toggleStatusUI(true));
+    if (btnStatusInactive) btnStatusInactive.addEventListener('click', () => toggleStatusUI(false));
+
     const grid = document.getElementById('flavors-grid');
     if (grid) {
         grid.addEventListener('click', async (e) => {
@@ -91,9 +94,7 @@ function setupEventListeners() {
     const btnEditDetail = document.getElementById('btn-edit-detail-flavor');
     if (btnEditDetail) {
         btnEditDetail.addEventListener('click', () => {
-            if (currentFlavorDetail) {
-                openEditFlavorModal(currentFlavorDetail);
-            }
+            if (currentFlavorDetail) openEditFlavorModal(currentFlavorDetail);
         });
     }
 }
@@ -113,14 +114,15 @@ window.openCreateFlavorModal = function () {
 
     const modalTitle = document.getElementById('create-modal-title');
     const modalSubtitle = document.getElementById('create-modal-subtitle');
+
     if (modalTitle) modalTitle.textContent = 'Nuevo sabor';
     if (modalSubtitle) modalSubtitle.textContent = 'Completa los datos del sabor';
 
     resetUploadArea();
     toggleStatusUI(true);
 
-    if (window.lucide) lucide.createIcons();
     document.getElementById('createFlavorModal')?.classList.add('is-open');
+    if (window.lucide) lucide.createIcons();
 };
 
 window.closeCreateFlavorModal = function () {
@@ -153,19 +155,23 @@ function resetUploadArea(imageUrl = '') {
     const uploadArea = document.getElementById('flavor-image-preview-wrapper');
     if (!uploadArea) return;
 
-    uploadArea.classList.toggle('has-image', Boolean(imageUrl));
-    uploadArea.style.backgroundImage = imageUrl ? `url('${imageUrl}')` : 'none';
+    uploadArea.classList.remove('has-image');
+    uploadArea.style.backgroundImage = 'none';
+
     uploadArea.innerHTML = `
         <input type="file" id="flavor-image-input" accept="image/png, image/jpeg" hidden />
-        ${imageUrl ? '' : `
-            <div class="create-flavor-upload-icon"><i data-lucide="image-plus"></i></div>
-            <p class="upload-title">Subir imagen del sabor</p>
-            <p class="upload-subtitle">PNG, JPG · Máx. 2 MB</p>
-        `}
+        <div class="create-flavor-upload-icon"><i data-lucide="image-plus"></i></div>
+        <p class="upload-title">Subir imagen del sabor</p>
+        <p class="upload-subtitle">PNG, JPG · Máx. 2 MB</p>
     `;
 
-    attachImageUploadEvent();
+    if (imageUrl) {
+        uploadArea.classList.add('has-image');
+        uploadArea.style.backgroundImage = `url('${imageUrl}')`;
+    }
+
     if (window.lucide) lucide.createIcons();
+    attachImageUploadEvent();
 }
 
 function attachImageUploadEvent() {
@@ -174,10 +180,8 @@ function attachImageUploadEvent() {
 
     if (!imagePreview || !imageInput) return;
 
-    imagePreview.onclick = (e) => {
-        if (e.target.id !== 'flavor-image-input') {
-            imageInput.click();
-        }
+    imagePreview.onclick = () => {
+        imageInput.click();
     };
 
     imageInput.onchange = (e) => {
@@ -187,19 +191,13 @@ function attachImageUploadEvent() {
         selectedImageFile = file;
 
         const reader = new FileReader();
-        reader.onload = (evento) => {
-            resetUploadArea(evento.target.result);
-            const newInput = document.getElementById('flavor-image-input');
-            if (newInput) {
-                const dt = new DataTransfer();
-                dt.items.add(file);
-                newInput.files = dt.files;
-            }
+        reader.onload = (event) => {
+            imagePreview.classList.add('has-image');
+            imagePreview.style.backgroundImage = `url('${event.target.result}')`;
         };
         reader.readAsDataURL(file);
     };
 }
-
 async function loadFlavors() {
     const grid = document.getElementById('flavors-grid');
     if (grid) {
@@ -219,9 +217,15 @@ async function loadFlavors() {
         applyFiltersAndRender(1);
     } catch (error) {
         console.error('Error al obtener sabores:', error);
+
         if (grid) {
-            grid.innerHTML = '<p style="padding:20px;">Error al conectar con el servidor.</p>';
+            grid.innerHTML = '<p style="padding:20px;">No se pudieron cargar los sabores. Verifica la conexión con el servidor.</p>';
         }
+
+        showErrorAlert(
+            'No se pudieron cargar los sabores',
+            'Verifica la conexión con el servidor e intenta nuevamente.'
+        );
     }
 
     if (window.lucide) lucide.createIcons();
@@ -237,8 +241,7 @@ function applyFiltersAndRender(page = 1) {
             flavor.code,
             flavor.color,
             flavor.category,
-            flavor.raw?.categoryName,
-            flavor.raw?.description
+            flavor.raw?.categoryName
         ]
             .filter(Boolean)
             .map(normalizeText)
@@ -274,6 +277,7 @@ function renderPagination(response) {
     const totalPages = response.totalPages || 1;
     const totalRecords = response.totalRecords || 0;
     const currentCount = response.data?.length || 0;
+
     currentPage = pageNumber;
 
     const startItem = totalRecords === 0 ? 0 : ((pageNumber - 1) * pageSize) + 1;
@@ -359,7 +363,7 @@ function renderGrid(flavors) {
                     <div class="product-card-code">${escapeHtml(flavor.code)}</div>
                 </div>
 
-                <button class="btn-view" type="button" data-id="${flavor.id}">
+                <button class="btn-view" type="button" data-id="${flavor.id}" aria-label="Ver detalle del sabor ${escapeHtml(flavor.name)}">
                     <i data-lucide="eye"></i>
                 </button>
             </div>
@@ -392,59 +396,91 @@ async function saveFlavor() {
     const colorInput = document.getElementById('flavor-color');
     const isActiveInput = document.getElementById('flavor-is-active');
 
-    if (!nameInput?.value.trim()) {
-        Swal.fire({
-            title: 'Campo requerido',
-            text: 'El nombre del sabor es obligatorio.',
-            icon: 'warning',
-            confirmButtonColor: '#10b981'
-        });
+    const name = nameInput?.value?.trim();
+    const color = normalizeHex(colorInput?.value || '#FF6B6B');
+    const isActive = isActiveInput?.value || 'true';
+
+    if (!name) {
+        showWarningAlert('Campo requerido', 'Debes ingresar el nombre del sabor.');
         return;
     }
 
     const formData = new FormData();
-    formData.append('FlavorName', nameInput.value.trim());
-    formData.append('FlavorColor', normalizeHex(colorInput?.value || '#FF6B6B'));
-    formData.append('IsActive', isActiveInput?.value || 'true');
+    formData.append('FlavorName', name);
+    formData.append('FlavorColor', color);
+    formData.append('IsActive', isActive);
 
     if (selectedImageFile) {
-        formData.append('Image', selectedImageFile);
-    }
+    formData.append('Image', selectedImageFile, selectedImageFile.name);
+}
 
     if (editingFlavorId) {
         formData.append('Id', String(editingFlavorId));
     }
 
     try {
-        let result;
-
         if (editingFlavorId && typeof FlavorService.update === 'function') {
-            result = await FlavorService.update(editingFlavorId, formData);
+            await FlavorService.update(editingFlavorId, formData);
+
+            showSuccessAlert(
+                'Sabor actualizado',
+                'Los cambios del sabor se guardaron correctamente.'
+            );
         } else {
-            result = await FlavorService.create(formData);
+            await FlavorService.create(formData);
+
+            showSuccessAlert(
+                'Sabor creado',
+                'El sabor se registró correctamente.'
+            );
         }
 
-        const success = result?.success !== false && !result?.errorMessage;
-        if (success) {
-            Swal.fire({
-                title: '¡Éxito!',
-                text: editingFlavorId ? 'El sabor se actualizó correctamente.' : 'El sabor se guardó correctamente.',
-                icon: 'success',
-                confirmButtonColor: '#10b981'
-            });
+        selectedImageFile = null;
+        editingFlavorId = null;
+        currentFlavorDetail = null;
 
-            closeCreateFlavorModal();
-            selectedImageFile = null;
-            editingFlavorId = null;
-            currentFlavorDetail = null;
-            await loadFlavors();
-            applyFiltersAndRender(1);
-        } else {
-            Swal.fire('Error', result?.message || result?.errorMessage || 'No se pudo guardar.', 'error');
-        }
+        closeCreateFlavorModal();
+        await loadFlavors();
+        applyFiltersAndRender(1);
     } catch (error) {
-        console.error(error);
-        Swal.fire('Error de conexión', 'No se pudo contactar al servidor.', 'error');
+        console.error('Error al guardar sabor:', error);
+
+        const message = String(error.message || '').toLowerCase();
+        const isEditing = Boolean(editingFlavorId);
+
+        let title = isEditing ? 'No se pudo actualizar' : 'No se pudo crear';
+        let text = isEditing
+            ? 'Ocurrió un error al actualizar el sabor.'
+            : 'Ocurrió un error al crear el sabor.';
+
+        if (message.includes('ya existe')) {
+            text = isEditing
+                ? 'No se pudo actualizar porque ya existe otro sabor con ese nombre.'
+                : 'Ya existe un sabor con ese nombre. Usa otro nombre o edita el existente.';
+        } else if (
+            message.includes('image') ||
+            message.includes('imagen') ||
+            message.includes('file') ||
+            message.includes('archivo')
+        ) {
+            text = 'No se pudo procesar la imagen del sabor. Verifica el archivo e intenta nuevamente.';
+        } else if (
+            message.includes('400')
+        ) {
+            text = isEditing
+                ? 'La información enviada para actualizar el sabor no es válida.'
+                : 'La información enviada para crear el sabor no es válida.';
+        } else if (
+            message.includes('404')
+        ) {
+            text = 'No se encontró el servicio de sabores en el servidor.';
+        } else if (
+            message.includes('500')
+        ) {
+            text = 'El servidor presentó un error al procesar la solicitud.';
+        }
+
+        showErrorAlert(title, text);
     }
 }
 
@@ -457,12 +493,19 @@ async function viewFlavorDetail(id) {
             flavor = result?.data ?? result ?? flavor;
         }
 
-        if (!flavor) return;
+        if (!flavor) {
+            showWarningAlert(
+                'Sabor no encontrado',
+                'No fue posible cargar el detalle del sabor seleccionado.'
+            );
+            return;
+        }
 
         const normalized = normalizeFlavor(flavor);
         currentFlavorDetail = normalized.raw;
 
-        document.getElementById('detail-name').textContent = normalized.name;
+        const detailName = document.getElementById('detail-name');
+        if (detailName) detailName.textContent = normalized.name;
 
         const statusEl = document.getElementById('detail-status');
         if (statusEl) {
@@ -487,10 +530,12 @@ async function viewFlavorDetail(id) {
         document.getElementById('detailFlavorModal')?.classList.add('is-open');
     } catch (error) {
         console.error(error);
-        Swal.fire('Error', 'No se pudieron cargar los detalles del sabor.', 'error');
+        showErrorAlert(
+            'No se pudo cargar el detalle',
+            'Ocurrió un error al obtener la información del sabor seleccionado.'
+        );
     }
 }
-
 function openEditFlavorModal(flavor) {
     if (!flavor) return;
 
@@ -510,16 +555,18 @@ function openEditFlavorModal(flavor) {
 
     const modalTitle = document.getElementById('create-modal-title');
     const modalSubtitle = document.getElementById('create-modal-subtitle');
+
     if (modalTitle) modalTitle.textContent = 'Editar sabor';
     if (modalSubtitle) modalSubtitle.textContent = 'Actualiza la información del sabor';
 
-    resetUploadArea(normalized.imageSrc && !normalized.imageSrc.includes('ui-avatars.com') ? normalized.imageSrc : '');
+    const hasRealImage = normalized.imageSrc && !normalized.imageSrc.includes('ui-avatars.com');
+    resetUploadArea(hasRealImage ? normalized.imageSrc : '');
+
     toggleStatusUI(normalized.isActive);
 
     closeDetailFlavorModal();
     document.getElementById('createFlavorModal')?.classList.add('is-open');
 }
-
 function normalizeFlavor(flavor) {
     const id = flavor.id ?? flavor.flavorId ?? 0;
     const name = flavor.flavorName ?? flavor.name ?? 'Sin nombre';
@@ -545,19 +592,17 @@ function normalizeFlavor(flavor) {
         category,
         isActive,
         imageSrc,
-        raw
+        raw: flavor
     };
-
-    function raw() {
-        return flavor;
-    }
 }
 
 function dedupeById(items) {
     const map = new Map();
+
     items.forEach((item) => {
         map.set(String(item.id), item);
     });
+
     return [...map.values()];
 }
 
@@ -565,6 +610,7 @@ function normalizeHex(value, fallback = true) {
     const raw = String(value || '').trim().toUpperCase();
     const normalized = raw.startsWith('#') ? raw : `#${raw}`;
     const valid = /^#[0-9A-F]{6}$/.test(normalized);
+
     if (valid) return normalized;
     return fallback ? '#FF6B6B' : '';
 }
@@ -575,6 +621,33 @@ function normalizeText(value) {
         .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase()
         .trim();
+}
+
+function showSuccessAlert(title, text) {
+    Swal.fire({
+        title,
+        text,
+        icon: 'success',
+        confirmButtonColor: '#10b981'
+    });
+}
+
+function showWarningAlert(title, text) {
+    Swal.fire({
+        title,
+        text,
+        icon: 'warning',
+        confirmButtonColor: '#f59e0b'
+    });
+}
+
+function showErrorAlert(title, text) {
+    Swal.fire({
+        title,
+        text,
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+    });
 }
 
 function escapeHtml(value) {
